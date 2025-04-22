@@ -1,0 +1,31 @@
+{
+  "name": "my-bot",
+  "version": "1.0.0",
+  "description": "Botpress coder workspace to manage bot programming",
+  "main": "index.js",
+  "scripts": {
+    "parse-bot": "ts-node ./utils/parseBot.ts",
+    "extract": "rm -rf ./bots/$ENV && 7z x -o./bots/$ENV/ ",
+    "extract:dev": "ENV=dev && npm run extract",
+    "extract:stg": "ENV=stg && npm run extract",
+    "extract:prod": "ENV=prod && npm run extract",
+    "compress": "rm -rf ./exports/$ENV/assistant-$ENV.bpz && 7z a -tzip -mx=9 ./exports/$ENV/assistant-$ENV.bpz ./bots/$ENV/*",
+    "compress:dev": "ENV=dev && npm run compress",
+    "compress:stg": "ENV=stg && npm run compress",
+    "compress:prod": "ENV=prod && npm run compress",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/node": "^22.14.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "zod": "^3.24.3"
+  }
+}

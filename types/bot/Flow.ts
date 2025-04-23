@@ -30,6 +30,7 @@ export interface NodeDef {
   name: string;
   type: NodeType;
   instructions: Instruction[];
+  parentFolder?: string;
 }
 export interface Flow {
   id: string;

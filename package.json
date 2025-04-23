@@ -4,7 +4,7 @@
   "description": "Botpress coder workspace to manage bot programming",
   "main": "index.js",
   "scripts": {
-    "parse-bot": "ts-node ./utils/parseBot.ts",
+    "parse-bot": "ts-node ./utils/parse-bot/exportBotpressFlows.ts",
     "extract": "rm -rf ./bots/$ENV && 7z x -o./bots/$ENV/ ",
     "extract:dev": "ENV=dev && npm run extract",
     "extract:stg": "ENV=stg && npm run extract",

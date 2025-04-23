@@ -23,5 +23,10 @@ export function buildFolderMap(
 }
 
 export function sanitizeName(name: string): string {
-  return name.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+  return name
+    .normalize("NFKD") // Descompone caracteres acentuados
+    .replace(/\p{Emoji_Presentation}/gu, "_") // Reemplaza emojis
+    .replace(/[^\p{L}\p{N}]+/gu, "_") // Cualquier no letra/número a '_'
+    .replace(/_+/g, "_") // Colapsar múltiples '_'
+    .replace(/^_|_$/g, ""); // Eliminar '_' inicial/final
 }

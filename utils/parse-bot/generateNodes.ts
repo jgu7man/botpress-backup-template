@@ -10,40 +10,62 @@ export function generateNodeFiles(
 ): void {
   nodes
     .filter(
-      (n) =>
-        n.type !== NodeType.COMMENT && n.type !== NodeType.EXCEPTION_HANDLER
+      (node) =>
+        node.type !== NodeType.COMMENT &&
+        node.type !== NodeType.EXCEPTION_HANDLER
     )
     .forEach((node) => {
-      const folder =
-        node.parentFolder && folderMap[node.parentFolder]
-          ? path.join(baseDir, folderMap[node.parentFolder].label)
+      // Determinar carpeta destino
+      const parentId = node.parentFolder as string | undefined;
+      const targetDir =
+        parentId && folderMap[parentId]
+          ? path.join(baseDir, folderMap[parentId].label)
           : baseDir;
-      if (!fs.existsSync(folder)) fs.mkdirSync(folder);
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
 
-      const name = sanitizeName(node.name);
-      node.instructions.forEach((ins, i) => {
+      const safeName = sanitizeName(node.name);
+
+      node.instructions.forEach((ins, idx) => {
+        // Acción
         if (ins.type === "action" && ins.code) {
-          fs.writeFileSync(
-            path.join(folder, `${name}.action.${i + 1}.ts`),
-            ins.code.trim() + "\n"
+          const filePath = path.join(
+            targetDir,
+            `${safeName}.action.${idx + 1}.ts`
           );
+          fs.writeFileSync(filePath, ins.code.trim() + "\n");
         }
+        // AI Prompt
         if (ins.type === "ai" && ins.prompt) {
-          const content = ins.prompt.messages
-            .map(
-              (m, j) =>
-                `// ${m.role}\nconst prompt${j} = ` + "`\n" + m.content + "\n`"
-            )
-            .join("\n\n");
-          fs.writeFileSync(
-            path.join(folder, `${name}.prompt.${i + 1}.ts`),
-            content + "\n"
+          const lines: string[] = [];
+          ins.prompt.messages.forEach((msg, i) => {
+            lines.push(`// ${msg.role}`);
+            lines.push(
+              `const prompt${i} = ` +
+                "`" +
+                "\n" +
+                msg.content +
+                "\n" +
+                "`" +
+                ";"
+            );
+          });
+          const filePath = path.join(
+            targetDir,
+            `${safeName}.prompt.${idx + 1}.ts`
           );
+          fs.writeFileSync(filePath, lines.join("\n") + "\n");
         }
+        // Content
         if (ins.type === "content" && ins.content) {
+          const filePath = path.join(
+            targetDir,
+            `${safeName}.content.${idx + 1}.json`
+          );
           fs.writeFileSync(
-            path.join(folder, `${name}.content.${i + 1}.json`),
-            JSON.stringify(ins.content, null, 2)
+            filePath,
+            JSON.stringify(ins.content, null, 2) + "\n"
           );
         }
       });

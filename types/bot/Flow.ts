@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NodeType } from "./NodeType";
 
 // Definición de tipos estrictos sin usar 'any'
@@ -30,11 +31,13 @@ export interface NodeDef {
   name: string;
   type: NodeType;
   instructions: Instruction[];
-  parentFolder?: string;
 }
 export interface Flow {
   id: string;
   name: string;
   variables: VariableDef[];
   nodes: NodeDef[];
+  links: any[];
+  startNode: string;
+  parentFolder?: string;
 }

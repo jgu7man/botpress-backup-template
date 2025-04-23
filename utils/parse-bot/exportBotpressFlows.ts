@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { BotExport } from "../../types/bot/BotExport";
 import { ensureDir } from "./fileUtils";
-import { buildFolderMap, sanitizeName } from "./folderUtils";
+import { generateFlowPath } from "./generateFlowPath";
 import { generateNodeFiles } from "./generateNodes";
 import { generateStateFile } from "./generateState";
 import { generateTableInterfaces } from "./generateTables";
@@ -14,19 +14,21 @@ function readBotExport(): BotExport {
   return JSON.parse(raw) as BotExport;
 }
 
-const bot = readBotExport();
-const workflowsBase = path.join(__dirname, "../../bot/workflows");
+export const bot = readBotExport();
+export const workflowsBase = path.join(__dirname, "../../bot/workflows");
 const tablesBase = path.join(__dirname, "../../bot/tables");
 ensureDir(workflowsBase);
 ensureDir(tablesBase);
 
 // Export workflows
 bot.flows.forEach((flow) => {
-  const flowDir = path.join(workflowsBase, sanitizeName(flow.name));
-  ensureDir(flowDir);
-  generateStateFile(flow, flowDir);
-  const folderMap = buildFolderMap(bot.folders);
-  generateNodeFiles(flow.nodes, folderMap, flowDir);
+  // Determinar carpeta destino
+  const targetDir = generateFlowPath(flow);
+
+  ensureDir(targetDir);
+  generateStateFile(flow, targetDir);
+
+  generateNodeFiles(flow.nodes, targetDir);
   console.log(`✅ Workflow generado: ${flow.name}`);
 });
 

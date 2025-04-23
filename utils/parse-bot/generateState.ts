@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import { Flow } from "../../types/bot/Flow";
+import { sanitizeName } from "./folderUtils";
 
 export function generateStateFile(flow: Flow, baseDir: string): void {
-  const className = `${capitalize(flow.name)}State`;
+  const className = `${capitalize(sanitizeName(flow.name))}State`;
   const lines: string[] = [`// ${flow.name}.state.ts`, `class ${className} {`];
   flow.variables.forEach((v) => {
     lines.push(`  /** ${v.description || "Sin descripción"} */`);

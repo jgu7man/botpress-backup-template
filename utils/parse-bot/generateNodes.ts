@@ -1,13 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { NodeDef } from "../../types/bot/Flow";
-import { FolderMap, NodeType, sanitizeName } from "./folderUtils";
+import { NodeType, sanitizeName } from "./folderUtils";
 
-export function generateNodeFiles(
-  nodes: NodeDef[],
-  folderMap: FolderMap,
-  baseDir: string
-): void {
+export function generateNodeFiles(nodes: NodeDef[], targetDir: string): void {
   nodes
     .filter(
       (node) =>
@@ -15,16 +11,6 @@ export function generateNodeFiles(
         node.type !== NodeType.EXCEPTION_HANDLER
     )
     .forEach((node) => {
-      // Determinar carpeta destino
-      const parentId = node.parentFolder as string | undefined;
-      const targetDir =
-        parentId && folderMap[parentId]
-          ? path.join(baseDir, folderMap[parentId].label)
-          : baseDir;
-      if (!fs.existsSync(targetDir)) {
-        fs.mkdirSync(targetDir, { recursive: true });
-      }
-
       const safeName = sanitizeName(node.name);
 
       node.instructions.forEach((ins, idx) => {

@@ -1,0 +1,28 @@
+class MotoStyleFlowState {
+  /** Sin descripción */
+  interpretedStyle?: string;
+  /** Sin descripción */
+  styleOptionList?: unknown[];
+  /** Sin descripción */
+  kbResponse?: string;
+  /** Sin descripción */
+  stlyeMenuOfferMessage?: string;
+  /** Sin descripción */
+  queriedReferences?: string;
+  /** Sin descripción */
+  motoList?: unknown[];
+  /** Sin descripción */
+  resultMessage?: string;
+  /** Sin descripción */
+  uniqueOptionConfirmation?: boolean;
+  /** Sin descripción */
+  relatedReferences?: string;
+  /** Sin descripción */
+  interestedMotoReference?: string;
+  /** Sin descripción */
+  captureMotoAttempts?: number;
+  /** Sin descripción */
+  optionsList?: unknown[];
+}
+
+export const workflow = new MotoStyleFlowState();

@@ -1,0 +1,12 @@
+{
+  "type": "text",
+  "text": {
+    "valueType": "dynamic",
+    "dynamicValue": "{{workflow.knowledgeBasesAnswer}}",
+    "staticValue": ""
+  },
+  "typing": {
+    "valueType": "static",
+    "staticValue": true
+  }
+}

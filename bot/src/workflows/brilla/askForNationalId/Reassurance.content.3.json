@@ -1,0 +1,12 @@
+{
+  "type": "text",
+  "text": {
+    "valueType": "dynamic",
+    "dynamicValue": "No hay inconveniente, por favor tenga el dato cuando se acerque a la sala",
+    "staticValue": ""
+  },
+  "typing": {
+    "valueType": "static",
+    "staticValue": true
+  }
+}

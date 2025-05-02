@@ -1,0 +1,5 @@
+import { workflow } from "./workflow.state";
+// ------------------ EXECUTE CODE -------------------------
+// "Assign Corrected User Input in Assistance Mode Workflow"
+
+workflow.assistanceModeAnswer = workflow.UnderstandUserInput1.correctedUserInput

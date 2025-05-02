@@ -1,0 +1,473 @@
+[
+  {
+    "id": "file_01JSS7P9KN6NP7RBXH2G9MNA6P",
+    "accessPolicies": [],
+    "contentType": "text/markdown",
+    "size": 4107,
+    "status": "indexing_completed",
+    "tags": {
+      "dsId": "ds-68bdd7c616",
+      "kbId": "kb-8020182bea",
+      "source": "knowledge-base",
+      "favicon": "https://marxa-digital.atlassian.net/wiki/s/-1257954834/6452/60eab475accd858db5647b01e921079bdbc0d299/1/_/favicon-update.ico",
+      "pageUrl": "https://marxa-digital.atlassian.net/wiki/external/ZDcyM2NhMjQ3ZWRlNDZiZmFkZThiYjc5ZmUwYjc5MTY",
+      "lastCrawledAt": "2025-04-26T14:23:15.512+00:00"
+    },
+    "key": "zdcym2nhmjq3zwrlndzizmfkzthiyjc5zmuwyjc5mty.html",
+    "index": true,
+    "updatedAt": "2025-04-26T14:23:15.562Z"
+  },
+  {
+    "id": "file_01JSS7NSBV86QKFHMHXFX7Z02W",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 192,
+    "status": "upload_completed",
+    "tags": {
+      "source": "website-indexing"
+    },
+    "key": "indexing-task-ds-68bdd7c616-20250426-0822.json",
+    "index": false,
+    "updatedAt": "2025-04-26T14:22:58.930Z"
+  },
+  {
+    "id": "file_01JSR06V36JXXE5ZK34D15E455",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 147,
+    "status": "upload_completed",
+    "tags": {
+      "source": "website-indexing"
+    },
+    "key": "indexing-task-ds-b7c2a55af0-20250425-2053.json",
+    "index": false,
+    "updatedAt": "2025-04-26T02:53:14.702Z"
+  },
+  {
+    "id": "file_01JSQY8MDAKZC177HF9WBQ5C02",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 183,
+    "status": "upload_completed",
+    "tags": {
+      "source": "website-indexing"
+    },
+    "key": "indexing-task-ds-956deca094-20250425-2019.json",
+    "index": false,
+    "updatedAt": "2025-04-26T02:19:16.257Z"
+  },
+  {
+    "id": "file_01JRZA1TG4E25TBQ4VQWKBTHZ6",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1060057,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "cedfdeb996752d506274ce0b002a71ec36e24b05a4a4f04dafc1a5fe45cfd37d",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1744807453550.json",
+    "index": false,
+    "updatedAt": "2025-04-16T12:44:14.578Z"
+  },
+  {
+    "id": "file_01JRYHM5R88XQT7ND299HGXV80",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1060625,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "cedfdeb996752d506274ce0b002a71ec36e24b05a4a4f04dafc1a5fe45cfd37d",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1744781842113.json",
+    "index": false,
+    "updatedAt": "2025-04-16T05:37:22.178Z"
+  },
+  {
+    "id": "file_01JRYESD1H4BRMH320497TF4S5",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 117547,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-06dfee802d",
+      "title": "Conocimiento sobre sinónimos y formas comunes en que los clientes se refieren a las motos.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-06dfee802d/Conocimiento sobre sinónimos y formas comunes en que los clientes se refieren a las motos.pdf",
+    "index": true,
+    "updatedAt": "2025-04-16T04:47:47.753Z"
+  },
+  {
+    "id": "file_01JRWT3PJ1SJF2EY17WPEFWKYN",
+    "accessPolicies": [],
+    "contentType": "text/plain; charset=utf-8",
+    "size": 434,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JHHBJCJ9C8T79QE7XT7TYRM7"
+    },
+    "key": "table_01JHHBJCJ9C8T79QE7XT7TYRM720250415132710.log",
+    "index": false,
+    "updatedAt": "2025-04-15T13:27:10.626Z"
+  },
+  {
+    "id": "file_01JRWT3MTDDEBZM8YJJ2FSHD2B",
+    "accessPolicies": [],
+    "contentType": "application/octet-stream",
+    "size": 6922,
+    "status": "upload_completed",
+    "tags": {},
+    "key": "my-file-1744723628568",
+    "index": false,
+    "updatedAt": "2025-04-15T13:27:08.869Z"
+  },
+  {
+    "id": "file_01JRJD7ZR39KFKR1J38EVNX4YG",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079235,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "895885b07d4687211de4197f8456d921f47c4a0e7ba6ae53cabd89e7dd0fb7f4",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1744374595138.json",
+    "index": false,
+    "updatedAt": "2025-04-11T12:29:55.284Z"
+  },
+  {
+    "id": "file_01JRD9QF2RHBDFDSK5JKM73Z68",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079965,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "ce716e3bff3220d1860a7a0162c312ca5ac3dabd35bd8163a8e4d65a5a4a81d7",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1744203135977.json",
+    "index": false,
+    "updatedAt": "2025-04-09T12:52:16.058Z"
+  },
+  {
+    "id": "file_01JRCFC30038Z13PMBCC6NNYV3",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 91529,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-aecc750e64",
+      "title": "Explicación del Sistema de Categorización de Consultas (con Cupo Brilla).pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-aecc750e64/Explicación del Sistema de Categorización de Consultas (con Cupo Brilla).pdf",
+    "index": true,
+    "updatedAt": "2025-04-09T05:11:40.251Z"
+  },
+  {
+    "id": "file_01JRCB180951CGMC04WJ4ZPCA1",
+    "accessPolicies": [],
+    "contentType": "text/plain; charset=utf-8",
+    "size": 434,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JHHBJCJ9C8T79QE7XT7TYRM7"
+    },
+    "key": "table_01JHHBJCJ9C8T79QE7XT7TYRM720250409035549.log",
+    "index": false,
+    "updatedAt": "2025-04-09T03:55:50.242Z"
+  },
+  {
+    "id": "file_01JRCB12BDM0XKH2H8M6DAWKZT",
+    "accessPolicies": [],
+    "contentType": "application/octet-stream",
+    "size": 2275,
+    "status": "upload_completed",
+    "tags": {},
+    "key": "my-file-1744170939794",
+    "index": false,
+    "updatedAt": "2025-04-09T03:55:42.493Z"
+  },
+  {
+    "id": "file_01JR6ESCCHQYJN9NDH3T8YWAY7",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1073795,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "ce716e3bff3220d1860a7a0162c312ca5ac3dabd35bd8163a8e4d65a5a4a81d7",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1743973560644.json",
+    "index": false,
+    "updatedAt": "2025-04-06T21:06:00.691Z"
+  },
+  {
+    "id": "file_01JR13A2BGR6Z5B6X8FZJ43S5E",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1066256,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "ce716e3bff3220d1860a7a0162c312ca5ac3dabd35bd8163a8e4d65a5a4a81d7",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1743793752379.json",
+    "index": false,
+    "updatedAt": "2025-04-04T19:09:12.423Z"
+  },
+  {
+    "id": "file_01JQZN411FXYJG6EPXRXBEGW1B",
+    "accessPolicies": [],
+    "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "size": 10734,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-980112fbf0",
+      "title": "Articulo SEO crédito.docx",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-980112fbf0/Articulo SEO crédito.docx",
+    "index": true,
+    "updatedAt": "2025-04-04T05:41:59.973Z"
+  },
+  {
+    "id": "file_01JQZKSR9V8WNE69QWBBZYDNPQ",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 3041,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-8020182bea",
+      "title": "Reconocimiento_Numeros_Celulares_Colombia.pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-8020182bea/Reconocimiento_Numeros_Celulares_Colombia.pdf",
+    "index": true,
+    "updatedAt": "2025-04-04T05:18:54.775Z"
+  },
+  {
+    "id": "file_01JQZGT6CMRJ51ERH4ACM2GSVS",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 4305,
+    "status": "upload_completed",
+    "tags": {
+      "system": "true",
+      "purpose": "config"
+    },
+    "key": "bot->e8a85cb7-0432-4b73-9d64-6d6b0135e108->models.config.json",
+    "index": false,
+    "updatedAt": "2025-04-04T04:26:43.467Z"
+  },
+  {
+    "id": "file_01JQWHZR6G5XGA2CDS26J31Y4E",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1059789,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "ce716e3bff3220d1860a7a0162c312ca5ac3dabd35bd8163a8e4d65a5a4a81d7",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1743641370773.json",
+    "index": false,
+    "updatedAt": "2025-04-03T00:49:30.823Z"
+  },
+  {
+    "id": "file_01JQH0KVCD213TGESX5Q4Q9AY4",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 69610,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e12e5e9d75",
+      "title": "Guía para Reconocer Números en Documentos de Facturación y Identificación en Colombia.pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-e12e5e9d75/Guía para Reconocer Números en Documentos de Facturación y Identificación en Colombia.pdf",
+    "index": true,
+    "updatedAt": "2025-03-29T13:14:16.335Z"
+  },
+  {
+    "id": "file_01JQH0KV5NGNKE9WNJRB53K849",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 4196,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-4e5d75775b",
+      "title": "Preferencia_Estudio_Credito.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-4e5d75775b/Preferencia_Estudio_Credito.pdf",
+    "index": true,
+    "updatedAt": "2025-03-29T13:14:16.117Z"
+  },
+  {
+    "id": "file_01JQH0KTQ3CZ593ZH4QYHKHBXT",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 4196,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Preferencia_Estudio_Credito.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-e2cf85fe7d/Preferencia_Estudio_Credito.pdf",
+    "index": true,
+    "updatedAt": "2025-03-29T13:14:15.651Z"
+  },
+  {
+    "id": "file_01JJ60ZT98PF2YECVA2R6YKT54",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 52774,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-fac3fb699b",
+      "title": "Contratos de trabajo en Colombia.pdf",
+      "source": "knowledge-base"
+    },
+    "key": "kb-fac3fb699b/Contratos de trabajo en Colombia.pdf",
+    "index": true,
+    "updatedAt": "2025-01-22T03:30:40.543Z"
+  },
+  {
+    "id": "file_01JHQNA2EHHVHBQN2MH2462CKK",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 38245,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-4e5d75775b",
+      "title": "Sedes de Atención de Auteco Las Motos.pdf",
+      "source": "knowledge-base"
+    },
+    "key": "kb-4e5d75775b/Sedes de Atención de Auteco Las Motos.pdf",
+    "index": true,
+    "updatedAt": "2025-01-16T13:37:11.626Z"
+  },
+  {
+    "id": "file_01JHQM5QKB7HSTV980DZD0QPY6",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 33158,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-06dfee802d",
+      "title": "Tipos de motos disponibles en Auteco.pdf",
+      "source": "knowledge-base"
+    },
+    "key": "kb-06dfee802d/Tipos de motos disponibles en Auteco.pdf",
+    "index": true,
+    "updatedAt": "2025-01-16T13:17:20.863Z"
+  },
+  {
+    "id": "file_01JHHBM9CA49X1ZHYVMGZAJ6SF",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/json",
+    "size": 728,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integrationName": "webchat",
+      "webchatConfigVersion": "1"
+    },
+    "key": "webchatConfig.json",
+    "index": false,
+    "updatedAt": "2025-04-16T12:44:34.487Z"
+  },
+  {
+    "id": "file_01JHHBM98BJV4TPAYB127DSFZ4",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/javascript",
+    "size": 751,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integrationName": "webchat",
+      "webchatInjectConfigVersion": "1"
+    },
+    "key": "webchatConfigInject.js",
+    "index": false,
+    "updatedAt": "2025-04-16T12:44:33.959Z"
+  },
+  {
+    "id": "file_01JHHBJB6BVCSTMEYG86NN40ZT",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/javascript",
+    "size": 738,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integrationName": "webchat",
+      "webchatInjectConfigVersion": "1"
+    },
+    "key": "webchatConfigInject.js",
+    "index": false,
+    "updatedAt": "2025-01-14T02:51:30.853Z"
+  },
+  {
+    "id": "file_01JHHBJB39S53B44DMAFWWHS83",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/json",
+    "size": 531,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integrationName": "webchat",
+      "webchatConfigVersion": "1"
+    },
+    "key": "webchatConfig.json",
+    "index": false,
+    "updatedAt": "2025-01-14T02:51:30.966Z"
+  },
+  {
+    "id": "file_01JHHBJAWXWK40ZM36ZF41V3H4",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 149633,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Frases de Confirmación en Colombia.pdf",
+      "source": "knowledge-base"
+    },
+    "key": "kb-e2cf85fe7d/Frases de Confirmación en Colombia.pdf",
+    "index": true,
+    "updatedAt": "2025-01-14T02:51:30.072Z"
+  }
+]

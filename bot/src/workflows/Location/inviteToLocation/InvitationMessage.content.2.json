@@ -1,0 +1,12 @@
+{
+  "type": "text",
+  "text": {
+    "valueType": "dynamic",
+    "dynamicValue": "{{workflow.serviceLocationInfo}}",
+    "staticValue": ""
+  },
+  "typing": {
+    "valueType": "static",
+    "staticValue": true
+  }
+}

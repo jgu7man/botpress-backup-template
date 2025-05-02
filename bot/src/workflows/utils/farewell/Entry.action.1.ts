@@ -1,0 +1,28 @@
+import { bot } from "@main";
+import { workflow } from "./workflow.state";
+import * as luxon from "luxon";
+// ------------------ EXECUTE CODE -------------------------
+// "Manage Bot State and Current Time in Colombia"
+
+const { DateTime } = luxon
+const CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)
+
+workflow.colombiaTime = CurrentTime
+
+const { botState } = workflow;
+console.log(`🤖 botState:`, botState);
+console.log(`🤖 1 irregularState:`, bot.irregularState);
+
+if (bot.irregularState === "ATTENDED") {
+  bot.irregularState = "SERVED";
+} else if (botState) {
+  bot.irregularState = botState;
+}
+
+console.log(`🤖 2 irregularState:`, bot.irregularState);
+
+if (!bot.irregularState) {
+  bot.irregularState = "ATTENDED";
+}
+
+console.log(`🤖 3 irregularState:`, bot.irregularState);

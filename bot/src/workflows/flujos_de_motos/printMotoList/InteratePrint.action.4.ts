@@ -1,0 +1,5 @@
+import { workflow } from "./workflow.state";
+// ------------------ EXECUTE CODE -------------------------
+// Increment the count of a workflow by 1.
+
+workflow.count+= 1

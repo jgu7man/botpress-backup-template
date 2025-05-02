@@ -1,0 +1,12 @@
+{
+  "type": "text",
+  "text": {
+    "valueType": "dynamic",
+    "dynamicValue": "Disculpa, para hacer el estudio en línea, necesito saber qué moto te interesa, para poder saber el presupuesto que necesitas para el crédito.\n\n¿Quieres que te ayude a reconocer la moto, o prefieres hacer el estudio en sala? ",
+    "staticValue": ""
+  },
+  "typing": {
+    "valueType": "static",
+    "staticValue": true
+  }
+}

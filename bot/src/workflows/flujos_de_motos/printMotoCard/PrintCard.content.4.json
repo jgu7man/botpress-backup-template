@@ -1,0 +1,23 @@
+{
+  "type": "card",
+  "title": {
+    "valueType": "dynamic",
+    "dynamicValue": "{{workflow.title}}\n",
+    "staticValue": ""
+  },
+  "subtitle": {
+    "valueType": "dynamic",
+    "dynamicValue": "La moto {{workflow.title}} tiene un valor de {{workflow.formattedPrice}} con los documentos de SOAT y matrícula.\n\nPuedes revisar más detalles en este link: {{workflow.detailsURL}}",
+    "staticValue": ""
+  },
+  "imageUrl": {
+    "valueType": "dynamic",
+    "dynamicValue": "{{workflow.imageURL}}",
+    "isExpression": true
+  },
+  "actions": {
+    "valueType": "static",
+    "staticValue": [],
+    "isExpression": true
+  }
+}

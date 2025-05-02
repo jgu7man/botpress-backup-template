@@ -95,11 +95,7 @@ function closeUnclosedCodeBlocks(markdownContent: string): string {
   return markdownContent;
 }
 
-export {
-  checkUnclosedCodeBlocks,
-  closeUnclosedCodeBlocks,
-  validateMarkdownString,
-};
+export { closeUnclosedCodeBlocks };
 
 // Example: test the markdown from your file
 const markdownContent =

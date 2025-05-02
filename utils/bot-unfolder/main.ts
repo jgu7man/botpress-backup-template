@@ -9,7 +9,7 @@ import { generateStateFile } from "./generateState";
 import { generateTableInterfaces } from "./generateTables";
 
 function readExportedBot(): BotExport {
-  const exportPath = path.join(__dirname, "../../bot.json");
+  const exportPath = path.join(__dirname, "../../", "bot/exported/bot.json");
   const raw = fs.readFileSync(exportPath, "utf8");
   return JSON.parse(raw) as BotExport;
 }

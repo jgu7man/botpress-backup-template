@@ -4,7 +4,7 @@
   "description": "Botpress coder workspace to manage bot programming",
   "main": "index.js",
   "scripts": {
-    "parse-bot": "ts-node ./utils/parse-bot/exportBotpressFlows.ts",
+    "unfold-bot": "ts-node ./utils/bot-unfolder/main.ts",
     "extract": "rm -rf ./bots/$ENV && 7z x -o./bots/$ENV/ ",
     "extract:dev": "ENV=dev && npm run extract",
     "extract:stg": "ENV=stg && npm run extract",
@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/luxon": "^3.6.2",
     "@types/node": "^22.14.1",
     "eslint": "^9.25.0",
     "eslint-plugin-react": "^7.37.5",
@@ -27,5 +28,8 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1",
     "zod": "^3.24.3"
+  },
+  "dependencies": {
+    "luxon": "^3.6.1"
   }
 }

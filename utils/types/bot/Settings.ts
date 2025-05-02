@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-export interface Settings {
+export interface BotSettings {
   defaultLanguage: string;
   languages: string[];
   description: string;
   id: string;
   inactivityTimeout: number;
-  botVariables: BotVariables[];
+  botVariables: Variables[];
   userVariables: UserVariables[];
   nodeRepetitionLimit: number;
   configVariables: ConfigVariables;
@@ -18,25 +18,25 @@ export interface Settings {
   autonomousModel: string;
   conversationVariables: undefined[];
 }
-export interface BotVariables {
-  id: string;
-  name: string;
-  description: string;
-  type: string;
-  scope: string;
-  defaultValue: string;
-}
+
+export type ScopeVariables = keyof Pick<
+  BotSettings,
+  "botVariables" | "userVariables" | "conversationVariables"
+>;
 export interface CognitiveConfigs {
   openAi: OpenAi;
 }
-export interface ConfigVariables {}
 export interface OpenAi {}
-export interface UserVariables {
-  defaultValue: string;
-  type: string;
-  name: string;
-  description: string;
+export interface ConfigVariables {}
+export interface Variables {
   id: string;
+  name: string;
+  defaultValue: string;
+  description: string;
+  type: string;
   scope: string;
+  schemaId?: string;
+}
+export interface UserVariables extends Variables {
   secret: boolean;
 }

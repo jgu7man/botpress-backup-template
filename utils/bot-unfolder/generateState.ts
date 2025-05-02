@@ -1,19 +1,19 @@
 import fs from "fs";
 import path from "path";
-import { Flow } from "../../types/bot/Flow";
+import { Workflow } from "utils/types/bot/Workflow";
 import { sanitizeName } from "./folderUtils";
 
-export function generateStateFile(flow: Flow, baseDir: string): void {
+export function generateStateFile(flow: Workflow, baseDir: string): void {
   const className = `${capitalize(sanitizeName(flow.name))}State`;
-  const lines: string[] = [`// ${flow.name}.state.ts`, `class ${className} {`];
-  flow.variables.forEach((v) => {
+  const lines: string[] = [`class ${className} {`];
+  (flow.variables || []).forEach((v) => {
     lines.push(`  /** ${v.description || "Sin descripción"} */`);
-    lines.push(`  ${v.name}: ${mapType(v.type)};`);
+    lines.push(`  ${v.name}?: ${mapType(v.type)};`);
   });
   lines.push(`}`);
   lines.push(``, `export const workflow = new ${className}();`);
 
-  const filePath = path.join(baseDir, `${flow.name}.state.ts`);
+  const filePath = path.join(baseDir, `workflow.state.ts`);
   fs.writeFileSync(filePath, lines.join("\n"));
 }
 

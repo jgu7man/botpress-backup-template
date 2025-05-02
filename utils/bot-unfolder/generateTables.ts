@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from "fs";
 import path from "path";
-import { BotExport } from "../../types/bot/BotExport";
+import { Table } from "utils/types/bot/Table";
+import { BotExport } from "../types/bot/BotExport";
 
 /**
  * Genera interfaces TypeScript para cada tabla en bot.json
@@ -14,7 +15,7 @@ export function generateTableInterfaces(
   if (!tables) return;
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-  Object.values(tables).forEach((tbl) => {
+  Object.values(tables).forEach((tbl: Table) => {
     const ifaceName = tbl.name;
     const props = (tbl.schema.properties || {}) as Record<string, any>;
     const lines: string[] = [

@@ -1,24 +1,29 @@
 import fs from "fs";
 import path from "path";
-import { BotExport } from "../../types/bot/BotExport";
+import { BotExport } from "../types/bot/BotExport";
+import { generateVariablesClasses } from "./extractVariables";
 import { ensureDir } from "./fileUtils";
 import { generateFlowPath } from "./generateFlowPath";
 import { generateNodeFiles } from "./generateNodes";
 import { generateStateFile } from "./generateState";
 import { generateTableInterfaces } from "./generateTables";
-// import { readBotExport } from "./readBotExport";
 
-function readBotExport(): BotExport {
+function readExportedBot(): BotExport {
   const exportPath = path.join(__dirname, "../../bot.json");
   const raw = fs.readFileSync(exportPath, "utf8");
   return JSON.parse(raw) as BotExport;
 }
 
-export const bot = readBotExport();
-export const workflowsBase = path.join(__dirname, "../../bot/workflows");
-const tablesBase = path.join(__dirname, "../../bot/tables");
+const targetDir = "../../bot";
+export const bot = readExportedBot();
+export const workflowsBase = path.join(__dirname, `${targetDir}/workflows`);
+const tablesBase = path.join(__dirname, `${targetDir}/tables`);
+const variablesBase = path.join(__dirname, `${targetDir}/variables`);
+const schemasBase = path.join(__dirname, `${targetDir}/schemas`);
 ensureDir(workflowsBase);
 ensureDir(tablesBase);
+ensureDir(variablesBase);
+ensureDir(schemasBase);
 
 // Export workflows
 bot.flows.forEach((flow) => {
@@ -35,4 +40,8 @@ bot.flows.forEach((flow) => {
 // Export table interfaces
 generateTableInterfaces(bot, tablesBase);
 console.log("✅ Tablas exportadas");
-console.log("✅ Export completo");
+
+generateVariablesClasses(bot, variablesBase, schemasBase);
+console.log("✅ Variables exportadas");
+
+console.log("✅ Unfold completo");

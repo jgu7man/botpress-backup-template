@@ -9,12 +9,12 @@ import { generateStateFile } from "./generateState";
 import { generateTableInterfaces } from "./generateTables";
 
 function readExportedBot(): BotExport {
-  const exportPath = path.join(__dirname, "../../", "bot/exported/bot.json");
+  const exportPath = path.join(__dirname, "../../", "bot/unzipped/bot.json");
   const raw = fs.readFileSync(exportPath, "utf8");
   return JSON.parse(raw) as BotExport;
 }
 
-const targetDir = "../../bot";
+const targetDir = "../../bot/src";
 export const bot = readExportedBot();
 export const workflowsBase = path.join(__dirname, `${targetDir}/workflows`);
 const tablesBase = path.join(__dirname, `${targetDir}/tables`);

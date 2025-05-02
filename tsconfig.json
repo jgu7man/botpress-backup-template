@@ -20,16 +20,19 @@
         "./test/*"
       ],
       "@main": [
-        "main/main.ts"
+        "bot/main.ts"
       ],
       "@workflows/*": [
-        "bot/workflows/*"
+        "bot/src/workflows/*"
       ],
       "@variables/*": [
-        "bot/variables/*"
+        "bot/src/variables/*"
       ],
       "@schemas/*": [
-        "bot/schemas/*"
+        "bot/src/schemas/*"
+      ],
+      "@tables/*": [
+        "bot/src/tables/*"
       ],
       "@core-types/*": [
         "utils/types/core/*"

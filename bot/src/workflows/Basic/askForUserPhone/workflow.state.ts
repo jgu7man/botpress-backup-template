@@ -1,20 +1,21 @@
+// Workflow: askForUserPhone - wf-9133a6672f
 class AskForUserPhoneState {
   /** Sin descripción */
-  answerType?: string;
+  answerType: string;
   /** Sin descripción */
-  userPhoneInput?: string;
+  userPhoneInput: string;
   /** Sin descripción */
-  phoneConfirmationInput?: string;
+  phoneConfirmationInput: string;
   /** Sin descripción */
-  phoneConfirmed?: string;
+  phoneConfirmed: string;
   /** Sin descripción */
-  messageResult?: string;
+  messageResult: string;
   /** Sin descripción */
-  skipFlowReason?: string;
+  skipFlowReason: string;
   /** Sin descripción */
-  attemptsToConfirm?: number;
+  attemptsToConfirm: number;
   /** Sin descripción */
-  kbPhoneEvaluation?: string;
+  kbPhoneEvaluation: string;
 }
 
 export const workflow = new AskForUserPhoneState();

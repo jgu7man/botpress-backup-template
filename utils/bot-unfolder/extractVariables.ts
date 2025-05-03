@@ -23,18 +23,38 @@ export function generateVariablesClasses(
     const variables = settings[scopeKey];
     if (!variables) return;
 
-    scopeVariableLines.push(`\nexport class ${scopeKey} {\n`);
+    scopeVariableLines.push(`\nexport class ${scopeKey} {`);
 
-    for (const v of variables) {
-      if (!v) continue;
+    for (const variable of variables) {
+      if (!variable) continue;
+      const { name, type, description } = variable;
 
-      const comment = v.description ? `  /** ${v.description} */\n` : "";
-      const type =
-        v.type === "schema"
-          ? `${getSchemaNameById(schemas, v.schemaId || "")} /* schema */`
-          : v.type;
-
-      scopeVariableLines.push(`${comment}  ${v.name}?: ${type};`);
+      const comment = description
+        ? [
+            `  /**`,
+            `  * [${variable.id}]`,
+            `  * @description ${description} `,
+            `  */`,
+          ]
+        : [`  /** [${variable.id}] */`];
+      scopeVariableLines.push(...comment);
+      if (type === "schema") {
+        const schemaName = getSchemaNameById(schemas, variable.schemaId || "");
+        if (schemaName) {
+          addSchemaImport(schemaName);
+          scopeVariableLines.push(`  ${name}?: ${schemaName};`);
+          continue;
+        }
+      } else if (type === "array" && variable.arrayType === "schema") {
+        const schemaName = getSchemaNameById(schemas, variable.schemaId || "");
+        if (schemaName) {
+          addSchemaImport(schemaName);
+          scopeVariableLines.push(`  ${name}?: ${schemaName}[];`);
+          continue;
+        }
+      } else {
+        scopeVariableLines.push(`  ${name}?: ${type};`);
+      }
     }
 
     scopeVariableLines.push("}");
@@ -47,6 +67,17 @@ export function generateVariablesClasses(
   });
 }
 
+function addSchemaImport(schemaName: string) {
+  const importIndexLine = scopeVariableLines.findIndex(
+    (line) => !line.includes(`import { ${schemaName} }`)
+  );
+  if (importIndexLine < 0) {
+    scopeVariableLines.unshift(
+      `import { ${schemaName} } from "${filesMap[schemaName]}";`
+    );
+  }
+}
+
 export function extractSchemaInterfaces(
   schemas: BotSchemas[],
   outputPath: string
@@ -57,8 +88,17 @@ export function extractSchemaInterfaces(
     const { name, schema } = s;
     const props = schema?.properties;
     if (!props) continue;
-
-    lines.push(`export interface ${name} {`);
+    const documentation = [
+      `/* eslint-disable @typescript-eslint/no-explicit-any */`,
+      `import { z } from "zod";\n`,
+      `/**`,
+      `* @id [${s.id}]`,
+      `* @name ${name}`,
+      `* @typings: ${s.typings}`,
+      `*/`,
+      `export interface ${name} {`,
+    ];
+    lines.push(...documentation);
 
     for (const [key, def] of Object.entries(props)) {
       const tsType = mapJsonSchemaTypeToTs(def.type);
@@ -66,6 +106,7 @@ export function extractSchemaInterfaces(
     }
 
     lines.push("}\n");
+    lines.push(...[`export const ${name}Schema = ${s.code}`]);
     fs.writeFileSync(`${outputPath}/${name}.ts`, lines.join("\n"), "utf8");
     // Generate a relative path for the import
     filesMap[name] = `../schemas/${name}`;

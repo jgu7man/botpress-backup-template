@@ -1,20 +1,21 @@
+// Workflow: ❓ evaluateConfirmation - wf-f44160aa45
 class EvaluateConfirmationState {
   /** Sin descripción */
-  interpretedInput?: string;
+  interpretedInput: string;
   /** Sin descripción */
-  inputCategorization?: string;
+  inputCategorization: string;
   /** Sin descripción */
-  kbUnderstanding?: string;
+  kbUnderstanding: string;
   /** Sin descripción */
-  userInput?: string;
+  userInput: string;
   /** Sin descripción */
-  correctedUserInput?: string;
+  correctedUserInput: string;
   /** Sin descripción */
-  understandingAttempts?: number;
+  understandingAttempts: number;
   /** Sin descripción */
-  confirmationType?: unknown;
+  confirmationType: unknown;
   /** Sin descripción */
-  answerType?: string;
+  answerType: string;
 }
 
 export const workflow = new EvaluateConfirmationState();

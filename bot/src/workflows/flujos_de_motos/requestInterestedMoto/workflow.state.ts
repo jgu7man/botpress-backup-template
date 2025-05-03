@@ -1,20 +1,21 @@
+// Workflow: requestInterestedMoto - wf-8dfd2bb518
 class RequestInterestedMotoState {
   /** Sin descripción */
-  interestedProductAnswer?: string;
+  interestedProductAnswer: string;
   /** Sin descripción */
-  assistanceMessage?: string;
+  assistanceMessage: string;
   /** Sin descripción */
-  answerClasification?: string;
+  answerClasification: string;
   /** Sin descripción */
-  interestedAnswerAttempts?: number;
+  interestedAnswerAttempts: number;
   /** Sin descripción */
-  insistedAnswer?: string;
+  insistedAnswer: string;
   /** Sin descripción */
-  understandInsistedAttempt?: number;
+  understandInsistedAttempt: number;
   /** Sin descripción */
-  purchasePreference?: unknown;
+  purchasePreference: unknown;
   /** Sin descripción */
-  insistAttempts?: number;
+  insistAttempts: number;
 }
 
 export const workflow = new RequestInterestedMotoState();

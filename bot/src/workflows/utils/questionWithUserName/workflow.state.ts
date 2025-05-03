@@ -1,12 +1,13 @@
+// Workflow: 👤 questionWithUserName - wf-9d5e1848de
 class QuestionWithUserNameState {
   /** Sin descripción */
-  question?: string;
+  question: string;
   /** Sin descripción */
-  additionalConsiderations?: string;
+  additionalConsiderations: string;
   /** Sin descripción */
-  messageResult?: string;
+  messageResult: string;
   /** Sin descripción */
-  waitForUserInput?: boolean;
+  waitForUserInput: boolean;
 }
 
 export const workflow = new QuestionWithUserNameState();

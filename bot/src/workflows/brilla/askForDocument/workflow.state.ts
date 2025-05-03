@@ -1,16 +1,17 @@
+// Workflow: askForDocument - wf-fc7cc8cc98
 class AskForDocumentState {
   /** Sin descripción */
-  answerInterpretation?: string;
+  answerInterpretation: string;
   /** Sin descripción */
-  userInput?: string;
+  userInput: string;
   /** Sin descripción */
-  understandingAttempts?: number;
+  understandingAttempts: number;
   /** Sin descripción */
-  kbAnswerInterpretation?: string;
+  kbAnswerInterpretation: string;
   /** Sin descripción */
-  requestDocumentQuestion?: string;
+  requestDocumentQuestion: string;
   /** Sin descripción */
-  expectedData?: string;
+  expectedData: string;
 }
 
 export const workflow = new AskForDocumentState();

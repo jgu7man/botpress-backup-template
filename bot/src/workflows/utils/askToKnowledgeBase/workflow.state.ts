@@ -1,12 +1,13 @@
+// Workflow: ✨ askToKnowledgeBase - wf-3b13133a5d
 class AskToKnowledgeBaseState {
   /** Sin descripción */
-  interpretedInput?: string;
+  interpretedInput: string;
   /** Sin descripción */
-  kbUnderstanding?: string;
+  kbUnderstanding: string;
   /** Sin descripción */
-  answerMessage?: string;
+  answerMessage: string;
   /** Sin descripción */
-  context?: string;
+  context: string;
 }
 
 export const workflow = new AskToKnowledgeBaseState();

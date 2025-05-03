@@ -1,14 +1,15 @@
+// Workflow: productDetailsFollowUp - wf-467dd924db
 class ProductDetailsFollowUpState {
   /** Sin descripción */
-  skipFirstCreditQuestion?: boolean;
+  skipFirstCreditQuestion: boolean;
   /** Sin descripción */
-  requireUserDataReason?: boolean;
+  requireUserDataReason: boolean;
   /** Sin descripción */
-  interestStatus?: string;
+  interestStatus: string;
   /** Sin descripción */
-  purchaseMethodInfo?: string;
+  purchaseMethodInfo: string;
   /** Sin descripción */
-  purchaseMethodInfoMessage?: string;
+  purchaseMethodInfoMessage: string;
 }
 
 export const workflow = new ProductDetailsFollowUpState();

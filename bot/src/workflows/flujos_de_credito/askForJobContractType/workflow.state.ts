@@ -1,10 +1,11 @@
+// Workflow: askForJobContractType - wf-fe334c1db0
 class AskForJobContractTypeState {
   /** Sin descripción */
-  userAnswer?: string;
+  userAnswer: string;
   /** Sin descripción */
-  answerUnderstanding?: string;
+  answerUnderstanding: string;
   /** Sin descripción */
-  understandingAttempts?: number;
+  understandingAttempts: number;
 }
 
 export const workflow = new AskForJobContractTypeState();

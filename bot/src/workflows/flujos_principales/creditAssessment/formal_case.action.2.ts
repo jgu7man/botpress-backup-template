@@ -1,3 +1,4 @@
+// Node: formal_case - nd-aacf4b3211
 import { user } from "@main";
 // ------------------ EXECUTE CODE -------------------------
 // Set User Conversation Status and Credit Profile for Banco Bogotá

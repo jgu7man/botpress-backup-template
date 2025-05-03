@@ -5,10 +5,14 @@ import { sanitizeName } from "./folderUtils";
 
 export function generateStateFile(flow: Workflow, baseDir: string): void {
   const className = `${capitalize(sanitizeName(flow.name))}State`;
-  const lines: string[] = [`class ${className} {`];
+  const lines: string[] = [
+    `// Workflow: ${flow.name} - ${flow.id}`,
+    `class ${className} {`,
+  ];
+
   (flow.variables || []).forEach((v) => {
     lines.push(`  /** ${v.description || "Sin descripción"} */`);
-    lines.push(`  ${v.name}?: ${mapType(v.type)};`);
+    lines.push(`  ${v.name}: ${mapType(v.type)};`);
   });
   lines.push(`}`);
   lines.push(``, `export const workflow = new ${className}();`);

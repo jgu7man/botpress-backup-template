@@ -1,3 +1,4 @@
+// Node: financiera_message - nd-45f911b1da
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
 // ------------------ EXECUTE CODE -------------------------

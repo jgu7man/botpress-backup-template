@@ -1,10 +1,11 @@
+// Workflow: analyzeLocationUserInput - wf-da822e8c2f
 class AnalyzeLocationUserInputState {
   /** Sin descripción */
-  locationInput?: string;
+  locationInput: string;
   /** Sin descripción */
-  context?: string;
+  context: string;
   /** Sin descripción */
-  knowledgeAboutLocation?: string;
+  knowledgeAboutLocation: string;
 }
 
 export const workflow = new AnalyzeLocationUserInputState();

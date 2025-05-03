@@ -1,10 +1,11 @@
+// Workflow: financialStudyMessage - wf-c3940caa98
 class FinancialStudyMessageState {
   /** Sin descripción */
-  financialLink?: string;
+  financialLink: string;
   /** Sin descripción */
-  colombiaTime?: string;
+  colombiaTime: string;
   /** Sin descripción */
-  assessmentInvitationMsg?: string;
+  assessmentInvitationMsg: string;
 }
 
 export const workflow = new FinancialStudyMessageState();

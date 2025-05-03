@@ -1,24 +1,25 @@
+// Workflow: printMotoList - wf-0f8fa1e6d4
 class PrintMotoListState {
   /** Sin descripción */
-  count?: number;
+  count: number;
   /** Sin descripción */
-  total?: number;
+  total: number;
   /** Sin descripción */
-  details?: unknown;
+  details: unknown;
   /** Sin descripción */
-  optionsList?: unknown[];
+  optionsList: unknown[];
   /** Sin descripción */
-  interestedMotoReference?: string;
+  interestedMotoReference: string;
   /** Sin descripción */
-  motoList?: unknown[];
+  motoList: unknown[];
   /** Sin descripción */
-  list?: string;
+  list: string;
   /** Sin descripción */
-  answerType?: string;
+  answerType: string;
   /** Sin descripción */
-  kbKnowledgeResponse?: string;
+  kbKnowledgeResponse: string;
   /** Sin descripción */
-  resultMessage?: string;
+  resultMessage: string;
 }
 
 export const workflow = new PrintMotoListState();

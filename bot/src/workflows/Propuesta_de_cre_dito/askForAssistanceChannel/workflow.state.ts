@@ -1,10 +1,11 @@
+// Workflow: askForAssistanceChannel - wf-9e68cef991
 class AskForAssistanceChannelState {
   /** Sin descripción */
-  assistanceModeAnswer?: string;
+  assistanceModeAnswer: string;
   /** Sin descripción */
-  retryAttempts?: number;
+  retryAttempts: number;
   /** Sin descripción */
-  userAnswerContext?: string;
+  userAnswerContext: string;
 }
 
 export const workflow = new AskForAssistanceChannelState();

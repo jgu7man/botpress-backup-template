@@ -1,8 +1,9 @@
+// Workflow: setCupoBrillaProfile - wf-bfe02f1d4e
 class SetCupoBrillaProfileState {
   /** Sin descripción */
-  isInterestedProduct?: boolean;
+  isInterestedProduct: boolean;
   /** Sin descripción */
-  alertMessage?: string;
+  alertMessage: string;
 }
 
 export const workflow = new SetCupoBrillaProfileState();

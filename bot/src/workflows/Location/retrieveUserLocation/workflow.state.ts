@@ -1,14 +1,15 @@
+// Workflow: retrieveUserLocation - wf-a8d94616a2
 class RetrieveUserLocationState {
   /** Sin descripción */
-  answerType?: string;
+  answerType: string;
   /** Sin descripción */
-  messageResult?: string;
+  messageResult: string;
   /** Sin descripción */
-  locationInput?: string;
+  locationInput: string;
   /** Sin descripción */
-  greetingMessage?: string;
+  greetingMessage: string;
   /** Sin descripción */
-  understandingAttempts?: number;
+  understandingAttempts: number;
 }
 
 export const workflow = new RetrieveUserLocationState();

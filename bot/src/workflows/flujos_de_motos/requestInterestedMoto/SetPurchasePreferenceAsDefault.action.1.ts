@@ -1,3 +1,4 @@
+// Node: SetPurchasePreferenceAsDefault - nd-10a0ebc2e6
 import { user } from "@main";
 import { workflow } from "./workflow.state";
 // ------------------ EXECUTE CODE -------------------------

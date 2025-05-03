@@ -1,30 +1,31 @@
+// Workflow: MotoKnowledgeBase - wf-fc6c348277
 class MotoKnowledgeBaseState {
   /** Sin descripción */
-  paymentMethodRequest?: boolean;
+  paymentMethodRequest: boolean;
   /** Sin descripción */
-  queriedReferences?: string;
+  queriedReferences: string;
   /** Sin descripción */
-  stlyeRelatedProducts?: unknown[];
+  stlyeRelatedProducts: unknown[];
   /** The type of the request of user */
-  answerType?: string;
+  answerType: string;
   /** Sin descripción */
-  interpretedMotorcycle?: string;
+  interpretedMotorcycle: string;
   /** Sin descripción */
-  foundMessage?: string;
+  foundMessage: string;
   /** Sin descripción */
-  styleOptionList?: unknown[];
+  styleOptionList: unknown[];
   /** Sin descripción */
-  kbResponse?: unknown;
+  kbResponse: unknown;
   /** Sin descripción */
-  competitorReference?: string;
+  competitorReference: string;
   /** Sin descripción */
-  stlyeMenuOfferMessage?: string;
+  stlyeMenuOfferMessage: string;
   /** Sin descripción */
-  styleMenuOffer?: boolean;
+  styleMenuOffer: boolean;
   /** Sin descripción */
-  ownReference?: string;
+  ownReference: string;
   /** Sin descripción */
-  interpretedStyle?: string;
+  interpretedStyle: string;
 }
 
 export const workflow = new MotoKnowledgeBaseState();

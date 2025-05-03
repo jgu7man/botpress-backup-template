@@ -1,3 +1,4 @@
+// Workflow: creditProposal - wf-998c649e12
 class CreditProposalState {
 }
 

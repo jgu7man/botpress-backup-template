@@ -1,14 +1,15 @@
+// Workflow: creditAssessment - wf-9cf84e7eb6
 class CreditAssessmentState {
   /** Sin descripción */
-  serviceLocationAbout?: string;
+  serviceLocationAbout: string;
   /** Sin descripción */
-  serviceLocationInfo?: string;
+  serviceLocationInfo: string;
   /** Sin descripción */
-  reportedResponse?: string;
+  reportedResponse: string;
   /** Sin descripción */
-  contractTypeAnswer?: string;
+  contractTypeAnswer: string;
   /** Sin descripción */
-  concernMessage?: string;
+  concernMessage: string;
 }
 
 export const workflow = new CreditAssessmentState();

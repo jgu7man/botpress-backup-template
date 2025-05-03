@@ -1,8 +1,9 @@
+// Workflow: CreditPreferenceHandle - wf-2e6b6506ba
 class CreditPreferenceHandleState {
   /** Sin descripción */
-  purchaseMethodInfo?: string;
+  purchaseMethodInfo: string;
   /** Sin descripción */
-  purchaseMethodInfoMessage?: string;
+  purchaseMethodInfoMessage: string;
 }
 
 export const workflow = new CreditPreferenceHandleState();

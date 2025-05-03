@@ -1,3 +1,4 @@
+// Workflow: Error - wf-error
 class ErrorState {
 }
 

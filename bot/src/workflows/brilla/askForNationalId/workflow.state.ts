@@ -1,14 +1,15 @@
+// Workflow: askForNationalId - wf-ebd6a89332
 class AskForNationalIdState {
   /** Sin descripción */
-  answerInterpretation?: string;
+  answerInterpretation: string;
   /** Sin descripción */
-  userInput?: string;
+  userInput: string;
   /** Sin descripción */
-  understandingAttempts?: number;
+  understandingAttempts: number;
   /** Sin descripción */
-  kbAnswerInterpretation?: string;
+  kbAnswerInterpretation: string;
   /** Sin descripción */
-  requestDocumentQuestion?: string;
+  requestDocumentQuestion: string;
 }
 
 export const workflow = new AskForNationalIdState();

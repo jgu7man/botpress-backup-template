@@ -1,10 +1,11 @@
+// Workflow: askForReportedStatus - wf-78b1830c28
 class AskForReportedStatusState {
   /** Sin descripción */
-  userReportedAnswer?: string;
+  userReportedAnswer: string;
   /** Sin descripción */
-  understandingAttempts?: number;
+  understandingAttempts: number;
   /** Sin descripción */
-  userReportedQuestion?: string;
+  userReportedQuestion: string;
 }
 
 export const workflow = new AskForReportedStatusState();

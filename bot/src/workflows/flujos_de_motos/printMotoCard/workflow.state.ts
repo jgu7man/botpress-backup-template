@@ -1,16 +1,17 @@
+// Workflow: printMotoCard - wf-b69d17ce48
 class PrintMotoCardState {
   /** Sin descripción */
-  title?: string;
+  title: string;
   /** Sin descripción */
-  detailsURL?: string;
+  detailsURL: string;
   /** Sin descripción */
-  imageURL?: string;
+  imageURL: string;
   /** Sin descripción */
-  price?: number;
+  price: number;
   /** Sin descripción */
-  formattedPrice?: string;
+  formattedPrice: string;
   /** Sin descripción */
-  productSource?: unknown;
+  productSource: unknown;
 }
 
 export const workflow = new PrintMotoCardState();

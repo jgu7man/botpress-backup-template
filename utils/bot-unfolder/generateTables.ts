@@ -19,14 +19,27 @@ export function generateTableInterfaces(
     const ifaceName = tbl.name;
     const props = (tbl.schema.properties || {}) as Record<string, any>;
     const lines: string[] = [
-      `// ${tbl.name}.table.ts`,
+      `/**`,
+      `  ${tbl.name}.table.ts - ${tbl.id}`,
+      `  Created: ${tbl.createdAt}`,
+      `  Created by: ${tbl.createdBy}`,
+      `  Tags: ${JSON.stringify(tbl.tags)}`,
+      `  Factor: ${tbl.factor}`,
+      `  Frozen: ${tbl.frozen}`,
+      `  Parent folder: ${tbl.parentFolder}`,
+      `  Selectors: ${JSON.stringify(tbl.selectors)}`,
+      `  Is compute enabled: ${tbl.isComputeEnabled}`,
+      `  Updated: ${tbl.updatedAt}`,
+      `*/`,
       `export interface ${ifaceName} {`,
     ];
 
     Object.entries(props).forEach(([key, def]) => {
       const tsType = mapJsonType(def.type);
       const nullable = def.nullable ? " | null" : "";
-      const desc = def.description ? `/** ${def.description} */` : "";
+      const desc = `/** ${
+        def.description ? def.description : "Sin descripción"
+      } */`;
       lines.push(`  ${desc}`);
       lines.push(`  ${key}: ${tsType}${nullable};`);
     });

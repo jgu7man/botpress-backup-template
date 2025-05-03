@@ -1,8 +1,9 @@
+// Workflow: CashPreferenceHandle - wf-1a6618bddb
 class CashPreferenceHandleState {
   /** Sin descripción */
-  purchaseMethodAnswer?: string;
+  purchaseMethodAnswer: string;
   /** Sin descripción */
-  priceInfoMessage?: string;
+  priceInfoMessage: string;
 }
 
 export const workflow = new CashPreferenceHandleState();

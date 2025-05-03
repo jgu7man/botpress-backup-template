@@ -1,3 +1,4 @@
+// Workflow: Main - wf-main
 class MainState {
 }
 

@@ -6,7 +6,7 @@ export interface BotSettings {
   id: string;
   inactivityTimeout: number;
   botVariables: Variables[];
-  userVariables: UserVariables[];
+  userVariables: Variables[];
   nodeRepetitionLimit: number;
   configVariables: ConfigVariables;
   cognitiveConfigs: CognitiveConfigs;
@@ -16,7 +16,7 @@ export interface BotSettings {
   useClient: boolean;
   llmzVersion: string;
   autonomousModel: string;
-  conversationVariables: undefined[];
+  conversationVariables: Variables[];
 }
 
 export type ScopeVariables = keyof Pick<
@@ -28,7 +28,10 @@ export interface CognitiveConfigs {
 }
 export interface OpenAi {}
 export interface ConfigVariables {}
-export interface Variables {
+
+export type Variables = VariablesBase | ArrayVariables | UserVariables;
+
+export interface VariablesBase {
   id: string;
   name: string;
   defaultValue: string;
@@ -36,7 +39,16 @@ export interface Variables {
   type: string;
   scope: string;
   schemaId?: string;
+  arrayType?: string;
 }
-export interface UserVariables extends Variables {
+
+export interface ArrayVariables
+  extends Omit<VariablesBase, "schemaId" | "arrayType"> {
+  arrayType: string;
+  type: "array";
+  schemaId: string;
+}
+
+export interface UserVariables extends VariablesBase {
   secret: boolean;
 }

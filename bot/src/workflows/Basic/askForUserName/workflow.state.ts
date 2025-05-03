@@ -1,14 +1,15 @@
+// Workflow: askForUserName - wf-836808153b
 class AskForUserNameState {
   /** Sin descripción */
-  userFullNameInput?: Record<string, unknown>;
+  userFullNameInput: Record<string, unknown>;
   /** Sin descripción */
-  answerType?: string;
+  answerType: string;
   /** Sin descripción */
-  interpretedAnswerType?: string;
+  interpretedAnswerType: string;
   /** Sin descripción */
-  pleasentriesMessage?: string;
+  pleasentriesMessage: string;
   /** Sin descripción */
-  skipFlowReason?: string;
+  skipFlowReason: string;
 }
 
 export const workflow = new AskForUserNameState();

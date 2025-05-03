@@ -1,10 +1,11 @@
+// Workflow: Conversation End - wf-conversation-end
 class Conversation_EndState {
   /** Sin descripción */
-  inputError?: string;
+  inputError: string;
   /** To set the bot state: 'COMPLEXED', 'CONFUSED', 'WRONG', 'TIMEOUT' */
-  botState?: string;
+  botState: string;
   /** Sin descripción */
-  colombiaTime?: string;
+  colombiaTime: string;
 }
 
 export const workflow = new Conversation_EndState();

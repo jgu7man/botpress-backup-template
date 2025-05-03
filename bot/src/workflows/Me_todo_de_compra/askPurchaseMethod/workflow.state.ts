@@ -1,10 +1,11 @@
+// Workflow: askPurchaseMethod - wf-1011b8c22c
 class AskPurchaseMethodState {
   /** Sin descripción */
-  purchaseMethodQuestion?: string;
+  purchaseMethodQuestion: string;
   /** Sin descripción */
-  purchaseMethodAnswer?: string;
+  purchaseMethodAnswer: string;
   /** Sin descripción */
-  clarificationAttempts?: number;
+  clarificationAttempts: number;
 }
 
 export const workflow = new AskPurchaseMethodState();

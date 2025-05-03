@@ -1,3 +1,4 @@
+// Node: skipByRefusing - nd-415b5eaa75
 import { workflow } from "./workflow.state";
 // ------------------ EXECUTE CODE -------------------------
 // "Set Reason for Skipping Workflow Execution"

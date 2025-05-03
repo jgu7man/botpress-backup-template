@@ -1,3 +1,4 @@
+// Node: AskKnowledgeBase - nd-fb8a80b52a
 // ------------------ EXECUTE CODE -------------------------
 // Log KnowledgeAgent's Answer, Response Status, and Citations
 

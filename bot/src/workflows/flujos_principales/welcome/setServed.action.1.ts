@@ -1,3 +1,4 @@
+// Node: setServed - nd-ed6692d686
 import { bot } from "@main";
 // ------------------ EXECUTE CODE -------------------------
 // "Initialize Bot with Empty Irregular State Variable"

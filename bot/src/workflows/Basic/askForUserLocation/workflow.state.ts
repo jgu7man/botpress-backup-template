@@ -1,16 +1,17 @@
+// Workflow: askForUserLocation - wf-f5e272a659
 class AskForUserLocationState {
   /** Sin descripción */
-  messageResult?: string;
+  messageResult: string;
   /** Sin descripción */
-  locationInput?: string;
+  locationInput: string;
   /** Sin descripción */
-  answerType?: string;
+  answerType: string;
   /** Sin descripción */
-  greetingMessage?: string;
+  greetingMessage: string;
   /** Sin descripción */
-  skipFlowReason?: string;
+  skipFlowReason: string;
   /** Sin descripción */
-  retryAttemps?: number;
+  retryAttemps: number;
 }
 
 export const workflow = new AskForUserLocationState();

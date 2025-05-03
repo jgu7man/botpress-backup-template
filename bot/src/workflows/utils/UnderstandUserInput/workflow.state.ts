@@ -1,22 +1,23 @@
+// Workflow: 🧠 UnderstandUserInput - wf-cabe199fc6
 class UnderstandUserInputState {
   /** Sin descripción */
-  kbUnderstanding?: string;
+  kbUnderstanding: string;
   /** Sin descripción */
-  context?: string;
+  context: string;
   /** Sin descripción */
-  correctedUserInput?: string;
+  correctedUserInput: string;
   /** Sin descripción */
-  userInput?: string;
+  userInput: string;
   /** Sin descripción */
-  allowAnswer?: boolean;
+  allowAnswer: boolean;
   /** Sin descripción */
-  expectedData?: string;
+  expectedData: string;
   /** Sin descripción */
-  retry?: boolean;
+  retry: boolean;
   /** Sin descripción */
-  paraphrasedQuestion?: string;
+  paraphrasedQuestion: string;
   /** Sin descripción */
-  retryAttempts?: number;
+  retryAttempts: number;
 }
 
 export const workflow = new UnderstandUserInputState();

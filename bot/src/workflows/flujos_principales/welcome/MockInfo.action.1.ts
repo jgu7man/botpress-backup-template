@@ -1,3 +1,4 @@
+// Node: MockInfo - nd-43f2179813
 import { user } from "@main";
 // ------------------ EXECUTE CODE -------------------------
 // Assign User Details Including Name, Phone, and Location

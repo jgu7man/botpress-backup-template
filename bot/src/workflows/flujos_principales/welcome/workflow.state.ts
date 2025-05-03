@@ -1,16 +1,17 @@
+// Workflow: ⭐️ welcome - wf-1f28b00f81
 class WelcomeState {
   /** Sin descripción */
-  startedSummary?: string;
+  startedSummary: string;
   /** Sin descripción */
-  startMessageType?: string;
+  startMessageType: string;
   /** Sin descripción */
-  adviseMessage?: string;
+  adviseMessage: string;
   /** Sin descripción */
-  colombiaTime?: string;
+  colombiaTime: string;
   /** Sin descripción */
-  welcomeMessage?: string;
+  welcomeMessage: string;
   /** Sin descripción */
-  transition?: string;
+  transition: string;
 }
 
 export const workflow = new WelcomeState();

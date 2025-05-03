@@ -1,8 +1,9 @@
+// Workflow: Timeout - wf-timeout
 class TimeoutState {
   /** Sin descripción */
-  colombiaTime?: string;
+  colombiaTime: string;
   /** Sin descripción */
-  timeoutMessage?: string;
+  timeoutMessage: string;
 }
 
 export const workflow = new TimeoutState();

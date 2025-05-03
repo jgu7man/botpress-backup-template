@@ -1,10 +1,11 @@
+// Workflow: ⚠️ helpQuestion - wf-1e09b08660
 class HelpQuestionState {
   /** Sin descripción */
-  firstRequest?: boolean;
+  firstRequest: boolean;
   /** Sin descripción */
-  message?: string;
+  message: string;
   /** Sin descripción */
-  template2?: boolean;
+  template2: boolean;
 }
 
 export const workflow = new HelpQuestionState();

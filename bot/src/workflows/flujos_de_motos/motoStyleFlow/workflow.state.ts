@@ -1,28 +1,29 @@
+// Workflow: motoStyleFlow - wf-8b9dfdf969
 class MotoStyleFlowState {
   /** Sin descripción */
-  interpretedStyle?: string;
+  interpretedStyle: string;
   /** Sin descripción */
-  styleOptionList?: unknown[];
+  styleOptionList: unknown[];
   /** Sin descripción */
-  kbResponse?: string;
+  kbResponse: string;
   /** Sin descripción */
-  stlyeMenuOfferMessage?: string;
+  stlyeMenuOfferMessage: string;
   /** Sin descripción */
-  queriedReferences?: string;
+  queriedReferences: string;
   /** Sin descripción */
-  motoList?: unknown[];
+  motoList: unknown[];
   /** Sin descripción */
-  resultMessage?: string;
+  resultMessage: string;
   /** Sin descripción */
-  uniqueOptionConfirmation?: boolean;
+  uniqueOptionConfirmation: boolean;
   /** Sin descripción */
-  relatedReferences?: string;
+  relatedReferences: string;
   /** Sin descripción */
-  interestedMotoReference?: string;
+  interestedMotoReference: string;
   /** Sin descripción */
-  captureMotoAttempts?: number;
+  captureMotoAttempts: number;
   /** Sin descripción */
-  optionsList?: unknown[];
+  optionsList: unknown[];
 }
 
 export const workflow = new MotoStyleFlowState();

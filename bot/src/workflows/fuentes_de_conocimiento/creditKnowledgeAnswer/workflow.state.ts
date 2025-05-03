@@ -1,12 +1,13 @@
+// Workflow: creditKnowledgeAnswer - wf-07238661a0
 class CreditKnowledgeAnswerState {
   /** The answer from the knowledge base */
-  knowledgeBasesAnswer?: string;
+  knowledgeBasesAnswer: string;
   /** Sin descripción */
-  knowledgeContentInfo?: string;
+  knowledgeContentInfo: string;
   /** Question made by the user */
-  userQuestion?: string;
+  userQuestion: string;
   /** Sin descripción */
-  conversationContext?: string;
+  conversationContext: string;
 }
 
 export const workflow = new CreditKnowledgeAnswerState();

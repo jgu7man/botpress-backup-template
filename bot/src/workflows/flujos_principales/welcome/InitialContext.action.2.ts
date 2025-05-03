@@ -1,3 +1,4 @@
+// Node: InitialContext - nd-6ecdfb7c32
 import { bot, user } from "@main";
 // ------------------ EXECUTE CODE -------------------------
 // "Validate User Information and Manage Bot Data Reset"

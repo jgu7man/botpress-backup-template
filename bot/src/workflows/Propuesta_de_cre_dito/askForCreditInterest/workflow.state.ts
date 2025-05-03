@@ -1,18 +1,19 @@
+// Workflow: askForCreditInterest - wf-339ffd4ede
 class AskForCreditInterestState {
   /** Sin descripción */
-  newInformationRequest?: boolean;
+  newInformationRequest: boolean;
   /** Sin descripción */
-  skipFirstQuestion?: boolean;
+  skipFirstQuestion: boolean;
   /** Sin descripción */
-  alternativeQuestion?: boolean;
+  alternativeQuestion: boolean;
   /** Sin descripción */
-  assistanceModeAnswer?: string;
+  assistanceModeAnswer: string;
   /** Sin descripción */
-  creditInterestedAnswer?: string;
+  creditInterestedAnswer: string;
   /** Sin descripción */
-  creditInterestQuestion?: string;
+  creditInterestQuestion: string;
   /** Sin descripción */
-  retryAttempts?: number;
+  retryAttempts: number;
 }
 
 export const workflow = new AskForCreditInterestState();

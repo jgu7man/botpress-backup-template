@@ -1,7 +1,8 @@
-// Node: ConfirmNumber - nd-0c6b6b4b4b
 import { workflow } from "./workflow.state";
+// Node: ConfirmNumber - nd-0c6b6b4b4b
+// "Track Confirmation Attempts and Set Skip Reason" - ins-68cfe8f5ae
+
 // ------------------ EXECUTE CODE -------------------------
-// "Track Confirmation Attempts and Set Skip Reason"
 
 workflow.attemptsToConfirm++
 

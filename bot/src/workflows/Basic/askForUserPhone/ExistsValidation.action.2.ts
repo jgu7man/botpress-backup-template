@@ -1,8 +1,9 @@
-// Node: ExistsValidation - nd-ef7b11568b
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: ExistsValidation - nd-ef7b11568b
+// Determine Workflow Skip Reason Based on User Phone Status - ins-f74da0894d
+
 // ------------------ EXECUTE CODE -------------------------
-// Determine Workflow Skip Reason Based on User Phone Status
 
 console.log('🤖 user.phone: ', user.phone)
 console.log('🤖 user.askedBefore: ', user.askedBefore)

@@ -1,6 +1,7 @@
-// Node: SetAssistanceModeInStore - nd-d0a5d177bf
 import { user } from "@main";
+// Node: SetAssistanceModeInStore - nd-d0a5d177bf
+// Set user assistance mode to empty string. - ins-00d91a9a6e
+
 // ------------------ EXECUTE CODE -------------------------
-// Set user assistance mode to empty string.
 
 user.assistanceMode = 'IN_STORE'

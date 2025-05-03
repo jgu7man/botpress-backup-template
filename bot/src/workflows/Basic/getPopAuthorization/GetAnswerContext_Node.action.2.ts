@@ -1,8 +1,9 @@
-// Node: GetAnswerContext_Node - nd-073eee7ef5
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: GetAnswerContext_Node - nd-073eee7ef5
+// Update user and workflow answer types with dynamic values. - ins-042d119543
+
 // ------------------ EXECUTE CODE -------------------------
-// Update user and workflow answer types with dynamic values.
 
 if(user.popAuthorized['staticValue']) {
     user.popAuthorized = user.popAuthorized['staticValue']

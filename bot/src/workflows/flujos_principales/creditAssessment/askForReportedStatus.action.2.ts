@@ -1,7 +1,8 @@
-// Node: askForReportedStatus - nd-9a2838d85a
 import { user } from "@main";
+// Node: askForReportedStatus - nd-9a2838d85a
+// "Activate Online Assistance and Begin Pre-Evaluation Process" - ins-ce9ea9252f
+
 // ------------------ EXECUTE CODE -------------------------
-// "Activate Online Assistance and Begin Pre-Evaluation Process"
 
 user.assistanceMode = "ON_LINE"
 user.conversationStatus = "PRE_EVALUATION_START"

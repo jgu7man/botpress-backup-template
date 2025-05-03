@@ -1,9 +1,10 @@
-// Node: Entry - nd-96a14bb62e
 import { bot } from "@main";
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
+// Node: Entry - nd-96a14bb62e
+// "Manage Bot State and Current Time in Colombia" - ins-7816ee7c57
+
 // ------------------ EXECUTE CODE -------------------------
-// "Manage Bot State and Current Time in Colombia"
 
 const { DateTime } = luxon
 const CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)

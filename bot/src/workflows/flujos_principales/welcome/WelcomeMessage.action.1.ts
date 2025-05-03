@@ -1,8 +1,9 @@
-// Node: WelcomeMessage - nd-766ed57e70
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
+// Node: WelcomeMessage - nd-766ed57e70
+// Consultar la hora de Colombia - ins-0fe0db2807
+
 // ------------------ EXECUTE CODE -------------------------
-// Consultar la hora de Colombia
 
 const { DateTime } = luxon
 const currentTime = DateTime.now()

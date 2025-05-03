@@ -3,8 +3,10 @@ import path from "path";
 import {
   ActionInstruction,
   AiInstruction,
+  ContentInstruction,
   EndNode,
   EntryNode,
+  Instruction,
   Node,
   NodeType,
   StandardNode,
@@ -30,18 +32,54 @@ export function generateNodeFiles(nodes: Node[], targetDir: string): void {
         }
         // Content
         if (instruction.type === "content" && instruction.content) {
+          generateContentFile(targetDir, safeName, idx, instruction);
+        }
+        // Transition
+        if (instruction.type === "transition") {
+          const condition = instruction.condition?.payload.replace(
+            /{{(.*?)}}/g,
+            (match, p1) => {
+              return `${p1.trim()}`;
+            }
+          );
+          const transitionName = instruction.id.replace("-", "");
+          const code = `const ${transitionName} = ${condition};`;
+          const separatorLabel = "TRANSITION CONDITION";
+
+          const lines: string[] = generateImportStatements(
+            code,
+            node,
+            separatorLabel,
+            instruction
+          );
+
+          lines.push(code.trim());
+          lines.push(`// Destination: ${instruction.destination.node}`);
+
           const filePath = path.join(
             targetDir,
-            `${safeName}.content.${idx + 1}.json`
+            `${safeName}.transition.${idx + 1}.ts`
           );
-          fs.writeFileSync(
-            filePath,
-            JSON.stringify(instruction.content, null, 2) + "\n"
-          );
+          const trueLines = lines.filter((line) => line.trim() !== ""); // Remove empty lines
+          fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
         }
       });
     });
 }
+
+function generateContentFile(
+  targetDir: string,
+  safeName: string,
+  idx: number,
+  instruction: ContentInstruction
+) {
+  const filePath = path.join(targetDir, `${safeName}.content.${idx + 1}.json`);
+  fs.writeFileSync(
+    filePath,
+    JSON.stringify(instruction.content, null, 2) + "\n"
+  );
+}
+
 function generateAiPromptFile(
   instruction: AiInstruction,
   targetDir: string,
@@ -81,6 +119,28 @@ function generateActionFile(
   idx: number
 ) {
   const code = instruction.code.trim();
+  const separatorLabel = "EXECUTE CODE";
+
+  const lines: string[] = generateImportStatements(
+    code,
+    node,
+    separatorLabel,
+    instruction
+  );
+
+  lines.push(instruction.code.trim());
+
+  const filePath = path.join(targetDir, `${safeName}.action.${idx + 1}.ts`);
+  const trueLines = lines.filter((line) => line.trim() !== ""); // Remove empty lines
+  fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
+}
+
+function generateImportStatements(
+  code: string,
+  node: Node,
+  separatorLabel: string,
+  instruction: Instruction
+) {
   const mainImports = [
     code.includes("bot.") ? "bot" : "",
     code.includes("user.") ? "user" : "",
@@ -89,7 +149,6 @@ function generateActionFile(
   ].filter((importName) => importName !== "");
 
   const lines: string[] = [
-    `// Node: ${node.name} - ${node.id}`,
     mainImports.length > 0
       ? `import { ${mainImports.join(", ")} } from "@main";`
       : "",
@@ -97,11 +156,9 @@ function generateActionFile(
       ? `import { workflow } from "./workflow.state";`
       : "",
     code.includes("luxon") ? `import * as luxon from "luxon";` : "",
-    "// ------------------ EXECUTE CODE -------------------------",
-    `// ${instruction.label || instruction.id}\n`,
-    instruction.code.trim(),
+    `// Node: ${node.name} - ${node.id}`,
+    `// ${instruction.label} - ${instruction.id}\n`,
+    `// ------------------ ${separatorLabel} -------------------------\n`,
   ];
-  const filePath = path.join(targetDir, `${safeName}.action.${idx + 1}.ts`);
-  const trueLines = lines.filter((line) => line.trim() !== ""); // Remove empty lines
-  fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
+  return lines;
 }

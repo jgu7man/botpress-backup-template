@@ -1,7 +1,8 @@
-// Node: InitialContext - nd-6ecdfb7c32
 import { bot, user } from "@main";
+// Node: InitialContext - nd-6ecdfb7c32
+// "Validate User Information and Manage Bot Data Reset" - ins-480e1fe562
+
 // ------------------ EXECUTE CODE -------------------------
-// "Validate User Information and Manage Bot Data Reset"
 
 const userFullName = user.fullName;
 const userPhone = user.phone;

@@ -1,8 +1,9 @@
-// Node: ExistsValidation - nd-717959226c
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: ExistsValidation - nd-717959226c
+// "User Data Authorization Check and Flow Skipping Logic" - ins-9efc3a1bd1
+
 // ------------------ EXECUTE CODE -------------------------
-// "User Data Authorization Check and Flow Skipping Logic"
 
 // Si el usuario ya ha sido preguntado por guardar sus datos y rechazón
 if (user.askedBefore && !user.popAuthorized) {

@@ -1,7 +1,8 @@
-// Node: InsistWithInterestProduct - nd-0eb482712b
 import { workflow } from "./workflow.state";
+// Node: InsistWithInterestProduct - nd-0eb482712b
+// Track User's Insist Attempts in Workflow Logic - ins-713a9566e2
+
 // ------------------ EXECUTE CODE -------------------------
-// Track User's Insist Attempts in Workflow Logic
 
 console.log('User has insisted on an answer.') // Comment to be set
 

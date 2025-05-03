@@ -1,7 +1,8 @@
-// Node: InteratePrint - nd-30b53e2f30
 import { workflow } from "./workflow.state";
+// Node: InteratePrint - nd-30b53e2f30
+// "Extract and Format Current Motorcycle Details for Workflow" - ins-e3b07296e3
+
 // ------------------ EXECUTE CODE -------------------------
-// "Extract and Format Current Motorcycle Details for Workflow"
 
 const currentMoto = workflow.motoList[workflow.count];
 

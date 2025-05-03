@@ -8,3 +8,8 @@ export interface SummaryAgentConfig {
   transcriptMaxLines: number;
   model: string;
 }
+
+export interface SummaryAgentConversation {
+  summary: string;
+  transcription: string;
+}

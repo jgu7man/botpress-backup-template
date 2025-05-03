@@ -1,8 +1,9 @@
-// Node: EvaluateUserAnswer - nd-503fb90194
 import { event } from "@main";
 import { workflow } from "./workflow.state";
+// Node: EvaluateUserAnswer - nd-503fb90194
+// "User Input Handling and Fallback Logic in Workflow" - ins-6be1103d96
+
 // ------------------ EXECUTE CODE -------------------------
-// "User Input Handling and Fallback Logic in Workflow"
 
 const {userInput} = workflow
 console.log(`👤 userInput: `, userInput)

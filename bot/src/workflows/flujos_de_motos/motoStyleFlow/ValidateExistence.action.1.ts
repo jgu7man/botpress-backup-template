@@ -1,8 +1,9 @@
-// Node: ValidateExistence - nd-bb96b9ec51
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: ValidateExistence - nd-bb96b9ec51
+// "Retrieve and Assign User's Interested Motorcycle Item" - ins-a34ed96d12
+
 // ------------------ EXECUTE CODE -------------------------
-// "Retrieve and Assign User's Interested Motorcycle Item"
 
 const foundItem = workflow.motoList
     .find( moto => moto.reference === workflow.interestedMotoReference )

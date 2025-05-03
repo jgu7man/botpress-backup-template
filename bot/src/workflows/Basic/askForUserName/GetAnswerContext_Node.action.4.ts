@@ -1,8 +1,9 @@
-// Node: GetAnswerContext_Node - nd-bf168ad71b
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: GetAnswerContext_Node - nd-bf168ad71b
+// Update user's full name and workflow's answer type. - ins-f3112719a9
+
 // ------------------ EXECUTE CODE -------------------------
-// Update user's full name and workflow's answer type.
 
 const {interpretedAnswerType} = workflow
 const {fullName} = user

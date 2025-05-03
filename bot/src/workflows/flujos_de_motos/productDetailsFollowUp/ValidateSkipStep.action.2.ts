@@ -1,7 +1,8 @@
-// Node: ValidateSkipStep - nd-e1d01d900d
 import { workflow } from "./workflow.state";
+// Node: ValidateSkipStep - nd-e1d01d900d
+// "Check User Data and Request Reason if Necessary" - ins-600c4e2756
+
 // ------------------ EXECUTE CODE -------------------------
-// "Check User Data and Request Reason if Necessary"
 
 const { askedBefore, popAuthorized, fullName, phone: celular } = user
 console.log(`🤖 user:`, {

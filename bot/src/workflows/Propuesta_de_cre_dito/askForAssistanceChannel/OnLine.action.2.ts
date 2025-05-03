@@ -1,7 +1,8 @@
-// Node: OnLine - nd-296255ca0e
 import { user } from "@main";
+// Node: OnLine - nd-296255ca0e
+// "Activate Online Assistance and Begin Pre-Evaluation Process" - ins-ae33b6fac3
+
 // ------------------ EXECUTE CODE -------------------------
-// "Activate Online Assistance and Begin Pre-Evaluation Process"
 
 user.assistanceMode = "ON_LINE"
 user.conversationStatus = "PRE_EVALUATION_START"

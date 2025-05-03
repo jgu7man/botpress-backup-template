@@ -1,8 +1,9 @@
-// Node: PrintCard - nd-985cd4339e
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: PrintCard - nd-985cd4339e
+// "Extract and Assign Product Details to Workflow Object" - ins-847e26b302
+
 // ------------------ EXECUTE CODE -------------------------
-// "Extract and Assign Product Details to Workflow Object"
 
 // project/scripts_v0/workflows/motos/print-moto-card/workflow.state.ts
 

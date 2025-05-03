@@ -1,8 +1,9 @@
-// Node: SetCupoBrillaProfile - nd-7992eecf06
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: SetCupoBrillaProfile - nd-7992eecf06
+// Check User Interest in Product Based on Price - ins-11f09d8cf7
+
 // ------------------ EXECUTE CODE -------------------------
-// Check User Interest in Product Based on Price
 
 user.creditProfile = "CUPO_BRILLA";
 const { interestedProduct } = user;

@@ -1,7 +1,8 @@
-// Node: Entry - nd-28168382bb
 import { workflow } from "./workflow.state";
+// Node: Entry - nd-28168382bb
+// Parsing a JSON list in a workflow. - ins-79d166d6e9
+
 // ------------------ EXECUTE CODE -------------------------
-// Parsing a JSON list in a workflow.
 
 workflow.motoList = JSON.parse(workflow.list)
 

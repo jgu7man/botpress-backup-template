@@ -1,8 +1,9 @@
-// Node: EvaluateContext - nd-8071d38c80
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: EvaluateContext - nd-8071d38c80
+// "Determine User Interest in Motorcycles and Credit Information" - ins-aee73310ff
+
 // ------------------ EXECUTE CODE -------------------------
-// "Determine User Interest in Motorcycles and Credit Information"
 
 const { conversationContext } = bot;
 

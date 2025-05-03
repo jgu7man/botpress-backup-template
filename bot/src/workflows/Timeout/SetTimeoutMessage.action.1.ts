@@ -1,9 +1,10 @@
-// Node: SetTimeoutMessage - nd-127dcfa177
 import { user } from "@main";
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
+// Node: SetTimeoutMessage - nd-127dcfa177
+// Set Current Time for Colombia in Workflow Variables - ins-335c219652
+
 // ------------------ EXECUTE CODE -------------------------
-// Set Current Time for Colombia in Workflow Variables
 
 const { DateTime } = luxon
 

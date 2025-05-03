@@ -1,6 +1,7 @@
-// Node: AnswerCreditOptions - nd-62e16905f0
 import { user } from "@main";
+// Node: AnswerCreditOptions - nd-62e16905f0
+// Set User Conversation Status to Credit Interested - ins-e6097fe885
+
 // ------------------ EXECUTE CODE -------------------------
-// Set User Conversation Status to Credit Interested
 
 user.conversationStatus = "CREDIT_INTERESTED"

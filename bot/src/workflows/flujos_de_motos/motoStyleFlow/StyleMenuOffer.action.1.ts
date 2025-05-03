@@ -1,7 +1,8 @@
-// Node: StyleMenuOffer - nd-9f04dbb1b3
 import { workflow } from "./workflow.state";
+// Node: StyleMenuOffer - nd-9f04dbb1b3
+// "List of Vehicle Style Options for Workflow" - ins-1d6b99bfd1
+
 // ------------------ EXECUTE CODE -------------------------
-// "List of Vehicle Style Options for Workflow"
 
 workflow.styleOptionList = [
   'Deportiva',

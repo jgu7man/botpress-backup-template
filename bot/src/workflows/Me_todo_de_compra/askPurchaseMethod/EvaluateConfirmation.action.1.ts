@@ -1,8 +1,9 @@
-// Node: EvaluateConfirmation - nd-7bbc0d8ff4
 import { bot } from "@main";
 import { workflow } from "./workflow.state";
+// Node: EvaluateConfirmation - nd-7bbc0d8ff4
+// "Track and Update Workflow Clarification Attempts Status" - ins-95e8936f11
+
 // ------------------ EXECUTE CODE -------------------------
-// "Track and Update Workflow Clarification Attempts Status"
 
 if ( !workflow.clarificationAttempts ) {
 	workflow.clarificationAttempts = 1;

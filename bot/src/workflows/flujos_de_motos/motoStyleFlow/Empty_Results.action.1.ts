@@ -1,7 +1,8 @@
-// Node: Empty_Results - nd-5ff6e02679
 import { workflow } from "./workflow.state";
+// Node: Empty_Results - nd-5ff6e02679
+// "Manage and Update Style Options in Workflow" - ins-9bd4db240f
+
 // ------------------ EXECUTE CODE -------------------------
-// "Manage and Update Style Options in Workflow"
 
 const { styleOptionList = [] } = workflow
 

@@ -1,8 +1,9 @@
-// Node: GetPhone - nd-071c667e5d
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: GetPhone - nd-071c667e5d
+// "Assign User Phone Based on Expected Data Availability" - ins-d20c25b926
+
 // ------------------ EXECUTE CODE -------------------------
-// "Assign User Phone Based on Expected Data Availability"
 
 const { expectedData = undefined } = workflow.UnderstandUserInput
 

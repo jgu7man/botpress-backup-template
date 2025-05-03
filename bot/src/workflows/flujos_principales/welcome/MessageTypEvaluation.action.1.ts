@@ -1,8 +1,9 @@
-// Node: MessageTypEvaluation - nd-539b678293
 import { event } from "@main";
 import { workflow } from "./workflow.state";
+// Node: MessageTypEvaluation - nd-539b678293
+// Log Event Payload  - ins-b67046c3ba
+
 // ------------------ EXECUTE CODE -------------------------
-// Log Event Payload 
 
 // EVALUAR EL TIPO DE MENSAJE RECIBIDO
 

@@ -1,8 +1,9 @@
-// Node: EvaluateInterest - nd-2e90e42efa
 import { user } from "@main";
 import { workflow } from "./workflow.state";
+// Node: EvaluateInterest - nd-2e90e42efa
+// Determine User Interest Status Based on Credit Profile and Context - ins-a7f0bfb760
+
 // ------------------ EXECUTE CODE -------------------------
-// Determine User Interest Status Based on Credit Profile and Context
 
 // Extrayendo el perfil crediticio del usuario para determinar su estado de interés
 const { creditProfile } = user

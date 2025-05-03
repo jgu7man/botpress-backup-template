@@ -37,11 +37,6 @@ export class userVariables {
   nationalID?: string;
   /** [var-2ab8508338] */
   brillaBillNumber?: string;
-  /**
-  * [var-354a3c444f]
-  * @description La categorización de la finalización de la conversación. Puede ser:  'COMPLEXED',  'WRONG', 'SERVED', 'TIMEDOUT' 
-  */
-  conversationEnding?: string;
   /** [var-17ae7daec2] */
   serviceLocation?: string;
   /** [var-25c7be938a] */

@@ -1,7 +1,7 @@
 import { event } from "@main";
 import { workflow } from "./workflow.state";
-// Node: MessageTypEvaluation - nd-539b678293
-// Log Event Payload  - ins-b67046c3ba
+// Node: evaluateMultimediaMessage - nd-18463ec851
+// Log Event Payload  - ins-c655cfce0b
 
 // ------------------ EXECUTE CODE -------------------------
 
@@ -16,9 +16,9 @@ const mediaTypes = {
 };
 
 // Determinar el tipo de mensaje recibido
-workflow.startMessageType = extractMessageType() || "TEXT";
+const startMessageType = extractMessageType() || "TEXT";
 
-console.log(`🤖  workflow.startMessageType:`, workflow.startMessageType);
+console.log(`🤖  workflow.startMessageType:`, startMessageType);
 
 // Mapa de advertencias
 const advicesMap = {
@@ -32,10 +32,10 @@ const advicesMap = {
 };
 
 // Enviar mensaje de advertencia
-if (workflow.startMessageType !== "TEXT") {
-  if (workflow.startMessageType !== "TEXT") {
+if (startMessageType !== "TEXT") {
+  if (startMessageType !== "TEXT") {
     // @ts-ignore - Sabemos que startMessageType es una clave válida
-    workflow.adviseMessage = advicesMap[workflow.startMessageType] || "Hola";
+    workflow.excusingMessage = advicesMap[startMessageType] || "";
   }
 }
 

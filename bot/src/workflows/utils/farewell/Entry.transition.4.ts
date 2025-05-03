@@ -1,8 +1,8 @@
-import { workflow } from "./workflow.state";
+import { bot } from "@main";
 // Node: Entry - nd-96a14bb62e
-// Hubo error - trs-3e9294398a
+// COMPLEXED - ins-ca963cbb79
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const trs3e9294398a = !!workflow.inputError;
+const insca963cbb79 = bot.irregularState === 'COMPLEXED';
 // Destination: nd-a1e8237457

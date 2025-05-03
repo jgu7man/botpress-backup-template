@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
 // Node: Router - nd-d7e5b1b879
-// Mismo contexto - ins-30f886ccec
+// Cliente pregunta - ins-1c8a22c390
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins30f886ccec = workflow.context === 'consistent';
-// Destination: nd-fb7e06f31a
+const ins1c8a22c390 = workflow.context === 'incoherent';
+// Destination: nd-690becc848

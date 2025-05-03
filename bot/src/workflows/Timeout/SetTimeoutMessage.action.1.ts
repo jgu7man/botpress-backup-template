@@ -1,8 +1,8 @@
-import { user } from "@main";
+import { conversation } from "@main";
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
 // Node: SetTimeoutMessage - nd-127dcfa177
-// Set Current Time for Colombia in Workflow Variables - ins-335c219652
+// "Set Current Time in Colombia for Workflow" - ins-335c219652
 
 // ------------------ EXECUTE CODE -------------------------
 
@@ -13,4 +13,4 @@ const currentTime = DateTime.now().setZone('America/Bogota').toLocaleString(Date
 
 workflow.colombiaTime = currentTime
 
-user.conversationEnding = 'TIMEOUT'
+conversation.conversationEnding = 'TIMEOUT'

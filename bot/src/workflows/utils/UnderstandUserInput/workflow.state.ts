@@ -16,10 +16,22 @@ class UnderstandUserInputState {
   retry: boolean;
   /** Sin descripción */
   paraphrasedQuestion: string;
-  /** Sin descripción */
-  retryAttempts: number;
-  /** askToKnowledgeBase1 */
-  askToKnowledgeBase1: any;
+  /** ❔mainKnowledgeBase */
+  ❔mainKnowledgeBase: any;
+  /** RephraseQuestion1 */
+  RephraseQuestion1: any;
+  /** farewell1 */
+  farewell1: any;
+  /** HandleMultimediaMessage1 */
+  HandleMultimediaMessage1: any;
+  /** farewell2 */
+  farewell2: any;
+  /** farewell3 */
+  farewell3: any;
+  /** farewell4 */
+  farewell4: any;
+  /** DataExtractor1 */
+  DataExtractor1: any;
 }
 
 export const workflow = new UnderstandUserInputState();

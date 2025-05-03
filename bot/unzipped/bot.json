@@ -135,14 +135,6 @@
         "defaultValue": ""
       },
       {
-        "id": "var-354a3c444f",
-        "name": "conversationEnding",
-        "description": "La categorización de la finalización de la conversación. Puede ser:  'COMPLEXED',  'WRONG', 'SERVED', 'TIMEDOUT'",
-        "type": "string",
-        "scope": "user",
-        "defaultValue": ""
-      },
-      {
         "id": "var-17ae7daec2",
         "name": "serviceLocation",
         "description": "",
@@ -260,6 +252,24 @@
         "scope": "conversation",
         "storeAsTag": false,
         "schemaId": "schema-5c5a4c000b"
+      },
+      {
+        "id": "var-b1e8b342fd",
+        "name": "retryAttempts",
+        "description": "",
+        "type": "number",
+        "scope": "conversation",
+        "defaultValue": 0,
+        "storeAsTag": false
+      },
+      {
+        "id": "var-354a3c444f",
+        "name": "conversationEnding",
+        "description": "La categorización de la finalización de la conversación. Puede ser:  'COMPLEXED',  'WRONG', 'SERVED', 'TIMEDOUT'",
+        "type": "string",
+        "scope": "conversation",
+        "defaultValue": "",
+        "storeAsTag": false
       }
     ]
   },
@@ -277,12 +287,12 @@
               "id": "ins-766af48f38",
               "type": "action",
               "category": "Execute",
-              "code": "bot.irregularState = 'WRONG'\nuser.conversationEnding = 'WRONG'",
+              "code": "bot.irregularState = 'WRONG'\nconversation.conversationEnding = 'WRONG'",
               "origin": "builtin",
               "nodeId": "nd-58fca56e01",
-              "label": "\"Manage User Input and Conversation State Handling\"",
+              "label": "\"Bot and User State Management for Conversation Handling\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.irregularState = \"WRONG\";\n  user.conversationEnding = \"WRONG\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.irregularState = \"WRONG\";\n  conversation.conversationEnding = \"WRONG\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -447,12 +457,12 @@
               "id": "ins-335c219652",
               "type": "action",
               "category": "Execute",
-              "code": "const { DateTime } = luxon\r\n\r\n\r\nconst currentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nworkflow.colombiaTime = currentTime\r\n\r\nuser.conversationEnding = 'TIMEOUT'\r\n",
+              "code": "const { DateTime } = luxon\r\n\r\n\r\nconst currentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nworkflow.colombiaTime = currentTime\r\n\r\nconversation.conversationEnding = 'TIMEOUT'\r\n",
               "origin": "builtin",
               "nodeId": "nd-127dcfa177",
-              "label": "Set Current Time for Colombia in Workflow Variables",
+              "label": "\"Set Current Time in Colombia for Workflow\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { DateTime } = luxon;\n  const currentTime = DateTime.now().setZone(\"America/Bogota\").toLocaleString(DateTime.TIME_SIMPLE);\n  workflow.colombiaTime = currentTime;\n  user.conversationEnding = \"TIMEOUT\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { DateTime } = luxon;\n  const currentTime = DateTime.now().setZone(\"America/Bogota\").toLocaleString(DateTime.TIME_SIMPLE);\n  workflow.colombiaTime = currentTime;\n  conversation.conversationEnding = \"TIMEOUT\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -477,7 +487,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-127dcfa177",
-              "label": "",
+              "label": "timeoutMessage",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -487,7 +497,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\nRetorna un mensaje basado en el {{conversation.SummaryAgent.summary}} donde le digas al cliente continúas a sus servicios de qué manera podría continuar con la conversación.  \n- Si es que aún se espera algo del cliente, solicitarlo nuevamente de forma clara pero breve.  \n- Si no se espera nada, cerrar con una pregunta abierta que invite a continuar si lo desea, sin afirmar explícitamente que no se espera nada.  \n\n**CONSIDERACIONES:**  \n- Saluda. Usa la hora actual de Colombia para determinar si es día, tarde o noche en el saludo.  \n- Inicia la conversación con este emoji: 🙋‍♂️  \n- Sé breve (máximo 2-3 líneas).  \n- Usa un tono amable, directo y profesional.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\nRetorna un mensaje basado en el {{conversation.SummaryAgent.summary}} donde le digas al cliente continúas a sus servicios de qué manera podría continuar con la conversación.  \n- Si es que aún se espera algo del cliente, solicitarlo nuevamente de forma clara pero breve.  \n- Si no se espera nada, cerrar con una pregunta abierta que invite a continuar si lo desea, sin afirmar explícitamente que no se espera nada.  \n\n**CONSIDERACIONES:**  \n- Saluda. Usa la hora actual de Colombia para determinar si es día, tarde o noche en el saludo.  \n- Inicia la conversación con este emoji: 🙋‍♂️  \n- Sé breve (máximo 2-3 líneas).  \n- Usa un tono amable, directo y profesional.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"timeoutMessage\": string\n}"
                   },
                   {
                     "role": "user",
@@ -692,7 +702,7 @@
               "nodeId": "nd-9c100402c7",
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.irregularState = \"\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": [],
-              "label": "\"Chatbot Input State Management for User Interaction\"",
+              "label": "\"Initialize Bot with Empty Irregular State Variable\"",
               "isCustomLabel": false
             }
           ],
@@ -700,7 +710,7 @@
             "targetNodeId": "nd-d311358b33"
           },
           "id": "nd-9c100402c7",
-          "name": "farewell"
+          "name": "resetValues"
         }
       ]
     },
@@ -3327,7 +3337,7 @@
                 {
                   "id": "trs-16fd250de8",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -9866,10 +9876,32 @@
           ],
           "instructions": [
             {
+              "id": "trs-3e9294398a",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!!workflow.inputError}}"
+              },
+              "destination": {
+                "node": "nd-1c6cfed152"
+              },
+              "transitions": [],
+              "nodeId": "nd-96a14bb62e",
+              "generative": {
+                "properties": {
+                  "condition": false
+                },
+                "suggestion": {},
+                "label": "Hubo error"
+              },
+              "label": "Hubo error",
+              "description": ""
+            },
+            {
               "id": "ins-7816ee7c57",
               "type": "action",
               "category": "Execute",
-              "code": "const { DateTime } = luxon\r\nconst CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nworkflow.colombiaTime = CurrentTime\r\n\r\nconst { botState } = workflow;\r\nconsole.log(`🤖 botState:`, botState);\r\nconsole.log(`🤖 1 irregularState:`, bot.irregularState);\r\n\r\nif (bot.irregularState === \"ATTENDED\") {\r\n  bot.irregularState = \"SERVED\";\r\n} else if (botState) {\r\n  bot.irregularState = botState;\r\n}\r\n\r\nconsole.log(`🤖 2 irregularState:`, bot.irregularState);\r\n\r\nif (!bot.irregularState) {\r\n  bot.irregularState = \"ATTENDED\";\r\n}\r\n\r\nconsole.log(`🤖 3 irregularState:`, bot.irregularState);\r\n",
+              "code": "const { DateTime } = luxon\r\nconst CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nworkflow.colombiaTime = CurrentTime\r\n\r\n// -----\r\n\r\nconst { botState } = workflow;\r\nconsole.log(`🤖 botState:`, botState);\r\nconsole.log(`🤖 1 irregularState:`, bot.irregularState);\r\n\r\n// Revisamos si el flujo proviene de una pregunta de oferta de ayuda\r\nif (bot.irregularState === \"ATTENDED\") {\r\n  bot.irregularState = \"SERVED\";\r\n} else if (botState) {\r\n  bot.irregularState = botState;\r\n}\r\n\r\nconsole.log(`🤖 2 irregularState:`, bot.irregularState);\r\n\r\n// Si no existe estado, significa que debemos ofrecer ayuda\r\nif (!bot.irregularState) {\r\n  bot.irregularState = \"ATTENDED\";\r\n}\r\n\r\nconsole.log(`🤖 3 irregularState:`, bot.irregularState);\r\n",
               "origin": "builtin",
               "nodeId": "nd-96a14bb62e",
               "label": "\"Manage Bot State and Current Time in Colombia\"",
@@ -9926,28 +9958,6 @@
                 "node": "nd-a1e8237457"
               },
               "transitions": []
-            },
-            {
-              "id": "trs-3e9294398a",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{!!workflow.inputError}}"
-              },
-              "destination": {
-                "node": "nd-a1e8237457"
-              },
-              "transitions": [],
-              "nodeId": "nd-96a14bb62e",
-              "generative": {
-                "properties": {
-                  "condition": false
-                },
-                "suggestion": {},
-                "label": "Hubo error"
-              },
-              "label": "Hubo error",
-              "description": ""
             },
             {
               "id": "ins-6d73507721",
@@ -10061,12 +10071,12 @@
               "id": "ins-2e6cc77476",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationEnding = 'SERVED'",
+              "code": "conversation.conversationEnding = 'SERVED'",
               "origin": "builtin",
-              "label": "Set User Conversation Status to \"SERVED\" Upon Ending",
+              "label": "Set Conversation Ending Status to 'SERVED' in User Object",
               "nodeId": "nd-70e34c6505",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationEnding = \"SERVED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.conversationEnding = \"SERVED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -10079,19 +10089,19 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 570,
-          "y": 0,
+          "x": 930,
+          "y": 60,
           "instructions": [
             {
               "id": "ins-7ff5728680",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationEnding = 'COMPLEXED'",
+              "code": "conversation.conversationEnding = 'COMPLEXED'",
               "origin": "builtin",
-              "label": "Set User Conversation Ending Status to 'COMPLEXED'",
+              "label": "Set Conversation Status to 'COMPLEXED' Upon Ending",
               "nodeId": "nd-a1e8237457",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationEnding = \"COMPLEXED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.conversationEnding = \"COMPLEXED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -10111,12 +10121,12 @@
               "id": "ins-0b9b58dc95",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationEnding = 'SERVED'",
+              "code": "conversation.conversationEnding = 'SERVED'",
               "origin": "builtin",
-              "label": "\"Set User Conversation Ending Status to Complex\"",
+              "label": "Set User Conversation Status to \"SERVED\" Upon Ending",
               "nodeId": "nd-7f9ec10eb1",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationEnding = \"SERVED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.conversationEnding = \"SERVED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -10174,8 +10184,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -165,
-          "y": -315,
+          "x": -210,
+          "y": -330,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">Despedida</span></strong></p><pre><code>farewell</code></pre>",
           "id": "nd-059ee00621",
@@ -10212,7 +10222,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-4383a054fb",
-              "label": "",
+              "label": "farewellMessage",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -10222,7 +10232,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n\n## Template:\n\n- Si el valor de `bot.irregularState` es `'COMPLEXED'` usa el siguiente template:\n  \"Discúlpame, pero sigo sin entender.\n\n  Para evitar malentendidos, voy a pedirle a un compañero que se comunique contigo a la mayor brevedad posible, feliz {día | tarde | noche}.\"\n\n- Si el valor de `user.creditProfile` es `'CUPO_BRILLA'` usa el siguiente template:\n  \"Gracias por comunicarse con nosotros, le recuerdo que sólo necesita:\n\n  1️⃣ Traer las dos últimas facturas originales pagadas (no duplicados)\n  2️⃣ Copia de la cédula por ambos lados\n  3️⃣ Que el solicitante sea el titular de la factura.\n\n  Espero que tenga {un bonito día|una bonita tarde|una bonita noche}. Hasta luego. ☺️\"\n\n- Si no se cumplen las condiciones anteriores, usa el siguiente template:\n\"Gracias por comunicarse con nosotros, espero que tenga {un bonito día|una bonita tarde|una bonita noche}. Hasta luego. ☺️\"\n\n## Considerations:\n\nObtén la {{workflow.colombiaTime}} para determinar si es \"día\", \"tarde\" o \"noche\" para el usuario y responde apropiadamente usando la plantilla.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n\n## Template:\n\n- Si el valor de `bot.irregularState` es `'COMPLEXED'` usa el siguiente template:\n  \"Discúlpame, pero sigo sin entender.\n\n  Para evitar malentendidos, voy a pedirle a un compañero que se comunique contigo a la mayor brevedad posible, feliz {día | tarde | noche}.\"\n\n- Si el valor de `user.creditProfile` es `'CUPO_BRILLA'` usa el siguiente template:\n  \"Gracias por comunicarse con nosotros, le recuerdo que sólo necesita:\n\n  1️⃣ Traer las dos últimas facturas originales pagadas (no duplicados)\n  2️⃣ Copia de la cédula por ambos lados\n  3️⃣ Que el solicitante sea el titular de la factura.\n\n  Espero que tenga {un bonito día|una bonita tarde|una bonita noche}. Hasta luego. ☺️\"\n\n- Si no se cumplen las condiciones anteriores, usa el siguiente template:\n\"Gracias por comunicarse con nosotros, espero que tenga {un bonito día|una bonita tarde|una bonita noche}. Hasta luego. ☺️\"\n\n## Considerations:\n\nObtén la {{workflow.colombiaTime}} para determinar si es \"día\", \"tarde\" o \"noche\" para el usuario y responde apropiadamente usando la plantilla.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"farewellMessage\": string\n}"
                   },
                   {
                     "role": "user",
@@ -10276,7 +10286,7 @@
           "type": "end",
           "deletable": true,
           "x": 2400,
-          "y": -45,
+          "y": -75,
           "instructions": [
             {
               "id": "trs-716b0eed84",
@@ -10430,8 +10440,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 450,
-          "y": -300,
+          "x": 870,
+          "y": -255,
           "instructions": [
             {
               "id": "ins-bd34eaf5e8",
@@ -10477,7 +10487,7 @@
               "category": "Execute",
               "code": "bot.irregularState = 'ATTENDED'",
               "origin": "builtin",
-              "label": "\"Set Bot State to Attended for Irregular Conditions\"",
+              "label": "\"Set Bot State to Attended for Irregular Situations\"",
               "nodeId": "nd-43f0eb185b",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.irregularState = \"ATTENDED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -10513,6 +10523,38 @@
           },
           "id": "nd-756af67774",
           "name": "ResetState"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 510,
+          "y": -555,
+          "instructions": [
+            {
+              "id": "ins-be2a489667",
+              "category": "Send Messages",
+              "type": "content",
+              "content": {
+                "type": "text",
+                "text": {
+                  "valueType": "dynamic",
+                  "dynamicValue": "Disculpa, estoy confundido, ¿te gustaría repetirme lo último que mencionaste?",
+                  "staticValue": ""
+                },
+                "typing": {
+                  "valueType": "static",
+                  "staticValue": true
+                }
+              },
+              "nodeId": "nd-1c6cfed152",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-9cd1505c0d"
+          },
+          "id": "nd-1c6cfed152",
+          "name": "SendErroMessage"
         }
       ],
       "parentFolder": "dir-6400c2779c"
@@ -11793,7 +11835,8 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-ed7af360bf",
-                "nd-fb7e06f31a"
+                "nd-fb7e06f31a",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
@@ -11822,7 +11865,7 @@
                 {
                   "id": "trs-7068096661",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -11839,6 +11882,27 @@
                     "suggestion": {
                       "label": "SameContext",
                       "condition": "lastNode=nd-fb7e06f31a"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-f2c6750732",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -13546,13 +13610,14 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-fb7e06f31a",
-                "nd-ed7af360bf"
+                "nd-ed7af360bf",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
                   "id": "trs-653b144268",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -13592,6 +13657,27 @@
                     "suggestion": {
                       "label": "ChangeContext",
                       "condition": "lastNode=nd-ed7af360bf"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-bd35725de3",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -15213,13 +15299,14 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-fb7e06f31a",
-                "nd-ed7af360bf"
+                "nd-ed7af360bf",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
                   "id": "trs-6f49980c0e",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -15259,6 +15346,27 @@
                     "suggestion": {
                       "label": "ChangeContext",
                       "condition": "lastNode=nd-ed7af360bf"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-29ec7d5756",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -16687,13 +16795,14 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-fb7e06f31a",
-                "nd-ed7af360bf"
+                "nd-ed7af360bf",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
                   "id": "trs-f3fef4a26a",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -16733,6 +16842,27 @@
                     "suggestion": {
                       "label": "ChangeContext",
                       "condition": "lastNode=nd-ed7af360bf"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-f2aa015a9d",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -16834,7 +16964,7 @@
               "category": "Execute",
               "code": "workflow.userInput = workflow.UnderstandUserInput.correctedUserInput",
               "origin": "builtin",
-              "label": "\"Assign User Input to Workflow Variable\"",
+              "label": "\"Assign Corrected User Input to Workflow Variable\"",
               "nodeId": "nd-0ca57c3738",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.userInput = workflow.UnderstandUserInput.correctedUserInput;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -17774,7 +17904,7 @@
                 {
                   "id": "trs-6db106269e",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -22354,13 +22484,14 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-fb7e06f31a",
-                "nd-ed7af360bf"
+                "nd-ed7af360bf",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
                   "id": "trs-14dbfadf7b",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -22400,6 +22531,27 @@
                     "suggestion": {
                       "label": "ChangeContext",
                       "condition": "lastNode=nd-ed7af360bf"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-4a9d268354",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -24497,15 +24649,6 @@
           "scope": "workflow",
           "defaultValue": "",
           "storeAsTag": false
-        },
-        {
-          "id": "var-b1e8b342fd",
-          "name": "retryAttempts",
-          "description": "",
-          "type": "number",
-          "scope": "workflow",
-          "defaultValue": 0,
-          "storeAsTag": false
         }
       ],
       "links": [],
@@ -24528,10 +24671,19 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-627c3d2122"
+                "node": "nd-52e2cfdbda"
               },
               "transitions": [],
-              "nodeId": "nd-727c072727"
+              "nodeId": "nd-727c072727",
+              "generative": {
+                "properties": {
+                  "condition": true
+                },
+                "suggestion": {},
+                "label": ""
+              },
+              "label": "",
+              "description": ""
             }
           ],
           "x": -225,
@@ -24539,7 +24691,7 @@
         },
         {
           "id": "nd-fb7e06f31a",
-          "name": "SameContext",
+          "name": "SUCCESS",
           "type": "exit",
           "variables": [
             "var-7fc5e620b4",
@@ -24561,15 +24713,93 @@
               "nodeId": "nd-fb7e06f31a"
             }
           ],
-          "x": 1230,
-          "y": 30
+          "x": 2280,
+          "y": 270
         },
         {
           "type": "standard",
           "deletable": true,
-          "x": 270,
-          "y": 510,
+          "x": 660,
+          "y": 360,
           "instructions": [
+            {
+              "id": "ins-1c7eab3163",
+              "tutorialId": "knowledge-query",
+              "description": "Retrieve answer & citations from Knowledge Bases to a custom query",
+              "title": "Query Knowledge Bases",
+              "schema": {
+                "_def": {
+                  "unknownKeys": "strip",
+                  "catchall": {
+                    "_def": {
+                      "typeName": "ZodNever"
+                    }
+                  },
+                  "typeName": "ZodObject"
+                },
+                "_cached": null
+              },
+              "uiconfiguration": {
+                "type": "VerticalLayout",
+                "elements": [
+                  {
+                    "type": "Input",
+                    "scope": "#/properties/query",
+                    "options": {
+                      "superInput": true
+                    }
+                  },
+                  {
+                    "type": "KBPicker",
+                    "label": "Knowledge Bases",
+                    "scope": "#/properties/kbs"
+                  },
+                  {
+                    "type": "VariablePicker",
+                    "label": "Store answer in variable",
+                    "scope": "#/properties/answerVariableId"
+                  }
+                ]
+              },
+              "type": "action",
+              "label": "Query Knowledge Bases",
+              "origin": "agent",
+              "agent": {
+                "action": "knowledge-query",
+                "id": "KnowledgeAgent"
+              },
+              "nodeId": "nd-52c6ee7566",
+              "data": {
+                "query": {
+                  "staticValue": "Paraphrase or clarify the intent behind this user query briefly and directly: '{{event.preview}}'. Avoid unnecessary wordiness.",
+                  "dynamicValue": "Paraphrase or clarify the intent behind this user query briefly and directly: '{{event.preview}}'. Avoid unnecessary wordiness.",
+                  "valueType": "dynamic"
+                },
+                "kbs": {
+                  "enabled": true,
+                  "searchScope": "all",
+                  "kbs": [],
+                  "valueType": "static",
+                  "dynamicValue": ""
+                },
+                "answerVariableId": "var-0770371c91"
+              },
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-e71af5bcf1",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖Knowledge Understanding: {{workflow.kbUnderstanding}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-52c6ee7566",
+              "transitions": []
+            },
             {
               "type": "log",
               "id": "ins-f5c20390df",
@@ -24587,11 +24817,10 @@
               "type": "ai",
               "id": "ins-90228a283f",
               "task": {
-                "instructions": "## **Role Description**\n\nEres un asistente de ventas colombiano que interpretará lo que el usuario quiso decir considerando el contexto colombiano y los posibles errores o coloquialismos. Además, debes cotejar si lo que respondió está dentro del contexto esperado, basado en la conversación.\n\n---\n\n## **Estrategia**\n\n1. **Detectar contexto:**\n\n   - Analiza el **Resumen de conversación** para identificar lo que el bot ha consultado recientemente al cliente.\n   - Analiza el mensaje actual del usuario.\n   - Apóyate en la **Interpretación de base de conocimiento** para identificar el contexto y significado del mensaje del usuario.\n\n2. **Evaluar la coherencia:**\n\n   - Si el usuario **responde claramente lo que se le ha preguntado y no hace ninguna consulta adicional**, asigna `consistent` a la variable `@workflow.context`.\n   - Si el usuario **responde lo preguntado pero también realiza una consulta adicional** en el mismo mensaje, asigna `incoherent` a `@workflow.context` para permitir cambiar el contexto y atender la nueva consulta.\n   - Si el mensaje no es coherente con la pregunta realizada, asigna `incoherent` a `@workflow.context`.\n   - Si el mensaje es ambiguo o no es posible determinar la coherencia, deja `@workflow.context` vacío.\n   - Si el usuario da señales de estar en proceso de responder (ejemplos: \"Claro\", \"Permítame\", \"Un momento, ya le digo\", \"Déjame revisar\"), asigna `pending` a `@workflow.context`.\n   - Si el usuario **rechaza explícitamente** brindar la información solicitada o responder la pregunta (ejemplos: \"Prefiero no decirlo\", \"No quiero dar esa información\", \"Eso no es relevante\"), asigna `refused` a `@workflow.context`.\n\n3. **Detectar consultas adicionales:**\n\n   - Evalúa si, además de responder, el usuario ha realizado una **consulta adicional** (pregunta, solicitud de información, duda, etc.).\n   - Si detectas una consulta además de proporcionar la data, guarda la data en la variable `@workflow.expectedData`.\n\n4. **Resultado final:**\n   - Entrega:\n     - El valor de coherencia en `@workflow.context` (`consistent`, `incoherent`, `pending`, `refused` o vacío).\n     - Dato solicitado al cliente (si existe) en `@workflow.expectedData`.\n\n---\n\n### **Resumen rápido del comportamiento:**\n\n| Caso                                                          | @workflow.context | @workflow.expectedData           |\n| ------------------------------------------------------------- | ----------------- | -------------------------------- |\n| Responde claramente lo preguntado **sin** consulta adicional  | `consistent`      | vacío                            |\n| Responde claramente lo preguntado **y también consulta algo** | `incoherent`      | Contiene la consulta del usuario |\n| Responde algo irrelevante o confuso                           | `incoherent`      | vacío (o consulta si aplica)     |\n| Da señales de estar pensando o preparando la respuesta        | `pending`         | vacío                            |\n| Rechaza explícitamente brindar información                    | `refused`         | vacío                            |\n| No es posible determinar                                      | vacío             | vacío                            |\n\n---\n\n### **Notas importantes:**\n\n- La detección de **consulta adicional** prevalece: si hay consulta junto a una respuesta correcta, se marca como `incoherent` para dar prioridad al nuevo tema.\n- Si el valor que se le solicitó al cliente, fue proporcionado, guárdalo en `@workflow.expectedData`, sin importar el contexto.\n",
+                "instructions": "## **Role Description**\n\nEres un asistente de ventas colombiano que interpretará lo que el usuario quiso decir considerando el contexto colombiano y los posibles errores o coloquialismos. Además, debes cotejar si lo que respondió está dentro del contexto esperado, basado en la conversación. También debes identificar si el cliente solicita explícitamente ser atendido por un humano.\n\n---\n\n## **Estrategia**\n\n1. **Detectar contexto:**\n\n   - Analiza el **Resumen de conversación** para identificar lo que el bot ha consultado recientemente al cliente.\n   - Analiza el mensaje actual del usuario.\n   - Apóyate en la **Interpretación de base de conocimiento** para identificar el contexto y significado del mensaje del usuario.\n\n2. **Evaluar la coherencia:**\n\n   - Si el usuario **responde claramente lo que se le ha preguntado y no hace ninguna consulta adicional ni solicita atención humana**, asigna `consistent` a la variable `@workflow.context`.\n   - Si el usuario **responde lo preguntado pero también realiza una consulta adicional** en el mismo mensaje, asigna `incoherent` a `@workflow.context` para permitir cambiar el contexto y atender la nueva consulta.\n   - Si el mensaje no es coherente con la pregunta realizada, asigna `incoherent` a `@workflow.context`.\n   - Si el mensaje es ambiguo o no es posible determinar la coherencia, deja `@workflow.context` vacío.\n   - Si el usuario da señales de estar en proceso de responder (ejemplos: \"Claro\", \"Permítame\", \"Un momento, ya le digo\", \"Déjame revisar\"), o el cliente no ha dado una respuesta contundente, asigna `pending` a `@workflow.context`.\n   - Si el usuario **rechaza explícitamente** brindar la información solicitada o responder la pregunta (ejemplos: \"Prefiero no decirlo\", \"No quiero dar esa información\", \"Eso no es relevante\"), asigna `refused` a `@workflow.context`.\n   - Si el usuario **solicita explícitamente ser atendido por un humano** (ejemplos: \"Quiero hablar con una persona\", \"Necesito un asesor\", \"¿Me puede comunicar con alguien?\", \"Atención al cliente, por favor\"), asigna `human_requested` a `@workflow.context`.\n\n3. **Detectar consultas adicionales:**\n\n   - Evalúa si, además de responder (o solicitar atención humana), el usuario ha realizado una **consulta adicional** (pregunta, solicitud de información, duda, etc.).\n   - Si detectas una consulta además de proporcionar la data o solicitar atención humana, marca esta situación para que otro proceso capture la consulta.\n\n4. **Resultado final:**\n   - Entrega el valor de coherencia en `@workflow.context` (`consistent`, `incoherent`, `pending`, `refused`, `human_requested` o vacío).\n\n---\n\n### **Resumen rápido del comportamiento:**\n\n| Caso                                                          | @workflow.context | ¿Consulta adicional? |\n| ------------------------------------------------------------- | ----------------- | -------------------- |\n| Responde claramente lo preguntado **sin** consulta adicional  | `consistent`      | No                   |\n| Responde claramente lo preguntado **y también consulta algo** | `incoherent`      | Sí                   |\n| Responde algo irrelevante o confuso                           | `incoherent`      | Sí (si aplica)       |\n| Da señales de estar pensando o preparando la respuesta        | `pending`         | No                   |\n| Rechaza explícitamente brindar información                    | `refused`         | No                   |\n| Solicita explícitamente atención humana                      | `human_requested` | Sí (si aplica)       |\n| No es posible determinar                                      | vacío             | No                   |\n\n---\n\n### **Notas importantes:**\n\n- La detección de **consulta adicional** prevalece (excepto para `human_requested`): si hay consulta junto a una respuesta correcta, se marca como `incoherent` para dar prioridad al nuevo tema. Si la solicitud de atención humana viene con una consulta adicional, se marca como `human_requested` y se registra la consulta.\n",
                 "input": "Interpretación de base de conocimiento:  @workflow.kbUnderstanding\nLo que el usuario dijo: {{event.preview}}\nResumen de conversación: {{conversation.SummaryAgent.summary}}",
                 "outputVariableIds": [
-                  "var-d576634f13",
-                  "var-cf24a95d03"
+                  "var-d576634f13"
                 ],
                 "handleFailure": false,
                 "examples": [
@@ -24605,7 +24834,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-52c6ee7566",
-              "label": "context, expectedData",
+              "label": "context",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -24615,7 +24844,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## **Role Description**\n\nEres un asistente de ventas colombiano que interpretará lo que el usuario quiso decir considerando el contexto colombiano y los posibles errores o coloquialismos. Además, debes cotejar si lo que respondió está dentro del contexto esperado, basado en la conversación.\n\n---\n\n## **Estrategia**\n\n1. **Detectar contexto:**\n\n   - Analiza el **Resumen de conversación** para identificar lo que el bot ha consultado recientemente al cliente.\n   - Analiza el mensaje actual del usuario.\n   - Apóyate en la **Interpretación de base de conocimiento** para identificar el contexto y significado del mensaje del usuario.\n\n2. **Evaluar la coherencia:**\n\n   - Si el usuario **responde claramente lo que se le ha preguntado y no hace ninguna consulta adicional**, asigna `consistent` a la variable `@workflow.context`.\n   - Si el usuario **responde lo preguntado pero también realiza una consulta adicional** en el mismo mensaje, asigna `incoherent` a `@workflow.context` para permitir cambiar el contexto y atender la nueva consulta.\n   - Si el mensaje no es coherente con la pregunta realizada, asigna `incoherent` a `@workflow.context`.\n   - Si el mensaje es ambiguo o no es posible determinar la coherencia, deja `@workflow.context` vacío.\n   - Si el usuario da señales de estar en proceso de responder (ejemplos: \"Claro\", \"Permítame\", \"Un momento, ya le digo\", \"Déjame revisar\"), asigna `pending` a `@workflow.context`.\n   - Si el usuario **rechaza explícitamente** brindar la información solicitada o responder la pregunta (ejemplos: \"Prefiero no decirlo\", \"No quiero dar esa información\", \"Eso no es relevante\"), asigna `refused` a `@workflow.context`.\n\n3. **Detectar consultas adicionales:**\n\n   - Evalúa si, además de responder, el usuario ha realizado una **consulta adicional** (pregunta, solicitud de información, duda, etc.).\n   - Si detectas una consulta además de proporcionar la data, guarda la data en la variable `@workflow.expectedData`.\n\n4. **Resultado final:**\n   - Entrega:\n     - El valor de coherencia en `@workflow.context` (`consistent`, `incoherent`, `pending`, `refused` o vacío).\n     - Dato solicitado al cliente (si existe) en `@workflow.expectedData`.\n\n---\n\n### **Resumen rápido del comportamiento:**\n\n| Caso                                                          | @workflow.context | @workflow.expectedData           |\n| ------------------------------------------------------------- | ----------------- | -------------------------------- |\n| Responde claramente lo preguntado **sin** consulta adicional  | `consistent`      | vacío                            |\n| Responde claramente lo preguntado **y también consulta algo** | `incoherent`      | Contiene la consulta del usuario |\n| Responde algo irrelevante o confuso                           | `incoherent`      | vacío (o consulta si aplica)     |\n| Da señales de estar pensando o preparando la respuesta        | `pending`         | vacío                            |\n| Rechaza explícitamente brindar información                    | `refused`         | vacío                            |\n| No es posible determinar                                      | vacío             | vacío                            |\n\n---\n\n### **Notas importantes:**\n\n- La detección de **consulta adicional** prevalece: si hay consulta junto a una respuesta correcta, se marca como `incoherent` para dar prioridad al nuevo tema.\n- Si el valor que se le solicitó al cliente, fue proporcionado, guárdalo en `@workflow.expectedData`, sin importar el contexto.\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"context\": string\n/**  */\n\"expectedData\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## **Role Description**\n\nEres un asistente de ventas colombiano que interpretará lo que el usuario quiso decir considerando el contexto colombiano y los posibles errores o coloquialismos. Además, debes cotejar si lo que respondió está dentro del contexto esperado, basado en la conversación. También debes identificar si el cliente solicita explícitamente ser atendido por un humano.\n\n---\n\n## **Estrategia**\n\n1. **Detectar contexto:**\n\n   - Analiza el **Resumen de conversación** para identificar lo que el bot ha consultado recientemente al cliente.\n   - Analiza el mensaje actual del usuario.\n   - Apóyate en la **Interpretación de base de conocimiento** para identificar el contexto y significado del mensaje del usuario.\n\n2. **Evaluar la coherencia:**\n\n   - Si el usuario **responde claramente lo que se le ha preguntado y no hace ninguna consulta adicional ni solicita atención humana**, asigna `consistent` a la variable `@workflow.context`.\n   - Si el usuario **responde lo preguntado pero también realiza una consulta adicional** en el mismo mensaje, asigna `incoherent` a `@workflow.context` para permitir cambiar el contexto y atender la nueva consulta.\n   - Si el mensaje no es coherente con la pregunta realizada, asigna `incoherent` a `@workflow.context`.\n   - Si el mensaje es ambiguo o no es posible determinar la coherencia, deja `@workflow.context` vacío.\n   - Si el usuario da señales de estar en proceso de responder (ejemplos: \"Claro\", \"Permítame\", \"Un momento, ya le digo\", \"Déjame revisar\"), o el cliente no ha dado una respuesta contundente, asigna `pending` a `@workflow.context`.\n   - Si el usuario **rechaza explícitamente** brindar la información solicitada o responder la pregunta (ejemplos: \"Prefiero no decirlo\", \"No quiero dar esa información\", \"Eso no es relevante\"), asigna `refused` a `@workflow.context`.\n   - Si el usuario **solicita explícitamente ser atendido por un humano** (ejemplos: \"Quiero hablar con una persona\", \"Necesito un asesor\", \"¿Me puede comunicar con alguien?\", \"Atención al cliente, por favor\"), asigna `human_requested` a `@workflow.context`.\n\n3. **Detectar consultas adicionales:**\n\n   - Evalúa si, además de responder (o solicitar atención humana), el usuario ha realizado una **consulta adicional** (pregunta, solicitud de información, duda, etc.).\n   - Si detectas una consulta además de proporcionar la data o solicitar atención humana, marca esta situación para que otro proceso capture la consulta.\n\n4. **Resultado final:**\n   - Entrega el valor de coherencia en `@workflow.context` (`consistent`, `incoherent`, `pending`, `refused`, `human_requested` o vacío).\n\n---\n\n### **Resumen rápido del comportamiento:**\n\n| Caso                                                          | @workflow.context | ¿Consulta adicional? |\n| ------------------------------------------------------------- | ----------------- | -------------------- |\n| Responde claramente lo preguntado **sin** consulta adicional  | `consistent`      | No                   |\n| Responde claramente lo preguntado **y también consulta algo** | `incoherent`      | Sí                   |\n| Responde algo irrelevante o confuso                           | `incoherent`      | Sí (si aplica)       |\n| Da señales de estar pensando o preparando la respuesta        | `pending`         | No                   |\n| Rechaza explícitamente brindar información                    | `refused`         | No                   |\n| Solicita explícitamente atención humana                      | `human_requested` | Sí (si aplica)       |\n| No es posible determinar                                      | vacío             | No                   |\n\n---\n\n### **Notas importantes:**\n\n- La detección de **consulta adicional** prevalece (excepto para `human_requested`): si hay consulta junto a una respuesta correcta, se marca como `incoherent` para dar prioridad al nuevo tema. Si la solicitud de atención humana viene con una consulta adicional, se marca como `human_requested` y se registra la consulta.\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"context\": string\n}"
                   },
                   {
                     "role": "user",
@@ -24638,20 +24867,6 @@
               },
               "nodeId": "nd-52c6ee7566",
               "transitions": []
-            },
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-ab27b4ac4b",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 Expected data: {{workflow.expectedData}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-52c6ee7566",
-              "transitions": []
             }
           ],
           "defaultTransition": {
@@ -24663,34 +24878,9 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": -135,
-          "y": 1515,
+          "x": 735,
+          "y": -165,
           "instructions": [
-            {
-              "id": "ins-f2cf551fbc",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{bot.irregularState === 'CONFUSED'}}"
-              },
-              "label": "Been Here Before",
-              "generative": {
-                "label": "Been Here Before",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-203f71c86e",
-              "description": "",
-              "transitions": [],
-              "destination": {
-                "node": "nd-6aecf8eea2"
-              }
-            },
             {
               "id": "ins-37cda37ca6",
               "type": "action",
@@ -24760,7 +24950,7 @@
                     "payload": "failed"
                   },
                   "destination": {
-                    "node": "nd-6aecf8eea2"
+                    "node": "nd-c47097f08d"
                   }
                 }
               ],
@@ -24808,70 +24998,10 @@
           "name": "AskForClarification"
         },
         {
-          "type": "standard",
-          "deletable": true,
-          "x": 555,
-          "y": 1605,
-          "instructions": [
-            {
-              "id": "ins-e4194f96f0",
-              "type": "action",
-              "category": "Execute",
-              "code": "bot.irregularState = 'COMPLEXED'",
-              "origin": "builtin",
-              "nodeId": "nd-6aecf8eea2",
-              "label": "\"Bot State Management for Complex Input Handling\"",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.irregularState = \"COMPLEXED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-7318705196"
-          },
-          "id": "nd-6aecf8eea2",
-          "name": "SetComplexedState"
-        },
-        {
-          "type": "end",
-          "deletable": true,
-          "x": 1020,
-          "y": 1605,
-          "instructions": [
-            {
-              "id": "trs-7dc8cc3179",
-              "type": "transition",
-              "label": "",
-              "condition": {
-                "type": "expression",
-                "payload": "true"
-              },
-              "destination": {
-                "node": "END"
-              },
-              "generative": {
-                "label": "",
-                "properties": {
-                  "label": true,
-                  "condition": true
-                },
-                "suggestion": {
-                  "label": "",
-                  "condition": "true"
-                }
-              },
-              "nodeId": "nd-7318705196",
-              "transitions": []
-            }
-          ],
-          "id": "nd-7318705196",
-          "name": "End1"
-        },
-        {
           "type": "exit",
           "deletable": true,
-          "x": 2070,
-          "y": 735,
+          "x": 795,
+          "y": 975,
           "variables": [
             "var-7fc5e620b4",
             "var-cf24a95d03"
@@ -24909,8 +25039,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -570,
-          "y": 0,
+          "x": -210,
+          "y": -360,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">UNDERSTAND USER INPUT</span></strong></p>",
           "id": "nd-f6136b82c2",
@@ -24922,8 +25052,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 780,
-          "y": -435,
+          "x": 1305,
+          "y": -120,
           "instructions": [
             {
               "id": "ins-392dab1551",
@@ -24932,21 +25062,10 @@
               "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
               "nodeId": "nd-2c641f3f72",
               "transitions": []
-            },
-            {
-              "id": "ins-a0219f7fc2",
-              "type": "action",
-              "code": "user.phone = event.preview",
-              "origin": "builtin",
-              "label": "Assigns a phone number to a user object.",
-              "nodeId": "nd-2c641f3f72",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.phone = event.preview;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-627c3d2122"
+            "targetNodeId": "nd-784ac93234"
           },
           "id": "nd-2c641f3f72",
           "name": "WaitUserInput"
@@ -24954,8 +25073,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 1275,
-          "y": 735,
+          "x": 1590,
+          "y": 240,
           "instructions": [
             {
               "id": "ins-7897c36ae5",
@@ -24976,90 +25095,41 @@
               "nodeId": "nd-690becc848",
               "description": "",
               "destination": {
-                "node": "nd-ed7af360bf"
+                "node": "nd-784ac93234"
               },
               "transitions": []
             },
             {
-              "id": "ins-088a505733",
+              "id": "ins-31e5310b86",
               "type": "skill",
-              "name": "askToKnowledgeBase1",
-              "flowId": "wf-3b13133a5d",
-              "exitNodes": [
-                "nd-8c3aab2e25",
-                "nd-35ea0d8403"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-fe9f35032f",
-                  "type": "transition",
-                  "label": "Success",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-8c3aab2e25"
-                  },
-                  "destination": {
-                    "node": "nd-b6f8cfcd9f"
-                  },
-                  "generative": {
-                    "label": "Success",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Success",
-                      "condition": "lastNode=nd-8c3aab2e25"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-246cdd7299",
-                  "type": "transition",
-                  "label": "CupoBrilla",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-35ea0d8403"
-                  },
-                  "destination": {
-                    "node": "nd-b6f8cfcd9f"
-                  },
-                  "generative": {
-                    "label": "CupoBrilla",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "CupoBrilla",
-                      "condition": "lastNode=nd-35ea0d8403"
-                    }
-                  }
-                }
-              ],
+              "name": "❔mainKnowledgeBase",
+              "flowId": "wf-8a77b12b87",
+              "exitNodes": [],
+              "transitions": [],
               "nodeId": "nd-690becc848",
-              "manualFields": [],
-              "variables": [
-                {
-                  "defaultValue": "",
-                  "storeAsTag": false,
-                  "type": "string",
-                  "name": "interpretedInput",
-                  "description": "",
-                  "id": "var-5db80e4c28",
-                  "scope": "workflow",
-                  "secret": false,
-                  "value": {
-                    "valueType": "dynamic",
-                    "dynamicValue": "{{workflow.correctedUserInput}}",
-                    "staticValue": ""
-                  }
-                }
-              ]
+              "manualFields": []
+            },
+            {
+              "id": "ins-59d4e0bdcd",
+              "type": "skill",
+              "name": "RephraseQuestion1",
+              "flowId": "wf-e5630b7036",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-690becc848",
+              "manualFields": []
+            },
+            {
+              "id": "ins-fd5b21ec94",
+              "type": "wait",
+              "label": "Wait for User Input",
+              "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
+              "nodeId": "nd-690becc848",
+              "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-203f71c86e"
+            "targetNodeId": "nd-5e6b741a46"
           },
           "id": "nd-690becc848",
           "name": "handleAdaptiveResponse"
@@ -25067,8 +25137,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 255,
-          "y": 360,
+          "x": 660,
+          "y": 225,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Evaluar si el mensaje del cliente es congruente con lo que se le cuestionó</span></strong></p>",
           "id": "nd-4607e0a910",
@@ -25082,8 +25152,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 810,
-          "y": 780,
+          "x": 1140,
+          "y": 375,
           "instructions": [
             {
               "id": "ins-3fa676ee45",
@@ -25110,39 +25180,15 @@
               "transitions": []
             },
             {
-              "id": "ins-30f886ccec",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.context === 'consistent'}}"
-              },
-              "label": "Mismo contexto",
-              "generative": {
-                "label": "Mismo contexto",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-d7e5b1b879",
-              "description": "",
-              "destination": {
-                "node": "nd-fb7e06f31a"
-              },
-              "transitions": []
-            },
-            {
               "id": "ins-1c8a22c390",
               "type": "transition",
               "condition": {
                 "type": "expression",
                 "payload": "{{workflow.context === 'incoherent'}}"
               },
-              "label": "Diferente contexto",
+              "label": "Cliente pregunta",
               "generative": {
-                "label": "Diferente contexto",
+                "label": "Cliente pregunta",
                 "suggestion": {
                   "condition": "true"
                 },
@@ -25154,6 +25200,30 @@
               "description": "",
               "destination": {
                 "node": "nd-690becc848"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-30f886ccec",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.context === 'consistent'}}"
+              },
+              "label": "Cliente responde",
+              "generative": {
+                "label": "Cliente responde",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-d7e5b1b879",
+              "description": "",
+              "destination": {
+                "node": "nd-5e6b741a46"
               },
               "transitions": []
             },
@@ -25177,13 +25247,37 @@
               "nodeId": "nd-d7e5b1b879",
               "description": "",
               "destination": {
-                "node": "nd-b8dbb7cfad"
+                "node": "nd-307bbb1f1e"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-75fcd53631",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.context === 'human_requested'}}"
+              },
+              "label": "Cliente solicita atención humana",
+              "generative": {
+                "label": "Cliente solicita atención humana",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-d7e5b1b879",
+              "description": "",
+              "destination": {
+                "node": "nd-c5740d3ebf"
               },
               "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-203f71c86e"
+            "targetNodeId": "nd-2e50726347"
           },
           "id": "nd-d7e5b1b879",
           "name": "Router"
@@ -25191,23 +25285,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -540,
-          "y": 240,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Parafrasear la respuesta del cliente</span></strong></p>",
-          "id": "nd-60081fbcbe",
-          "name": "Comment3",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 810,
-          "y": 720,
+          "x": 1140,
+          "y": 210,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Bifuraciones</span></strong></p>",
           "id": "nd-09deaa6e3c",
@@ -25221,8 +25300,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 780,
-          "y": -585,
+          "x": 1275,
+          "y": -300,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Esperar al cliente hasta que responda un mensaje contundente</span></strong></p>",
           "id": "nd-781b66ef3b",
@@ -25236,8 +25315,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 1290,
-          "y": 240,
+          "x": 1590,
+          "y": 105,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Responder la pregunta del cliente</span></strong></p>",
           "id": "nd-0c61f58eae",
@@ -25251,8 +25330,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -120,
-          "y": 1395,
+          "x": 735,
+          "y": -300,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Solicitar al cliente que repita la respuesta o pregunta</span></strong></p>",
           "id": "nd-57ef51adfd",
@@ -25264,25 +25343,10 @@
           }
         },
         {
-          "type": "comment",
-          "deletable": true,
-          "x": 555,
-          "y": 1440,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">No se logra entender al cliente</span></strong></p>",
-          "id": "nd-fda506a96b",
-          "name": "Comment8",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
           "type": "exit",
           "deletable": true,
-          "x": 1620,
-          "y": 1560,
+          "x": 795,
+          "y": 1140,
           "variables": [],
           "instructions": [
             {
@@ -25315,78 +25379,114 @@
           "name": "Refused"
         },
         {
+          "name": "farewell_COMPLEXED",
           "type": "standard",
           "deletable": true,
-          "x": 1245,
-          "y": 1470,
+          "x": 885,
+          "y": -690,
           "instructions": [
             {
-              "type": "log",
-              "id": "ins-b4acb4bb93",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "El cliente ha decidido rechazar a contestar",
-                "staticValue": ""
-              },
-              "nodeId": "nd-b8dbb7cfad",
-              "transitions": []
+              "id": "ins-9b2d0e2436",
+              "type": "skill",
+              "name": "farewell1",
+              "flowId": "wf-066a81d084",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-c47097f08d",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-28a6148a19",
+                  "name": "inputError",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "staticValue": false,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5229f73ac9",
+                  "name": "botState",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "COMPLEXED",
+                    "staticValue": ""
+                  }
+                }
+              ]
             }
           ],
-          "defaultTransition": {
-            "targetNodeId": "nd-c9ade57441"
-          },
-          "id": "nd-b8dbb7cfad",
-          "name": "RejectToAnswer"
+          "id": "nd-c47097f08d"
         },
         {
           "type": "standard",
           "deletable": true,
-          "x": 1680,
-          "y": 960,
+          "x": 315,
+          "y": -375,
           "instructions": [
             {
-              "id": "ins-e1cf2839cb",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.retry === false}}"
-              },
-              "label": "Not retry",
-              "generative": {
-                "label": "Not retry",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-b6f8cfcd9f",
-              "description": "",
-              "destination": {
-                "node": "nd-ed7af360bf"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-88572eb68c",
+              "id": "ins-a8c641188d",
               "type": "action",
               "category": "Execute",
-              "code": "workflow.retryAttempts++",
+              "code": "conversation.retryAttempts++",
               "origin": "builtin",
-              "label": "\"Retrieve and Process Data from External Sources\"",
-              "nodeId": "nd-b6f8cfcd9f",
+              "label": "Increment Conversation Retry Attempts Counter in Code",
+              "nodeId": "nd-52e2cfdbda",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.retryAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.retryAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
-              "id": "ins-e22003cbdd",
+              "id": "ins-0f73856575",
+              "type": "skill",
+              "name": "HandleMultimediaMessage1",
+              "flowId": "wf-12d523cbb2",
+              "exitNodes": [
+                "nd-1b346aa54d"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-5a2bdfd41f",
+                  "type": "transition",
+                  "label": "WaitForUserInput",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-1b346aa54d"
+                  },
+                  "destination": {
+                    "node": "nd-69c63fb7cf"
+                  },
+                  "generative": {
+                    "label": "WaitForUserInput",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "WaitForUserInput",
+                      "condition": "lastNode=nd-1b346aa54d"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-52e2cfdbda",
+              "manualFields": []
+            },
+            {
+              "id": "ins-07ef862f79",
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{workflow.retryAttempts >= 2}}"
+                "payload": "{{conversation.retryAttempts >= 3}}"
               },
               "label": "Retry attempts over",
               "generative": {
@@ -25397,146 +25497,49 @@
                 }
               },
               "category": "Flow Logic",
-              "nodeId": "nd-b6f8cfcd9f",
+              "nodeId": "nd-52e2cfdbda",
               "description": "",
               "destination": {
-                "node": "nd-ed7af360bf"
+                "node": "nd-c47097f08d"
               },
               "transitions": []
             },
             {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-836094637e",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "✨ Paraphrased question",
-                "staticValue": ""
+              "id": "ins-4c8d11cdc1",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{conversation.retryAttempts == 2}}"
               },
-              "nodeId": "nd-b6f8cfcd9f",
-              "transitions": []
-            },
-            {
-              "id": "ins-e5c4639921",
-              "category": "Send Messages",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "{{workflow.paraphrasedQuestion}}",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
+              "label": "Second Attempt",
+              "generative": {
+                "label": "Second Attempt",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
                 }
               },
-              "nodeId": "nd-b6f8cfcd9f",
-              "transitions": []
-            },
-            {
-              "id": "ins-4b360a058d",
-              "type": "wait",
-              "category": "Capture Information",
-              "label": "Wait for User Input",
-              "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
-              "nodeId": "nd-b6f8cfcd9f",
+              "category": "Flow Logic",
+              "nodeId": "nd-52e2cfdbda",
+              "description": "",
+              "destination": {
+                "node": "nd-203f71c86e"
+              },
               "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-ed7af360bf"
+            "targetNodeId": "nd-52c6ee7566"
           },
-          "id": "nd-b6f8cfcd9f",
-          "name": "Retry"
+          "id": "nd-52e2cfdbda",
+          "name": "validateAttempts"
         },
         {
           "type": "standard",
           "deletable": true,
-          "x": 270,
-          "y": -195,
+          "x": -195,
+          "y": -720,
           "instructions": [
-            {
-              "id": "ins-1c7eab3163",
-              "tutorialId": "knowledge-query",
-              "description": "Retrieve answer & citations from Knowledge Bases to a custom query",
-              "title": "Query Knowledge Bases",
-              "schema": {
-                "_def": {
-                  "unknownKeys": "strip",
-                  "catchall": {
-                    "_def": {
-                      "typeName": "ZodNever"
-                    }
-                  },
-                  "typeName": "ZodObject"
-                },
-                "_cached": null
-              },
-              "uiconfiguration": {
-                "type": "VerticalLayout",
-                "elements": [
-                  {
-                    "type": "Input",
-                    "scope": "#/properties/query",
-                    "options": {
-                      "superInput": true
-                    }
-                  },
-                  {
-                    "type": "KBPicker",
-                    "label": "Knowledge Bases",
-                    "scope": "#/properties/kbs"
-                  },
-                  {
-                    "type": "VariablePicker",
-                    "label": "Store answer in variable",
-                    "scope": "#/properties/answerVariableId"
-                  }
-                ]
-              },
-              "type": "action",
-              "label": "Query Knowledge Bases",
-              "origin": "agent",
-              "agent": {
-                "action": "knowledge-query",
-                "id": "KnowledgeAgent"
-              },
-              "nodeId": "nd-627c3d2122",
-              "data": {
-                "query": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "Paraphrase or clarify the intent behind this user query briefly and directly: '{{event.preview}}'. Avoid unnecessary wordiness.",
-                  "staticValue": "Paraphrase or clarify the intent behind this user query briefly and directly: '{{event.preview}}'. Avoid unnecessary wordiness."
-                },
-                "kbs": {
-                  "enabled": true,
-                  "searchScope": "all",
-                  "kbs": [],
-                  "valueType": "static",
-                  "dynamicValue": ""
-                },
-                "answerVariableId": "var-0770371c91"
-              },
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "id": "ins-e71af5bcf1",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖Knowledge Understanding: {{workflow.kbUnderstanding}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-627c3d2122",
-              "transitions": []
-            },
             {
               "type": "ai",
               "category": "AI",
@@ -25560,7 +25563,7 @@
                 "temperature": 0,
                 "version": "1.0"
               },
-              "nodeId": "nd-627c3d2122",
+              "nodeId": "nd-c6f2c21f21",
               "label": "correctedUserInput",
               "transitions": [],
               "prompt": {
@@ -25593,30 +25596,448 @@
                 "dynamicValue": "✨ Paraphrased User Input: {{workflow.correctedUserInput}}",
                 "staticValue": ""
               },
-              "nodeId": "nd-627c3d2122",
+              "nodeId": "nd-c6f2c21f21",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-ab27b4ac4b",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Expected data: {{workflow.expectedData}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-c6f2c21f21",
               "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-52c6ee7566"
+            "targetNodeId": null
           },
-          "id": "nd-627c3d2122",
-          "name": "Knowledge_Understanding"
+          "id": "nd-c6f2c21f21",
+          "name": "Trash"
+        },
+        {
+          "name": "farewell_ATTENTION_REQUESTED",
+          "type": "standard",
+          "deletable": true,
+          "x": 1545,
+          "y": 1515,
+          "instructions": [
+            {
+              "id": "ins-5d30d79478",
+              "type": "skill",
+              "name": "farewell2",
+              "flowId": "wf-066a81d084",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-c5740d3ebf",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-28a6148a19",
+                  "name": "inputError",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "staticValue": false,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5229f73ac9",
+                  "name": "botState",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "ATTENTION_REQUESTED",
+                    "staticValue": ""
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "nd-c5740d3ebf"
+        },
+        {
+          "name": "farewell_ATTENDED",
+          "type": "standard",
+          "deletable": true,
+          "x": 1650,
+          "y": 1155,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-b4acb4bb93",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "El cliente ha decidido rechazar a contestar",
+                "staticValue": ""
+              },
+              "nodeId": "nd-307bbb1f1e",
+              "transitions": []
+            },
+            {
+              "id": "ins-63829699be",
+              "type": "skill",
+              "name": "farewell3",
+              "flowId": "wf-066a81d084",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-307bbb1f1e",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-28a6148a19",
+                  "name": "inputError",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "staticValue": false,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5229f73ac9",
+                  "name": "botState",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "ATTENDED",
+                    "staticValue": ""
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "nd-307bbb1f1e"
+        },
+        {
+          "type": "exception-handler",
+          "deletable": true,
+          "x": -240,
+          "y": 300,
+          "instructions": [
+            {
+              "id": "trs-d18e5b68d5",
+              "type": "transition",
+              "label": "",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-d05dbb6589"
+              },
+              "generative": {
+                "label": "",
+                "properties": {
+                  "label": true,
+                  "condition": true
+                },
+                "suggestion": {
+                  "label": "",
+                  "condition": "true"
+                }
+              },
+              "nodeId": "nd-a8c2e585ee",
+              "transitions": []
+            }
+          ],
+          "id": "nd-a8c2e585ee",
+          "name": "Exception Handler1"
+        },
+        {
+          "name": "farewell_ERROR",
+          "type": "standard",
+          "deletable": true,
+          "x": -240,
+          "y": 555,
+          "instructions": [
+            {
+              "id": "ins-908705a671",
+              "type": "skill",
+              "name": "farewell4",
+              "flowId": "wf-066a81d084",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-d05dbb6589",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-28a6148a19",
+                  "name": "inputError",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "valueType": "static",
+                    "staticValue": true,
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5229f73ac9",
+                  "name": "botState",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "nd-d05dbb6589"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1680,
+          "y": 780,
+          "instructions": [
+            {
+              "id": "ins-cb9afb7d86",
+              "type": "skill",
+              "name": "DataExtractor1",
+              "flowId": "wf-c6d98af004",
+              "exitNodes": [
+                "nd-1955a81c3b"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-3a8ff10618",
+                  "type": "transition",
+                  "label": "UNSUCCESS",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-1955a81c3b"
+                  },
+                  "destination": {
+                    "node": "nd-f1dc3429dd"
+                  },
+                  "generative": {
+                    "label": "UNSUCCESS",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "UNSUCCESS",
+                      "condition": "lastNode=nd-1955a81c3b"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-5e6b741a46",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-ec6369738b",
+                  "name": "kbResponse",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ins-f8236fc3ce",
+              "type": "action",
+              "category": "Execute",
+              "code": "workflow.expectedData = workflow.DataExtractor1.expectedData",
+              "origin": "builtin",
+              "label": "\"Assign Expected Data from DataExtractor1 to Workflow\"",
+              "nodeId": "nd-5e6b741a46",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.expectedData = workflow.DataExtractor1.expectedData;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-784ac93234"
+          },
+          "id": "nd-5e6b741a46",
+          "name": "extracData"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": -210,
+          "y": 1140,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-03e203b86f",
+              "label": "Log",
+              "level": "error",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "No pudo entenderse el contexto de la respuesta",
+                "staticValue": ""
+              },
+              "nodeId": "nd-2e50726347",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-52e2cfdbda"
+          },
+          "id": "nd-2e50726347",
+          "name": "handleMisunderstanding"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 2055,
+          "y": -795,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-00c6ce8bb9",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "No pudo conseguirse el dato esperado",
+                "staticValue": ""
+              },
+              "nodeId": "nd-f1dc3429dd",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-52e2cfdbda"
+          },
+          "id": "nd-f1dc3429dd",
+          "name": "handleDataMissed"
         },
         {
           "type": "comment",
           "deletable": true,
-          "x": 270,
-          "y": -330,
+          "x": 1680,
+          "y": 645,
           "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Entendimiento con base de conocimiento</span></strong></p>",
-          "id": "nd-7876457d48",
+          "comment": "<p><strong><span style=\"font-size: 18px\">Recuperar el dato esperado</span></strong></p>",
+          "id": "nd-8546a8616d",
+          "name": "Comment3",
+          "height": 128,
+          "width": 296,
+          "defaultTransition": {
+            "targetNodeId": null
+          }
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 1650,
+          "y": 1050,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 18px\">Manejar como atendido por que rechazó contestar</span></strong></p>",
+          "id": "nd-aa4bcfdb88",
+          "name": "Comment8",
+          "height": 128,
+          "width": 296,
+          "defaultTransition": {
+            "targetNodeId": null
+          }
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 1545,
+          "y": 1380,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 18px\">Ciente solicita atención humana.</span></strong></p>",
+          "id": "nd-618bcb8b5d",
           "name": "Comment9",
           "height": 128,
           "width": 296,
           "defaultTransition": {
             "targetNodeId": null
           }
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 2280,
+          "y": 60,
+          "instructions": [
+            {
+              "id": "ins-1e5579675f",
+              "type": "action",
+              "code": "console.log(`🤖 Reseting attempts`)\nconversation.retryAttempts = 0\nconsole.log(`🤖 retryAttempts: ${conversation.retryAttempts}`)",
+              "origin": "builtin",
+              "label": "Resetting Conversation Retry Attempts to Zero",
+              "nodeId": "nd-784ac93234",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  console.log(`\\u{1F916} Reseting attempts`);\n  conversation.retryAttempts = 0;\n  console.log(`\\u{1F916} retryAttempts: ${conversation.retryAttempts}`);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-fb7e06f31a"
+          },
+          "id": "nd-784ac93234",
+          "name": "resetAttempts"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 810,
+          "y": -885,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-06a24edf13",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "El cliente envío mensaje multimedia",
+                "staticValue": ""
+              },
+              "nodeId": "nd-69c63fb7cf",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-784ac93234"
+          },
+          "id": "nd-69c63fb7cf",
+          "name": "waitByMultimediaReason"
         }
       ],
       "parentFolder": "dir-6400c2779c"
@@ -26154,7 +26575,8 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-ed7af360bf",
-                "nd-fb7e06f31a"
+                "nd-fb7e06f31a",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
@@ -26183,7 +26605,7 @@
                 {
                   "id": "trs-1ac8b1d5e2",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -26200,6 +26622,27 @@
                     "suggestion": {
                       "label": "SameContext",
                       "condition": "lastNode=nd-fb7e06f31a"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-8ab88f70ca",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -28794,7 +29237,8 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-ed7af360bf",
-                "nd-fb7e06f31a"
+                "nd-fb7e06f31a",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
@@ -28823,7 +29267,7 @@
                 {
                   "id": "trs-282dde437f",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -28840,6 +29284,27 @@
                     "suggestion": {
                       "label": "SameContext",
                       "condition": "lastNode=nd-fb7e06f31a"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-7c35051640",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -29373,7 +29838,8 @@
               "flowId": "wf-cabe199fc6",
               "exitNodes": [
                 "nd-ed7af360bf",
-                "nd-fb7e06f31a"
+                "nd-fb7e06f31a",
+                "nd-c9ade57441"
               ],
               "transitions": [
                 {
@@ -29402,7 +29868,7 @@
                 {
                   "id": "trs-8bdc07df23",
                   "type": "transition",
-                  "label": "SameContext",
+                  "label": "SUCCESS",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-fb7e06f31a"
@@ -29419,6 +29885,27 @@
                     "suggestion": {
                       "label": "SameContext",
                       "condition": "lastNode=nd-fb7e06f31a"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-04a3c6110a",
+                  "type": "transition",
+                  "label": "Refused",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-c9ade57441"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Refused",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Refused",
+                      "condition": "lastNode=nd-c9ade57441"
                     }
                   }
                 }
@@ -30728,12 +31215,12 @@
               "id": "ins-b67046c3ba",
               "type": "action",
               "category": "Execute",
-              "code": "// EVALUAR EL TIPO DE MENSAJE RECIBIDO\n\n// Mapa de identificadores de medios\nconst mediaTypes = {\n  AUDIO: '(Audio)',\n  IMAGE: '(Image)',\n  VIDEO: '(Video)',\n  FILE: '(File)'\n}\n\n// Determinar el tipo de mensaje recibido\nworkflow.startMessageType =\n  (Object.entries(mediaTypes).find(([key, value]) => event.preview.includes(value))?.[0] as string) || 'TEXT'\n\nconsole.log(`🤖  workflow.startMessageType:`, workflow.startMessageType)\n\n// Mapa de advertencias\nconst advicesMap = {\n  AUDIO: 'Discúlpame, por el momento no puedo escuchar audios. ¿Me podrías escribir por favor?',\n  IMAGE: 'Discúlpame, por el momento no puedo entender imágenes. ¿Me podrías escribir por favor?',\n  VIDEO: 'Discúlpame, por el momento no puedo ver videos. ¿Me podrías escribir por favor?',\n  FILE: 'Discúlpame, por el momento no puedo recibir archivos. ¿Me podrías escribir por favor?'\n}\n\n// Enviar mensaje de advertencia\nif (workflow.startMessageType !== 'TEXT') {\n  workflow.adviseMessage = advicesMap[workflow.startMessageType] || 'Hola'\n}\n\n// Ejemplos de contenido recibido\n\n// {\"audioUrl\":\"https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=547813380919690&ext=1739940310&hash=ATsMDnTMW3zzmxkJtm23985cHfb_aAlf2xbppOZT8-LegA\"}\n// console.log(`🤖 Event payload: ${JSON.stringify(event.payload)}`)\n\n// (Audio) https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=547813380919690&ext=1739940310&hash=ATsMDnTMW3zzmxkJtm23985cHfb_aAlf2xbppOZT8-LegA\n// console.log(`🤖 Event preview: ${event.preview}`)\n",
+              "code": "// EVALUAR EL TIPO DE MENSAJE RECIBIDO\n\n// Mapa de identificadores de medios\nconst mediaTypes = {\n  AUDIO: \"(Audio)\",\n  IMAGE: \"(Image)\",\n  VIDEO: \"(Video)\",\n  FILE: \"(File)\",\n};\n\n// Determinar el tipo de mensaje recibido\nworkflow.startMessageType = extractMessageType() || \"TEXT\";\n\nconsole.log(`🤖  workflow.startMessageType:`, workflow.startMessageType);\n\n// Mapa de advertencias\nconst advicesMap = {\n  AUDIO:\n    \"Discúlpame, por el momento no puedo escuchar audios. ¿Me podrías escribir por favor?\",\n  IMAGE:\n    \"Discúlpame, por el momento no puedo entender imágenes. ¿Me podrías escribir por favor?\",\n  VIDEO:\n    \"Discúlpame, por el momento no puedo ver videos. ¿Me podrías escribir por favor?\",\n  FILE: \"Discúlpame, por el momento no puedo recibir archivos. ¿Me podrías escribir por favor?\",\n};\n\n// Enviar mensaje de advertencia\nif (workflow.startMessageType !== \"TEXT\") {\n  if (workflow.startMessageType !== \"TEXT\") {\n    // @ts-ignore - Sabemos que startMessageType es una clave válida\n    workflow.adviseMessage = advicesMap[workflow.startMessageType] || \"Hola\";\n  }\n}\n\nfunction extractMessageType(): string {\n  return Object.entries(mediaTypes).find(([key, value]) =>\n    event.preview.includes(value)\n  )?.[0] as string;\n}\n// Ejemplos de contenido recibido\n\n// {\"audioUrl\":\"https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=547813380919690&ext=1739940310&hash=ATsMDnTMW3zzmxkJtm23985cHfb_aAlf2xbppOZT8-LegA\"}\n// console.log(`🤖 Event payload: ${JSON.stringify(event.payload)}`)\n\n// (Audio) https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=547813380919690&ext=1739940310&hash=ATsMDnTMW3zzmxkJtm23985cHfb_aAlf2xbppOZT8-LegA\n// console.log(`🤖 Event preview: ${event.preview}`)\n",
               "origin": "builtin",
               "label": "Log Event Payload ",
               "nodeId": "nd-539b678293",
               "isCustomLabel": true,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const mediaTypes = {\n    AUDIO: \"(Audio)\",\n    IMAGE: \"(Image)\",\n    VIDEO: \"(Video)\",\n    FILE: \"(File)\"\n  };\n  workflow.startMessageType = Object.entries(mediaTypes).find(([key, value]) => event.preview.includes(value))?.[0] || \"TEXT\";\n  console.log(`\\u{1F916}  workflow.startMessageType:`, workflow.startMessageType);\n  const advicesMap = {\n    AUDIO: \"Disc\\xFAlpame, por el momento no puedo escuchar audios. \\xBFMe podr\\xEDas escribir por favor?\",\n    IMAGE: \"Disc\\xFAlpame, por el momento no puedo entender im\\xE1genes. \\xBFMe podr\\xEDas escribir por favor?\",\n    VIDEO: \"Disc\\xFAlpame, por el momento no puedo ver videos. \\xBFMe podr\\xEDas escribir por favor?\",\n    FILE: \"Disc\\xFAlpame, por el momento no puedo recibir archivos. \\xBFMe podr\\xEDas escribir por favor?\"\n  };\n  if (workflow.startMessageType !== \"TEXT\") {\n    workflow.adviseMessage = advicesMap[workflow.startMessageType] || \"Hola\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const mediaTypes = {\n    AUDIO: \"(Audio)\",\n    IMAGE: \"(Image)\",\n    VIDEO: \"(Video)\",\n    FILE: \"(File)\"\n  };\n  workflow.startMessageType = extractMessageType() || \"TEXT\";\n  console.log(`\\u{1F916}  workflow.startMessageType:`, workflow.startMessageType);\n  const advicesMap = {\n    AUDIO: \"Disc\\xFAlpame, por el momento no puedo escuchar audios. \\xBFMe podr\\xEDas escribir por favor?\",\n    IMAGE: \"Disc\\xFAlpame, por el momento no puedo entender im\\xE1genes. \\xBFMe podr\\xEDas escribir por favor?\",\n    VIDEO: \"Disc\\xFAlpame, por el momento no puedo ver videos. \\xBFMe podr\\xEDas escribir por favor?\",\n    FILE: \"Disc\\xFAlpame, por el momento no puedo recibir archivos. \\xBFMe podr\\xEDas escribir por favor?\"\n  };\n  if (workflow.startMessageType !== \"TEXT\") {\n    if (workflow.startMessageType !== \"TEXT\") {\n      workflow.adviseMessage = advicesMap[workflow.startMessageType] || \"Hola\";\n    }\n  }\n  function extractMessageType() {\n    return Object.entries(mediaTypes).find(\n      ([key, value]) => event.preview.includes(value)\n    )?.[0];\n  }\n  __name(extractMessageType, \"extractMessageType\");\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -33623,6 +34110,620 @@
         }
       ],
       "parentFolder": "dir-6fb4de4b07"
+    },
+    {
+      "id": "wf-c6d98af004",
+      "name": "🔎 DataExtractor",
+      "startNode": "nd-d4b95981b6",
+      "variables": [
+        {
+          "id": "var-ec6369738b",
+          "name": "kbResponse",
+          "description": "",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "defaultValue": "",
+          "storeAsTag": false,
+          "type": "string",
+          "name": "expectedData",
+          "description": "",
+          "id": "var-68cee1fa03",
+          "scope": "workflow",
+          "secret": false
+        }
+      ],
+      "links": [
+        {
+          "id": "lnk-894142cde3",
+          "source": "nd-d4b95981b6",
+          "target": "nd-49b4de78cd",
+          "sourcePort": "trs-e1f99ea1cc"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "nd-d4b95981b6",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [
+            "var-ec6369738b"
+          ],
+          "instructions": [
+            {
+              "id": "trs-e1f99ea1cc",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-49b4de78cd"
+              },
+              "transitions": [],
+              "nodeId": "nd-d4b95981b6"
+            }
+          ],
+          "x": 100,
+          "y": 100
+        },
+        {
+          "id": "nd-cc87a1e9e7",
+          "name": "SUCCESS",
+          "type": "exit",
+          "variables": [
+            "var-68cee1fa03"
+          ],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-1adb188175",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-cc87a1e9e7"
+            }
+          ],
+          "x": 930,
+          "y": 120
+        },
+        {
+          "id": "nd-49b4de78cd",
+          "name": "extractDataNode",
+          "type": "standard",
+          "deletable": true,
+          "instructions": [
+            {
+              "type": "ai",
+              "category": "AI",
+              "id": "ins-e835da51d4",
+              "task": {
+                "instructions": "## **Role Description**\n\nEres un extractor de información cuya única tarea es identificar si el usuario ha proporcionado el dato que se le solicitó previamente en la conversación.\n\n---\n\n## **Estrategia**\n\n1. **Analizar el Resumen de conversación:** Identifica la última pregunta realizada por el bot al usuario\n2. **Analizar la base de conocimientos:** Determina si la respuesta de la base de conocimientos contiene una respuesta a la pregunta anterior\n3. **Extraer el dato (si existe):** Si la base de conocimientos proporcionó el dato solicitado, extráelo y guárdalo en la variable `@workflow.expectedData`. De lo contrario, deja la variable vacía\n\n\n---\n\n### Ejemplos:\n1. Última pregunta del bot: \"¿Cuál es su número de cédula?\"\nRespuesta: \"Mi cédula es 123456789.\"\n`@workflow.expectedData`: 123456789\n2. Última pregunta del bot: \"¿Qué color le gustaría?\"\nRespuesta: \"Quiero el azul, por favor.\"\n`@workflow.expectedData`: azul\n3. Última pregunta del bot: \"¿Cuántos años tiene?\"\nRespuesta: \"30 años.\"\n`@workflow.expectedData`: 30\n4. Última pregunta del bot: \"¿Cuál es su correo electrónico?\"\nRespuesta: \"No lo recuerdo bien...\"\n`@workflow.expectedData`: vacío\n5. Última pregunta del bot: \"¿Desea adquirir el seguro?\"\nRespuesta: \"Sí, me interesa.\"\n`@workflow.expectedData`: Sí\n6. Última pregunta del bot: \"¿Cuál es su dirección?\"\nRespuesta: \"¿Para qué necesitan eso?\"\n`@workflow.expectedData`: vacío\n7. Última pregunta del bot: \"¿Qué día le queda bien para la cita?\"\nRespuesta: \"El martes. ¿A qué hora?\"\n`@workflow.expectedData`: martes",
+                "input": "Resumen de conversación: {{conversation.SummaryAgent.summary}}\nRespuesta de la base de conocimientos: {{workflow.kbResponse}}",
+                "outputVariableIds": [
+                  "var-68cee1fa03"
+                ],
+                "handleFailure": false,
+                "examples": [
+                  {
+                    "input": "",
+                    "output": {}
+                  }
+                ],
+                "model": "fast-model",
+                "temperature": 0,
+                "version": "1.0"
+              },
+              "nodeId": "nd-49b4de78cd",
+              "label": "expectedData",
+              "transitions": [],
+              "prompt": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
+                  },
+                  {
+                    "role": "user",
+                    "content": "I have a task for you to complete. Here are the instructions:\n## **Role Description**\n\nEres un extractor de información cuya única tarea es identificar si el usuario ha proporcionado el dato que se le solicitó previamente en la conversación.\n\n---\n\n## **Estrategia**\n\n1. **Analizar el Resumen de conversación:** Identifica la última pregunta realizada por el bot al usuario\n2. **Analizar la base de conocimientos:** Determina si la respuesta de la base de conocimientos contiene una respuesta a la pregunta anterior\n3. **Extraer el dato (si existe):** Si la base de conocimientos proporcionó el dato solicitado, extráelo y guárdalo en la variable `@workflow.expectedData`. De lo contrario, deja la variable vacía\n\n\n---\n\n### Ejemplos:\n1. Última pregunta del bot: \"¿Cuál es su número de cédula?\"\nRespuesta: \"Mi cédula es 123456789.\"\n`@workflow.expectedData`: 123456789\n2. Última pregunta del bot: \"¿Qué color le gustaría?\"\nRespuesta: \"Quiero el azul, por favor.\"\n`@workflow.expectedData`: azul\n3. Última pregunta del bot: \"¿Cuántos años tiene?\"\nRespuesta: \"30 años.\"\n`@workflow.expectedData`: 30\n4. Última pregunta del bot: \"¿Cuál es su correo electrónico?\"\nRespuesta: \"No lo recuerdo bien...\"\n`@workflow.expectedData`: vacío\n5. Última pregunta del bot: \"¿Desea adquirir el seguro?\"\nRespuesta: \"Sí, me interesa.\"\n`@workflow.expectedData`: Sí\n6. Última pregunta del bot: \"¿Cuál es su dirección?\"\nRespuesta: \"¿Para qué necesitan eso?\"\n`@workflow.expectedData`: vacío\n7. Última pregunta del bot: \"¿Qué día le queda bien para la cita?\"\nRespuesta: \"El martes. ¿A qué hora?\"\n`@workflow.expectedData`: martes\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"expectedData\": string\n}"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
+                  }
+                ],
+                "model": "fast-model",
+                "temperature": 0
+              }
+            },
+            {
+              "type": "log",
+              "id": "ins-08c3421c4a",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Extracted data: {{workflow.expectedData}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-49b4de78cd",
+              "transitions": []
+            },
+            {
+              "id": "ins-f393e472ad",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.expectedData != null}}"
+              },
+              "label": "Sí extrajo data",
+              "generative": {
+                "label": "Sí extrajo data",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-49b4de78cd",
+              "description": "",
+              "destination": {
+                "node": "nd-cc87a1e9e7"
+              },
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-2c18be72b3",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "No extrajo data",
+                "staticValue": ""
+              },
+              "nodeId": "nd-49b4de78cd",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-1955a81c3b"
+          },
+          "x": 450,
+          "y": 100
+        },
+        {
+          "type": "exit",
+          "deletable": true,
+          "x": 945,
+          "y": 390,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-6c5007eec1",
+              "type": "transition",
+              "label": "",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "generative": {
+                "label": "",
+                "properties": {
+                  "label": true,
+                  "condition": true
+                },
+                "suggestion": {
+                  "label": "",
+                  "condition": "true"
+                }
+              },
+              "nodeId": "nd-1955a81c3b",
+              "transitions": []
+            }
+          ],
+          "id": "nd-1955a81c3b",
+          "name": "UNSUCCESS"
+        }
+      ],
+      "parentFolder": "dir-6400c2779c"
+    },
+    {
+      "id": "wf-e5630b7036",
+      "name": "✏️ RephraseQuestion",
+      "startNode": "nd-7d631dcc65",
+      "variables": [
+        {
+          "id": "var-c93b6f511d",
+          "name": "paraphrasedQuestion",
+          "description": "La última pregunta que se le hizo al cliente parafraseada",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        }
+      ],
+      "links": [
+        {
+          "id": "lnk-0f0bc14228",
+          "source": "nd-7d631dcc65",
+          "target": "nd-39779fadfb",
+          "sourcePort": "trs-083db3a1b6"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "nd-7d631dcc65",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-083db3a1b6",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-39779fadfb"
+              },
+              "transitions": [],
+              "nodeId": "nd-7d631dcc65"
+            }
+          ],
+          "x": 100,
+          "y": 100
+        },
+        {
+          "id": "nd-135cdce020",
+          "name": "Exit",
+          "type": "exit",
+          "variables": [],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-a0f989029b",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-135cdce020"
+            }
+          ],
+          "x": 800,
+          "y": 100
+        },
+        {
+          "id": "nd-39779fadfb",
+          "name": "paraphraseQuestion",
+          "type": "standard",
+          "deletable": true,
+          "instructions": [
+            {
+              "type": "ai",
+              "category": "AI",
+              "id": "ins-24de2703cb",
+              "task": {
+                "instructions": "Actúa como un asistente experto en atención al cliente. Tu tarea es reformular la última pregunta realizada por el cliente para asegurar una comprensión clara y precisa antes de continuar con la interacción.\n\nConsiderando el siguiente resumen de la conversación:\n\n{{conversation.AgentSummary.summary}}\n\n**Instrucciones:**\n\n1. **Identifica la última pregunta del cliente** basándote en el resumen proporcionado.\n2. **Parafraséala de manera clara y concisa**, utilizando un lenguaje natural y profesional.\n3. **Mantén el significado original de la pregunta**, pero exprésala con tus propias palabras.\n4. **Evita agregar información nueva o interpretaciones personales.**\n5. **El objetivo es confirmar que has entendido correctamente la necesidad del cliente.**\n\nTu respuesta debe ser únicamente la paráfrasis de la última pregunta.",
+                "input": "Resumen de la conversación: {{conversation.SummaryAgent.summary}}",
+                "outputVariableIds": [
+                  "var-c93b6f511d"
+                ],
+                "handleFailure": false,
+                "examples": [
+                  {
+                    "input": "",
+                    "output": {}
+                  }
+                ],
+                "model": "openai__gpt-4.1-mini-2025-04-14",
+                "temperature": 0.4,
+                "version": "1.0"
+              },
+              "nodeId": "nd-39779fadfb",
+              "label": "paraphrasedQuestion",
+              "transitions": [],
+              "prompt": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
+                  },
+                  {
+                    "role": "user",
+                    "content": "I have a task for you to complete. Here are the instructions:\nActúa como un asistente experto en atención al cliente. Tu tarea es reformular la última pregunta realizada por el cliente para asegurar una comprensión clara y precisa antes de continuar con la interacción.\n\nConsiderando el siguiente resumen de la conversación:\n\n{{conversation.AgentSummary.summary}}\n\n**Instrucciones:**\n\n1. **Identifica la última pregunta del cliente** basándote en el resumen proporcionado.\n2. **Parafraséala de manera clara y concisa**, utilizando un lenguaje natural y profesional.\n3. **Mantén el significado original de la pregunta**, pero exprésala con tus propias palabras.\n4. **Evita agregar información nueva o interpretaciones personales.**\n5. **El objetivo es confirmar que has entendido correctamente la necesidad del cliente.**\n\nTu respuesta debe ser únicamente la paráfrasis de la última pregunta.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /** La última pregunta que se le hizo al cliente parafraseada */\n\"paraphrasedQuestion\": string\n}"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
+                  }
+                ],
+                "model": "openai__gpt-4.1-mini-2025-04-14",
+                "temperature": 0.4
+              }
+            },
+            {
+              "type": "log",
+              "id": "ins-38a7650657",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "✨ ParaphrasedQuestion: {{workflow.paraphrasedQuestion}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-39779fadfb",
+              "transitions": []
+            },
+            {
+              "id": "ins-116a8b6816",
+              "type": "content",
+              "content": {
+                "type": "text",
+                "text": {
+                  "valueType": "dynamic",
+                  "dynamicValue": "{{workflow.paraphrasedQuestion}}",
+                  "staticValue": ""
+                },
+                "typing": {
+                  "valueType": "static",
+                  "staticValue": true
+                }
+              },
+              "nodeId": "nd-39779fadfb",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-135cdce020"
+          },
+          "x": 450,
+          "y": 100
+        }
+      ],
+      "parentFolder": "dir-6400c2779c"
+    },
+    {
+      "id": "wf-12d523cbb2",
+      "name": "🌉 HandleMultimediaMessage",
+      "startNode": "nd-bf15d74ce6",
+      "variables": [
+        {
+          "id": "var-15903db76d",
+          "name": "excusingMessage",
+          "description": "Mensaje de disculpa por no poder leer mensajes multimedia",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        }
+      ],
+      "links": [
+        {
+          "id": "lnk-cffbd8885b",
+          "source": "nd-bf15d74ce6",
+          "target": "nd-18463ec851",
+          "sourcePort": "trs-a7a358f7a9"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "nd-bf15d74ce6",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-a7a358f7a9",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-18463ec851"
+              },
+              "transitions": [],
+              "nodeId": "nd-bf15d74ce6"
+            }
+          ],
+          "x": 100,
+          "y": 100
+        },
+        {
+          "id": "nd-65d39ec496",
+          "name": "Exit",
+          "type": "exit",
+          "variables": [],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-d1909dcbac",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-65d39ec496"
+            }
+          ],
+          "x": 825,
+          "y": 420
+        },
+        {
+          "id": "nd-18463ec851",
+          "name": "evaluateMultimediaMessage",
+          "type": "standard",
+          "deletable": true,
+          "instructions": [
+            {
+              "id": "ins-c655cfce0b",
+              "type": "action",
+              "category": "Execute",
+              "code": "// EVALUAR EL TIPO DE MENSAJE RECIBIDO\n\n// Mapa de identificadores de medios\nconst mediaTypes = {\n  AUDIO: \"(Audio)\",\n  IMAGE: \"(Image)\",\n  VIDEO: \"(Video)\",\n  FILE: \"(File)\",\n};\n\n// Determinar el tipo de mensaje recibido\nconst startMessageType = extractMessageType() || \"TEXT\";\n\nconsole.log(`🤖  workflow.startMessageType:`, startMessageType);\n\n// Mapa de advertencias\nconst advicesMap = {\n  AUDIO:\n    \"Discúlpame, por el momento no puedo escuchar audios. ¿Me podrías escribir por favor?\",\n  IMAGE:\n    \"Discúlpame, por el momento no puedo entender imágenes. ¿Me podrías escribir por favor?\",\n  VIDEO:\n    \"Discúlpame, por el momento no puedo ver videos. ¿Me podrías escribir por favor?\",\n  FILE: \"Discúlpame, por el momento no puedo recibir archivos. ¿Me podrías escribir por favor?\",\n};\n\n// Enviar mensaje de advertencia\nif (startMessageType !== \"TEXT\") {\n  if (startMessageType !== \"TEXT\") {\n    // @ts-ignore - Sabemos que startMessageType es una clave válida\n    workflow.excusingMessage = advicesMap[startMessageType] || \"\";\n  }\n}\n\nfunction extractMessageType(): string {\n  return Object.entries(mediaTypes).find(([key, value]) =>\n    event.preview.includes(value)\n  )?.[0] as string;\n}\n// Ejemplos de contenido recibido\n\n// {\"audioUrl\":\"https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=547813380919690&ext=1739940310&hash=ATsMDnTMW3zzmxkJtm23985cHfb_aAlf2xbppOZT8-LegA\"}\n// console.log(`🤖 Event payload: ${JSON.stringify(event.payload)}`)\n\n// (Audio) https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=547813380919690&ext=1739940310&hash=ATsMDnTMW3zzmxkJtm23985cHfb_aAlf2xbppOZT8-LegA\n// console.log(`🤖 Event preview: ${event.preview}`)",
+              "origin": "builtin",
+              "label": "Log Event Payload ",
+              "nodeId": "nd-18463ec851",
+              "isCustomLabel": true,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const mediaTypes = {\n    AUDIO: \"(Audio)\",\n    IMAGE: \"(Image)\",\n    VIDEO: \"(Video)\",\n    FILE: \"(File)\"\n  };\n  const startMessageType = extractMessageType() || \"TEXT\";\n  console.log(`\\u{1F916}  workflow.startMessageType:`, startMessageType);\n  const advicesMap = {\n    AUDIO: \"Disc\\xFAlpame, por el momento no puedo escuchar audios. \\xBFMe podr\\xEDas escribir por favor?\",\n    IMAGE: \"Disc\\xFAlpame, por el momento no puedo entender im\\xE1genes. \\xBFMe podr\\xEDas escribir por favor?\",\n    VIDEO: \"Disc\\xFAlpame, por el momento no puedo ver videos. \\xBFMe podr\\xEDas escribir por favor?\",\n    FILE: \"Disc\\xFAlpame, por el momento no puedo recibir archivos. \\xBFMe podr\\xEDas escribir por favor?\"\n  };\n  if (startMessageType !== \"TEXT\") {\n    if (startMessageType !== \"TEXT\") {\n      workflow.excusingMessage = advicesMap[startMessageType] || \"\";\n    }\n  }\n  function extractMessageType() {\n    return Object.entries(mediaTypes).find(\n      ([key, value]) => event.preview.includes(value)\n    )?.[0];\n  }\n  __name(extractMessageType, \"extractMessageType\");\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "id": "ins-9d72287d48",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!!workflow.excusingMessage}}"
+              },
+              "label": "Existe mensaje de disculpa",
+              "generative": {
+                "label": "Existe mensaje de disculpa",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-18463ec851",
+              "description": "",
+              "destination": {
+                "node": "nd-09a1f251ca"
+              },
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-65d39ec496"
+          },
+          "x": 450,
+          "y": 100
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 45,
+          "y": -150,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 32px\">Handle Multimedia Message</span></strong></p>",
+          "id": "nd-f9e441a53f",
+          "name": "Comment1",
+          "height": 173,
+          "width": 326,
+          "backgroundColor": "var(--jade-5)"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 810,
+          "y": 45,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-6083002869",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Mensaje de disculpa: {{workflow.excusingMessage}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-09a1f251ca",
+              "transitions": []
+            },
+            {
+              "id": "ins-fab64d7d1b",
+              "type": "content",
+              "content": {
+                "type": "text",
+                "text": {
+                  "valueType": "dynamic",
+                  "dynamicValue": "{{workflow.excusingMessage}}",
+                  "staticValue": ""
+                },
+                "typing": {
+                  "valueType": "static",
+                  "staticValue": true
+                }
+              },
+              "nodeId": "nd-09a1f251ca",
+              "transitions": []
+            },
+            {
+              "id": "ins-1f4b5311f6",
+              "type": "wait",
+              "label": "Wait for User Input",
+              "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
+              "nodeId": "nd-09a1f251ca",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-1b346aa54d"
+          },
+          "id": "nd-09a1f251ca",
+          "name": "sendExcusingMessage"
+        },
+        {
+          "type": "exit",
+          "deletable": true,
+          "x": 1215,
+          "y": 60,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-6765333e44",
+              "type": "transition",
+              "label": "",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "generative": {
+                "label": "",
+                "properties": {
+                  "label": true,
+                  "condition": true
+                },
+                "suggestion": {
+                  "label": "",
+                  "condition": "true"
+                }
+              },
+              "nodeId": "nd-1b346aa54d",
+              "transitions": []
+            }
+          ],
+          "id": "nd-1b346aa54d",
+          "name": "WaitForUserInput"
+        }
+      ],
+      "parentFolder": "dir-6400c2779c"
     }
   ],
   "intents": [
@@ -36129,28 +37230,21 @@
       "id": "version_01JRJD8FY84J036TAWW71KMX3T"
     }
   ],
-  "revision": 43868,
+  "revision": 44567,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-05-01T16:26:20.571Z",
-    "lastRevisionId": 42629,
+    "lastRevisionCheckAt": "2025-05-03T19:42:21.240Z",
+    "lastRevisionId": 44566,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-05-01T14:32:25.236Z: initialized -> connecting (ok)",
-      "2025-05-01T14:32:25.953Z (KsmMBIjk6k): connecting -> connected (ok)",
-      "2025-05-01T14:41:15.502Z (KsmMBIjk6k): connected -> disconnected (Websocket closed)",
-      "2025-05-01T14:41:15.503Z (KsmMBIjk6k): disconnected -> connecting (ok)",
-      "2025-05-01T14:41:15.801Z (KsmMBIjk6k): connecting -> connected (ok)",
-      "2025-05-01T16:26:14.009Z: connected -> closing (Connection closing)",
-      "2025-05-01T16:26:14.009Z: closing -> closed (Connection closed)",
-      "2025-05-01T16:26:14.009Z: initialized -> connecting (ok)",
-      "2025-05-01T16:26:14.457Z (50JWNztIto): connecting -> connected (ok)"
+      "2025-05-03T19:42:23.367Z: initialized -> connecting (ok)",
+      "2025-05-03T19:42:23.677Z (BOUlWUDoni): connecting -> connected (ok)"
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01JT646K5NE55JRQ69V13JNTD0 / Thu, 01 May 2025 16:26:14 GMT /  2025-05-01T16:26:16.003Z"
+      "jguzman@marxadigital.com / sess_01JTBTQKGXSE10D2Z63GDCF9G9 / Sat, 03 May 2025 19:42:23 GMT /  Sat, 03 May 2025 19:42:23 GMT"
     ],
-    "savedAt": "2025-05-01T16:26:20.571Z",
+    "savedAt": "2025-05-03T19:42:30.671Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01JT646K5NE55JRQ69V13JNTD0"
+    "sessionId": "sess_01JTBTQKGXSE10D2Z63GDCF9G9"
   },
   "identity": {
     "name": "asistente-lasmotos-dev",

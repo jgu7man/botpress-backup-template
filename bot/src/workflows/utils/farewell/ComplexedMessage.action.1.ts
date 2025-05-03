@@ -1,7 +1,7 @@
-import { user } from "@main";
+import { conversation } from "@main";
 // Node: ComplexedMessage - nd-a1e8237457
-// Set User Conversation Ending Status to 'COMPLEXED' - ins-7ff5728680
+// Set Conversation Status to 'COMPLEXED' Upon Ending - ins-7ff5728680
 
 // ------------------ EXECUTE CODE -------------------------
 
-user.conversationEnding = 'COMPLEXED'
+conversation.conversationEnding = 'COMPLEXED'

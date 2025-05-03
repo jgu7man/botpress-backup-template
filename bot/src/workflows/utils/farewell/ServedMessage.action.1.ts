@@ -1,7 +1,7 @@
-import { user } from "@main";
+import { conversation } from "@main";
 // Node: ServedMessage - nd-70e34c6505
-// Set User Conversation Status to "SERVED" Upon Ending - ins-2e6cc77476
+// Set Conversation Ending Status to 'SERVED' in User Object - ins-2e6cc77476
 
 // ------------------ EXECUTE CODE -------------------------
 
-user.conversationEnding = 'SERVED'
+conversation.conversationEnding = 'SERVED'

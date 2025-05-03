@@ -1,8 +1,8 @@
 import { bot } from "@main";
 // Node: Entry - nd-96a14bb62e
-// COMPLEXED - ins-ca963cbb79
+// ATTENDED - ins-706abcf343
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const insca963cbb79 = bot.irregularState === 'COMPLEXED';
-// Destination: nd-a1e8237457
+const ins706abcf343 = bot.irregularState === 'ATTENDED';
+// Destination: nd-43f0eb185b

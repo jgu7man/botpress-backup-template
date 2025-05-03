@@ -1,8 +1,8 @@
-import { bot, user } from "@main";
+import { bot, conversation } from "@main";
 // Node: Handler - nd-58fca56e01
-// "Manage User Input and Conversation State Handling" - ins-766af48f38
+// "Bot and User State Management for Conversation Handling" - ins-766af48f38
 
 // ------------------ EXECUTE CODE -------------------------
 
 bot.irregularState = 'WRONG'
-user.conversationEnding = 'WRONG'
+conversation.conversationEnding = 'WRONG'

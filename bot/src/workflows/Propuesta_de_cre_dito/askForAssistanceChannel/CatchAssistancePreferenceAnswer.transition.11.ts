@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins47fff54d44 = workflow.userAnswerContext === 'consulta';
-// Destination: [object Object]
+// Destination: nd-3bdb5a73f6

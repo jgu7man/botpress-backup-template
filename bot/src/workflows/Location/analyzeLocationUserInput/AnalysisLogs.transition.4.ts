@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins3e5d4dcd74 = !user.location;
-// Destination: [object Object]
+// Destination: nd-8065de6e4a

@@ -8,6 +8,12 @@ class GetPopAuthorizationState {
   skipFlowReason: string;
   /** Sin descripción */
   interpratedAnswer: string;
+  /** mainKnowledgeBase */
+  mainKnowledgeBase: any;
+  /** saveDataUser1 */
+  saveDataUser1: any;
+  /** incorrectInput1 */
+  incorrectInput1: any;
 }
 
 export const workflow = new GetPopAuthorizationState();

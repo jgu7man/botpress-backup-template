@@ -6,6 +6,16 @@ class AskForReportedStatusState {
   understandingAttempts: number;
   /** Sin descripción */
   userReportedQuestion: string;
+  /** saveDataUser */
+  saveDataUser: any;
+  /** saveDataUser */
+  saveDataUser: any;
+  /** evaluateConfirmation1 */
+  evaluateConfirmation1: any;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
 }
 
 export const workflow = new AskForReportedStatusState();

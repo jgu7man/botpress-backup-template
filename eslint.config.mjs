@@ -15,4 +15,9 @@ export default defineConfig([
       "@typescript-eslint/no-unused-vars": "off",
     }
   },
+  {
+    file: ["**/*.state.{ts,tsx}"], rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    }
+  }
 ]);

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insa73cc8860a = workflow.retrieveUserLocation.answerType === 'city and question';
-// Destination: [object Object]
+// Destination: nd-102b5f68b2

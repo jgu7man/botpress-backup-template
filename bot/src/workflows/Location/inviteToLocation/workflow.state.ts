@@ -4,6 +4,8 @@ class InviteToLocationState {
   serviceLocationAbout: string;
   /** Sin descripción */
   serviceLocationInfo: string;
+  /** retrieveServiceLocation1 */
+  retrieveServiceLocation1: any;
 }
 
 export const workflow = new InviteToLocationState();

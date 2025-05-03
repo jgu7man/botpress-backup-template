@@ -4,4 +4,4 @@
 // ------------------ TRANSITION CONDITION -------------------------
 
 const trs8584b0e95a = true;
-// Destination: [object Object]
+// Destination: #

@@ -16,6 +16,14 @@ class RequestInterestedMotoState {
   purchasePreference: unknown;
   /** Sin descripción */
   insistAttempts: number;
+  /** questionWithUserName1 */
+  questionWithUserName1: any;
+  /** MotoKnowledgeBase */
+  MotoKnowledgeBase: any;
+  /** askPurchasePreference1 */
+  askPurchasePreference1: any;
+  /** UnderstandUserInput2 */
+  UnderstandUserInput2: any;
 }
 
 export const workflow = new RequestInterestedMotoState();

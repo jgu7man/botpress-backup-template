@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insbd545167df = workflow.count !== workflow.total;
-// Destination: [object Object]
+// Destination: nd-30b53e2f30

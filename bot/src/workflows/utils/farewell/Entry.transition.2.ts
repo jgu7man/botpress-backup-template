@@ -5,4 +5,4 @@ import { bot } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins706abcf343 = bot.irregularState === 'ATTENDED';
-// Destination: [object Object]
+// Destination: nd-43f0eb185b

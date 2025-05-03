@@ -5,4 +5,4 @@ import { conversation } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins10c1d6e95a = !conversation.SummaryAgent.summary;
-// Destination: [object Object]
+// Destination: nd-766ed57e70

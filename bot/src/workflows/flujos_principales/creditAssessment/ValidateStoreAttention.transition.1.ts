@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insb365c0096a = user.assistanceMode === 'IN_STORE';
-// Destination: [object Object]
+// Destination: nd-adc42b4c83

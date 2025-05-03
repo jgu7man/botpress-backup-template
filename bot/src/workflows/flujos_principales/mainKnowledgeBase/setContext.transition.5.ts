@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insd90518c57f = workflow.typeContext == 'credito';
-// Destination: [object Object]
+// Destination: nd-32c7571aec

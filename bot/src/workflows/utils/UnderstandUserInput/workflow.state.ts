@@ -18,6 +18,8 @@ class UnderstandUserInputState {
   paraphrasedQuestion: string;
   /** Sin descripción */
   retryAttempts: number;
+  /** askToKnowledgeBase1 */
+  askToKnowledgeBase1: any;
 }
 
 export const workflow = new UnderstandUserInputState();

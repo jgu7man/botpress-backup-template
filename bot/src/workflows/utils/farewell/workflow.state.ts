@@ -8,6 +8,14 @@ class FarewellState {
   botState: string;
   /** Sin descripción */
   farewellMessage: string;
+  /** askForNationalId */
+  askForNationalId: any;
+  /** askForBillNumber */
+  askForBillNumber: any;
+  /** inviteToLocation */
+  inviteToLocation: any;
+  /** helpQuestion1 */
+  helpQuestion1: any;
 }
 
 export const workflow = new FarewellState();

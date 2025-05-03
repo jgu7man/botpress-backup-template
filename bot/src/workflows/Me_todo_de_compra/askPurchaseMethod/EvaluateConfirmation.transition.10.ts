@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins91e85ae2da = user.purchasePreference === 'CUPO_BRILLA';
-// Destination: [object Object]
+// Destination: nd-0468eb36be

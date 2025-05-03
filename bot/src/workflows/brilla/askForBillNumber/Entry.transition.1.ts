@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insa8406c0f6b = user.brillaBillNumber !== "";
-// Destination: [object Object]
+// Destination: nd-64593a19c2

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins015592a371 = workflow.transition == 'User has a question';
-// Destination: [object Object]
+// Destination: nd-2581524d76

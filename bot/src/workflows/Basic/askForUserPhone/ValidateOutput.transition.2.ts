@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insc20a7f70f8 = !user.phone;
-// Destination: [object Object]
+// Destination: nd-1812b43bad

@@ -26,6 +26,14 @@ class MotoKnowledgeBaseState {
   ownReference: string;
   /** Sin descripción */
   interpretedStyle: string;
+  /** motoSyleFlow1 */
+  motoSyleFlow1: any;
+  /** printMotoCard */
+  printMotoCard: any;
+  /** RetrieveMoto2 */
+  RetrieveMoto2: any;
+  /** RetrieveMoto3 */
+  RetrieveMoto3: any;
 }
 
 export const workflow = new MotoKnowledgeBaseState();

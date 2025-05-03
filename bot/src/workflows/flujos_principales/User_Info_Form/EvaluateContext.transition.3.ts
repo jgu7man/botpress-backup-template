@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins662f710530 = !workflow.isContextToContinue;
-// Destination: [object Object]
+// Destination: nd-e826a5b485

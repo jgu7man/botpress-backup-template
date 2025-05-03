@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insb0cb1021ac = user.purchasePreference === 'CREDIT';
-// Destination: [object Object]
+// Destination: nd-87048ee08d

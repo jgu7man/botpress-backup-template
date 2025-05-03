@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins190cf956f7 = user.negativeCreditReport === 'SÍ';
-// Destination: [object Object]
+// Destination: nd-000c9a583c

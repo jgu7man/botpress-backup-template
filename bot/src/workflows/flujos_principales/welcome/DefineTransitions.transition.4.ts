@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insf9a23fc866 = workflow.transition == 'User has been served';
-// Destination: [object Object]
+// Destination: nd-ed6692d686

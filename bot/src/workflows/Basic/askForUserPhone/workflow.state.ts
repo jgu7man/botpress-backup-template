@@ -16,6 +16,12 @@ class AskForUserPhoneState {
   attemptsToConfirm: number;
   /** Sin descripción */
   kbPhoneEvaluation: string;
+  /** evaluateConfirmation1 */
+  evaluateConfirmation1: any;
+  /** UnderstandUserInput */
+  UnderstandUserInput: any;
+  /** QuestionWithUserName */
+  QuestionWithUserName: any;
 }
 
 export const workflow = new AskForUserPhoneState();

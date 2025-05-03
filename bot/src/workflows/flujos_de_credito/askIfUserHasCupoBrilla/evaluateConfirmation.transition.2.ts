@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins76ea1fdda4 = workflow.understandingAttempts >= 2;
-// Destination: [object Object]
+// Destination: nd-e732116c1c

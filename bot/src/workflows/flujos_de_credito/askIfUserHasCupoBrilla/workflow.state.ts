@@ -10,6 +10,12 @@ class AskIfUserHasCupoBrillaState {
   confirmation: boolean;
   /** Sin descripción */
   understandingAttempts: number;
+  /** EvaluateConfirmation */
+  EvaluateConfirmation: any;
+  /** setCupoBrillaProfile */
+  setCupoBrillaProfile: any;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
 }
 
 export const workflow = new AskIfUserHasCupoBrillaState();

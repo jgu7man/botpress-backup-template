@@ -8,6 +8,12 @@ class CreditKnowledgeAnswerState {
   userQuestion: string;
   /** Sin descripción */
   conversationContext: string;
+  /** setConversationContext */
+  setConversationContext: any;
+  /** setCupoBrillaProfile */
+  setCupoBrillaProfile: any;
+  /** setConversationContext */
+  setConversationContext: any;
 }
 
 export const workflow = new CreditKnowledgeAnswerState();

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins3f5fc18604 = workflow.answerType == 'own_reference';
-// Destination: [object Object]
+// Destination: nd-9fb02e392a

@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insfe5ce54153 = !user.popAuthorized;
-// Destination: [object Object]
+// Destination: nd-3bff816f62

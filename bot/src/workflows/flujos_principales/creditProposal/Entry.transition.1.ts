@@ -5,4 +5,4 @@ import { bot } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insc72e442c5c = bot.conversationContext === 'ABOUT_CREDIT_INFO';
-// Destination: [object Object]
+// Destination: nd-4f89e45341

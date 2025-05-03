@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insc2319307b2 = (workflow.motoList || []).length < 1;
-// Destination: [object Object]
+// Destination: nd-5ff6e02679

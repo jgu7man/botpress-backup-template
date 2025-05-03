@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insf9d36f214a = user.purchasePreference === 'CASH';
-// Destination: [object Object]
+// Destination: nd-2b25d1b2d0

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins5603c1f7bf = workflow.answerType == 'competitor';
-// Destination: [object Object]
+// Destination: nd-dbf9e21563

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins7cd074f198 = !!workflow.waitForUserInput;
-// Destination: [object Object]
+// Destination: nd-82387a219d

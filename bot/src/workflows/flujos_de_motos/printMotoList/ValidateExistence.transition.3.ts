@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insb3894e2381 = !!user.interestedProduct;
-// Destination: [object Object]
+// Destination: nd-9e43ab8dd8

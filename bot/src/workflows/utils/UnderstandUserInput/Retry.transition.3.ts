@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const inse22003cbdd = workflow.retryAttempts >= 2;
-// Destination: [object Object]
+// Destination: nd-ed7af360bf

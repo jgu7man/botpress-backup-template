@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const inse2febc463a = workflow.conversationContext == 'ABOUT_CUPO_BRILLA';
-// Destination: [object Object]
+// Destination: nd-44b5c49b66

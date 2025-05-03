@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insd317eb49d8 = !!workflow.adviseMessage;
-// Destination: [object Object]
+// Destination: nd-7856aaf588

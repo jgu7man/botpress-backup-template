@@ -5,4 +5,4 @@ import { bot } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins3cc09a8da1 = !!bot.conversationContext;
-// Destination: [object Object]
+// Destination: nd-6ecdfb7c32

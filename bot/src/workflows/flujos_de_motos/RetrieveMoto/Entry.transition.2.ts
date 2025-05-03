@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins5f3f317781 = !workflow.referenceName;
-// Destination: [object Object]
+// Destination: nd-dc61773f7e

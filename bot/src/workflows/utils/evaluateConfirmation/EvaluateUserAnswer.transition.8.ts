@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins1bf4918408 = workflow.answerType.includes('question');
-// Destination: [object Object]
+// Destination: nd-78f25ab69c

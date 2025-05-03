@@ -10,10 +10,17 @@ export function generateStateFile(flow: Workflow, baseDir: string): void {
     `class ${className} {`,
   ];
 
+  const skillsInstructions = extractSkillsInstructions(flow);
+
   (flow.variables || []).forEach((v) => {
     lines.push(`  /** ${v.description || "Sin descripción"} */`);
     lines.push(`  ${v.name}: ${mapType(v.type)};`);
   });
+  skillsInstructions.forEach((skill) => {
+    lines.push(`  /** ${skill} */`);
+    lines.push(`  ${skill}: any;`);
+  });
+
   lines.push(`}`);
   lines.push(``, `export const workflow = new ${className}();`);
 
@@ -39,4 +46,18 @@ function mapType(type: string): string {
     default:
       return "unknown";
   }
+}
+
+function extractSkillsInstructions(flow: Workflow) {
+  const skillsInstructions: string[] = [];
+  const nodes = flow.nodes.filter((node) => node.type === "standard");
+  nodes.forEach((node) => {
+    const instructions = node.instructions.filter(
+      (instruction) => instruction.type === "skill"
+    );
+    instructions.forEach((instruction) => {
+      skillsInstructions.push(instruction.name);
+    });
+  });
+  return skillsInstructions;
 }

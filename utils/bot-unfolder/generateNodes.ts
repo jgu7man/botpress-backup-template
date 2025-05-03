@@ -11,6 +11,7 @@ import {
   NodeType,
   StandardNode,
   StartNode,
+  TransitionInstruction,
 } from "../types/bot/Workflow";
 import { closeUnclosedCodeBlocks } from "./codeBlocksValidation";
 import { sanitizeName } from "./folderUtils";
@@ -36,35 +37,42 @@ export function generateNodeFiles(nodes: Node[], targetDir: string): void {
         }
         // Transition
         if (instruction.type === "transition") {
-          const condition = instruction.condition?.payload.replace(
-            /{{(.*?)}}/g,
-            (match, p1) => {
-              return `${p1.trim()}`;
-            }
-          );
-          const transitionName = instruction.id.replace("-", "");
-          const code = `const ${transitionName} = ${condition};`;
-          const separatorLabel = "TRANSITION CONDITION";
-
-          const lines: string[] = generateImportStatements(
-            code,
-            node,
-            separatorLabel,
-            instruction
-          );
-
-          lines.push(code.trim());
-          lines.push(`// Destination: ${instruction.destination.node}`);
-
-          const filePath = path.join(
-            targetDir,
-            `${safeName}.transition.${idx + 1}.ts`
-          );
-          const trueLines = lines.filter((line) => line.trim() !== ""); // Remove empty lines
-          fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
+          createTransitionFile(instruction, node, targetDir, safeName, idx);
         }
       });
     });
+}
+
+function createTransitionFile(
+  instruction: TransitionInstruction,
+  node: EntryNode | StandardNode | EndNode | StartNode,
+  targetDir: string,
+  safeName: string,
+  idx: number
+) {
+  const condition = instruction.condition?.payload.replace(
+    /{{(.*?)}}/g,
+    (match, p1) => {
+      return `${p1.trim()}`;
+    }
+  );
+  const transitionName = instruction.id.replace("-", "");
+  const code = `const ${transitionName} = ${condition};`;
+  const separatorLabel = "TRANSITION CONDITION";
+
+  const lines: string[] = generateImportStatements(
+    code,
+    node,
+    separatorLabel,
+    instruction
+  );
+
+  lines.push(code.trim());
+  lines.push(`// Destination: ${instruction.destination.node}`);
+
+  const filePath = path.join(targetDir, `${safeName}.transition.${idx + 1}.ts`);
+  const trueLines = lines.filter((line) => line.trim() !== ""); // Remove empty lines
+  fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
 }
 
 function generateContentFile(

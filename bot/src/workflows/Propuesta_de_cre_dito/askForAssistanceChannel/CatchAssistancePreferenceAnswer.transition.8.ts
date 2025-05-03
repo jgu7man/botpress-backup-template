@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins3bfe25bb6a = workflow.userAnswerContext === 'linea';
-// Destination: [object Object]
+// Destination: nd-296255ca0e

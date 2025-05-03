@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins7897c36ae5 = workflow.allowAnswer === false;
-// Destination: [object Object]
+// Destination: nd-ed7af360bf

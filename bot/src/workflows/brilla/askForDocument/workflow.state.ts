@@ -12,6 +12,8 @@ class AskForDocumentState {
   requestDocumentQuestion: string;
   /** Sin descripción */
   expectedData: string;
+  /** UnderstandUserInput1 */
+  UnderstandUserInput1: any;
 }
 
 export const workflow = new AskForDocumentState();

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins4f818b8452 = workflow.confirmationType === 'ACCEPTED';
-// Destination: [object Object]
+// Destination: nd-4ee2d978c5

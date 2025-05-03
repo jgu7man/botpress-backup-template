@@ -10,6 +10,8 @@ class AskForUserNameState {
   pleasentriesMessage: string;
   /** Sin descripción */
   skipFlowReason: string;
+  /** mainKnowledgeBase */
+  mainKnowledgeBase: any;
 }
 
 export const workflow = new AskForUserNameState();

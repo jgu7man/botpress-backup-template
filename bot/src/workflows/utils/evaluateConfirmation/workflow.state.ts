@@ -16,6 +16,16 @@ class EvaluateConfirmationState {
   confirmationType: unknown;
   /** Sin descripción */
   answerType: string;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
+  /** askToKnowledgeBase1 */
+  askToKnowledgeBase1: any;
+  /** UnderstandUserInput */
+  UnderstandUserInput: any;
+  /** farewell1 */
+  farewell1: any;
+  /** farewell2 */
+  farewell2: any;
 }
 
 export const workflow = new EvaluateConfirmationState();

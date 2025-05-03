@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins5f2f8198ca = workflow.interestStatus === 'unknown';
-// Destination: [object Object]
+// Destination: nd-33d5ec26bc

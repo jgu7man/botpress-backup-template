@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insd14b4f6f95 = !user.phoneInvalid;
-// Destination: [object Object]
+// Destination: nd-443f88d0fb

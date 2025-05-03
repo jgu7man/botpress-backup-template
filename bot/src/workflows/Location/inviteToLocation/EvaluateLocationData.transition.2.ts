@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins7beb46501d = !!user.outOfServiceRange;
-// Destination: [object Object]
+// Destination: nd-1b3e8c71d7

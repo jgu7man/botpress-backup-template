@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const inse1cf2839cb = workflow.retry === false;
-// Destination: [object Object]
+// Destination: nd-ed7af360bf

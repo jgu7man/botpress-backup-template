@@ -5,4 +5,4 @@ import { bot } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insca963cbb79 = bot.irregularState === 'COMPLEXED';
-// Destination: [object Object]
+// Destination: nd-a1e8237457

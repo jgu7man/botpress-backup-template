@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins15e39c4a7e = workflow.captureMotoAttempts >= 2;
-// Destination: [object Object]
+// Destination: nd-68129672cd

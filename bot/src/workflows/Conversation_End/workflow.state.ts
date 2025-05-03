@@ -6,6 +6,8 @@ class Conversation_EndState {
   botState: string;
   /** Sin descripción */
   colombiaTime: string;
+  /** saveUserData1 */
+  saveUserData1: any;
 }
 
 export const workflow = new Conversation_EndState();

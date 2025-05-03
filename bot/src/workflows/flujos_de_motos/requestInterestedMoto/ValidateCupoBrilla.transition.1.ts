@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins92915693cb = user.creditProfile !== 'CUPO_BRILLA';
-// Destination: [object Object]
+// Destination: nd-26ff7f3362

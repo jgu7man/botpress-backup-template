@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins2003e63168 = !workflow.locationInput;
-// Destination: [object Object]
+// Destination: nd-f2c61feb5f

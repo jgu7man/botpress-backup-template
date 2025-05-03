@@ -20,6 +20,8 @@ class PrintMotoListState {
   kbKnowledgeResponse: string;
   /** Sin descripción */
   resultMessage: string;
+  /** mainKnowledgeBase1 */
+  mainKnowledgeBase1: any;
 }
 
 export const workflow = new PrintMotoListState();

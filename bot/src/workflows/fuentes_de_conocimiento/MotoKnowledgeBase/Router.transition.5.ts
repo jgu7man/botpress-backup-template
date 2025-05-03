@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins94d8948b05 = workflow.answerType === 'style' || workflow.answerType === 'general_motorcycles';
-// Destination: [object Object]
+// Destination: nd-a4e664e4f2

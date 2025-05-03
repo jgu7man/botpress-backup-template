@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insb0c36ca5c4 = user.askedBefore && user.popAuthorized === false;
-// Destination: [object Object]
+// Destination: nd-9b169fec48

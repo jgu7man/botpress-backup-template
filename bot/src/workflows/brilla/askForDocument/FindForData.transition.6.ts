@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insd526f43a2a = !!workflow.expectedData;
-// Destination: [object Object]
+// Destination: nd-03c6775596

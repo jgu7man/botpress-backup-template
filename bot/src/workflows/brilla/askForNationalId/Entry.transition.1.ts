@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insdfd8195063 = user.nationalID!=="";
-// Destination: [object Object]
+// Destination: nd-e50006e44f

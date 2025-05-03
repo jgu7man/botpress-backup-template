@@ -5,4 +5,4 @@ import { user } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins4b31c07e2c = user.jobContractType === 'FORMAL';
-// Destination: [object Object]
+// Destination: nd-a3bd076727

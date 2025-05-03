@@ -5,4 +5,4 @@ import { bot } from "@main";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insf2cf551fbc = bot.irregularState === 'CONFUSED';
-// Destination: [object Object]
+// Destination: nd-6aecf8eea2

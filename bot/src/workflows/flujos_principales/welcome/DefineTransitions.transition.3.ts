@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insa387ee6471 = workflow.transition == 'Just greet';
-// Destination: [object Object]
+// Destination: nd-34a5ae8619

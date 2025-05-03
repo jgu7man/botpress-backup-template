@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins2f9d1de93c = workflow.conversationContext == 'ABOUT_CREDIT_INFO';
-// Destination: [object Object]
+// Destination: nd-b7864c249e

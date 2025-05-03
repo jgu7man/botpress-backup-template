@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins6aa85ddee5 = workflow.typeContext == 'moto';
-// Destination: [object Object]
+// Destination: nd-f76c8a8ad5

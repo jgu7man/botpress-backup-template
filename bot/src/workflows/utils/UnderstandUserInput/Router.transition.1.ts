@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins3fa676ee45 = workflow.context === 'pending';
-// Destination: [object Object]
+// Destination: nd-2c641f3f72

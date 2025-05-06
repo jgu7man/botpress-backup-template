@@ -18,6 +18,7 @@ export default defineConfig([
   {
     file: ["**/*.state.{ts,tsx}"], rules: {
       "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/await-thenable": "off"
     }
   }
 ]);

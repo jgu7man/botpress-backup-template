@@ -1,6 +1,6 @@
 Input:
 ```
-Interpretación de base de conocimiento:  @workflow.kbUnderstanding
+Interpretación de base de conocimiento:  {{bot.kbIntentInterpretation}}
 Lo que el usuario dijo: {{event.preview}}
 Resumen de conversación: {{conversation.SummaryAgent.summary}}
 ```
@@ -64,7 +64,6 @@ The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /**  */
-"context": string
+  
 }
 ```

@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins75d505b759 = !!workflow.interpretedInput;
-// Destination: nd-0d14dc6eba
+// Destination: undefined

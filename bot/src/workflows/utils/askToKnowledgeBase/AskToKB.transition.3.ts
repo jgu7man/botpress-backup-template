@@ -4,5 +4,5 @@ import { workflow } from "./workflow.state";
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins3616bdaf06 = !workflow.kbUnderstanding;
+const ins3616bdaf06 = !workflow.kbAnswer;
 // Destination: nd-30f649eb25

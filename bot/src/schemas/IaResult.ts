@@ -9,9 +9,11 @@ import { z } from "zod";
 export interface IaResult {
   valueType: string;
   dynamicValue: string;
+  staticValue: string;
 }
 
 export const IaResultSchema = z.object({
-  valueType: z.string(),
-  dynamicValue: z.string(),
+    valueType: z.string(),
+    dynamicValue: z.string(),
+    staticValue: z.string(),
 })

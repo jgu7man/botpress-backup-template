@@ -1,8 +1,6 @@
 // Workflow: 🧠 UnderstandUserInput - wf-cabe199fc6
 class UnderstandUserInputState {
   /** Sin descripción */
-  kbUnderstanding: string;
-  /** Sin descripción */
   context: string;
   /** Sin descripción */
   correctedUserInput: string;

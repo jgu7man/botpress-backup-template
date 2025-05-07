@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
-// Node: Router - nd-d7e5b1b879
-// Cliente pregunta - ins-1c8a22c390
+// Node: ROUTER - nd-d7e5b1b879
+// Cliente solicita atención humana - ins-75fcd53631
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins1c8a22c390 = workflow.context === 'incoherent';
-// Destination: nd-690becc848
+const ins75fcd53631 = workflow.context === 'human_requested';
+// Destination: nd-c5740d3ebf

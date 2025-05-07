@@ -3,11 +3,11 @@ class AskToKnowledgeBaseState {
   /** Sin descripción */
   interpretedInput: string;
   /** Sin descripción */
-  kbUnderstanding: string;
-  /** Sin descripción */
   answerMessage: string;
   /** Sin descripción */
   context: string;
+  /** Respuesta dada por la base de conocimientos */
+  kbAnswer: string;
   /** setCupoBrillaProfile */
   setCupoBrillaProfile: any;
 }

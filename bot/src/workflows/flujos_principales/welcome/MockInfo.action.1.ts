@@ -6,5 +6,5 @@ import { user } from "@main";
 
 user.fullName="jorge"
 user.phone="31112121121"
-user.askedBefore=true
+user.authorizedPop.askedBefore=true
 user.serviceLocation='SANTA MARTA'

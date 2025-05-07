@@ -3,18 +3,22 @@ import { SensitiveData } from "../schemas/SensitiveData";
 
 export class conversationVariables {
   /**
-   * [var-8d66e81332]
-   * @description The sensitive data to save on Lead_Clients_Table
-   */
-  sensitiveData?: SensitiveData;
+  * [var-8d66e81332]
+  * @description The sensitive data to save on Lead_Clients_Table 
+  */
+  sensitiveData: SensitiveData;
   /** [var-68a8c7281f] */
-  nonSensitiveData?: NonSensitiveData;
+  nonSensitiveData: NonSensitiveData;
   /** [var-b1e8b342fd] */
-  retryAttempts?: number;
+  retryAttempts: number;
   /**
-   * [var-354a3c444f]
-   * @description La categorización de la finalización de la conversación. Puede ser:  'COMPLEXED',  'WRONG', 'SERVED', 'TIMEDOUT'
-   */
-  conversationEnding?: string;
-  lastQuestionMade?: string;
+  * [var-354a3c444f]
+  * @description La categorización de la finalización de la conversación. Puede ser:  'COMPLEXED',  'WRONG', 'SERVED', 'TIMEDOUT' 
+  */
+  conversationEnding: string;
+  /**
+  * [var-55f85cc88f]
+  * @description Temas que se han manejado en la conversación 
+  */
+  topics: string[];
 }

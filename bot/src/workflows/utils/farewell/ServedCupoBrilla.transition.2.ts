@@ -4,5 +4,5 @@ import { user } from "@main";
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const insb0c36ca5c4 = user.askedBefore && user.popAuthorized === false;
+const insb0c36ca5c4 = user.authorizedPop?.askedBefore && user.authorizedPop?.answer === 'REJECTED';
 // Destination: nd-9b169fec48

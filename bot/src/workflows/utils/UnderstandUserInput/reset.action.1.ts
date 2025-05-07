@@ -1,5 +1,5 @@
 import { conversation } from "@main";
-// Node: resetAttempts - nd-784ac93234
+// Node: reset - nd-784ac93234
 // Resetting Conversation Retry Attempts to Zero - ins-1e5579675f
 
 // ------------------ EXECUTE CODE -------------------------

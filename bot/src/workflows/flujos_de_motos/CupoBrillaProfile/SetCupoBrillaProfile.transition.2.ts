@@ -5,4 +5,4 @@ import { workflow } from "./workflow.state";
 // ------------------ TRANSITION CONDITION -------------------------
 
 const ins3af70afd1a = !workflow.isInterestedProduct;
-// Destination: nd-b28e6179e2
+// Destination: nd-dcc6b9eebe

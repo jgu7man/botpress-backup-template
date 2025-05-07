@@ -1,8 +1,8 @@
-import { bot } from "@main";
+import { user } from "@main";
 // Node: Entry - nd-96a14bb62e
-// ATTENDED - ins-706abcf343
+// Es Cupo Brilla - ins-c881e664f4
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins706abcf343 = bot.irregularState === 'ATTENDED';
-// Destination: nd-43f0eb185b
+const insc881e664f4 = user.creditProfile === 'CUPO_BRILLA';
+// Destination: nd-7f9ec10eb1

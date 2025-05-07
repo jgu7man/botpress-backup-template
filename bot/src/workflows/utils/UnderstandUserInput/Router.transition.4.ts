@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
-// Node: Router - nd-d7e5b1b879
-// Rechazo a contestar - ins-fab8c6ecd7
+// Node: ROUTER - nd-d7e5b1b879
+// Cliente responde - ins-30f886ccec
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const insfab8c6ecd7 = workflow.context === 'refused';
-// Destination: nd-307bbb1f1e
+const ins30f886ccec = workflow.context === 'consistent';
+// Destination: nd-5e6b741a46

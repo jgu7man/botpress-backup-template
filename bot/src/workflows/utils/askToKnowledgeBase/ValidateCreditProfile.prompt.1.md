@@ -14,7 +14,6 @@ The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /**  */
-"context": string
+  
 }
 ```

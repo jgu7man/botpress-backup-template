@@ -1,14 +1,22 @@
 import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: GetAnswerContext_Node - nd-073eee7ef5
-// Update user and workflow answer types with dynamic values. - ins-042d119543
+// "Update User and Workflow Properties Based on Conditions" - ins-042d119543
 
 // ------------------ EXECUTE CODE -------------------------
 
-if(user.popAuthorized['staticValue']) {
-    user.popAuthorized = user.popAuthorized['staticValue']
+const authorizedPop: any = user.authorizedPop;
+console.log(`🤖 authorizedPop:`, authorizedPop);
+
+if (authorizedPop?.['staticValue']) {
+    user.authorizedPop.answer = authorizedPop?.[ 'staticValue' ];
+    console.log(`🤖 user.authorizedPop.answer :`, user.authorizedPop.answer );
 }
 
-if (workflow.answerType['dynamicValue']) {
-    workflow.answerType = workflow.answerType['dynamicValue']
+const answerType: any = workflow.answerType;
+console.log(`🤖 answerType:`, answerType);
+
+if (answerType['dynamicValue']) {
+    workflow.answerType = answerType[ 'dynamicValue' ]
+    console.log(`🤖 workflow.answerType :`, workflow.answerType );
 }

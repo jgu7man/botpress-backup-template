@@ -1,8 +1,8 @@
 import { bot } from "@main";
 // Node: Entry - nd-96a14bb62e
-// CONFUSED - ins-6d73507721
+// ATTENTION_REQUESTED - ins-3dfacb306c
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins6d73507721 = bot.irregularState === 'CONFUSED';
-// Destination: nd-ffb8d29668
+const ins3dfacb306c = bot.irregularState === 'ATTENTION_REQUESTED';
+// Destination: nd-a1e8237457

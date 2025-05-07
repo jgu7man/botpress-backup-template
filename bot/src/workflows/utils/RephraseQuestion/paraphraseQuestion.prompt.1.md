@@ -20,12 +20,14 @@ Considerando el siguiente resumen de la conversación:
 5. **El objetivo es confirmar que has entendido correctamente la necesidad del cliente.**
 
 Tu respuesta debe ser únicamente la paráfrasis de la última pregunta.
+
+Asigna el resultado a la variable @bot.lastQuestionMade
 --
 The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /** La última pregunta que se le hizo al cliente parafraseada */
-"paraphrasedQuestion": string
+  /** La última pregunta que se le hizo al cliente */
+"lastQuestionMade": string
 }
 ```

@@ -4,7 +4,7 @@
   "description": "Botpress coder workspace to manage bot programming",
   "main": "index.js",
   "scripts": {
-    "unfold-bot": "ts-node ./utils/bot-unfolder/main.ts",
+    "unfold-bot": "rm -rf bot/src && ts-node ./utils/bot-unfolder/main.ts",
     "extract": "rm -rf ./bot/unzipped && 7z x -o./bot/unzipped/ ",
     "compress": "rm -rf ./exports/$ENV/assistant-$ENV.bpz && 7z a -tzip -mx=9 ./exports/$ENV/assistant-$ENV.bpz ./bots/$ENV/*",
     "compress:dev": "ENV=dev && npm run compress",

@@ -42,18 +42,20 @@ export function generateVariablesClasses(
         const schemaName = getSchemaNameById(schemas, variable.schemaId || "");
         if (schemaName) {
           addSchemaImport(schemaName);
-          scopeVariableLines.push(`  ${name}?: ${schemaName};`);
+          scopeVariableLines.push(`  ${name}: ${schemaName};`);
           continue;
         }
-      } else if (type === "array" && variable.arrayType === "schema") {
-        const schemaName = getSchemaNameById(schemas, variable.schemaId || "");
-        if (schemaName) {
-          addSchemaImport(schemaName);
-          scopeVariableLines.push(`  ${name}?: ${schemaName}[];`);
-          continue;
-        }
+      } else if (type === "array") {
+        const schemaName =
+          variable.arrayType === "schema"
+            ? getSchemaNameById(schemas, variable.schemaId || "")
+            : (variable.arrayType as string);
+
+        addSchemaImport(schemaName);
+        scopeVariableLines.push(`  ${name}: ${schemaName}[];`);
+        continue;
       } else {
-        scopeVariableLines.push(`  ${name}?: ${type};`);
+        scopeVariableLines.push(`  ${name}: ${type};`);
       }
     }
 

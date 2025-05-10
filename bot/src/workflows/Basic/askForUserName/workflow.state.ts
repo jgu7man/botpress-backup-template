@@ -12,6 +12,8 @@ class AskForUserNameState {
   skipFlowReason: string;
   /** mainKnowledgeBase */
   mainKnowledgeBase: any;
+  /** UnderstandUserInput1 */
+  UnderstandUserInput1: any;
 }
 
 export const workflow = new AskForUserNameState();

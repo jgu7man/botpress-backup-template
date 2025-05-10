@@ -1,5 +1,5 @@
 import { user } from "@main";
-// Node: ConfirmNumber - nd-0c6b6b4b4b
+// Node: validateNumber - nd-0c6b6b4b4b
 // Phone is valid - ins-d14b4f6f95
 
 // ------------------ TRANSITION CONDITION -------------------------

@@ -1,5 +1,5 @@
 import { workflow } from "./workflow.state";
-// Node: QuestionAndConfirmed - nd-ad2d521b2b
+// Node: EvaluateUserAnswer - nd-503fb90194
 // ACEPTÓ - ins-4f818b8452
 
 // ------------------ TRANSITION CONDITION -------------------------

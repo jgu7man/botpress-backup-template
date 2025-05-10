@@ -1,8 +1,7 @@
-import { user } from "@main";
 // Node: Entry - nd-74c4629a3b
-// Ya es cupo brilla - ins-dcfcc05444
+// undefined - trs-b54a65b07a
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const insdcfcc05444 = user.creditProfile === 'CUPO_BRILLA';
-// Destination: nd-974a5ca6ce
+const trsb54a65b07a = true;
+// Destination: nd-7992eecf06

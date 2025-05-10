@@ -15,7 +15,8 @@ Eres un asistente experto en motocicletas. Analiza la respuesta del la búsqueda
 
 IMPORTANTE: 
 - Evita duplicaciones basado en la referencia
-- Si la respuesta de la búsqyeda está vacía, designa el valor de {{workflow.motoList}} como array vacío.
+- Si la respuesta de la búsqueda está vacía, designa el valor de {{workflow.motoList}} como array vacío.
+- Limita el array a 5 items
 
 --
 The following is the typescript interface I need as output of the task:

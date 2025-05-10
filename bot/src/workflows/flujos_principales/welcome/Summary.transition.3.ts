@@ -1,5 +1,5 @@
 import { conversation } from "@main";
-// Node: MessageTypEvaluation - nd-539b678293
+// Node: Summary - nd-b2cf6450f5
 // Conversación nueva - ins-10c1d6e95a
 
 // ------------------ TRANSITION CONDITION -------------------------

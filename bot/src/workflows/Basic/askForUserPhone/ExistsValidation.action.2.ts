@@ -1,7 +1,7 @@
 import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: ExistsValidation - nd-ef7b11568b
-// "Determine User's Phone Status and Authorization Response" - ins-f74da0894d
+// "Determine User Phone Status and Authorization Response" - ins-f74da0894d
 
 // ------------------ EXECUTE CODE -------------------------
 
@@ -24,4 +24,9 @@ if (user.phone) {
 } else {
   // En cualquier otro caso, no hay razón para saltar el flujo
   workflow.skipFlowReason = '';
+}
+
+
+if(workflow.answerType) {
+    workflow.answerType = ''
 }

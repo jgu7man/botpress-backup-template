@@ -30,6 +30,8 @@ class UnderstandUserInputState {
   farewell4: any;
   /** DataExtractor1 */
   DataExtractor1: any;
+  /** ❔mainKnowledgeBase */
+  ❔mainKnowledgeBase: any;
 }
 
 export const workflow = new UnderstandUserInputState();

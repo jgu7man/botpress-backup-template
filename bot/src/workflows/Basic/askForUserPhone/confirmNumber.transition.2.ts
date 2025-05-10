@@ -1,5 +1,5 @@
 import { workflow } from "./workflow.state";
-// Node: ConfirmNumber - nd-0c6b6b4b4b
+// Node: confirmNumber - nd-98ac3e0a7b
 // Attempts to confirm over - ins-cb2b203b4d
 
 // ------------------ TRANSITION CONDITION -------------------------

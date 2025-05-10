@@ -18,8 +18,6 @@ class EvaluateConfirmationState {
   answerType: string;
   /** 💾 saveUserData */
   💾 saveUserData: any;
-  /** askToKnowledgeBase1 */
-  askToKnowledgeBase1: any;
   /** UnderstandUserInput */
   UnderstandUserInput: any;
   /** farewell1 */

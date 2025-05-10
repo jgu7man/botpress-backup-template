@@ -1,11 +1,11 @@
-import { bot, user } from "@main";
+import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: Entry - nd-e6f6d5a549
 // "Skip Workflow Based on User Location Status" - ins-4740601cfa
 
 // ------------------ EXECUTE CODE -------------------------
 
-const askedBefore = !!bot.conversationActions.find((action) => action.key == 'ASK_USER_LOCATION')
+const askedBefore = !!user.location
 
 // Verifica si el usuario está fuera del rango de servicio
 if (user.outOfServiceRange) {

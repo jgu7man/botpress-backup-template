@@ -43,7 +43,7 @@ The following is the typescript interface I need as output of the task:
 ```typescript
 interface Output = {
   /** Información de que el cliente autorizó o rechazó el guardado de sus datos. */
-"authorizedPop": { answer: "ACCEPTED" | "REJECTED"; askedBefore: boolean }
+"authorizedPop": { answer?: "ACCEPTED" | "REJECTED" | ""; askedBefore?: boolean }
 /**  */
 "answerType": string
 }

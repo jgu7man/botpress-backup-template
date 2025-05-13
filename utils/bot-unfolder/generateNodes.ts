@@ -154,6 +154,7 @@ function generateImportStatements(
     code.includes("user.") ? "user" : "",
     code.includes("event.") ? "event" : "",
     code.includes("conversation.") ? "conversation" : "",
+    code.includes("turn.") ? "turn" : "",
   ].filter((importName) => importName !== "");
 
   const lines: string[] = [

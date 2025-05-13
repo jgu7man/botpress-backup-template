@@ -1,13 +1,13 @@
 import fs from "fs";
 import path from "path";
-import { generateImportStatements } from "utils/helpers/generateImportStatements";
+import { generateImportStatements } from "../helpers";
 import {
   ActionInstruction,
   EndNode,
   EntryNode,
   StandardNode,
   StartNode,
-} from "utils/types/bot/Workflow";
+} from "../types/bot/Workflow";
 
 export function generateActionFile(
   instruction: ActionInstruction,

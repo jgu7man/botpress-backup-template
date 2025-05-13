@@ -1,22 +1,14 @@
 import fs from "fs";
 import path from "path";
-import { generateImportStatements } from "utils/helpers/generateImportStatements";
-import { toBackticksValues } from "utils/helpers/manageExpressions";
-import {
-  CardContent,
-  ContentInstruction,
-  EndNode,
-  EntryNode,
-  StandardNode,
-  StartNode,
-} from "utils/types/bot/Workflow";
+import { generateImportStatements, toBackticksValues } from "../helpers";
+import { CardContent, ContentInstruction, Node } from "../types/bot/Workflow";
 
 export function generateContentFile(
   targetDir: string,
   safeName: string,
   idx: number,
   instruction: ContentInstruction,
-  node: EntryNode | StandardNode | EndNode | StartNode
+  node: Node
 ) {
   const { type } = instruction.content;
   const content: string[] = [];

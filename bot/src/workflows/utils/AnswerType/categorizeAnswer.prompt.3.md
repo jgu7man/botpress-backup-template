@@ -1,3 +1,7 @@
+# categorizeAnswer
+<!-- Instruction: answerType -->
+
+
 Input:
 ```
 Explicación de la respuesta: {{workflow.answerExplanation}}

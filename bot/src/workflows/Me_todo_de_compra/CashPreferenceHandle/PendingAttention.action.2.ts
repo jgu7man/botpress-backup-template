@@ -1,7 +1,7 @@
-import { user } from "@main";
+import { conversation } from "@main";
 // Node: PendingAttention - nd-87981a6ade
-// Set User Conversation Status to Call Attention Pending - ins-eeec62013a
+// Manage Conversation Status for Attention Requests - ins-eeec62013a
 
 // ------------------ EXECUTE CODE -------------------------
 
-user.conversationStatus = "CALL_ATTENTION_PENDING"
+conversation.status = "CALL_ATTENTION_PENDING"

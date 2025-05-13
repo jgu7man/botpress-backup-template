@@ -1,3 +1,7 @@
+# ProvideUniqOption
+<!-- Instruction: resultMessage -->
+
+
 Input:
 ```
 Moto de interés: @workflow.interpretedStyle  

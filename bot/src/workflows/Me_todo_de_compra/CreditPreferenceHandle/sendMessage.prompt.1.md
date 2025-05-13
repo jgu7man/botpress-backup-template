@@ -1,3 +1,7 @@
+# sendMessage
+<!-- Instruction: purchaseMethodInfoMessage -->
+
+
 Input:
 ```
 `@workflow.purchaseMethodInfo`: {{workflow.purchaseMethodInfo}}

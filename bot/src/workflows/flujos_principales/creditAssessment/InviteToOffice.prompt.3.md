@@ -1,3 +1,7 @@
+# InviteToOffice
+<!-- Instruction: serviceLocationInfo -->
+
+
 Input:
 ```
 store location info:  @workflow.serviceLocationAbout 

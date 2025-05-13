@@ -1,3 +1,7 @@
+# extractDataNode
+<!-- Instruction: expectedData, phone, location, fullName, assistanceMode, nationalID, brillaBillNumber, interestedProduct, purchasePreference, jobContractType, negativeCreditReport, authorizedPop -->
+
+
 Input:
 ```
 Resumen de conversación: {{conversation.SummaryAgent.summary}};

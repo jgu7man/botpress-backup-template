@@ -1,3 +1,7 @@
+# WelcomeMessage
+<!-- Instruction: fullName, welcomeMessage -->
+
+
 Input:
 ```
 Colombia time: {{workflow.colombiaTime}};

@@ -1,8 +1,8 @@
-import { user } from "@main";
+import { user, conversation } from "@main";
 // Node: ReportedQuestion - nd-ad61a2e49e
-// Enable online user assistance mode and start pre-evaluation conversation. - ins-3b264ecffb
+// "Activate Online Assistance and Start Pre-Evaluation Conversation" - ins-3b264ecffb
 
 // ------------------ EXECUTE CODE -------------------------
 
-user.assistanceMode="ON_LINE"
-user.conversationStatus="PRE_EVALUATION_START"
+user.assistanceMode = "ON_LINE"
+conversation.status = "PRE_EVALUATION_START"

@@ -57,11 +57,6 @@ export class userVariables {
   /** [var-1b5209edbb] */
   negativeCreditReport: string;
   /**
-  * [var-372b1dc48c]
-  * @description variable que controla cuando se debe contactar al usuario 
-  */
-  conversationStatus: string;
-  /**
   * [var-2946efe2f3]
   * @description Información de que el cliente autorizó o rechazó el guardado de sus datos. 
   */

@@ -1,3 +1,7 @@
+# notifyPriceChange
+<!-- Instruction: alertMessage -->
+
+
 Input:
 ```
 moto: {{user.interestedProduct}}

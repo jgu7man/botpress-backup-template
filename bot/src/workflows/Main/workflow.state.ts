@@ -18,8 +18,6 @@ class MainState {
   welcome1: any;
   /** farewell1 */
   farewell1: any;
-  /** askForNationalId1 */
-  askForNationalId1: any;
 }
 
 export const workflow = new MainState();

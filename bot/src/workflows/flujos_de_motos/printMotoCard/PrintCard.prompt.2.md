@@ -1,3 +1,7 @@
+# PrintCard
+<!-- Instruction: title, formattedPrice -->
+
+
 Input:
 ```
 Nombre de la moto: {{workflow.title}}

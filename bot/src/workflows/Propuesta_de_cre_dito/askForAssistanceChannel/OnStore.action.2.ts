@@ -1,8 +1,8 @@
-import { user } from "@main";
+import { user, conversation } from "@main";
 // Node: OnStore - nd-76690f3c69
-// "Set User Assistance Mode and Conversation Status" - ins-d456ef93f5
+// "Set User Assistance Mode to In-Store for Attention" - ins-d456ef93f5
 
 // ------------------ EXECUTE CODE -------------------------
 
 user.assistanceMode = 'IN_STORE'
-user.conversationStatus = "PENDING_ATTENTION"
+conversation.status = "STORE_ATTENTION"

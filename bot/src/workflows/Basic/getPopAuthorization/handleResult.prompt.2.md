@@ -1,3 +1,7 @@
+# handleResult
+<!-- Instruction: popThanksMessage -->
+
+
 Input:
 ```
 Confirmación: {{user.authorizedPop}}

@@ -21,7 +21,7 @@ conversation.nonSensitiveData = {
   RESUMEN: user.description,
   PRODUCTO_DE_INTERES: user.interestedProduct?.reference,
   UBICACION_DE_SERVICIO: user.serviceLocation,
-  ESTATUS: user.conversationStatus,
+  ESTATUS: conversation.status,
   ASISTENCIA: user.assistanceMode,
   ROL_DE_CLIENTE: user.clientRole,
   PERFIL_CREDITICIO: user.creditProfile,

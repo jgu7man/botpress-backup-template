@@ -4,5 +4,4 @@ import { user } from "@main";
 
 // ------------------ EXECUTE CODE -------------------------
 
-user.conversationStatus = 'BANCO_BOGOTA_ATTENTION'
 user.creditProfile = 'BANCO_BOGOTA'

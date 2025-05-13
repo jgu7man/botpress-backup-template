@@ -1,3 +1,7 @@
+# SearchStyledMoto
+<!-- Instruction: interpretedStyle -->
+
+
 Input:
 ```
 User Input: {{event.preview}} 

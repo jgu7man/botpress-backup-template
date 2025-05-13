@@ -230,16 +230,6 @@
         "storeAsTag": false
       },
       {
-        "defaultValue": "BOT_ATTENTION",
-        "type": "string",
-        "name": "conversationStatus",
-        "description": "variable que controla cuando se debe contactar al usuario",
-        "id": "var-372b1dc48c",
-        "scope": "user",
-        "secret": false,
-        "storeAsTag": false
-      },
-      {
         "id": "var-2946efe2f3",
         "name": "authorizedPop",
         "description": "Información de que el cliente autorizó o rechazó el guardado de sus datos.",
@@ -296,6 +286,16 @@
         "scope": "conversation",
         "storeAsTag": false,
         "arrayType": "string"
+      },
+      {
+        "defaultValue": "BOT_ATTENTION",
+        "type": "string",
+        "name": "status",
+        "description": "variable que controla cuando se debe contactar al usuario",
+        "id": "var-372b1dc48c",
+        "scope": "conversation",
+        "secret": false,
+        "storeAsTag": false
       }
     ]
   },
@@ -791,7 +791,7 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-4be58bd5f8"
+                "node": "nd-db4e37e320"
               },
               "transitions": [],
               "nodeId": "nd-2bb9db230d"
@@ -920,9 +920,9 @@
               ],
               "transitions": [
                 {
-                  "id": "trs-b775d51d24",
+                  "id": "trs-585f49c793",
                   "type": "transition",
-                  "label": "Exit",
+                  "label": "CONTINUAR",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-1b5f64341e"
@@ -931,19 +931,19 @@
                     "node": "nd-80bb43ff39"
                   },
                   "generative": {
-                    "label": "Exit",
+                    "label": "CONTINUAR",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "Exit",
+                      "label": "CONTINUAR",
                       "condition": "lastNode=nd-1b5f64341e"
                     }
                   }
                 },
                 {
-                  "id": "trs-aa7297262d",
+                  "id": "trs-a6e6e0b57f",
                   "type": "transition",
                   "label": "cupo_brilla",
                   "condition": {
@@ -1066,8 +1066,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -1110,
-          "y": -1065,
+          "x": -1095,
+          "y": -1050,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">PREGUNTAS FRECUENTES</span></strong></p>",
           "id": "nd-7dc5f0c0d5",
@@ -1389,49 +1389,6 @@
             }
           ],
           "id": "nd-e1289efd7f"
-        },
-        {
-          "name": "askForNationalId1",
-          "type": "standard",
-          "deletable": true,
-          "x": -1710,
-          "y": -1515,
-          "instructions": [
-            {
-              "id": "ins-da0f0f3dc7",
-              "type": "skill",
-              "name": "askForNationalId1",
-              "flowId": "wf-ebd6a89332",
-              "exitNodes": [
-                "nd-91ad343167"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-ee7369c6c9",
-                  "type": "transition",
-                  "label": "Exit",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-91ad343167"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Exit",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Exit",
-                      "condition": "lastNode=nd-91ad343167"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-4be58bd5f8"
-            }
-          ],
-          "id": "nd-4be58bd5f8"
         }
       ],
       "parentFolder": "root"
@@ -3135,12 +3092,12 @@
               "id": "ins-648c840c43",
               "type": "action",
               "category": "Execute",
-              "code": "const phone = user.phone\r\nconst { conversationId = '' } = event\r\nconsole.log(`💾 saving conversationId:`, conversationId)\r\n\r\nconversation.sensitiveData = {\r\n  TELEFONO: phone,\r\n  NOMBRE: user.fullName,\r\n  UBICACION_DEL_USUARIO: user.location,\r\n  CEDULA: user.nationalID,\r\n  NUMERO_DE_FACTURA: user.brillaBillNumber,\r\n  TIPO_DE_CONTRATO: user.jobContractType\r\n}\r\n\r\nconversation.nonSensitiveData = {\r\n  RESUMEN: user.description,\r\n  PRODUCTO_DE_INTERES: user.interestedProduct?.reference,\r\n  UBICACION_DE_SERVICIO: user.serviceLocation,\r\n  ESTATUS: user.conversationStatus,\r\n  ASISTENCIA: user.assistanceMode,\r\n  ROL_DE_CLIENTE: user.clientRole,\r\n  PERFIL_CREDITICIO: user.creditProfile,\r\n  REPORTADO: user.negativeCreditReport ? 'Si' : 'No',\r\n  PREFERENCIA_DE_COMPRA: user.purchasePreference,\r\n  CONCLUSION: conversation.conversationEnding\r\n}\r\n\r\nlet rowData: {\r\n  CONVERSATION_ID: string\r\n  [key: string]: string\r\n} = {\r\n  CONVERSATION_ID: conversationId,\r\n  ...(user.authorizedPop?.answer === 'ACCEPTED'\r\n    ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData }\r\n    : { ...conversation.nonSensitiveData })\r\n}\r\n\r\nconsole.log(`🤖 Saving rowData:`, rowData)\r\n\r\ntry {\r\n  const existingRecord = await leadClientsTable.findRecords({\r\n    filter: { TELEFONO: phone }\r\n  })\r\n  console.log(`🤖 existingRecord:`, existingRecord)\r\n\r\n  if (existingRecord.length > 0) {\r\n    console.log(`✅ Updating record with id: ${existingRecord[0].id}`)\r\n    const recordId = existingRecord[0].id\r\n    await leadClientsTable.updateRecord(recordId, rowData)\r\n  } else {\r\n    console.log(`🔅 Creating new record`)\r\n    await leadClientsTable.createRecord(rowData)\r\n  }\r\n} catch (error) {\r\n  console.error('❌ Error saving data:', error)\r\n}\r\n",
+              "code": "const phone = user.phone\r\nconst { conversationId = '' } = event\r\nconsole.log(`💾 saving conversationId:`, conversationId)\r\n\r\nconversation.sensitiveData = {\r\n  TELEFONO: phone,\r\n  NOMBRE: user.fullName,\r\n  UBICACION_DEL_USUARIO: user.location,\r\n  CEDULA: user.nationalID,\r\n  NUMERO_DE_FACTURA: user.brillaBillNumber,\r\n  TIPO_DE_CONTRATO: user.jobContractType\r\n}\r\n\r\nconversation.nonSensitiveData = {\r\n  RESUMEN: user.description,\r\n  PRODUCTO_DE_INTERES: user.interestedProduct?.reference,\r\n  UBICACION_DE_SERVICIO: user.serviceLocation,\r\n  ESTATUS: conversation.status,\r\n  ASISTENCIA: user.assistanceMode,\r\n  ROL_DE_CLIENTE: user.clientRole,\r\n  PERFIL_CREDITICIO: user.creditProfile,\r\n  REPORTADO: user.negativeCreditReport ? 'Si' : 'No',\r\n  PREFERENCIA_DE_COMPRA: user.purchasePreference,\r\n  CONCLUSION: conversation.conversationEnding\r\n}\r\n\r\nlet rowData: {\r\n  CONVERSATION_ID: string\r\n  [key: string]: string\r\n} = {\r\n  CONVERSATION_ID: conversationId,\r\n  ...(user.authorizedPop?.answer === 'ACCEPTED'\r\n    ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData }\r\n    : { ...conversation.nonSensitiveData })\r\n}\r\n\r\nconsole.log(`🤖 Saving rowData:`, rowData)\r\n\r\ntry {\r\n  const existingRecord = await leadClientsTable.findRecords({\r\n    filter: { TELEFONO: phone }\r\n  })\r\n  console.log(`🤖 existingRecord:`, existingRecord)\r\n\r\n  if (existingRecord.length > 0) {\r\n    console.log(`✅ Updating record with id: ${existingRecord[0].id}`)\r\n    const recordId = existingRecord[0].id\r\n    await leadClientsTable.updateRecord(recordId, rowData)\r\n  } else {\r\n    console.log(`🔅 Creating new record`)\r\n    await leadClientsTable.createRecord(rowData)\r\n  }\r\n} catch (error) {\r\n  console.error('❌ Error saving data:', error)\r\n}\r\n",
               "origin": "builtin",
               "nodeId": "nd-bb06b713d9",
               "label": "\"Save and Update User Conversation Data in Database\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const phone = user.phone;\n  const { conversationId = \"\" } = event;\n  console.log(`\\u{1F4BE} saving conversationId:`, conversationId);\n  conversation.sensitiveData = {\n    TELEFONO: phone,\n    NOMBRE: user.fullName,\n    UBICACION_DEL_USUARIO: user.location,\n    CEDULA: user.nationalID,\n    NUMERO_DE_FACTURA: user.brillaBillNumber,\n    TIPO_DE_CONTRATO: user.jobContractType\n  };\n  conversation.nonSensitiveData = {\n    RESUMEN: user.description,\n    PRODUCTO_DE_INTERES: user.interestedProduct?.reference,\n    UBICACION_DE_SERVICIO: user.serviceLocation,\n    ESTATUS: user.conversationStatus,\n    ASISTENCIA: user.assistanceMode,\n    ROL_DE_CLIENTE: user.clientRole,\n    PERFIL_CREDITICIO: user.creditProfile,\n    REPORTADO: user.negativeCreditReport ? \"Si\" : \"No\",\n    PREFERENCIA_DE_COMPRA: user.purchasePreference,\n    CONCLUSION: conversation.conversationEnding\n  };\n  let rowData = {\n    CONVERSATION_ID: conversationId,\n    ...user.authorizedPop?.answer === \"ACCEPTED\" ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData } : { ...conversation.nonSensitiveData }\n  };\n  console.log(`\\u{1F916} Saving rowData:`, rowData);\n  try {\n    const existingRecord = await leadClientsTable.findRecords({\n      filter: { TELEFONO: phone }\n    });\n    console.log(`\\u{1F916} existingRecord:`, existingRecord);\n    if (existingRecord.length > 0) {\n      console.log(`\\u2705 Updating record with id: ${existingRecord[0].id}`);\n      const recordId = existingRecord[0].id;\n      await leadClientsTable.updateRecord(recordId, rowData);\n    } else {\n      console.log(`\\u{1F505} Creating new record`);\n      await leadClientsTable.createRecord(rowData);\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error saving data:\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const phone = user.phone;\n  const { conversationId = \"\" } = event;\n  console.log(`\\u{1F4BE} saving conversationId:`, conversationId);\n  conversation.sensitiveData = {\n    TELEFONO: phone,\n    NOMBRE: user.fullName,\n    UBICACION_DEL_USUARIO: user.location,\n    CEDULA: user.nationalID,\n    NUMERO_DE_FACTURA: user.brillaBillNumber,\n    TIPO_DE_CONTRATO: user.jobContractType\n  };\n  conversation.nonSensitiveData = {\n    RESUMEN: user.description,\n    PRODUCTO_DE_INTERES: user.interestedProduct?.reference,\n    UBICACION_DE_SERVICIO: user.serviceLocation,\n    ESTATUS: conversation.status,\n    ASISTENCIA: user.assistanceMode,\n    ROL_DE_CLIENTE: user.clientRole,\n    PERFIL_CREDITICIO: user.creditProfile,\n    REPORTADO: user.negativeCreditReport ? \"Si\" : \"No\",\n    PREFERENCIA_DE_COMPRA: user.purchasePreference,\n    CONCLUSION: conversation.conversationEnding\n  };\n  let rowData = {\n    CONVERSATION_ID: conversationId,\n    ...user.authorizedPop?.answer === \"ACCEPTED\" ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData } : { ...conversation.nonSensitiveData }\n  };\n  console.log(`\\u{1F916} Saving rowData:`, rowData);\n  try {\n    const existingRecord = await leadClientsTable.findRecords({\n      filter: { TELEFONO: phone }\n    });\n    console.log(`\\u{1F916} existingRecord:`, existingRecord);\n    if (existingRecord.length > 0) {\n      console.log(`\\u2705 Updating record with id: ${existingRecord[0].id}`);\n      const recordId = existingRecord[0].id;\n      await leadClientsTable.updateRecord(recordId, rowData);\n    } else {\n      console.log(`\\u{1F505} Creating new record`);\n      await leadClientsTable.createRecord(rowData);\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error saving data:\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -6082,28 +6039,6 @@
               "transitions": []
             },
             {
-              "id": "ins-e6097fe885",
-              "type": "action",
-              "category": "Execute",
-              "code": "user.conversationStatus = \"CREDIT_INTERESTED\"",
-              "origin": "builtin",
-              "nodeId": "nd-62e16905f0",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"CREDIT_INTERESTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "Set User Conversation Status to Credit Interested",
-              "isCustomLabel": false,
-              "transitions": []
-            },
-            {
-              "id": "ins-268c8da6ac",
-              "type": "skill",
-              "name": "saveDataUser",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "nodeId": "nd-62e16905f0",
-              "manualFields": []
-            },
-            {
               "id": "ins-9ca60e0fce",
               "category": "Send Messages",
               "type": "content",
@@ -6299,6 +6234,105 @@
                   }
                 }
               ]
+            },
+            {
+              "type": "log",
+              "id": "ins-4d45db1063",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Credit Interested Answer: {{event.preview}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-4073f5c709",
+              "transitions": []
+            },
+            {
+              "id": "ins-c4c1e64a2c",
+              "type": "skill",
+              "name": "GetConfirmation",
+              "flowId": "wf-3e02a49614",
+              "exitNodes": [
+                "nd-0b93ddef9b"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-abbd131db1",
+                  "type": "transition",
+                  "label": "UNSUCESS",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-0b93ddef9b"
+                  },
+                  "destination": {
+                    "node": "nd-20733523a2"
+                  },
+                  "generative": {
+                    "label": "UNSUCESS",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "UNSUCESS",
+                      "condition": "lastNode=nd-0b93ddef9b"
+                    }
+                  }
+                }
+              ],
+              "category": "Flow Logic",
+              "nodeId": "nd-4073f5c709",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-0e66ca5c99",
+                  "name": "userInput",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ins-e6097fe885",
+              "type": "action",
+              "category": "Execute",
+              "code": "workflow.creditInterestedAnswer = workflow.GetConfirmation.confirmationType\n\n// Verificar si está interesado en que se le hable de crédito\nif (workflow.creditInterestedAnswer === 'ACCEPTED') {\n  // Establecer el estado de la conversación según el tipo de confirmación\n  conversation.status = 'CREDIT_INTERESTED'\n}\n",
+              "origin": "builtin",
+              "nodeId": "nd-4073f5c709",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.creditInterestedAnswer = workflow.GetConfirmation.confirmationType;\n  if (workflow.creditInterestedAnswer === \"ACCEPTED\") {\n    conversation.status = \"CREDIT_INTERESTED\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "label": "Set Conversation Status Based on Credit Interest Confirmation",
+              "isCustomLabel": false,
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-0eee8aad5c",
+              "label": "Log",
+              "level": "info",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Conversation Status: {{ conversation.status }}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-4073f5c709"
+            },
+            {
+              "id": "ins-268c8da6ac",
+              "type": "skill",
+              "name": "saveDataUser",
+              "flowId": "wf-21d68eedc5",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-4073f5c709",
+              "manualFields": []
             }
           ],
           "defaultTransition": {
@@ -6314,19 +6348,6 @@
           "x": 30,
           "y": -120,
           "instructions": [
-            {
-              "type": "log",
-              "id": "ins-4d45db1063",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Credit Interested Answer: {{event.preview}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-748c42cbce",
-              "transitions": []
-            },
             {
               "id": "ins-7c1e9dd7d1",
               "type": "transition",
@@ -6538,7 +6559,7 @@
           "type": "comment",
           "deletable": true,
           "x": -435,
-          "y": 195,
+          "y": 180,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Realizar pregunta de interés en el crédito</span></strong></p>",
           "id": "nd-aeba2254e0",
@@ -6638,6 +6659,71 @@
           },
           "id": "nd-d205c8a3c9",
           "name": "Skip"
+        },
+        {
+          "name": "getAnswerType",
+          "type": "standard",
+          "deletable": true,
+          "x": 30,
+          "y": 300,
+          "instructions": [
+            {
+              "id": "ins-afaacde7ba",
+              "type": "skill",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-20fb14943e"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-ff25db3f55",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-4073f5c709"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-20733523a2",
+              "manualFields": []
+            },
+            {
+              "id": "ins-81319264e3",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.creditInterestedAnswer == 'ACCEPTED'}}"
+              },
+              "label": "Acepta que se le hable de crédito",
+              "generative": {
+                "label": "Acepta que se le hable de crédito",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-20733523a2",
+              "description": ""
+            }
+          ],
+          "id": "nd-20733523a2"
         }
       ],
       "parentFolder": "dir-6f096a3adf"
@@ -6836,12 +6922,12 @@
               "id": "ins-a547c41a3e",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus=\"PENDING_ATTENTION\"",
+              "code": "conversation.status = \"STORE_ATTENTION\"",
               "origin": "builtin",
-              "label": "Update user conversation status to pending attention.",
+              "label": "Set Conversation Status to Pending Attention",
               "nodeId": "nd-adc42b4c83",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"PENDING_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"STORE_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -7081,13 +7167,13 @@
               "id": "ins-011caa888f",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus = 'CREDIORBE_ATTENTION'\r\nuser.creditProfile = 'CREDIORBE'\r\n",
+              "code": "user.creditProfile = 'CREDIORBE'\r\n",
               "origin": "builtin",
               "nodeId": "nd-0107c4c77d",
               "transitions": [],
-              "label": "\"Set User Conversation Status and Credit Profile\"",
+              "label": "Update User Status and Credit Profile in Conversation System",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"CREDIORBE_ATTENTION\";\n  user.creditProfile = \"CREDIORBE\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"CREDIORBE\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             },
             {
               "id": "ins-a7305aa904",
@@ -7114,6 +7200,18 @@
                   }
                 }
               ]
+            },
+            {
+              "id": "ins-8f20803566",
+              "type": "action",
+              "category": "Execute",
+              "code": "conversation.status = 'CREDIORBE_ATTENTION'\r\n\r\n",
+              "origin": "builtin",
+              "nodeId": "nd-0107c4c77d",
+              "transitions": [],
+              "label": "Update User Status and Credit Profile in Conversation System",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"CREDIORBE_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             }
           ],
           "defaultTransition": {
@@ -7145,13 +7243,13 @@
               "id": "ins-a9f44c65e3",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus = 'BANCO_BOGOTA_ATTENTION'\r\nuser.creditProfile = 'BANCO_BOGOTA'\r\n",
+              "code": "user.creditProfile = 'BANCO_BOGOTA'\r\n",
               "origin": "builtin",
               "nodeId": "nd-aacf4b3211",
               "transitions": [],
               "label": "Set User Conversation Status and Credit Profile for Banco Bogotá",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"BANCO_BOGOTA_ATTENTION\";\n  user.creditProfile = \"BANCO_BOGOTA\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"BANCO_BOGOTA\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             },
             {
               "id": "ins-ae573880be",
@@ -7178,6 +7276,18 @@
                   }
                 }
               ]
+            },
+            {
+              "id": "ins-e61fa4b9ef",
+              "type": "action",
+              "category": "Execute",
+              "code": "conversation.status = 'BANCO_BOGOTA_ATTENTION'\r\n",
+              "origin": "builtin",
+              "nodeId": "nd-aacf4b3211",
+              "transitions": [],
+              "label": "\"Manage Conversation Status for Banco Bogota Attention\"",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"BANCO_BOGOTA_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             }
           ],
           "defaultTransition": {
@@ -7516,10 +7626,10 @@
               "id": "ins-ce9ea9252f",
               "type": "action",
               "category": "Execute",
-              "code": "user.assistanceMode = \"ON_LINE\"\r\nuser.conversationStatus = \"PRE_EVALUATION_START\"",
+              "code": "user.assistanceMode = \"ON_LINE\"\r\nconversation.status = \"PRE_EVALUATION_START\"",
               "origin": "builtin",
               "nodeId": "nd-9a2838d85a",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  user.conversationStatus = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  conversation.status = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "label": "\"Activate Online Assistance and Begin Pre-Evaluation Process\"",
               "isCustomLabel": false,
               "transitions": []
@@ -7953,7 +8063,7 @@
         },
         {
           "id": "nd-1b5f64341e",
-          "name": "Exit",
+          "name": "CONTINUAR",
           "type": "exit",
           "variables": [],
           "deletable": false,
@@ -11522,12 +11632,12 @@
               "id": "ins-83287b9e30",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus = 'CREDIT_INTERESTED'",
+              "code": "conversation.status = 'CREDIT_INTERESTED'",
               "origin": "builtin",
-              "label": "Set User Conversation Status to Credit Interested",
+              "label": "Update Conversation Status to Credit Interested",
               "nodeId": "nd-e6e68f4ba5",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"CREDIT_INTERESTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"CREDIT_INTERESTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -25987,11 +26097,11 @@
               "id": "ins-d456ef93f5",
               "type": "action",
               "category": "Execute",
-              "code": "user.assistanceMode = 'IN_STORE'\r\nuser.conversationStatus = \"PENDING_ATTENTION\"",
+              "code": "user.assistanceMode = 'IN_STORE'\r\nconversation.status = \"STORE_ATTENTION\"",
               "origin": "builtin",
               "nodeId": "nd-76690f3c69",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"IN_STORE\";\n  user.conversationStatus = \"PENDING_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "\"Set User Assistance Mode and Conversation Status\"",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"IN_STORE\";\n  conversation.status = \"STORE_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "label": "\"Set User Assistance Mode to In-Store for Attention\"",
               "isCustomLabel": false,
               "transitions": []
             },
@@ -26046,11 +26156,11 @@
               "id": "ins-ae33b6fac3",
               "type": "action",
               "category": "Execute",
-              "code": "user.assistanceMode = \"ON_LINE\"\r\nuser.conversationStatus = \"PRE_EVALUATION_START\"",
+              "code": "user.assistanceMode = \"ON_LINE\"\r\nconversation.status = \"PRE_EVALUATION_START\"",
               "origin": "builtin",
               "nodeId": "nd-296255ca0e",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  user.conversationStatus = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "\"Activate Online Assistance and Begin Pre-Evaluation Process\"",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  conversation.status = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "label": "\"Activate Online Assistance for Pre-Evaluation Conversations\"",
               "isCustomLabel": false,
               "transitions": []
             },
@@ -26094,11 +26204,11 @@
               "id": "ins-330b4602d0",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus = \"ATTENTION_REJECTED\"",
+              "code": "conversation.status = \"ATTENTION_REJECTED\"",
               "origin": "builtin",
               "nodeId": "nd-09714d4d0e",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"ATTENTION_REJECTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "Set User Conversation Status to Attention Rejected",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"ATTENTION_REJECTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "label": "Set Conversation Status to Attention Rejected",
               "isCustomLabel": false,
               "transitions": []
             },
@@ -26436,8 +26546,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 210,
-          "y": -150,
+          "x": 45,
+          "y": -270,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">Propuesta de crédito</span></strong></p><pre><code>creditProposal</code></pre>",
           "id": "nd-8f263c0001",
@@ -26558,11 +26668,11 @@
               "id": "ins-3b264ecffb",
               "type": "action",
               "category": "Execute",
-              "code": "user.assistanceMode=\"ON_LINE\"\r\nuser.conversationStatus=\"PRE_EVALUATION_START\"",
+              "code": "user.assistanceMode = \"ON_LINE\"\r\nconversation.status = \"PRE_EVALUATION_START\"",
               "origin": "builtin",
               "nodeId": "nd-ad61a2e49e",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  user.conversationStatus = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "Enable online user assistance mode and start pre-evaluation conversation.",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  conversation.status = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "label": "\"Activate Online Assistance and Start Pre-Evaluation Conversation\"",
               "isCustomLabel": false,
               "transitions": []
             },
@@ -30032,12 +30142,12 @@
               "id": "ins-eeec62013a",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus = \"CALL_ATTENTION_PENDING\"",
+              "code": "conversation.status = \"CALL_ATTENTION_PENDING\"",
               "origin": "builtin",
               "nodeId": "nd-87981a6ade",
-              "label": "Set User Conversation Status to Call Attention Pending",
+              "label": "Manage Conversation Status for Attention Requests",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"CALL_ATTENTION_PENDING\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"CALL_ATTENTION_PENDING\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -30070,12 +30180,12 @@
               "id": "ins-844bc9c433",
               "type": "action",
               "category": "Execute",
-              "code": "user.conversationStatus=\"ATTENTION_REJECTED\"",
+              "code": "conversation.status = \"ATTENTION_REJECTED\"",
               "origin": "builtin",
               "nodeId": "nd-2d3b086dcd",
-              "label": "Set user conversation status to \"attention pending\"",
+              "label": "\"Manage Conversation Status for Rejected Attention Cases\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.conversationStatus = \"ATTENTION_REJECTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"ATTENTION_REJECTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -31483,7 +31593,7 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 780,
+          "x": 765,
           "y": 375,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Saltar manejo de dato</span></strong></p>",
@@ -31604,7 +31714,7 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-80cf5f7acb"
+                "node": "nd-2b3da1255b"
               },
               "transitions": [],
               "nodeId": "nd-b727749050",
@@ -31708,7 +31818,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-f1366d2aef"
+            "targetNodeId": "nd-b84d919168"
           },
           "id": "nd-c15626e931",
           "name": "Acknowledgements"
@@ -31765,78 +31875,69 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-f1366d2aef"
+            "targetNodeId": "nd-b84d919168"
           },
           "id": "nd-b09f31e505",
           "name": "Reassurance"
         },
         {
-          "name": "MainKnowledgeBase",
-          "type": "standard",
-          "deletable": true,
-          "x": 840,
-          "y": 690,
-          "instructions": [
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-cc0935bb88",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Context Changed: {{workflow.AskForNationalId1.userInput}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-adb1ad9ae5",
-              "transitions": []
-            },
-            {
-              "id": "ins-e244486a9d",
-              "type": "skill",
-              "name": "mainKnowledgeBase1",
-              "flowId": "wf-8a77b12b87",
-              "exitNodes": [
-                "nd-54302a2e21"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-d9921c7b8b",
-                  "type": "transition",
-                  "label": "Continue",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-54302a2e21"
-                  },
-                  "destination": {
-                    "node": "nd-f1366d2aef"
-                  },
-                  "generative": {
-                    "label": "Continue",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Continue",
-                      "condition": "lastNode=nd-54302a2e21"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-adb1ad9ae5",
-              "manualFields": []
-            }
-          ],
-          "id": "nd-adb1ad9ae5"
-        },
-        {
-          "name": "AskForDocument",
+          "name": "retrieveDocument",
           "type": "standard",
           "deletable": true,
           "x": 405,
           "y": -120,
           "instructions": [
+            {
+              "id": "ins-587bcc8d1d",
+              "type": "skill",
+              "name": "QuestionWithUserName1",
+              "flowId": "wf-9d5e1848de",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-2b3da1255b",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-db2f30c8bf",
+                  "name": "question",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "¿Me puede proporcionar el número de contrato de su factura de gas?",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-81cc728a15",
+                  "name": "additionalConsiderations",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5b7f702b3f",
+                  "name": "waitForUserInput",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "staticValue": false,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
+            },
             {
               "id": "ins-c6d6138976",
               "type": "action",
@@ -31855,35 +31956,11 @@
               "name": "AskForNationalId1",
               "flowId": "wf-fc7cc8cc98",
               "exitNodes": [
-                "nd-3622891b2e",
                 "nd-03c6775596",
                 "nd-4bf2d508cd",
-                "nd-d678baf7dd"
+                "nd-3622891b2e"
               ],
               "transitions": [
-                {
-                  "id": "trs-51048035d2",
-                  "type": "transition",
-                  "label": "Skipped",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-3622891b2e"
-                  },
-                  "destination": {
-                    "node": "nd-64593a19c2"
-                  },
-                  "generative": {
-                    "label": "Skipped",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Skipped",
-                      "condition": "lastNode=nd-3622891b2e"
-                    }
-                  }
-                },
                 {
                   "id": "trs-be187ffc7d",
                   "type": "transition",
@@ -31931,25 +32008,25 @@
                   }
                 },
                 {
-                  "id": "trs-1a9403291c",
+                  "id": "trs-eb7fc8c35d",
                   "type": "transition",
-                  "label": "ChangedContext",
+                  "label": "Skipped",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-d678baf7dd"
+                    "payload": "lastNode=nd-3622891b2e"
                   },
                   "destination": {
-                    "node": "nd-adb1ad9ae5"
+                    "node": "nd-19d03a88f7"
                   },
                   "generative": {
-                    "label": "ChangedContext",
+                    "label": "Skipped",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "ChangedContext",
-                      "condition": "lastNode=nd-d678baf7dd"
+                      "label": "Skipped",
+                      "condition": "lastNode=nd-3622891b2e"
                     }
                   }
                 }
@@ -32002,93 +32079,6 @@
           },
           "id": "nd-64593a19c2",
           "name": "Skipped"
-        },
-        {
-          "name": "MadeQuestion",
-          "type": "standard",
-          "deletable": true,
-          "x": 30,
-          "y": -120,
-          "instructions": [
-            {
-              "id": "ins-587bcc8d1d",
-              "type": "skill",
-              "name": "QuestionWithUserName1",
-              "flowId": "wf-9d5e1848de",
-              "exitNodes": [
-                "nd-09447a4e34"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-334bf53e39",
-                  "type": "transition",
-                  "label": "Success",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-09447a4e34"
-                  },
-                  "destination": {
-                    "node": "nd-2b3da1255b"
-                  },
-                  "generative": {
-                    "label": "Success",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Success",
-                      "condition": "lastNode=nd-09447a4e34"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-80cf5f7acb",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-db2f30c8bf",
-                  "name": "question",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "value": {
-                    "valueType": "dynamic",
-                    "dynamicValue": "¿Me puede proporcionar el número de contrato de su factura de gas?",
-                    "staticValue": ""
-                  }
-                },
-                {
-                  "id": "var-81cc728a15",
-                  "name": "additionalConsiderations",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "value": {
-                    "staticValue": "",
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-5b7f702b3f",
-                  "name": "waitForUserInput",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-80cf5f7acb"
         },
         {
           "type": "comment",
@@ -32167,19 +32157,80 @@
           }
         },
         {
-          "type": "comment",
+          "type": "standard",
           "deletable": true,
-          "x": 825,
-          "y": 525,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 32px\">Si el cliente cambia el contexto</span></strong></p>",
-          "id": "nd-e6a4dddeb4",
-          "name": "Comment6",
-          "height": 163,
-          "width": 356,
+          "x": 1470,
+          "y": 150,
+          "instructions": [
+            {
+              "id": "ins-bad72ea591",
+              "type": "skill",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-b84d919168",
+              "manualFields": []
+            },
+            {
+              "id": "ins-c7f577cbe9",
+              "type": "action",
+              "category": "Execute",
+              "code": "bot.retryAttempts = 0",
+              "origin": "builtin",
+              "label": "\"Automated Workflow Management System for Task Coordination\"",
+              "nodeId": "nd-b84d919168",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.retryAttempts = 0;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-0dd7706b6a",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Intentos actualizados: {{bot.retryAttempts}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-b84d919168",
+              "transitions": []
+            }
+          ],
           "defaultTransition": {
-            "targetNodeId": null
-          }
+            "targetNodeId": "nd-f1366d2aef"
+          },
+          "id": "nd-b84d919168",
+          "name": "getAnswerType"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 810,
+          "y": 690,
+          "instructions": [
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-dce2977ba8",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Catch data skipped",
+                "staticValue": ""
+              },
+              "nodeId": "nd-19d03a88f7",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-b84d919168"
+          },
+          "id": "nd-19d03a88f7",
+          "name": "handleSkipping"
         }
       ],
       "parentFolder": "dir-538e41137b"
@@ -39821,27 +39872,27 @@
       "id": "version_01JRJD8FY84J036TAWW71KMX3T"
     }
   ],
-  "revision": 48952,
+  "revision": 49065,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-05-12T14:31:51.092Z",
-    "lastRevisionId": 48951,
+    "lastRevisionCheckAt": "2025-05-13T01:01:15.305Z",
+    "lastRevisionId": 49064,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-05-12T13:15:27.091Z (CHmZX_ga7_): disconnected -> connecting (ok)",
-      "2025-05-12T13:15:27.365Z (CHmZX_ga7_): connecting -> connected (ok)",
-      "2025-05-12T13:15:27.771Z (CHmZX_ga7_): connecting -> connected (ok)",
-      "2025-05-12T13:15:28.051Z (CHmZX_ga7_): connecting -> connected (ok)",
-      "2025-05-12T13:55:26.157Z (CHmZX_ga7_): connected -> disconnected (Websocket closed)",
-      "2025-05-12T13:55:26.168Z (CHmZX_ga7_): disconnected -> connecting (ok)",
-      "2025-05-12T13:55:26.685Z (CHmZX_ga7_): connecting -> connected (ok)",
-      "2025-05-12T14:06:12.954Z (CHmZX_ga7_): connected -> disconnected (Websocket closed)",
-      "2025-05-12T14:06:12.969Z (CHmZX_ga7_): disconnected -> connecting (ok)",
-      "2025-05-12T14:06:13.264Z (CHmZX_ga7_): connecting -> connected (ok)"
+      "2025-05-12T22:42:57.907Z (CHmZX_ga7_): disconnected -> connecting (ok)",
+      "2025-05-12T22:42:58.194Z (CHmZX_ga7_): connecting -> connected (ok)",
+      "2025-05-13T00:25:49.367Z: connected -> closing (Connection closing)",
+      "2025-05-13T00:25:49.373Z: closing -> closed (Connection closed)",
+      "2025-05-13T00:25:49.437Z: connected -> closing (Connection closing)",
+      "2025-05-13T00:25:49.437Z: closing -> closed (Connection closed)",
+      "2025-05-13T00:25:49.437Z: connected -> closing (Connection closing)",
+      "2025-05-13T00:25:49.437Z: closing -> closed (Connection closed)",
+      "2025-05-13T00:25:49.454Z: initialized -> connecting (ok)",
+      "2025-05-13T00:25:49.855Z (HSfesadcYm): connecting -> connected (ok)"
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01JV0080NEF3NKCMKNHEVNAEWQ / Mon, 12 May 2025 00:59:33 GMT /  2025-05-12T14:32:18.479Z"
+      "jguzman@marxadigital.com / sess_01JV0080NEF3NKCMKNHEVNAEWQ / Tue, 13 May 2025 00:25:50 GMT /  2025-05-13T01:01:28.762Z"
     ],
-    "savedAt": "2025-05-12T14:32:20.193Z",
+    "savedAt": "2025-05-13T01:01:35.162Z",
     "savedBy": "jguzman@marxadigital.com",
     "sessionId": "sess_01JV0080NEF3NKCMKNHEVNAEWQ"
   },

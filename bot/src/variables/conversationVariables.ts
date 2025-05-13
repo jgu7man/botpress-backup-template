@@ -19,4 +19,9 @@ export class conversationVariables {
   * @description Temas que se han manejado en la conversación 
   */
   topics: string[];
+  /**
+  * [var-372b1dc48c]
+  * @description variable que controla cuando se debe contactar al usuario 
+  */
+  status: string;
 }

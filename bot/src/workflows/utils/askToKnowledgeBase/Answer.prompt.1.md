@@ -1,3 +1,7 @@
+# Answer
+<!-- Instruction: answerMessage -->
+
+
 Input:
 ```
 Respuesta de la base de conocimiento: {{workflow.kbAnswer}}

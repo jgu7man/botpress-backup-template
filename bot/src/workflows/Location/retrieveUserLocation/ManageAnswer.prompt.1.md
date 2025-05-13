@@ -1,3 +1,7 @@
+# ManageAnswer
+<!-- Instruction: location, answerType -->
+
+
 Input:
 ```
 user input: {{workflow.locationInput || event.preview}}

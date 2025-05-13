@@ -1,3 +1,7 @@
+# StyleMenuOffer
+<!-- Instruction: stlyeMenuOfferMessage -->
+
+
 Input:
 ```
 Response =  @workflow.kbResponse; 

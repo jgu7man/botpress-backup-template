@@ -1,3 +1,7 @@
+# GenerateFarewellMessage
+<!-- Instruction: farewellMessage -->
+
+
 Input:
 ```
 time: {{workflow.colombiaTime}}

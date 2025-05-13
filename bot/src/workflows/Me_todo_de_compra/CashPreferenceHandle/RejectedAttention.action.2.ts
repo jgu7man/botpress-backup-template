@@ -1,7 +1,7 @@
-import { user } from "@main";
+import { conversation } from "@main";
 // Node: RejectedAttention - nd-2d3b086dcd
-// Set user conversation status to "attention pending" - ins-844bc9c433
+// "Manage Conversation Status for Rejected Attention Cases" - ins-844bc9c433
 
 // ------------------ EXECUTE CODE -------------------------
 
-user.conversationStatus="ATTENTION_REJECTED"
+conversation.status = "ATTENTION_REJECTED"

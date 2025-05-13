@@ -1,3 +1,7 @@
+# getCategorization
+<!-- Instruction: conversationContext -->
+
+
 Input:
 ```
 Evaluación de base de conocimiento:

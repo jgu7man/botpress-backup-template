@@ -1,3 +1,7 @@
+# answerAsCompetitor
+<!-- Instruction: foundMessage -->
+
+
 Input:
 ```
 Nombre del usuario: @user.fullName; 

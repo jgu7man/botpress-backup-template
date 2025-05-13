@@ -50,7 +50,7 @@ export enum NodeType {
   EXCEPTION_HANDLER = "exception-handler",
 }
 
-interface BaseNode {
+export interface BaseNode {
   id: string;
   name: string;
   type: NodeType;
@@ -148,7 +148,7 @@ export interface ActionInstruction extends BaseInstruction {
 
 export interface ContentInstruction extends BaseInstruction {
   type: "content";
-  content: Content;
+  content: TextContent | CardContent;
 }
 
 export interface TransitionInstruction extends BaseInstruction {
@@ -185,10 +185,36 @@ export interface LogInstruction extends BaseInstruction {
   message: DynamicOrStatic<string>;
 }
 
-export interface Content {
+export interface TextContent {
   type: "text";
-  text: DynamicOrStatic<string>;
-  typing: DynamicOrStatic<boolean>;
+  text: DynamicStaticValue;
+  typing: StaticExpressionValue;
+}
+
+export interface DynamicStaticValue {
+  valueType: "dynamic";
+  staticValue: string;
+  dynamicValue: string;
+}
+
+export interface StaticExpressionValue {
+  valueType: "static";
+  staticValue: any[];
+  isExpression: boolean;
+}
+
+export interface DynamicExpressionValue {
+  valueType: "dynamic";
+  dynamicValue: string;
+  isExpression: boolean;
+}
+
+export interface CardContent {
+  type: "card";
+  title: DynamicStaticValue;
+  subtitle: DynamicStaticValue;
+  imageUrl: DynamicExpressionValue;
+  actions: StaticExpressionValue;
 }
 
 export interface Condition {

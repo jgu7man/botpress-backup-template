@@ -1,12 +1,12 @@
 import fs from "fs";
 import path from "path";
+import { replaceKeysExpressions } from "utils/helpers/manageExpressions";
+import { generateImportStatements } from "../helpers/generateImportStatements";
 import {
-  ActionInstruction,
   AiInstruction,
-  ContentInstruction,
+  BaseNode,
   EndNode,
   EntryNode,
-  Instruction,
   Node,
   NodeType,
   StandardNode,
@@ -15,6 +15,8 @@ import {
 } from "../types/bot/Workflow";
 import { closeUnclosedCodeBlocks } from "./codeBlocksValidation";
 import { sanitizeName } from "./folderUtils";
+import { generateActionFile } from "./generateActionFile";
+import { generateContentFile } from "./generateContentFile";
 
 export function generateNodeFiles(nodes: Node[], targetDir: string): void {
   nodes
@@ -29,11 +31,11 @@ export function generateNodeFiles(nodes: Node[], targetDir: string): void {
         }
         // AI Prompt
         if (instruction.type === "ai" && instruction.prompt) {
-          generateAiPromptFile(instruction, targetDir, safeName, idx);
+          generateAiPromptFile(instruction, targetDir, safeName, idx, node);
         }
         // Content
         if (instruction.type === "content" && instruction.content) {
-          generateContentFile(targetDir, safeName, idx, instruction);
+          generateContentFile(targetDir, safeName, idx, instruction, node);
         }
         // Transition
         if (instruction.type === "transition") {
@@ -50,12 +52,7 @@ function createTransitionFile(
   safeName: string,
   idx: number
 ) {
-  const condition = instruction.condition?.payload.replace(
-    /{{(.*?)}}/g,
-    (match, p1) => {
-      return `${p1.trim()}`;
-    }
-  );
+  const condition = replaceKeysExpressions(instruction.condition?.payload);
   const transitionName = instruction.id.replace("-", "");
   const code = `const ${transitionName} = ${condition};`;
   const separatorLabel = "TRANSITION CONDITION";
@@ -75,27 +72,19 @@ function createTransitionFile(
   fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
 }
 
-function generateContentFile(
-  targetDir: string,
-  safeName: string,
-  idx: number,
-  instruction: ContentInstruction
-) {
-  const filePath = path.join(targetDir, `${safeName}.content.${idx + 1}.json`);
-  fs.writeFileSync(
-    filePath,
-    JSON.stringify(instruction.content, null, 2) + "\n"
-  );
-}
-
 function generateAiPromptFile(
   instruction: AiInstruction,
   targetDir: string,
   safeName: string,
-  idx: number
+  idx: number,
+  node: BaseNode
 ) {
   const lines: string[] = [];
   if (instruction.task) {
+    lines.push(`# ${safeName}`);
+    lines.push(`<!-- Node: ${node.id} -->`);
+    lines.push(`<!-- Instruction: ${instruction.id} -->`);
+    lines.push("```\n");
     lines.push("Input:");
     lines.push("```");
     lines.push(`${instruction.task?.input}`);
@@ -117,57 +106,4 @@ function generateAiPromptFile(
 
   const filePath = path.join(targetDir, `${safeName}.prompt.${idx + 1}.md`);
   fs.writeFileSync(filePath, lines.join("\n") + "\n");
-}
-
-function generateActionFile(
-  instruction: ActionInstruction,
-  node: EntryNode | StandardNode | EndNode | StartNode,
-  targetDir: string,
-  safeName: string,
-  idx: number
-) {
-  const code = instruction.code.trim();
-  const separatorLabel = "EXECUTE CODE";
-
-  const lines: string[] = generateImportStatements(
-    code,
-    node,
-    separatorLabel,
-    instruction
-  );
-
-  lines.push(instruction.code.trim());
-
-  const filePath = path.join(targetDir, `${safeName}.action.${idx + 1}.ts`);
-  const trueLines = lines.filter((line) => line.trim() !== ""); // Remove empty lines
-  fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
-}
-
-function generateImportStatements(
-  code: string,
-  node: Node,
-  separatorLabel: string,
-  instruction: Instruction
-) {
-  const mainImports = [
-    code.includes("bot.") ? "bot" : "",
-    code.includes("user.") ? "user" : "",
-    code.includes("event.") ? "event" : "",
-    code.includes("conversation.") ? "conversation" : "",
-    code.includes("turn.") ? "turn" : "",
-  ].filter((importName) => importName !== "");
-
-  const lines: string[] = [
-    mainImports.length > 0
-      ? `import { ${mainImports.join(", ")} } from "@main";`
-      : "",
-    code.includes("workflow.")
-      ? `import { workflow } from "./workflow.state";`
-      : "",
-    code.includes("luxon") ? `import * as luxon from "luxon";` : "",
-    `// Node: ${node.name} - ${node.id}`,
-    `// ${instruction.label} - ${instruction.id}\n`,
-    `// ------------------ ${separatorLabel} -------------------------\n`,
-  ];
-  return lines;
 }

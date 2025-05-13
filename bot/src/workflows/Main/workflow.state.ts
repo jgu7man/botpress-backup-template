@@ -4,6 +4,8 @@ class MainState {
   data: string;
   /** Sin descripción */
   moto: string;
+  /** Sin descripción */
+  confirmation: unknown;
   /** credictStudy1 */
   credictStudy1: any;
   /** getContact1 */
@@ -16,8 +18,8 @@ class MainState {
   welcome1: any;
   /** farewell1 */
   farewell1: any;
-  /** AnswerType1 */
-  AnswerType1: any;
+  /** askForNationalId1 */
+  askForNationalId1: any;
 }
 
 export const workflow = new MainState();

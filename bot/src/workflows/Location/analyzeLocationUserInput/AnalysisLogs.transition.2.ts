@@ -1,6 +1,6 @@
 import { user } from "@main";
 // Node: AnalysisLogs - nd-a169b17103
-// Service Location Recognized - ins-3375c86b7f
+// Ubicación de servicio reconocida - ins-3375c86b7f
 
 // ------------------ TRANSITION CONDITION -------------------------
 

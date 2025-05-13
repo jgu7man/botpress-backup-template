@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
-// Node: categorizeAnswer - nd-b6b6abd395
-// Consulta - ins-aeaeb51ab3
+// Node: categorizeAnswer - nd-4f5092aaef
+// CONFIRMACION - ins-67e611a374
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const insaeaeb51ab3 = workflow.answerType === 'CONSULTA';
-// Destination: nd-d5e0ce1607
+const ins67e611a374 = workflow.answerType.includes('CONFIRMACION');
+// Destination: nd-8de3a214db

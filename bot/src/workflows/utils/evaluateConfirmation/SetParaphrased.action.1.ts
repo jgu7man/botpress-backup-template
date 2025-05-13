@@ -4,4 +4,4 @@ import { workflow } from "./workflow.state";
 
 // ------------------ EXECUTE CODE -------------------------
 
-workflow.userInput = workflow.UnderstandUserInput.correctedUserInput
+workflow.userInput = workflow.AnswerTypeConfirmation.extractedData

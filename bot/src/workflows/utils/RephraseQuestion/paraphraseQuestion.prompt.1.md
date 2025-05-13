@@ -1,6 +1,7 @@
 Input:
 ```
-Resumen de la conversación: {{conversation.SummaryAgent.summary}}
+Resumen de la conversación: {{conversation.SummaryAgent.summary}};
+Último mensaje del cliente: {{event.preview}}
 ```
 
 <!-- user -->
@@ -13,7 +14,7 @@ Considerando el siguiente resumen de la conversación:
 
 **Instrucciones:**
 
-1. **Identifica la última pregunta del cliente** basándote en el resumen proporcionado.
+1. **Identifica la última pregunta que hizo el cliente** basándote en el resumen proporcionado.
 2. **Parafraséala de manera clara y concisa**, utilizando un lenguaje natural y profesional.
 3. **Mantén el significado original de la pregunta**, pero exprésala con tus propias palabras.
 4. **Evita agregar información nueva o interpretaciones personales.**

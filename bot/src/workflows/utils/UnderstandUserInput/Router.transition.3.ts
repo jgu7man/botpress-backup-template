@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
-// Node: ROUTER - nd-d7e5b1b879
-// Requiere esperar - ins-3fa676ee45
+// Node: ROUTER - nd-e7f8659f61
+// Requiere esperar - ins-133814e446
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins3fa676ee45 = workflow.context === 'pending';
-// Destination: nd-2c641f3f72
+const ins133814e446 = workflow.context === 'ESPERA';
+// Destination: nd-aeaee0f7a9

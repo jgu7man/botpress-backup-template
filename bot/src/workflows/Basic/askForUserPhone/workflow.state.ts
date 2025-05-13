@@ -7,8 +7,6 @@ class AskForUserPhoneState {
   /** Sin descripción */
   phoneConfirmationInput: string;
   /** Sin descripción */
-  phoneConfirmed: string;
-  /** Sin descripción */
   messageResult: string;
   /** Sin descripción */
   skipFlowReason: string;
@@ -16,12 +14,12 @@ class AskForUserPhoneState {
   attemptsToConfirm: number;
   /** Sin descripción */
   kbPhoneEvaluation: string;
-  /** UnderstandUserInput */
-  UnderstandUserInput: any;
+  /** Sin descripción */
+  phoneConfirmed: boolean;
   /** QuestionWithUserName */
   QuestionWithUserName: any;
-  /** evaluateConfirmation2 */
-  evaluateConfirmation2: any;
+  /** 🗣️ AnswerType - Copy1 */
+  🗣️ AnswerType - Copy1: any;
 }
 
 export const workflow = new AskForUserPhoneState();

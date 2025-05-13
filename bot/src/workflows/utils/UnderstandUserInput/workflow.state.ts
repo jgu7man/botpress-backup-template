@@ -1,7 +1,5 @@
-// Workflow: 🧠 UnderstandUserInput - wf-cabe199fc6
+// Workflow: 🧠 UnderstandUserInput - wf-537dc9aef5
 class UnderstandUserInputState {
-  /** Sin descripción */
-  context: string;
   /** Sin descripción */
   correctedUserInput: string;
   /** Sin descripción */
@@ -14,10 +12,10 @@ class UnderstandUserInputState {
   retry: boolean;
   /** Sin descripción */
   paraphrasedQuestion: string;
-  /** ❔mainKnowledgeBase */
-  ❔mainKnowledgeBase: any;
-  /** RephraseQuestion1 */
-  RephraseQuestion1: any;
+  /** Contexto del mensaje del cliente. Puede ser: 'ESPERA', 'RECHAZO', 'ASISTENCIA_HUMANA', 'NO_APLICA' */
+  context: string;
+  /** Intentos de entender el mensaje del usuario */
+  retryCount: number;
   /** farewell1 */
   farewell1: any;
   /** HandleMultimediaMessage1 */
@@ -28,10 +26,6 @@ class UnderstandUserInputState {
   farewell3: any;
   /** farewell4 */
   farewell4: any;
-  /** DataExtractor1 */
-  DataExtractor1: any;
-  /** ❔mainKnowledgeBase */
-  ❔mainKnowledgeBase: any;
 }
 
 export const workflow = new UnderstandUserInputState();

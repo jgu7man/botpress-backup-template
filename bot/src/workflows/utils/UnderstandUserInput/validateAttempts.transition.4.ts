@@ -1,8 +1,8 @@
-import { conversation } from "@main";
-// Node: validateAttempts - nd-52e2cfdbda
-// Second Attempt - ins-4c8d11cdc1
+import { workflow } from "./workflow.state";
+// Node: validateAttempts - nd-19fcda7231
+// Attempts over - ins-57f50dd29f
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins4c8d11cdc1 = conversation.retryAttempts == 2;
-// Destination: nd-203f71c86e
+const ins57f50dd29f = workflow.retryCount >= 3;
+// Destination: nd-740566333c

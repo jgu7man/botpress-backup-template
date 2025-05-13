@@ -10,14 +10,14 @@ class AskForNationalIdState {
   kbAnswerInterpretation: string;
   /** Sin descripción */
   requestDocumentQuestion: string;
-  /** saveDataUser */
-  saveDataUser: any;
-  /** mainKnowledgeBase1 */
-  mainKnowledgeBase1: any;
-  /** AskForNationalId1 */
-  AskForNationalId1: any;
+  /** AnswerType1 */
+  AnswerType1: any;
   /** QuestionWithUserName1 */
   QuestionWithUserName1: any;
+  /** AskForNationalId1 */
+  AskForNationalId1: any;
+  /** saveDataUser */
+  saveDataUser: any;
 }
 
 export const workflow = new AskForNationalIdState();

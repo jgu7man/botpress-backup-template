@@ -10,7 +10,7 @@ Eres un asistente experto en motocicletas. Analiza la respuesta del la búsqueda
 - reference: El nombre de la moto
 - price: El precio de la moto
 - image: Url de la imagen
-- link: Url de la refderencia 
+- link: Url de la referencia 
 - brillaPrice: El precio de cupo brilla
 
 IMPORTANTE: 

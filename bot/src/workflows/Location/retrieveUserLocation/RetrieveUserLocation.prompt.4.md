@@ -7,7 +7,7 @@ Input:
 I have a task for you to complete. Here are the instructions:
 ## **Comportamiento**
 - Usa el siguiente template para armar un mensaje:
-"Muchas gracias, {Sr. o Sra. según sea el caso si no hay nombre entonces usar Sr@.} {{user.fullName}},
+"Muchas gracias, {Sr. o Sra. según sea el caso si no hay nombre entonces usar Sr@.} {{user.fullName}}, deme un momento."
 
 ## **Consideraciones:**
 - Usa el primer nombre si tiene mas de uno

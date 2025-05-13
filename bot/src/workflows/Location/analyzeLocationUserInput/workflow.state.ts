@@ -6,6 +6,8 @@ class AnalyzeLocationUserInputState {
   context: string;
   /** Sin descripción */
   knowledgeAboutLocation: string;
+  /** Cantidad de intentos por capturar la ciudad del cliente */
+  cityRetryCount: number;
 }
 
 export const workflow = new AnalyzeLocationUserInputState();

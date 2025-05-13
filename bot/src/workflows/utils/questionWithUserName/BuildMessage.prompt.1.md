@@ -3,6 +3,7 @@ Input:
 fullname:{{ user.fullName }}
 pregunta:{{workflow.question}}
 consideraciones adicionales:{{workflow.additionalConsiderations}}
+bot.retryAttempts: @bot.retryAttempts
 ```
 
 <!-- user -->
@@ -21,7 +22,7 @@ I have a task for you to complete. Here are the instructions:
   - Si no puedes reconocer el género con el nombre. Usa "Sr@" solamente.
 - Cambia los adjetivos y palabras necesarias a masculino o femenino según sea el género del usuario
 -  El usuario no se llama usuario. No uses esa palabra.
-
+- Si la variable bot.retryAttempts es igual a 2, parafrasea la pregunta para que tenga un tono coherente a recuperación de la conversación.
 
 {{additionalConsiderations}}
 --

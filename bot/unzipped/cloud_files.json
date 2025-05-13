@@ -1,5 +1,37 @@
 [
   {
+    "id": "file_01JV0X8NSRJMHA6SVMQH7Z0GXD",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 90323,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-6692a2dcc2",
+      "title": "Árbol de Decisión para Categorización de Mensajes v2_2.pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-6692a2dcc2/Árbol de Decisión para Categorización de Mensajes v2_2.pdf",
+    "index": true,
+    "updatedAt": "2025-05-12T00:10:40.815Z"
+  },
+  {
+    "id": "file_01JTXJZMJNNVW7JXSJ290G7BX8",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 56337,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-6692a2dcc2",
+      "title": "Categorización de Mensajes de Usuario.pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-6692a2dcc2/Categorización de Mensajes de Usuario.pdf",
+    "index": true,
+    "updatedAt": "2025-05-10T17:13:15.597Z"
+  },
+  {
     "id": "file_01JSS7P9KN6NP7RBXH2G9MNA6P",
     "accessPolicies": [],
     "contentType": "text/markdown",

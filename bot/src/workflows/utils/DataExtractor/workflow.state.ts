@@ -2,8 +2,8 @@
 class DataExtractorState {
   /** Sin descripción */
   kbResponse: string;
-  /** Sin descripción */
-  expectedData: string;
+  /** La data que extrajo la base de conocimiento  */
+  extractedData: string;
 }
 
 export const workflow = new DataExtractorState();

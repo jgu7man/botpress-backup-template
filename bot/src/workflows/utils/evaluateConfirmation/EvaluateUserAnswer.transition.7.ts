@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
 // Node: EvaluateUserAnswer - nd-503fb90194
-// RECHAZÓ - ins-055d6f6a88
+// ACEPTÓ - ins-4f818b8452
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins055d6f6a88 = workflow.confirmationType === 'REJECTED';
-// Destination: nd-7772964a66
+const ins4f818b8452 = workflow.confirmationType === 'ACCEPTED';
+// Destination: nd-4ee2d978c5

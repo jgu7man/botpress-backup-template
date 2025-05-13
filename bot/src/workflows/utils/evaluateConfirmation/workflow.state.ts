@@ -18,12 +18,12 @@ class EvaluateConfirmationState {
   answerType: string;
   /** 💾 saveUserData */
   💾 saveUserData: any;
-  /** UnderstandUserInput */
-  UnderstandUserInput: any;
+  /** 🔎 DataExtractor */
+  🔎 DataExtractor: any;
   /** farewell1 */
   farewell1: any;
-  /** farewell2 */
-  farewell2: any;
+  /** 🗣️ AnswerType - Copy1 */
+  🗣️ AnswerType - Copy1: any;
 }
 
 export const workflow = new EvaluateConfirmationState();

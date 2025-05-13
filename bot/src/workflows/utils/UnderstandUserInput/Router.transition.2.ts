@@ -1,8 +1,8 @@
 import { workflow } from "./workflow.state";
-// Node: ROUTER - nd-d7e5b1b879
-// Cliente solicita atención humana - ins-75fcd53631
+// Node: ROUTER - nd-e7f8659f61
+// Cliente solicita atención humana - ins-6f75fc359f
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins75fcd53631 = workflow.context === 'human_requested';
-// Destination: nd-c5740d3ebf
+const ins6f75fc359f = workflow.context === 'ASISTENCIA_HUMANA';
+// Destination: nd-9d4b5bb722

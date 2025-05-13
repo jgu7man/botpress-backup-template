@@ -8,6 +8,8 @@ class QuestionWithUserNameState {
   messageResult: string;
   /** Sin descripción */
   waitForUserInput: boolean;
+  /** Sin descripción */
+  tryAttemptMessage: string;
 }
 
 export const workflow = new QuestionWithUserNameState();

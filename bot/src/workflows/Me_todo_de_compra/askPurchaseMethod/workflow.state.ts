@@ -10,10 +10,12 @@ class AskPurchaseMethodState {
   questionWithUserName: any;
   /** 💾 saveUserData */
   💾 saveUserData: any;
-  /** CreditPreferenceHandle */
-  CreditPreferenceHandle: any;
   /** setCupoBrillaProfile1 */
   setCupoBrillaProfile1: any;
+  /** CashPreferenceHandle1 */
+  CashPreferenceHandle1: any;
+  /** CreditPreferenceHandle */
+  CreditPreferenceHandle: any;
 }
 
 export const workflow = new AskPurchaseMethodState();

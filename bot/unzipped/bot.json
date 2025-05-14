@@ -221,15 +221,6 @@
         "storeAsTag": false
       },
       {
-        "id": "var-1b5209edbb",
-        "name": "negativeCreditReport",
-        "description": "",
-        "type": "string",
-        "scope": "user",
-        "defaultValue": "",
-        "storeAsTag": false
-      },
-      {
         "id": "var-2946efe2f3",
         "name": "authorizedPop",
         "description": "Información de que el cliente autorizó o rechazó el guardado de sus datos.",
@@ -237,6 +228,15 @@
         "scope": "user",
         "storeAsTag": false,
         "schemaId": "schema-b0a02998ac"
+      },
+      {
+        "id": "var-1b5209edbb",
+        "name": "negativeCreditReport",
+        "description": "Estado del cliente ante data crédito. Se le pregunta si está reportado y los valores posibles son 'SÍ' o 'NO'",
+        "type": "string",
+        "scope": "user",
+        "defaultValue": "",
+        "storeAsTag": false
       }
     ],
     "nodeRepetitionLimit": 6,
@@ -800,7 +800,7 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-db4e37e320"
+                "node": "nd-8006222ef7"
               },
               "transitions": [],
               "nodeId": "nd-2bb9db230d"
@@ -1398,6 +1398,49 @@
             }
           ],
           "id": "nd-e1289efd7f"
+        },
+        {
+          "name": "requestInterestedMoto1",
+          "type": "standard",
+          "deletable": true,
+          "x": -2160,
+          "y": -1680,
+          "instructions": [
+            {
+              "id": "ins-0a149ef4d6",
+              "type": "skill",
+              "name": "requestInterestedMoto1",
+              "flowId": "wf-8dfd2bb518",
+              "exitNodes": [
+                "nd-11374c2d34"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-80e6ce8a58",
+                  "type": "transition",
+                  "label": "Exit",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-11374c2d34"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Exit",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Exit",
+                      "condition": "lastNode=nd-11374c2d34"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-8006222ef7"
+            }
+          ],
+          "id": "nd-8006222ef7"
         }
       ],
       "parentFolder": "root"
@@ -2694,7 +2737,23 @@
                   }
                 }
               ],
-              "nodeId": "nd-acfbfa3915"
+              "nodeId": "nd-acfbfa3915",
+              "variables": [
+                {
+                  "id": "var-4640e40e5f",
+                  "name": "noRequiereConsultar",
+                  "description": "Confirmación excepcional de que el no necesita repteir la pregunta.  Cuando es true, la transición \"REPITE\" no se cumplirá",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": false,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
             }
           ],
           "id": "nd-acfbfa3915"
@@ -5173,7 +5232,7 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-e1d01d900d"
+                "node": "nd-16586db07f"
               },
               "transitions": [],
               "nodeId": "nd-710c3a617a",
@@ -5188,8 +5247,8 @@
               "description": ""
             }
           ],
-          "x": -360,
-          "y": 135
+          "x": -375,
+          "y": -480
         },
         {
           "id": "nd-36d6158290",
@@ -5214,211 +5273,15 @@
               "nodeId": "nd-36d6158290"
             }
           ],
-          "x": 2400,
-          "y": -615
-        },
-        {
-          "name": "Ask_User_Data",
-          "type": "standard",
-          "deletable": true,
-          "x": 45,
-          "y": -315,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-9f0985255f",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "⚠️ Es necesario preguntar datos",
-                "staticValue": ""
-              },
-              "nodeId": "nd-6abc11518e",
-              "transitions": []
-            },
-            {
-              "id": "ins-217567de58",
-              "type": "skill",
-              "name": "getContact1",
-              "flowId": "wf-7e26022245",
-              "exitNodes": [
-                "nd-1b5f64341e",
-                "nd-8745dd86d3",
-                "nd-fd36f445b5"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-ac80e2d319",
-                  "type": "transition",
-                  "label": "Exit",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-1b5f64341e"
-                  },
-                  "destination": {
-                    "node": "nd-2e90e42efa"
-                  },
-                  "generative": {
-                    "label": "Exit",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Exit",
-                      "condition": "lastNode=nd-1b5f64341e"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-426f14c7ad",
-                  "type": "transition",
-                  "label": "cupo_brilla",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-8745dd86d3"
-                  },
-                  "destination": {
-                    "node": "nd-effb5fef1a"
-                  },
-                  "generative": {
-                    "label": "cupo_brilla",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "cupo_brilla",
-                      "condition": "lastNode=nd-8745dd86d3"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-6abc11518e",
-              "manualFields": []
-            }
-          ],
-          "id": "nd-6abc11518e"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 30,
-          "y": -690,
-          "instructions": [
-            {
-              "id": "ins-b669f19c67",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{!!user.purchasePreference}}"
-              },
-              "label": "Purchase type Asked before",
-              "generative": {
-                "label": "Purchase type Asked before",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-e1d01d900d",
-              "description": "",
-              "destination": {
-                "node": "nd-870326d931"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-600c4e2756",
-              "type": "action",
-              "code": "const { fullName, phone: celular } = user\nconst { askedBefore, answer: popAuthorized } = user.authorizedPop\n\nconsole.log(`🤖 user:`, {\n  askedBefore,\n  popAuthorized,\n  fullName,\n  phone: celular\n})\n\n// Verifica si NO tenemos nombre y teléfono del usuario\nconst isUserDataUndefined = !fullName || !celular\n\n// Si no tenemos nombre y teléfono...\nif (!isUserDataUndefined) {\n  // ... y el usuario no ha sido consultado antes, requerimos la razón de los datos\n  if (!askedBefore) {\n    workflow.requireUserDataReason = true // Asignamos true si no ha sido preguntado antes\n  }\n}\n\nworkflow.requireUserDataReason = false // Reiniciamos a false si se cumplen las condiciones anteriores\n",
-              "origin": "builtin",
-              "label": "\"Check User Data and Request Reason if Necessary\"",
-              "nodeId": "nd-e1d01d900d",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { fullName, phone: celular } = user;\n  const { askedBefore, answer: popAuthorized } = user.authorizedPop;\n  console.log(`\\u{1F916} user:`, {\n    askedBefore,\n    popAuthorized,\n    fullName,\n    phone: celular\n  });\n  const isUserDataUndefined = !fullName || !celular;\n  if (!isUserDataUndefined) {\n    if (!askedBefore) {\n      workflow.requireUserDataReason = true;\n    }\n  }\n  workflow.requireUserDataReason = false;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "id": "ins-cf0dde5c96",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Razón para saltar datos: {{workflow.requireUserDataReason}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-e1d01d900d",
-              "transitions": []
-            },
-            {
-              "id": "ins-dc03e843e7",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{!workflow.requireUserDataReason}}"
-              },
-              "label": "No Requiere preguntar datos",
-              "generative": {
-                "label": "No Requiere preguntar datos",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-e1d01d900d",
-              "description": "",
-              "destination": {
-                "node": "nd-2e90e42efa"
-              },
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-6abc11518e"
-          },
-          "id": "nd-e1d01d900d",
-          "name": "ValidateSkipStep"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 900,
-          "y": -825,
-          "instructions": [
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-a32b85800f",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Saltar pregunta por que: {{user.purchasePreference ? 'Ya se sabe la preferencia de compra' : 'Por ya sabemos que quiere la moto a crédito pero no es cupo brilla'}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-870326d931",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-36d6158290"
-          },
-          "id": "nd-870326d931",
-          "name": "StepSkiped"
+          "x": 1485,
+          "y": -660
         },
         {
           "name": "askPurchaseMethod_Node",
           "type": "standard",
           "deletable": true,
-          "x": 1005,
-          "y": -150,
+          "x": 435,
+          "y": -135,
           "instructions": [
             {
               "id": "ins-cb03d67bc6",
@@ -5428,8 +5291,7 @@
               "exitNodes": [
                 "nd-4d21d2bcc2",
                 "nd-87048ee08d",
-                "nd-2b25d1b2d0",
-                "nd-3bcbdebad4"
+                "nd-2b25d1b2d0"
               ],
               "transitions": [
                 {
@@ -5441,7 +5303,7 @@
                     "payload": "lastNode=nd-4d21d2bcc2"
                   },
                   "destination": {
-                    "node": "nd-9abaa9a7fa"
+                    "node": "nd-f1f066a469"
                   },
                   "generative": {
                     "label": "Exit",
@@ -5500,29 +5362,6 @@
                       "condition": "lastNode=nd-2b25d1b2d0"
                     }
                   }
-                },
-                {
-                  "id": "trs-9cadbe7e70",
-                  "type": "transition",
-                  "label": "CupoBrilla",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-3bcbdebad4"
-                  },
-                  "destination": {
-                    "node": "nd-effb5fef1a"
-                  },
-                  "generative": {
-                    "label": "CupoBrilla",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "CupoBrilla",
-                      "condition": "lastNode=nd-3bcbdebad4"
-                    }
-                  }
                 }
               ],
               "nodeId": "nd-33d5ec26bc",
@@ -5535,8 +5374,8 @@
           "name": "CashPreferenceHandle",
           "type": "standard",
           "deletable": true,
-          "x": 1545,
-          "y": 105,
+          "x": 795,
+          "y": 120,
           "instructions": [
             {
               "id": "ins-bba2c70d3e",
@@ -5578,36 +5417,10 @@
           "id": "nd-3c8984114b"
         },
         {
-          "type": "standard",
-          "deletable": true,
-          "x": 1395,
-          "y": -585,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-874b3d1437",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "User was not understood",
-                "staticValue": ""
-              },
-              "nodeId": "nd-9abaa9a7fa",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-f1f066a469"
-          },
-          "id": "nd-9abaa9a7fa",
-          "name": "SkipOut"
-        },
-        {
           "type": "comment",
           "deletable": true,
-          "x": 30,
-          "y": -780,
+          "x": 15,
+          "y": -960,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Validar si se debe preguntar los datos del cliente o no</span></strong></p>",
           "id": "nd-bffebc823b",
@@ -5618,23 +5431,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 45,
-          "y": -405,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Preguntar los datos del cliente</span></strong></p>",
-          "id": "nd-787991412f",
-          "name": "Comment3",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 900,
-          "y": -1035,
+          "x": 1410,
+          "y": -840,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Saltar el flujo por que ya se hizo antes esta consulta</span></strong></p>",
           "id": "nd-1caafe1f30",
@@ -5648,8 +5446,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 1005,
-          "y": -270,
+          "x": 465,
+          "y": -315,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Realizar pregunta crédito o contado y analizar respuesta</span></strong></p>",
           "id": "nd-41ee15ef6a",
@@ -5663,23 +5461,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 825,
-          "y": 120,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Manejar el perfil de cupo brilla.</span></strong></p><p><strong><span style=\"font-size: 18px\">No requiere preguntar CREDITO o CASH</span></strong></p>",
-          "id": "nd-a8c478ca7f",
-          "name": "Comment7",
-          "height": 148,
-          "width": 281,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 1260,
-          "y": -735,
+          "x": 450,
+          "y": -660,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Saltar pregunta por que no se entiendió la respuesta del cliente</span></strong></p>",
           "id": "nd-20d396b1e3",
@@ -5693,8 +5476,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 1545,
-          "y": -15,
+          "x": 825,
+          "y": -60,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Cliente contesta que desea comprar de contado</span></strong></p>",
           "id": "nd-9cce5ee2a6",
@@ -5706,112 +5489,10 @@
           }
         },
         {
-          "name": "EvaluateInterest",
-          "type": "standard",
-          "deletable": true,
-          "x": 465,
-          "y": -555,
-          "instructions": [
-            {
-              "id": "ins-a7f0bfb760",
-              "type": "action",
-              "category": "Execute",
-              "code": "// Si no existe una preferencia de compra, verificar si el perfil crediticio del usuario es 'CUPO_BRILLA'\r\nif (user.creditProfile === 'CUPO_BRILLA') {\r\n  // Establecer el estado de interés como 'cupobrilla' para usuarios con perfil crediticio 'CUPO_BRILLA'\r\n  workflow.interestStatus = 'cupobrilla'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para alinearla con su perfil crediticio\r\n  user.purchasePreference = 'CREDIT'\r\n} else if (conversation.context === 'ABOUT_CREDIT_INFO') {\r\n  // Si el contexto de la conversación es sobre información crediticia, asumir que el usuario está interesado\r\n  workflow.interestStatus = 'interested'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para reflejar su interés\r\n  user.purchasePreference = 'CREDIT'\r\n} else {\r\n  // Si ninguna de las condiciones se cumple, establecer el estado de interés como unknown\r\n  workflow.interestStatus = 'unknown'\r\n}\r\n",
-              "origin": "builtin",
-              "nodeId": "nd-2e90e42efa",
-              "label": "\"Determine User Purchase Preference Based on Credit Profile\"",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  if (user.creditProfile === \"CUPO_BRILLA\") {\n    workflow.interestStatus = \"cupobrilla\";\n    user.purchasePreference = \"CREDIT\";\n  } else if (conversation.context === \"ABOUT_CREDIT_INFO\") {\n    workflow.interestStatus = \"interested\";\n    user.purchasePreference = \"CREDIT\";\n  } else {\n    workflow.interestStatus = \"unknown\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-ce48c9835f",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 Interest status: {{workflow.interestStatus}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-2e90e42efa",
-              "transitions": []
-            },
-            {
-              "id": "ins-ca409ce9e0",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.interestStatus === 'interested'}}"
-              },
-              "label": "Ya está interesado en crédito o sabemos su preferencia de compra",
-              "generative": {
-                "label": "Ya está interesado en crédito o sabemos su preferencia de compra",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-2e90e42efa",
-              "description": "",
-              "destination": {
-                "node": "nd-870326d931"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-5f2f8198ca",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.interestStatus === 'unknown'}}"
-              },
-              "label": "No sabemos su interés de compra",
-              "generative": {
-                "label": "No sabemos su interés de compra",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-2e90e42efa",
-              "description": "",
-              "destination": {
-                "node": "nd-33d5ec26bc"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-6bc2dbb694",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.interestStatus === 'cupobrilla'}}"
-              },
-              "label": "Es Perfil CupoBrilla",
-              "generative": {
-                "label": "Es Perfil CupoBrilla",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-2e90e42efa",
-              "description": "",
-              "destination": {
-                "node": "nd-effb5fef1a"
-              },
-              "transitions": []
-            }
-          ],
-          "id": "nd-2e90e42efa"
-        },
-        {
           "type": "comment",
           "deletable": true,
-          "x": -540,
-          "y": -255,
+          "x": -555,
+          "y": -840,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">Seguimiento de compra del producto</span></strong></p><pre><code>productDetailsFollowUp</code></pre>",
           "id": "nd-ce42b61533",
@@ -5824,72 +5505,10 @@
           }
         },
         {
-          "name": "CupoBrillaInterested",
-          "type": "standard",
-          "deletable": true,
-          "x": 840,
-          "y": 300,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-eea5346a71",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Purchace Prefrence is Cupo Brilla",
-                "staticValue": ""
-              },
-              "nodeId": "nd-effb5fef1a",
-              "transitions": []
-            },
-            {
-              "id": "ins-e874fc37d4",
-              "type": "skill",
-              "name": "farewell1",
-              "flowId": "wf-066a81d084",
-              "exitNodes": [],
-              "transitions": [],
-              "nodeId": "nd-effb5fef1a",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-28a6148a19",
-                  "name": "inputError",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-5229f73ac9",
-                  "name": "botState",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "storeAsTag": false,
-                  "value": {
-                    "valueType": "dynamic",
-                    "dynamicValue": "SERVED",
-                    "staticValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-effb5fef1a"
-        },
-        {
           "name": "AnswerType1",
           "type": "standard",
           "deletable": true,
-          "x": 1935,
+          "x": 1140,
           "y": -405,
           "instructions": [
             {
@@ -5953,6 +5572,76 @@
             }
           ],
           "id": "nd-f1f066a469"
+        },
+        {
+          "name": "EvaluateAskingUserData1",
+          "type": "standard",
+          "deletable": true,
+          "x": 15,
+          "y": -855,
+          "instructions": [
+            {
+              "id": "ins-88493259b0",
+              "type": "skill",
+              "name": "EvaluateAskingUserData1",
+              "flowId": "wf-45eae1291b",
+              "exitNodes": [
+                "nd-1b6e060063",
+                "nd-211df3e602"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-32da8a2cc9",
+                  "type": "transition",
+                  "label": "SKIPPED",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-1b6e060063"
+                  },
+                  "destination": {
+                    "node": "nd-36d6158290"
+                  },
+                  "generative": {
+                    "label": "SKIPPED",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "SKIPPED",
+                      "condition": "lastNode=nd-1b6e060063"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-0afec1e93a",
+                  "type": "transition",
+                  "label": "ASK_PURCHASE_PREFERENCE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-211df3e602"
+                  },
+                  "destination": {
+                    "node": "nd-33d5ec26bc"
+                  },
+                  "generative": {
+                    "label": "ASK_PURCHASE_PREFERENCE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "ASK_PURCHASE_PREFERENCE",
+                      "condition": "lastNode=nd-211df3e602"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-16586db07f",
+              "manualFields": []
+            }
+          ],
+          "id": "nd-16586db07f"
         }
       ],
       "parentFolder": "dir-6fb4de4b07"
@@ -6841,6 +6530,16 @@
           "y": 330,
           "instructions": [
             {
+              "id": "ins-37226b3870",
+              "type": "skill",
+              "name": "saveDataUser2",
+              "flowId": "wf-21d68eedc5",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-f08ac74711",
+              "manualFields": []
+            },
+            {
               "type": "log",
               "id": "ins-a9860f37c0",
               "label": "Log",
@@ -6875,7 +6574,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-f08ac74711",
-              "label": "",
+              "label": "concernMessage",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -6885,7 +6584,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Template:\n\nLamentablemente no podemos atenderle en línea { ‘Sr.’ | ‘Sra.’ } {NAME}. Pero tenemos buenas noticias. Ya tiene un crédito pre-aprobado para compra de moto con su cupo BRILLA, solo debe acercarse a nuestra sede para firmar los documentos para que la moto quede a su nombre. Sólo necesita:\n\n1️⃣ Traer las dos últimas facturas originales pagadas (no duplicados)\n2️⃣ Copia de la cédula por ambos lados\n3️⃣ Que el solicitante sea el titular de la factura.\n\n## Consideraciones:\n\n- Usa el primer nombre si tiene mas de un nombre\n- Cambia Sr. por Sra. si detectas que el género del nombre\n- Si no detectas el género en el nombre. Usa \"Sr@.\"\n- Si no detectas el nombre sólo deja Sr@.\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Template:\n\nLamentablemente no podemos atenderle en línea { ‘Sr.’ | ‘Sra.’ } {NAME}. Pero tenemos buenas noticias. Ya tiene un crédito pre-aprobado para compra de moto con su cupo BRILLA, solo debe acercarse a nuestra sede para firmar los documentos para que la moto quede a su nombre. Sólo necesita:\n\n1️⃣ Traer las dos últimas facturas originales pagadas (no duplicados)\n2️⃣ Copia de la cédula por ambos lados\n3️⃣ Que el solicitante sea el titular de la factura.\n\n## Consideraciones:\n\n- Usa el primer nombre si tiene mas de un nombre\n- Cambia Sr. por Sra. si detectas que el género del nombre\n- Si no detectas el género en el nombre. Usa \"Sr@.\"\n- Si no detectas el nombre sólo deja Sr@.\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"concernMessage\": string\n}"
                   },
                   {
                     "role": "user",
@@ -6994,6 +6693,18 @@
           "y": 840,
           "instructions": [
             {
+              "id": "ins-011caa888f",
+              "type": "action",
+              "category": "Execute",
+              "code": "user.creditProfile = 'CREDIORBE'\r\n",
+              "origin": "builtin",
+              "nodeId": "nd-0107c4c77d",
+              "transitions": [],
+              "label": "Update User Status and Credit Profile in Conversation System",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"CREDIORBE\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+            },
+            {
               "type": "log",
               "id": "ins-433a78de66",
               "label": "Log",
@@ -7005,18 +6716,6 @@
               },
               "nodeId": "nd-0107c4c77d",
               "transitions": []
-            },
-            {
-              "id": "ins-011caa888f",
-              "type": "action",
-              "category": "Execute",
-              "code": "user.creditProfile = 'CREDIORBE'\r\n",
-              "origin": "builtin",
-              "nodeId": "nd-0107c4c77d",
-              "transitions": [],
-              "label": "Update User Status and Credit Profile in Conversation System",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"CREDIORBE\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             },
             {
               "id": "ins-a7305aa904",
@@ -7070,6 +6769,18 @@
           "y": 1290,
           "instructions": [
             {
+              "id": "ins-a9f44c65e3",
+              "type": "action",
+              "category": "Execute",
+              "code": "user.creditProfile = 'BANCO_BOGOTA'\r\n",
+              "origin": "builtin",
+              "nodeId": "nd-aacf4b3211",
+              "transitions": [],
+              "label": "Set User Conversation Status and Credit Profile for Banco Bogotá",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"BANCO_BOGOTA\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+            },
+            {
               "type": "log",
               "id": "ins-97f6463ada",
               "label": "Log",
@@ -7081,18 +6792,6 @@
               },
               "nodeId": "nd-aacf4b3211",
               "transitions": []
-            },
-            {
-              "id": "ins-a9f44c65e3",
-              "type": "action",
-              "category": "Execute",
-              "code": "user.creditProfile = 'BANCO_BOGOTA'\r\n",
-              "origin": "builtin",
-              "nodeId": "nd-aacf4b3211",
-              "transitions": [],
-              "label": "Set User Conversation Status and Credit Profile for Banco Bogotá",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"BANCO_BOGOTA\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             },
             {
               "id": "ins-ae573880be",
@@ -7404,6 +7103,16 @@
           "y": 1170,
           "instructions": [
             {
+              "id": "ins-181830b639",
+              "type": "skill",
+              "name": "saveDataUser2",
+              "flowId": "wf-21d68eedc5",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-f211e49ce3",
+              "manualFields": []
+            },
+            {
               "id": "ins-c21e644f4a",
               "type": "skill",
               "name": "farewell1",
@@ -7488,9 +7197,9 @@
               ],
               "transitions": [
                 {
-                  "id": "trs-ea4636804c",
+                  "id": "trs-68ec3f0c4d",
                   "type": "transition",
-                  "label": "Reported",
+                  "label": "Reportado",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-6c4c24aa70"
@@ -7499,21 +7208,21 @@
                     "node": "nd-eec7554210"
                   },
                   "generative": {
-                    "label": "Reported",
+                    "label": "Reportado",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "Reported",
+                      "label": "Reportado",
                       "condition": "lastNode=nd-6c4c24aa70"
                     }
                   }
                 },
                 {
-                  "id": "trs-833a8bab0b",
+                  "id": "trs-162de9df47",
                   "type": "transition",
-                  "label": "No_Reported",
+                  "label": "No_reportado",
                   "condition": {
                     "type": "expression",
                     "payload": "lastNode=nd-761ade4356"
@@ -7522,13 +7231,13 @@
                     "node": "nd-5f3c762428"
                   },
                   "generative": {
-                    "label": "No_Reported",
+                    "label": "No_reportado",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "No_Reported",
+                      "label": "No_reportado",
                       "condition": "lastNode=nd-761ade4356"
                     }
                   }
@@ -7553,40 +7262,40 @@
               "name": "askIfUserHasCupoBrilla1",
               "flowId": "wf-d1c4555027",
               "exitNodes": [
-                "nd-32b3b9b945",
-                "nd-e732116c1c"
+                "nd-e732116c1c",
+                "nd-32b3b9b945"
               ],
               "transitions": [
                 {
-                  "id": "trs-3f3bcb2ef0",
+                  "id": "trs-1d722ae464",
                   "type": "transition",
-                  "label": "UserHasCupoBrilla",
+                  "label": "HasCupoBrilla",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-32b3b9b945"
+                    "payload": "lastNode=nd-e732116c1c"
                   },
                   "destination": {
                     "node": "nd-f08ac74711"
                   },
                   "generative": {
-                    "label": "UserHasCupoBrilla",
+                    "label": "HasCupoBrilla",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "UserHasCupoBrilla",
-                      "condition": "lastNode=nd-32b3b9b945"
+                      "label": "HasCupoBrilla",
+                      "condition": "lastNode=nd-e732116c1c"
                     }
                   }
                 },
                 {
-                  "id": "trs-f7085ba592",
+                  "id": "trs-94376799bf",
                   "type": "transition",
                   "label": "UserHas_Not_CupoBrilla",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-e732116c1c"
+                    "payload": "lastNode=nd-32b3b9b945"
                   },
                   "destination": {
                     "node": "nd-0107c4c77d"
@@ -7599,12 +7308,13 @@
                     },
                     "suggestion": {
                       "label": "UserHas_Not_CupoBrilla",
-                      "condition": "lastNode=nd-e732116c1c"
+                      "condition": "lastNode=nd-32b3b9b945"
                     }
                   }
                 }
               ],
-              "nodeId": "nd-eec7554210"
+              "nodeId": "nd-eec7554210",
+              "manualFields": []
             }
           ],
           "id": "nd-eec7554210"
@@ -10533,7 +10243,7 @@
               "category": "Execute",
               "code": "user.assistanceMode = 'IN_STORE'",
               "origin": "builtin",
-              "label": "Set user assistance mode to empty string.",
+              "label": "Set User Assistance Mode to In-Store Experience",
               "nodeId": "nd-d0a5d177bf",
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"IN_STORE\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": [],
@@ -12827,222 +12537,6 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 1290,
-          "y": 645,
-          "instructions": [
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-193016c20e",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "✨ Knowledge Interpretation: {{workflow.answerInterpretation}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-b9e9600ffe",
-              "transitions": []
-            },
-            {
-              "id": "ins-16de5c973c",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{ workflow.answerInterpretation == 'PROPORCIONA_DATO'}}"
-              },
-              "label": "Proporciona el dato",
-              "generative": {
-                "label": "Proporciona el dato",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-b9e9600ffe",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-b9e9600ffe",
-          "name": "InterpretAnswer"
-        },
-        {
-          "name": "UnderstandUserInput",
-          "type": "standard",
-          "deletable": true,
-          "x": 1605,
-          "y": 945,
-          "instructions": [
-            {
-              "id": "ins-23e542885d",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.understandingAttempts == 2}}"
-              },
-              "label": "Attemps over",
-              "generative": {
-                "label": "Attemps over",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-09906cfaff",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            },
-            {
-              "id": "ins-e2978dd3ff",
-              "type": "action",
-              "code": "workflow.understandingAttempts++",
-              "origin": "builtin",
-              "label": "Increment Workflow Understanding Attempts Counter Functionality",
-              "nodeId": "nd-09906cfaff",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.understandingAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-7f467f1ba7",
-              "label": "Log",
-              "level": "error",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Unrecognized answer from {{event.preview}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-09906cfaff",
-              "transitions": []
-            },
-            {
-              "id": "ins-34e6c4163f",
-              "type": "skill",
-              "name": "UnderstandUserInput1",
-              "flowId": "wf-cabe199fc6",
-              "exitNodes": [
-                "nd-fb7e06f31a",
-                "nd-ed7af360bf",
-                "nd-c9ade57441"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-653b144268",
-                  "type": "transition",
-                  "label": "SUCCESS",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-fb7e06f31a"
-                  },
-                  "destination": {
-                    "node": "nd-34d714cfb8"
-                  },
-                  "generative": {
-                    "label": "SameContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "SameContext",
-                      "condition": "lastNode=nd-fb7e06f31a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-3985b07da9",
-                  "type": "transition",
-                  "label": "ChangeContext",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-ed7af360bf"
-                  },
-                  "destination": {
-                    "node": "nd-6c9b69430e"
-                  },
-                  "generative": {
-                    "label": "ChangeContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "ChangeContext",
-                      "condition": "lastNode=nd-ed7af360bf"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-bd35725de3",
-                  "type": "transition",
-                  "label": "Refused",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-c9ade57441"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Refused",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Refused",
-                      "condition": "lastNode=nd-c9ade57441"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-09906cfaff",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-e6e441d563",
-                  "name": "allowAnswer",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-d2e43ac990",
-                  "name": "retry",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-09906cfaff"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
           "x": 435,
           "y": -90,
           "instructions": [
@@ -13138,44 +12632,6 @@
           },
           "id": "nd-c49d72e114",
           "name": "AskForNationalId"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1950,
-          "y": 945,
-          "instructions": [
-            {
-              "id": "ins-050d8353c7",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.kbAnswerInterpretation = workflow.UnderstandUserInput1.correctedUserInput",
-              "origin": "builtin",
-              "label": "\"User Input Interpretation for Workflow Processing\"",
-              "nodeId": "nd-34d714cfb8",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.kbAnswerInterpretation = workflow.UnderstandUserInput1.correctedUserInput;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "id": "ins-c1515210eb",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 Reinterpreted user input: {{workflow.kbAnswerInterpretation}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-34d714cfb8",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-b9e9600ffe"
-          },
-          "id": "nd-34d714cfb8",
-          "name": "SetUserInput"
         },
         {
           "type": "standard",
@@ -13508,44 +12964,6 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 2055,
-          "y": 1455,
-          "variables": [
-            "var-9e5d5a7491"
-          ],
-          "instructions": [
-            {
-              "id": "trs-f9789747f9",
-              "type": "transition",
-              "label": "",
-              "condition": {
-                "type": "expression",
-                "payload": "true"
-              },
-              "destination": {
-                "node": "#"
-              },
-              "generative": {
-                "label": "",
-                "properties": {
-                  "label": true,
-                  "condition": true
-                },
-                "suggestion": {
-                  "label": "",
-                  "condition": "true"
-                }
-              },
-              "nodeId": "nd-d678baf7dd",
-              "transitions": []
-            }
-          ],
-          "id": "nd-d678baf7dd",
-          "name": "ChangedContext"
-        },
-        {
-          "type": "exit",
-          "deletable": true,
           "x": 390,
           "y": 1005,
           "variables": [],
@@ -13578,30 +12996,6 @@
           ],
           "id": "nd-3622891b2e",
           "name": "Skipped"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1965,
-          "y": 1215,
-          "instructions": [
-            {
-              "id": "ins-7af64538ca",
-              "type": "action",
-              "code": "workflow.userInput = workflow.UnderstandUserInput1.correctedUserInput",
-              "origin": "builtin",
-              "label": "\"User Input Handling for Workflow Automation\"",
-              "nodeId": "nd-6c9b69430e",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.userInput = workflow.UnderstandUserInput1.correctedUserInput;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-d678baf7dd"
-          },
-          "id": "nd-6c9b69430e",
-          "name": "GetUserQuestion"
         },
         {
           "type": "comment",
@@ -13643,36 +13037,6 @@
           "comment": "<p><strong><span style=\"font-size: 18px\">Interpretación de la respuesta</span></strong></p>",
           "id": "nd-3fc524e638",
           "name": "Comment3",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 1695,
-          "y": 540,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Bifurcar según la respuesta</span></strong></p>",
-          "id": "nd-bc92e780cb",
-          "name": "Comment4",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 1935,
-          "y": 870,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Parafrasear la respuesta del usaurio para reinterpretarla</span></strong></p>",
-          "id": "nd-16efbcb836",
-          "name": "Comment6",
           "height": 128,
           "width": 296,
           "defaultTransition": {
@@ -25553,15 +24917,6 @@
       "startNode": "nd-df1f1a9d37",
       "variables": [
         {
-          "id": "var-513a1c452e",
-          "name": "userReportedAnswer",
-          "description": "",
-          "type": "string",
-          "scope": "workflow",
-          "defaultValue": "",
-          "storeAsTag": false
-        },
-        {
           "id": "var-d77c37e502",
           "name": "understandingAttempts",
           "description": "",
@@ -25574,6 +24929,15 @@
           "id": "var-98f5705179",
           "name": "userReportedQuestion",
           "description": "",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-513a1c452e",
+          "name": "userReportedAnswer",
+          "description": "Respuesta a la pregunta de estar reportado o no",
           "type": "string",
           "scope": "workflow",
           "defaultValue": "",
@@ -25608,7 +24972,7 @@
         },
         {
           "id": "nd-6c4c24aa70",
-          "name": "Reported",
+          "name": "Reportado",
           "type": "exit",
           "variables": [],
           "deletable": false,
@@ -25627,264 +24991,8 @@
               "nodeId": "nd-6c4c24aa70"
             }
           ],
-          "x": 1200,
-          "y": -1005
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": -1005,
-          "y": -1065,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-6bdd55e2b1",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "User prefers be assisted on line",
-                "staticValue": ""
-              },
-              "nodeId": "nd-ad61a2e49e",
-              "transitions": []
-            },
-            {
-              "id": "ins-3b264ecffb",
-              "type": "action",
-              "category": "Execute",
-              "code": "user.assistanceMode = \"ON_LINE\"\r\nconversation.status = \"PRE_EVALUATION_START\"",
-              "origin": "builtin",
-              "nodeId": "nd-ad61a2e49e",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  conversation.status = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "\"Activate Online Assistance and Start Pre-Evaluation Conversation\"",
-              "isCustomLabel": false,
-              "transitions": []
-            },
-            {
-              "id": "ins-a5212d617f",
-              "category": "Send Messages",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "¿Me podría decir si está reportado?",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
-                }
-              },
-              "nodeId": "nd-ad61a2e49e",
-              "transitions": []
-            },
-            {
-              "id": "ins-315d354fd3",
-              "type": "wait",
-              "category": "Capture Information",
-              "label": "Wait for User Input",
-              "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
-              "nodeId": "nd-ad61a2e49e",
-              "transitions": []
-            },
-            {
-              "type": "ai",
-              "id": "ins-76d715c26d",
-              "task": {
-                "instructions": "## Role\nEres un clasificador experto en interpretar respuestas colombianas. \n\n## Strategy\nTu tarea es determinar si un usuario está **reportado**, **no reportado** o si la respuesta es **ambigua** basada en las siguientes reglas:  \n1. **Reportado:**  \n   - Respuestas afirmativas como \"sí\", \"así es\", \"correcto\", \"claro que sí\", o cualquier otra que confirme que el usuario está reportado.  \n   - Respuestas ambiguas, como \"no sé\", \"no estoy seguro\", \"tal vez\", o respuestas que indiquen que el usuario no quiere responder directamente.  \n   - Respuestas como \"prefiero no responder\", \"es personal\", o que claramente eviten dar información.  \n\n2. **No reportado:**  \n   - Respuestas negativas como \"no\", \"no estoy reportado\", \"para nada\", \"negativo\", o cualquier otra que niegue explícitamente estar reportado.\n\n3. **Ambiguo:**  \n   - Respuestas que no tienen suficiente información para clasificarse como \"reportado\" o \"no reportado\". Ejemplo: \"Hmm\", \"tal vez sí o no\", \"sfdsdf\" o cualquier otra cosa que no corresponda\n\nDevuelve únicamente la clasificación del mensaje como:  \n- **\"Reportado\"**  \n- **\"No reportado\"**  \n- **\"Ambiguo\"**\n\nAdemás, considera que las respuestas estarán en español colombiano.  \n\n## Examples\n\n**Ejemplo de formato esperado:**  \nEntrada: \"No sé si estoy reportado.\"  \nClasificación: **\"Reportado\"**\n\nEntrada: \"No, no estoy reportado.\"  \nClasificación: **\"No reportado\"**\n\nEntrada: \"Prefiero no decirlo.\"  \nClasificación: **\"Reportado\"**\n\nEntrada: \"sfdsdf.\"  \nClasificación: **\"Ambiguo\"**",
-                "input": "{{event.preview}}",
-                "outputVariableIds": [
-                  "var-f302608436"
-                ],
-                "handleFailure": false,
-                "examples": [
-                  {
-                    "input": "",
-                    "output": {
-                      "reportedResponse": ""
-                    }
-                  }
-                ],
-                "model": "anthropic__claude-3-5-sonnet-20240620",
-                "temperature": 0.5,
-                "version": "1.0"
-              },
-              "nodeId": "nd-ad61a2e49e",
-              "label": "",
-              "transitions": [],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
-                  },
-                  {
-                    "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Role\nEres un clasificador experto en interpretar respuestas colombianas. \n\n## Strategy\nTu tarea es determinar si un usuario está **reportado**, **no reportado** o si la respuesta es **ambigua** basada en las siguientes reglas:  \n1. **Reportado:**  \n   - Respuestas afirmativas como \"sí\", \"así es\", \"correcto\", \"claro que sí\", o cualquier otra que confirme que el usuario está reportado.  \n   - Respuestas ambiguas, como \"no sé\", \"no estoy seguro\", \"tal vez\", o respuestas que indiquen que el usuario no quiere responder directamente.  \n   - Respuestas como \"prefiero no responder\", \"es personal\", o que claramente eviten dar información.  \n\n2. **No reportado:**  \n   - Respuestas negativas como \"no\", \"no estoy reportado\", \"para nada\", \"negativo\", o cualquier otra que niegue explícitamente estar reportado.\n\n3. **Ambiguo:**  \n   - Respuestas que no tienen suficiente información para clasificarse como \"reportado\" o \"no reportado\". Ejemplo: \"Hmm\", \"tal vez sí o no\", \"sfdsdf\" o cualquier otra cosa que no corresponda\n\nDevuelve únicamente la clasificación del mensaje como:  \n- **\"Reportado\"**  \n- **\"No reportado\"**  \n- **\"Ambiguo\"**\n\nAdemás, considera que las respuestas estarán en español colombiano.  \n\n## Examples\n\n**Ejemplo de formato esperado:**  \nEntrada: \"No sé si estoy reportado.\"  \nClasificación: **\"Reportado\"**\n\nEntrada: \"No, no estoy reportado.\"  \nClasificación: **\"No reportado\"**\n\nEntrada: \"Prefiero no decirlo.\"  \nClasificación: **\"Reportado\"**\n\nEntrada: \"sfdsdf.\"  \nClasificación: **\"Ambiguo\"**\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
-                  }
-                ],
-                "model": "anthropic__claude-3-5-sonnet-20240620",
-                "temperature": 0.5
-              }
-            },
-            {
-              "id": "ins-71de5f8212",
-              "type": "skill",
-              "name": "saveDataUser",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [
-                "nd-98fd6f9d73"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-27ef038fd5",
-                  "type": "transition",
-                  "label": "Exit",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-98fd6f9d73"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Exit",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Exit",
-                      "condition": "lastNode=nd-98fd6f9d73"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-ad61a2e49e",
-              "manualFields": []
-            },
-            {
-              "type": "aiclassify",
-              "category": "AI",
-              "id": "ins-16e0751c80",
-              "task": {
-                "input": {
-                  "staticValue": "",
-                  "valueType": "dynamic",
-                  "dynamicValue": "reportedResponse"
-                },
-                "classes": {
-                  "staticValue": [
-                    {
-                      "label": "Reportado",
-                      "value": "Reportado",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "No reportado",
-                      "value": "No reportado",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "Ambiguo",
-                      "value": "Ambiguo",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "",
-                      "value": "",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "",
-                      "value": "",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "",
-                      "value": "",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "",
-                      "value": "",
-                      "isTransition": true
-                    },
-                    {
-                      "label": "",
-                      "value": "",
-                      "isTransition": true
-                    }
-                  ],
-                  "valueType": "static",
-                  "dynamicValue": ""
-                },
-                "outputVariableId": "__none__",
-                "forceClassify": false,
-                "model": "openai__gpt-4o-2024-11-20"
-              },
-              "prompt": {
-                "response_format": {
-                  "type": "json_object"
-                },
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "This task requires precise categorization. The bot should associate the content with a category only if there's an evident, direct, and unambiguous relation. \nEschew inferred, indirect, or imaginative associations.\nPick from the provided categories only if the content unmistakably corresponds. If any uncertainty exists or the content doesn't clearly fit a category, select ANYTHING_ELSE.\n\nReply with a JSON with the following shape:\n```typescript\n{\n/**\n* The chosen class for classification. Value can be one of:\n* - \"Reportado\"\n* - \"No reportado\"\n* - \"Ambiguo\"\n* - \"ANYTHING_ELSE\"\n*/\nvalue: string\n/**\n* A brief explanation for the chosen classification.\n*/\nexplanation: string\n/**\n* The score of the chosen class.\n*/\nscore: number\n}\n```\n\nEg:\n```json\n{\n \"value\": \"Reportado\",\n \"explanation\": \"The content is about...\",\n \"score\": 0.9\n}\n```"
-                  },
-                  {
-                    "role": "user",
-                    "content": "Content: {{CLASSIFICATION_INPUT}}\n\nAvailable categories: \n  - Reportado\n  - No reportado\n  - Ambiguo\n  - ANYTHING_ELSE\n\nIf the content doesn't directly align with any categories, select ANYTHING_ELSE."
-                  }
-                ],
-                "model": "openai__gpt-4o-2024-11-20",
-                "temperature": 0,
-                "signatureVersion": "Jan-2024"
-              },
-              "nodeId": "nd-ad61a2e49e",
-              "transitions": [
-                {
-                  "id": "trs-c8c4bbad7d",
-                  "type": "transition",
-                  "label": "Reportado",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "__CLASS=Reportado"
-                  },
-                  "destination": {}
-                },
-                {
-                  "id": "trs-7512bbc9d2",
-                  "type": "transition",
-                  "label": "No reportado",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "__CLASS=No reportado"
-                  },
-                  "destination": {}
-                },
-                {
-                  "id": "trs-bd89d731aa",
-                  "type": "transition",
-                  "label": "Ambiguo",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "__CLASS=Ambiguo"
-                  },
-                  "destination": {}
-                }
-              ]
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-ad61a2e49e",
-          "name": "ReportedQuestion"
+          "x": 810,
+          "y": -990
         },
         {
           "type": "standard",
@@ -25897,7 +25005,7 @@
               "id": "ins-5685a4f025",
               "task": {
                 "instructions": "## Role\nEres un clasificador experto en interpretar respuestas colombianas. \n\n## Strategy\n1. Tu tarea es determinar si un usuario está **reportado**, **no reportado** o si la respuesta es **ambigua** basada en las siguientes reglas:  \n  a. **Reportado:**  \n   - Respuestas afirmativas como \"sí\", \"así es\", \"correcto\", \"claro que sí\", o cualquier otra que confirme que el usuario está reportado.  \n   - Respuestas ambiguas, como \"no sé\", \"no estoy seguro\", \"tal vez\", o respuestas que indiquen que el usuario no quiere responder directamente.  \n   - Respuestas como \"prefiero no responder\", \"es personal\", o que claramente eviten dar información.  \n\n  b. **No reportado:**  \n   - Respuestas negativas como \"no\", \"no estoy reportado\", \"para nada\", \"negativo\", o cualquier otra que niegue explícitamente estar reportado.\n\n  c. **Ambiguo:**  \n   - Respuestas que no tienen suficiente información para clasificarse como \"reportado\" o \"no reportado\". Ejemplo: \"Hmm\", \"tal vez sí o no\", \"sfdsdf\" o cualquier otra cosa que no corresponda\n\n2. Una vez clasificado. Define el valor de `@user.negativeCreditReport` de la siguiente manera:\n- **\"SÍ\"**: @user.negativeCreditReport = true\n- **\"NO\"**:  @user.negativeCreditReport = false\n- **\"AMBIGUO\"**: @user.negativeCreditReport = (empty)\n\nAdemás, considera que las respuestas estarán en español colombiano.  \n\n## Examples\n\n**Ejemplo de formato esperado:**  \nEntrada: \"No sé si estoy reportado.\"  \nClasificación: **\"SÍ\"**\n\nEntrada: \"No, no estoy reportado.\"  \nClasificación: **\"NO\"**\n\nEntrada: \"Prefiero no decirlo.\"  \nClasificación: **\"SÍ\"**\n\nEntrada: \"sfdsdf.\"  \nClasificación: **\"AMBIGUO\"**",
-                "input": "{{workflow.userReportedAnswer}}",
+                "input": "Respuesta reportado o no: {{workflow.userReportedAnswer}}",
                 "outputVariableIds": [
                   "var-1b5209edbb"
                 ],
@@ -25936,12 +25044,13 @@
             },
             {
               "type": "log",
-              "id": "ins-bf7ef6d46e",
+              "category": "Utilities",
+              "id": "ins-6e2fd32f9f",
               "label": "Log",
               "level": "info",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "User reported on data credito: {{user.negativeCreditReport}}",
+                "dynamicValue": "🤖 Respuesta de estadao en data crédito: {{user.negativeCreditReport}}",
                 "staticValue": ""
               },
               "nodeId": "nd-e417adb2b2",
@@ -25974,60 +25083,10 @@
               "transitions": [],
               "nodeId": "nd-e417adb2b2",
               "manualFields": []
-            },
-            {
-              "id": "ins-190cf956f7",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{user.negativeCreditReport === 'SÍ'}}"
-              },
-              "label": "Reported",
-              "generative": {
-                "label": "Reported",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-e417adb2b2",
-              "description": "",
-              "destination": {
-                "node": "nd-000c9a583c"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-b256dbe028",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{user.negativeCreditReport === 'NO'}}"
-              },
-              "label": "No Reported",
-              "generative": {
-                "label": "No Reported",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-e417adb2b2",
-              "description": "",
-              "destination": {
-                "node": "nd-74af5d584a"
-              },
-              "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-653e88f063"
+            "targetNodeId": "nd-d7491cc00b"
           },
           "id": "nd-e417adb2b2",
           "name": "ReportedQuestion_RawVersion"
@@ -26035,8 +25094,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 1260,
-          "y": -765,
+          "x": 795,
+          "y": -720,
           "variables": [],
           "instructions": [
             {
@@ -26066,172 +25125,116 @@
             }
           ],
           "id": "nd-761ade4356",
-          "name": "No_Reported"
+          "name": "No_reportado"
         },
         {
-          "name": "ReportedIncorrectInput",
           "type": "standard",
           "deletable": true,
-          "x": -240,
-          "y": -1125,
+          "x": -15,
+          "y": -420,
           "instructions": [
             {
-              "id": "ins-713822d6fd",
-              "type": "action",
-              "code": "workflow.understandingAttempts++",
-              "origin": "builtin",
-              "label": "\"Track and Manage User Understanding Attempts in Learning\"",
-              "nodeId": "nd-653e88f063",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.understandingAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "id": "ins-c01a3ea56a",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.understandingAttempts >= 2}}"
-              },
-              "label": "Attempts over",
-              "generative": {
-                "label": "Attempts over",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-653e88f063",
-              "description": "",
-              "destination": {
-                "node": "nd-319c8774ce"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-385220a5ac",
+              "id": "ins-08649fb228",
               "type": "skill",
-              "name": "evaluateConfirmation1",
-              "flowId": "wf-f44160aa45",
-              "exitNodes": [
-                "nd-029e738c1a",
-                "nd-44f981d7c0",
-                "nd-d9bd76f4f9"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-e2c60b15bd",
-                  "type": "transition",
-                  "label": "UserHasConfirmed",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-029e738c1a"
-                  },
-                  "destination": {
-                    "node": "nd-000c9a583c"
-                  },
-                  "generative": {
-                    "label": "UserHasConfirmed",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasConfirmed",
-                      "condition": "lastNode=nd-029e738c1a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-6798b04d7d",
-                  "type": "transition",
-                  "label": "UserHasRejected",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-44f981d7c0"
-                  },
-                  "destination": {
-                    "node": "nd-74af5d584a"
-                  },
-                  "generative": {
-                    "label": "UserHasRejected",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasRejected",
-                      "condition": "lastNode=nd-44f981d7c0"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-c151932bce",
-                  "type": "transition",
-                  "label": "Questio_Answered",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-d9bd76f4f9"
-                  },
-                  "destination": {
-                    "node": "nd-999484b2e5"
-                  },
-                  "generative": {
-                    "label": "Questio_Answered",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Questio_Answered",
-                      "condition": "lastNode=nd-d9bd76f4f9"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-653e88f063",
+              "name": "QuestionWithUserName",
+              "flowId": "wf-9d5e1848de",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-999484b2e5",
               "manualFields": [],
               "variables": [
                 {
-                  "id": "var-b34d67ec67",
-                  "name": "userInput",
+                  "id": "var-db2f30c8bf",
+                  "name": "question",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-81cc728a15",
+                  "name": "additionalConsiderations",
                   "description": "",
                   "type": "string",
                   "scope": "workflow",
                   "defaultValue": "",
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "{{workflow.userReportedAnswer}}",
+                    "dynamicValue": "Genera un mensaje para el usuario donde le preguntes si está \"reportado\". Considera generar el mensaje con congruencia basado en el resumen de conversación.",
                     "staticValue": ""
                   }
                 },
                 {
-                  "id": "var-999f1cd8d0",
-                  "name": "answerType",
+                  "id": "var-5b7f702b3f",
+                  "name": "waitForUserInput",
                   "description": "",
-                  "type": "string",
+                  "type": "boolean",
                   "scope": "workflow",
-                  "defaultValue": "",
-                  "storeAsTag": false,
+                  "defaultValue": false,
                   "value": {
-                    "valueType": "dynamic",
-                    "dynamicValue": "{{workflow.userReportedAnswer}}",
-                    "staticValue": ""
+                    "valueType": "static",
+                    "staticValue": true,
+                    "dynamicValue": ""
                   }
                 }
               ]
+            },
+            {
+              "id": "ins-26d880ec8e",
+              "type": "action",
+              "code": "workflow.userReportedAnswer = event.preview",
+              "origin": "builtin",
+              "label": "\"Assign User Reported Answer to Workflow Event Preview\"",
+              "nodeId": "nd-999484b2e5",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.userReportedAnswer = event.preview;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+            },
+            {
+              "type": "log",
+              "id": "ins-9c9e182062",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Reported answer: {{workflow.userReportedAnswer}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-999484b2e5",
+              "transitions": []
             }
           ],
-          "id": "nd-653e88f063"
+          "defaultTransition": {
+            "targetNodeId": "nd-e417adb2b2"
+          },
+          "id": "nd-999484b2e5",
+          "name": "MadeQuestion"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": -660,
+          "y": -615,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 32px\">Preguntar si está reportado</span></strong></p><pre><code>askForReportedStatus</code></pre>",
+          "id": "nd-7cc03ac165",
+          "name": "Comment1",
+          "height": 188,
+          "width": 326,
+          "backgroundColor": "var(--jade-5)",
+          "defaultTransition": {
+            "targetNodeId": null
+          }
         },
         {
           "type": "standard",
           "deletable": true,
-          "x": 0,
-          "y": -180,
+          "x": -285,
+          "y": -45,
           "instructions": [
             {
               "type": "ai",
@@ -26253,7 +25256,7 @@
                 "temperature": 0.5,
                 "version": "1.0"
               },
-              "nodeId": "nd-999484b2e5",
+              "nodeId": "nd-2f4a3d8513",
               "label": "userReportedQuestion",
               "transitions": [],
               "prompt": {
@@ -26285,7 +25288,7 @@
                 "dynamicValue": "✨ User reported question: {{workflow.userReportedQuestion}}",
                 "staticValue": ""
               },
-              "nodeId": "nd-999484b2e5",
+              "nodeId": "nd-2f4a3d8513",
               "transitions": []
             },
             {
@@ -26300,7 +25303,7 @@
                   "kb-e2cf85fe7d"
                 ]
               },
-              "nodeId": "nd-999484b2e5",
+              "nodeId": "nd-2f4a3d8513",
               "variableId": "var-513a1c452e",
               "question": {
                 "valueType": "dynamic",
@@ -26360,145 +25363,142 @@
                 "model": "gpt-3.5-turbo",
                 "temperature": 0
               }
-            },
-            {
-              "type": "log",
-              "id": "ins-9c9e182062",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Reported answer: {{workflow.userReportedAnswer}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-999484b2e5",
-              "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-e417adb2b2"
+            "targetNodeId": null
           },
-          "id": "nd-999484b2e5",
-          "name": "MadeQuestion"
+          "id": "nd-2f4a3d8513",
+          "name": "__TRASH"
         },
         {
+          "name": "AnswerType1",
           "type": "standard",
           "deletable": true,
-          "x": 270,
-          "y": -1140,
-          "instructions": [
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-ac988ca74f",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Understanding the reported status: attempts over",
-                "staticValue": ""
-              },
-              "nodeId": "nd-319c8774ce",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-000c9a583c"
-          },
-          "id": "nd-319c8774ce",
-          "name": "AttemptsOverLog"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 780,
+          "x": -15,
           "y": -990,
           "instructions": [
             {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-6e2fd32f9f",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "User set as reported",
-                "staticValue": ""
-              },
-              "nodeId": "nd-000c9a583c",
-              "transitions": []
-            },
-            {
-              "id": "ins-518ed2bb6d",
+              "id": "ins-11dc7a38a7",
               "type": "skill",
-              "name": "💾 saveUserData",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "category": "Flow Logic",
-              "nodeId": "nd-000c9a583c",
-              "manualFields": []
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-7b82823ee1",
+                "nd-20fb14943e"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-6a5e41f15f",
+                  "type": "transition",
+                  "label": "CONTINUAR",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-7b82823ee1"
+                  },
+                  "destination": {
+                    "node": "nd-a50fd7155c"
+                  },
+                  "generative": {
+                    "label": "CONTINUAR",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "CONTINUAR",
+                      "condition": "lastNode=nd-7b82823ee1"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-6185880a5c",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-999484b2e5"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-d7491cc00b"
             }
           ],
-          "defaultTransition": {
-            "targetNodeId": "nd-6c4c24aa70"
-          },
-          "id": "nd-000c9a583c",
-          "name": "SetUserAsReported"
+          "id": "nd-d7491cc00b"
         },
         {
+          "name": "askForDocument1",
           "type": "standard",
           "deletable": true,
-          "x": 825,
-          "y": -780,
+          "x": 435,
+          "y": -930,
           "instructions": [
             {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-e0e07fe4e3",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "User set as not reported",
-                "staticValue": ""
+              "id": "ins-190cf956f7",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{user.negativeCreditReport === 'SÍ'}}"
               },
-              "nodeId": "nd-74af5d584a",
+              "label": "Reported",
+              "generative": {
+                "label": "Reported",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-a50fd7155c",
+              "description": "",
+              "destination": {
+                "node": "nd-6c4c24aa70"
+              },
               "transitions": []
             },
             {
-              "id": "ins-9e3a0fc1de",
-              "type": "skill",
-              "name": "💾 saveUserData",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
+              "id": "ins-b256dbe028",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{user.negativeCreditReport === 'NO'}}"
+              },
+              "label": "No Reported",
+              "generative": {
+                "label": "No Reported",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
               "category": "Flow Logic",
-              "nodeId": "nd-74af5d584a",
-              "manualFields": []
+              "nodeId": "nd-a50fd7155c",
+              "description": "",
+              "destination": {
+                "node": "nd-761ade4356"
+              },
+              "transitions": []
             }
           ],
-          "defaultTransition": {
-            "targetNodeId": "nd-761ade4356"
-          },
-          "id": "nd-74af5d584a",
-          "name": "SetUserAsNotRepoted"
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": -660,
-          "y": -615,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 32px\">Preguntar si está reportado</span></strong></p><pre><code>askForReportedStatus</code></pre>",
-          "id": "nd-7cc03ac165",
-          "name": "Comment1",
-          "height": 188,
-          "width": 326,
-          "backgroundColor": "var(--jade-5)",
-          "defaultTransition": {
-            "targetNodeId": null
-          }
+          "id": "nd-a50fd7155c"
         }
       ],
       "parentFolder": "dir-789b6d398d"
@@ -26508,15 +25508,6 @@
       "name": "askIfUserHasCupoBrilla",
       "startNode": "nd-1f3088f8e6",
       "variables": [
-        {
-          "id": "var-d84ed5e3a0",
-          "name": "userAnswer",
-          "description": "",
-          "type": "string",
-          "scope": "workflow",
-          "defaultValue": "",
-          "storeAsTag": false
-        },
         {
           "id": "var-db9ad04d98",
           "name": "answerUnderstanding",
@@ -26551,6 +25542,15 @@
           "type": "number",
           "scope": "workflow",
           "defaultValue": 0,
+          "storeAsTag": false
+        },
+        {
+          "id": "var-d84ed5e3a0",
+          "name": "haveCupoBrillaAnswer",
+          "description": "Respuesta que dal el cliente cuando se le pregunta si tiene cupo brilla o no",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
           "storeAsTag": false
         }
       ],
@@ -26605,7 +25605,7 @@
         },
         {
           "id": "nd-32b3b9b945",
-          "name": "UserHasCupoBrilla",
+          "name": "UserHas_Not_CupoBrilla",
           "type": "exit",
           "variables": [],
           "deletable": false,
@@ -26625,7 +25625,7 @@
             }
           ],
           "x": 1725,
-          "y": 165
+          "y": 405
         },
         {
           "type": "standard",
@@ -26634,77 +25634,66 @@
           "y": 285,
           "instructions": [
             {
-              "id": "ins-ab0dc221dc",
-              "type": "capture",
-              "entityId": "prompts://RawInput/v1",
-              "entityName": "Raw Input",
-              "kbPriority": {
-                "enabled": true,
-                "searchScope": "specific",
-                "kbs": [
-                  "kb-e2cf85fe7d"
-                ]
-              },
-              "nodeId": "nd-acd4f6664d",
-              "variableId": "var-d84ed5e3a0",
-              "question": {
-                "staticValue": "",
-                "dynamicValue": "¿Cuenta con cupo brilla?",
-                "valueType": "dynamic"
-              },
-              "validation": {
-                "validators": []
-              },
-              "choice": {
-                "options": {
-                  "staticValue": [],
-                  "dynamicValue": "",
-                  "valueType": "static"
-                }
-              },
-              "retry": {
-                "maxRetries": 2,
-                "retryMessage": {
-                  "staticValue": "",
-                  "dynamicValue": "",
-                  "valueType": "dynamic"
-                }
-              },
-              "cancellation": {
-                "cancellable": true,
-                "confirmCancel": true,
-                "confirmCancelMessage": {
-                  "staticValue": "",
-                  "dynamicValue": "",
-                  "valueType": "static"
-                }
-              },
-              "handleFailure": false,
-              "historyLookback": 0,
-              "skipIfAlreadyFilled": false,
+              "id": "ins-131539b59a",
+              "type": "skill",
+              "name": "QuestionWithUserName",
+              "flowId": "wf-9d5e1848de",
+              "exitNodes": [],
               "transitions": [],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are ExtractGPT and your only goal is to generate useful content in JSON format for developers to parse and use. You don't know any other language than JSON."
-                  },
-                  {
-                    "role": "user",
-                    "content": "```typescript\n/** The user answer to the question \"undefined\" */\ninterface Output = { value: any }\n```\n\nHere is a conversation between me and a user. Transcript:\n\"\"\"\n(...)\nagent: undefined\nuser: undefined\n\"\"\""
-                  },
-                  {
-                    "role": "assistant",
-                    "content": "{}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "\nNow, forget about the previous transcripts. These were just examples, don't consider those as valid transcripts for this new task.\n\n###\n\nThe current Date is {{CURRENT_DATE_TIME}}.\n\nAt this point of the conversation, I need require the user to fill the output in following JSON output to complete the task.\nIf more than one property, try to extract each of them the best you can.\n\n```typescript\n/** The user answer to the question \"{{QUESTION}}\" */\ninterface Output = { value: any }\n```\n\nHere is a conversation between me and a user. Transcript:\n\"\"\"\n(...)\n{{TRANSCRIPT}}\n\"\"\"\n\nIn the last user message, here are the entities found:\n\"\"\"\nENTITIES_IDENTIFIED\n\"\"\"\n\nI need you to extract from the conversation transcript above the values the user has provided.\nIf the user has not provided the information I need, I need you to set the value of the missing answer properties to null.\nHave some tolerance to typos and variations in how the user selects from the possible values.\n\n\n\nNow, please reply to me with the above JSON output and nothing but JSON.\nYou should not explain your answer and should not talk back to me. Just JSON."
+              "category": "Flow Logic",
+              "nodeId": "nd-acd4f6664d",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-db2f30c8bf",
+                  "name": "question",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "¿Cuenta con cupo brilla?",
+                    "staticValue": ""
                   }
-                ],
-                "model": "gpt-3.5-turbo",
-                "temperature": 0
-              }
+                },
+                {
+                  "id": "var-81cc728a15",
+                  "name": "additionalConsiderations",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "En esta ocación no menciones el nombre",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-5b7f702b3f",
+                  "name": "waitForUserInput",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "valueType": "static",
+                    "staticValue": true,
+                    "dynamicValue": ""
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ins-13892a4fa4",
+              "type": "action",
+              "code": "workflow.haveCupoBrillaAnswer = event.preview",
+              "origin": "builtin",
+              "label": "\"Workflow for Managing Cupo Brilla Responses\"",
+              "nodeId": "nd-acd4f6664d",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.haveCupoBrillaAnswer = event.preview;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             },
             {
               "type": "log",
@@ -26713,147 +25702,48 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "haveCupoBrillaAnswer: {{workflow.use}}",
+                "dynamicValue": "haveCupoBrillaAnswer: {{workflow.haveCupoBrillaAnswer}}",
                 "staticValue": ""
               },
               "nodeId": "nd-acd4f6664d",
               "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-724e557c36"
-          },
-          "id": "nd-acd4f6664d",
-          "name": "MadeQuestion"
-        },
-        {
-          "name": "evaluateConfirmation",
-          "type": "standard",
-          "deletable": true,
-          "x": 900,
-          "y": 600,
-          "instructions": [
-            {
-              "id": "ins-e91a4d923e",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.understandingAttempts = workflow.understandingAttempts++",
-              "origin": "builtin",
-              "label": "\"Increment Workflow Understanding Attempts Counter\"",
-              "nodeId": "nd-724e557c36",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.understandingAttempts = workflow.understandingAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
             },
             {
-              "id": "ins-76ea1fdda4",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.understandingAttempts >= 2}}"
-              },
-              "label": "Understanding Attempts over",
-              "generative": {
-                "label": "Understanding Attempts over",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-724e557c36",
-              "description": "",
-              "destination": {
-                "node": "nd-e732116c1c"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-099072e221",
+              "id": "ins-f748ae939b",
               "type": "skill",
-              "name": "EvaluateConfirmation",
-              "flowId": "wf-f44160aa45",
+              "name": "GetConfirmation",
+              "flowId": "wf-3e02a49614",
               "exitNodes": [
-                "nd-029e738c1a",
-                "nd-44f981d7c0",
-                "nd-d9bd76f4f9"
+                "nd-0b93ddef9b"
               ],
               "transitions": [
                 {
-                  "id": "trs-da4ece9636",
+                  "id": "trs-ca0ad2742e",
                   "type": "transition",
-                  "label": "UserHasConfirmed",
+                  "label": "UNSUCESS",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-029e738c1a"
+                    "payload": "lastNode=nd-0b93ddef9b"
                   },
-                  "destination": {
-                    "node": "nd-7dd53b805a"
-                  },
+                  "destination": {},
                   "generative": {
-                    "label": "UserHasConfirmed",
+                    "label": "UNSUCESS",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "UserHasConfirmed",
-                      "condition": "lastNode=nd-029e738c1a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-d8e373235d",
-                  "type": "transition",
-                  "label": "UserHasRejected",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-44f981d7c0"
-                  },
-                  "destination": {
-                    "node": "nd-e732116c1c"
-                  },
-                  "generative": {
-                    "label": "UserHasRejected",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasRejected",
-                      "condition": "lastNode=nd-44f981d7c0"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-5c211bd66b",
-                  "type": "transition",
-                  "label": "Questio_Answered",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-d9bd76f4f9"
-                  },
-                  "destination": {
-                    "node": "nd-acd4f6664d"
-                  },
-                  "generative": {
-                    "label": "Questio_Answered",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Questio_Answered",
-                      "condition": "lastNode=nd-d9bd76f4f9"
+                      "label": "UNSUCESS",
+                      "condition": "lastNode=nd-0b93ddef9b"
                     }
                   }
                 }
               ],
-              "nodeId": "nd-724e557c36",
+              "nodeId": "nd-acd4f6664d",
               "manualFields": [],
               "variables": [
                 {
-                  "id": "var-b34d67ec67",
+                  "id": "var-0e66ca5c99",
                   "name": "userInput",
                   "description": "",
                   "type": "string",
@@ -26861,92 +25751,46 @@
                   "defaultValue": "",
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "{{workflow.userAnswer}}",
+                    "dynamicValue": "{{workflow.haveCupoBrillaAnswer}}",
                     "staticValue": ""
-                  }
-                },
-                {
-                  "id": "var-999f1cd8d0",
-                  "name": "answerType",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": "",
-                    "valueType": "static",
-                    "dynamicValue": ""
                   }
                 }
               ]
-            }
-          ],
-          "id": "nd-724e557c36"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1350,
-          "y": 390,
-          "instructions": [
-            {
-              "id": "ins-6c367212c5",
-              "type": "skill",
-              "name": "setCupoBrillaProfile",
-              "flowId": "wf-bfe02f1d4e",
-              "exitNodes": [
-                "nd-b28e6179e2"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-fdf2531d87",
-                  "type": "transition",
-                  "label": "Exit",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-b28e6179e2"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Exit",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Exit",
-                      "condition": "lastNode=nd-b28e6179e2"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-7dd53b805a",
-              "manualFields": []
             },
             {
-              "id": "ins-57ee784a5a",
-              "type": "skill",
-              "name": "💾 saveUserData",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "category": "Flow Logic",
-              "nodeId": "nd-7dd53b805a",
-              "manualFields": []
+              "id": "ins-f175a904f5",
+              "type": "action",
+              "code": "const { confirmationType } = workflow.GetConfirmation\n\nworkflow.confirmation = confirmationType === 'ACCEPTED'",
+              "origin": "builtin",
+              "label": "Determine Confirmation Status Based on Workflow Type",
+              "nodeId": "nd-acd4f6664d",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { confirmationType } = workflow.GetConfirmation;\n  workflow.confirmation = confirmationType === \"ACCEPTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+            },
+            {
+              "type": "log",
+              "id": "ins-0ed8d6edca",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Tiene Cupo Brilla: {{workflow.confirmation}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-acd4f6664d"
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-32b3b9b945"
+            "targetNodeId": "nd-85017b5080"
           },
-          "id": "nd-7dd53b805a",
-          "name": "SetProfile"
+          "id": "nd-acd4f6664d",
+          "name": "MadeQuestion"
         },
         {
           "type": "exit",
           "deletable": true,
-          "x": 1455,
-          "y": 705,
+          "x": 1740,
+          "y": 735,
           "variables": [],
           "instructions": [
             {
@@ -26976,7 +25820,7 @@
             }
           ],
           "id": "nd-e732116c1c",
-          "name": "UserHas_Not_CupoBrilla"
+          "name": "HasCupoBrilla"
         },
         {
           "type": "standard",
@@ -27000,7 +25844,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-32b3b9b945"
+            "targetNodeId": "nd-1fad6b1e03"
           },
           "id": "nd-71345f8e47",
           "name": "Skip"
@@ -27020,6 +25864,119 @@
           "defaultTransition": {
             "targetNodeId": null
           }
+        },
+        {
+          "name": "getAnswerType",
+          "type": "standard",
+          "deletable": true,
+          "x": 840,
+          "y": 915,
+          "instructions": [
+            {
+              "id": "ins-68669293c2",
+              "type": "skill",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-7b82823ee1",
+                "nd-20fb14943e"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-7ad750086c",
+                  "type": "transition",
+                  "label": "CONTINUAR",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-7b82823ee1"
+                  },
+                  "destination": {
+                    "node": "nd-1fad6b1e03"
+                  },
+                  "generative": {
+                    "label": "CONTINUAR",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "CONTINUAR",
+                      "condition": "lastNode=nd-7b82823ee1"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-dbfdc65dfd",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-acd4f6664d"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-85017b5080"
+            }
+          ],
+          "id": "nd-85017b5080"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1380,
+          "y": 495,
+          "instructions": [
+            {
+              "id": "ins-c42b34c83d",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!workflow.confirmation }}"
+              },
+              "label": "No tiene cupo brilla",
+              "generative": {
+                "label": "No tiene cupo brilla",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-1fad6b1e03",
+              "description": "",
+              "destination": {
+                "node": "nd-32b3b9b945"
+              }
+            },
+            {
+              "id": "ins-d3b791228a",
+              "type": "action",
+              "code": "user.creditProfile = 'CUPO_BRILLA'",
+              "origin": "builtin",
+              "label": "\"Assign User Credit Profile Based on Criteria\"",
+              "nodeId": "nd-1fad6b1e03",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.creditProfile = \"CUPO_BRILLA\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-e732116c1c"
+          },
+          "id": "nd-1fad6b1e03",
+          "name": "evaluateHasCupoBrilla"
         }
       ],
       "parentFolder": "dir-789b6d398d"
@@ -27129,67 +26086,8 @@
               "nodeId": "nd-a3bd076727"
             }
           ],
-          "x": 1695,
-          "y": -225
-        },
-        {
-          "id": "nd-abd865b305",
-          "name": "Router",
-          "type": "standard",
-          "deletable": true,
-          "instructions": [
-            {
-              "id": "ins-4b31c07e2c",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{user.jobContractType === 'FORMAL'}}"
-              },
-              "label": "Formal",
-              "generative": {
-                "label": "Formal",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-abd865b305",
-              "description": "",
-              "destination": {
-                "node": "nd-a3bd076727"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-6f250e13c1",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{user.jobContractType === 'INFORMAL'}}"
-              },
-              "label": "Informal",
-              "generative": {
-                "label": "Informal",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-abd865b305",
-              "description": "",
-              "destination": {
-                "node": "nd-aed9b30cfe"
-              },
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-a208acadb4"
-          },
-          "x": 915,
-          "y": -180
+          "x": 1710,
+          "y": -75
         },
         {
           "type": "standard",
@@ -27198,90 +26096,56 @@
           "y": 225,
           "instructions": [
             {
-              "id": "ins-5a48aa3f98",
-              "type": "capture",
-              "entityId": "prompts://RawInput/v1",
-              "entityName": "Raw Input",
-              "kbPriority": {
-                "enabled": true,
-                "searchScope": "specific",
-                "kbs": [
-                  "kb-fac3fb699b"
-                ]
-              },
+              "id": "ins-959b18d2a7",
+              "type": "skill",
+              "name": "👤 questionWithUserName",
+              "flowId": "wf-9d5e1848de",
+              "exitNodes": [],
+              "transitions": [],
+              "category": "Flow Logic",
               "nodeId": "nd-471985123b",
-              "variableId": "var-2b7dcc68de",
-              "question": {
-                "valueType": "dynamic",
-                "dynamicValue": "¿Qué tipo de contrato tiene? ¿Formal o informal?",
-                "staticValue": ""
-              },
-              "validation": {
-                "validators": []
-              },
-              "choice": {
-                "options": {
-                  "staticValue": [],
-                  "dynamicValue": "",
-                  "valueType": "static"
-                }
-              },
-              "retry": {
-                "maxRetries": 2,
-                "retryMessage": {
-                  "staticValue": "",
-                  "dynamicValue": "",
-                  "valueType": "dynamic"
-                }
-              },
-              "cancellation": {
-                "cancellable": true,
-                "confirmCancel": true,
-                "confirmCancelMessage": {
-                  "staticValue": "",
-                  "dynamicValue": "",
-                  "valueType": "static"
-                }
-              },
-              "handleFailure": true,
-              "historyLookback": 0,
-              "skipIfAlreadyFilled": false,
-              "transitions": [
+              "manualFields": [],
+              "variables": [
                 {
-                  "id": "trs-bea37186d6",
-                  "type": "transition",
-                  "label": "On Failure",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "failed"
-                  },
-                  "destination": {
-                    "node": "nd-a208acadb4"
+                  "id": "var-db2f30c8bf",
+                  "name": "question",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "¿Qué tipo de contrato tiene? ¿Formal o informal?",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-81cc728a15",
+                  "name": "additionalConsiderations",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5b7f702b3f",
+                  "name": "waitForUserInput",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "valueType": "static",
+                    "staticValue": true,
+                    "dynamicValue": ""
                   }
                 }
-              ],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are ExtractGPT and your only goal is to generate useful content in JSON format for developers to parse and use. You don't know any other language than JSON."
-                  },
-                  {
-                    "role": "user",
-                    "content": "```typescript\n/** The user answer to the question \"undefined\" */\ninterface Output = { value: any }\n```\n\nHere is a conversation between me and a user. Transcript:\n\"\"\"\n(...)\nagent: undefined\nuser: undefined\n\"\"\""
-                  },
-                  {
-                    "role": "assistant",
-                    "content": "{}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "\nNow, forget about the previous transcripts. These were just examples, don't consider those as valid transcripts for this new task.\n\n###\n\nThe current Date is {{CURRENT_DATE_TIME}}.\n\nAt this point of the conversation, I need require the user to fill the output in following JSON output to complete the task.\nIf more than one property, try to extract each of them the best you can.\n\n```typescript\n/** The user answer to the question \"{{QUESTION}}\" */\ninterface Output = { value: any }\n```\n\nHere is a conversation between me and a user. Transcript:\n\"\"\"\n(...)\n{{TRANSCRIPT}}\n\"\"\"\n\nIn the last user message, here are the entities found:\n\"\"\"\nENTITIES_IDENTIFIED\n\"\"\"\n\nI need you to extract from the conversation transcript above the values the user has provided.\nIf the user has not provided the information I need, I need you to set the value of the missing answer properties to null.\nHave some tolerance to typos and variations in how the user selects from the possible values.\n\n\n\nNow, please reply to me with the above JSON output and nothing but JSON.\nYou should not explain your answer and should not talk back to me. Just JSON."
-                  }
-                ],
-                "model": "gpt-3.5-turbo",
-                "temperature": 0
-              }
+              ]
             },
             {
               "type": "log",
@@ -27291,7 +26155,7 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "Job type answer: {{workflow.userAnswer}}",
+                "dynamicValue": "Job type answer: {{event.preview}}",
                 "staticValue": ""
               },
               "nodeId": "nd-471985123b",
@@ -27307,8 +26171,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 390,
-          "y": 810,
+          "x": 435,
+          "y": 555,
           "instructions": [
             {
               "id": "ins-ae676cb25d",
@@ -27379,15 +26243,15 @@
               "data": {
                 "query": {
                   "valueType": "dynamic",
-                  "dynamicValue": "Retrieve understanding about: `{{workflow.userAnswer}}`.\nAvoid unnecessary wordiness",
+                  "dynamicValue": "Retrieve understanding about: `{{event.preview}}`.\nAvoid unnecessary wordiness",
                   "staticValue": "Retrieve understanding about: `{{workflow.authorizationInput}}`"
                 },
                 "kbs": {
                   "enabled": true,
+                  "searchScope": "specific",
                   "kbs": [
                     "kb-fac3fb699b"
                   ],
-                  "searchScope": "specific",
                   "valueType": "static",
                   "dynamicValue": ""
                 },
@@ -27478,7 +26342,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-abd865b305"
+            "targetNodeId": "nd-0d3fedf548"
           },
           "id": "nd-aceb54947d",
           "name": "UnderstandAnswer"
@@ -27486,8 +26350,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 1635,
-          "y": -45,
+          "x": 1710,
+          "y": 120,
           "variables": [],
           "instructions": [
             {
@@ -27520,309 +26384,10 @@
           "name": "informal"
         },
         {
-          "name": "UnderstandUserInput",
           "type": "standard",
           "deletable": true,
-          "x": 975,
-          "y": 675,
-          "instructions": [
-            {
-              "id": "ins-682c3b7b2a",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.understandingAttempts++",
-              "origin": "builtin",
-              "label": "\"Increment Understanding Attempts in Workflow Logic\"",
-              "nodeId": "nd-a208acadb4",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.understandingAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": [],
-              "isCustomLabel": false
-            },
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-e14621b5ff",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Understanding attempts: {{workflow.understandingAttempts}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-a208acadb4",
-              "transitions": []
-            },
-            {
-              "id": "ins-9d5a98f639",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.understandingAttempts >= 2}}"
-              },
-              "label": "Attempts over",
-              "generative": {
-                "label": "Attempts over",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-a208acadb4",
-              "description": "",
-              "destination": {
-                "node": "nd-d79b03db1a"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-fb0baeae6c",
-              "type": "skill",
-              "name": "UnderstandUserInput",
-              "flowId": "wf-cabe199fc6",
-              "exitNodes": [
-                "nd-ed7af360bf",
-                "nd-fb7e06f31a",
-                "nd-c9ade57441"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-706d409b1d",
-                  "type": "transition",
-                  "label": "ChangeContext",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-ed7af360bf"
-                  },
-                  "destination": {
-                    "node": "nd-471985123b"
-                  },
-                  "generative": {
-                    "label": "ChangeContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "ChangeContext",
-                      "condition": "lastNode=nd-ed7af360bf"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-282dde437f",
-                  "type": "transition",
-                  "label": "SUCCESS",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-fb7e06f31a"
-                  },
-                  "destination": {
-                    "node": "nd-1b55bb1de3"
-                  },
-                  "generative": {
-                    "label": "SameContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "SameContext",
-                      "condition": "lastNode=nd-fb7e06f31a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-7c35051640",
-                  "type": "transition",
-                  "label": "Refused",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-c9ade57441"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Refused",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Refused",
-                      "condition": "lastNode=nd-c9ade57441"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-a208acadb4",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-e6e441d563",
-                  "name": "allowAnswer",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "valueType": "static",
-                    "staticValue": true,
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-d2e43ac990",
-                  "name": "retry",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-a208acadb4"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1335,
-          "y": 1305,
-          "instructions": [
-            {
-              "id": "ins-a265d94952",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.userAnswer = workflow.UnderstandUserInput.correctedUserInput\n",
-              "origin": "builtin",
-              "label": "Assign Corrected User Input to Workflow User Answer",
-              "nodeId": "nd-1b55bb1de3",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.userAnswer = workflow.UnderstandUserInput.correctedUserInput;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": [],
-              "isCustomLabel": false
-            },
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-2d94980704",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Reinterpreate",
-                "staticValue": ""
-              },
-              "nodeId": "nd-1b55bb1de3",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-aceb54947d"
-          },
-          "id": "nd-1b55bb1de3",
-          "name": "SetParaphrase"
-        },
-        {
-          "name": "AttemptsOver",
-          "type": "standard",
-          "deletable": true,
-          "x": 1470,
-          "y": 600,
-          "instructions": [
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-8e4fd727ac",
-              "label": "Log",
-              "level": "error",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Understanding attempts over",
-                "staticValue": ""
-              },
-              "nodeId": "nd-d79b03db1a",
-              "transitions": []
-            },
-            {
-              "id": "ins-145dfaf5ca",
-              "type": "skill",
-              "name": "farewell1",
-              "flowId": "wf-066a81d084",
-              "exitNodes": [
-                "nd-9cd1505c0d"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-aa0716a004",
-                  "type": "transition",
-                  "label": "Exit",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-9cd1505c0d"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Exit",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Exit",
-                      "condition": "lastNode=nd-9cd1505c0d"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-d79b03db1a",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-28a6148a19",
-                  "name": "inputError",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-5229f73ac9",
-                  "name": "botState",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": "",
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-d79b03db1a"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 510,
-          "y": -390,
+          "x": 495,
+          "y": -60,
           "instructions": [
             {
               "type": "log",
@@ -27840,7 +26405,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-abd865b305"
+            "targetNodeId": "nd-5746843cfb"
           },
           "id": "nd-f33e2fc5a7",
           "name": "Skipping"
@@ -27862,7 +26427,7 @@
           "type": "comment",
           "deletable": true,
           "x": 435,
-          "y": 150,
+          "y": 75,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Preguntar tipo de contrato</span></strong></p>",
           "id": "nd-d0815eeca0",
@@ -27874,7 +26439,7 @@
           "type": "comment",
           "deletable": true,
           "x": 480,
-          "y": -510,
+          "y": -210,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Salta pregunta por que ya tenemos el dato</span></strong></p>",
           "id": "nd-c82121f5bf",
@@ -27888,8 +26453,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 900,
-          "y": -315,
+          "x": 1305,
+          "y": -150,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Bifurcar dependiendo la respuesta</span></strong></p>",
           "id": "nd-77a434845a",
@@ -27903,53 +26468,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 975,
-          "y": 540,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Entendimiento profundo de la respuesta</span></strong></p>",
-          "id": "nd-4d769d4801",
-          "name": "Comment5",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 1425,
-          "y": 450,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Se acabaron los intentos por entender</span></strong></p>",
-          "id": "nd-0c45cf792e",
-          "name": "Comment6",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 1335,
-          "y": 1185,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Parafrasear la respuesta del cliente para intentar reinterpretarla</span></strong></p>",
-          "id": "nd-f5b5691896",
-          "name": "Comment7",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 390,
-          "y": 705,
+          "x": 420,
+          "y": 435,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Interpretar la respuesta del cliente</span></strong></p>",
           "id": "nd-7f9d567956",
@@ -27959,6 +26479,132 @@
           "defaultTransition": {
             "targetNodeId": null
           }
+        },
+        {
+          "name": "AnswerType1",
+          "type": "standard",
+          "deletable": true,
+          "x": 930,
+          "y": 495,
+          "instructions": [
+            {
+              "id": "ins-7599dbb522",
+              "type": "skill",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-20fb14943e",
+                "nd-7b82823ee1"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-604aedff86",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-471985123b"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-2f936d778c",
+                  "type": "transition",
+                  "label": "CONTINUAR",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-7b82823ee1"
+                  },
+                  "destination": {
+                    "node": "nd-5746843cfb"
+                  },
+                  "generative": {
+                    "label": "CONTINUAR",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "CONTINUAR",
+                      "condition": "lastNode=nd-7b82823ee1"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-0d3fedf548",
+              "manualFields": []
+            }
+          ],
+          "id": "nd-0d3fedf548"
+        },
+        {
+          "name": "Router",
+          "type": "standard",
+          "deletable": true,
+          "x": 1320,
+          "y": -30,
+          "instructions": [
+            {
+              "id": "ins-4b31c07e2c",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{user.jobContractType === 'FORMAL'}}"
+              },
+              "label": "Formal",
+              "generative": {
+                "label": "Formal",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-5746843cfb",
+              "description": "",
+              "destination": {
+                "node": "nd-a3bd076727"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-6f250e13c1",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{user.jobContractType === 'INFORMAL'}}"
+              },
+              "label": "Informal",
+              "generative": {
+                "label": "Informal",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-5746843cfb",
+              "description": "",
+              "destination": {
+                "node": "nd-aed9b30cfe"
+              },
+              "transitions": []
+            }
+          ],
+          "id": "nd-5746843cfb"
         }
       ],
       "parentFolder": "dir-789b6d398d"
@@ -28043,8 +26689,8 @@
               "nodeId": "nd-4d21d2bcc2"
             }
           ],
-          "x": 300,
-          "y": 720
+          "x": 1260,
+          "y": 495
         },
         {
           "id": "nd-93c34beabf",
@@ -28113,8 +26759,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 630,
-          "y": 345,
+          "x": 1260,
+          "y": 165,
           "variables": [],
           "instructions": [
             {
@@ -28149,8 +26795,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 540,
-          "y": 135,
+          "x": 1245,
+          "y": 45,
           "variables": [],
           "instructions": [
             {
@@ -28181,42 +26827,6 @@
           ],
           "id": "nd-2b25d1b2d0",
           "name": "De_Contado"
-        },
-        {
-          "type": "exit",
-          "deletable": true,
-          "x": 990,
-          "y": 480,
-          "variables": [],
-          "instructions": [
-            {
-              "id": "trs-e6a4515744",
-              "type": "transition",
-              "label": "",
-              "condition": {
-                "type": "expression",
-                "payload": "true"
-              },
-              "destination": {
-                "node": "#"
-              },
-              "generative": {
-                "label": "",
-                "properties": {
-                  "label": true,
-                  "condition": true
-                },
-                "suggestion": {
-                  "label": "",
-                  "condition": "true"
-                }
-              },
-              "nodeId": "nd-3bcbdebad4",
-              "transitions": []
-            }
-          ],
-          "id": "nd-3bcbdebad4",
-          "name": "CupoBrilla"
         },
         {
           "type": "standard",
@@ -28403,19 +27013,9 @@
               "nodeId": "nd-9e115e2e1e",
               "description": "",
               "destination": {
-                "node": "nd-2b25d1b2d0"
+                "node": "nd-250410162e"
               },
               "transitions": []
-            },
-            {
-              "id": "ins-587beba34d",
-              "type": "skill",
-              "name": "CreditPreferenceHandle",
-              "flowId": "wf-2e6b6506ba",
-              "exitNodes": [],
-              "transitions": [],
-              "nodeId": "nd-9e115e2e1e",
-              "manualFields": []
             },
             {
               "id": "ins-b0cb1021ac",
@@ -28435,7 +27035,7 @@
               "nodeId": "nd-9e115e2e1e",
               "description": "",
               "destination": {
-                "node": "nd-87048ee08d"
+                "node": "nd-47b0d977b7"
               },
               "transitions": []
             },
@@ -28463,7 +27063,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-4d21d2bcc2"
+            "targetNodeId": "nd-cc9289de43"
           },
           "id": "nd-9e115e2e1e",
           "name": "EvaluateConfirmation"
@@ -28493,21 +27093,80 @@
               "type": "skill",
               "name": "setCupoBrillaProfile1",
               "flowId": "wf-bfe02f1d4e",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-0468eb36be",
+              "manualFields": []
+            }
+          ],
+          "id": "nd-0468eb36be"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 570,
+          "y": 870,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-1d514990ca",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "User was not understood",
+                "staticValue": ""
+              },
+              "nodeId": "nd-cc9289de43",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-4d21d2bcc2"
+          },
+          "id": "nd-cc9289de43",
+          "name": "skipOut"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 555,
+          "y": 735,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 18px\">Saltar pregunta por que no se entiendió la respuesta del cliente</span></strong></p>",
+          "id": "nd-513a3d095d",
+          "name": "Comment2",
+          "height": 148,
+          "width": 281,
+          "defaultTransition": {
+            "targetNodeId": null
+          }
+        },
+        {
+          "name": "handleCashPreference",
+          "type": "standard",
+          "deletable": true,
+          "x": 600,
+          "y": 75,
+          "instructions": [
+            {
+              "id": "ins-7570e4b73e",
+              "type": "skill",
+              "name": "CashPreferenceHandle1",
+              "flowId": "wf-1a6618bddb",
               "exitNodes": [
-                "nd-b28e6179e2"
+                "nd-c127f41c68"
               ],
               "transitions": [
                 {
-                  "id": "trs-ffe1feca06",
+                  "id": "trs-80d38d3462",
                   "type": "transition",
                   "label": "Exit",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-b28e6179e2"
+                    "payload": "lastNode=nd-c127f41c68"
                   },
-                  "destination": {
-                    "node": "nd-3bcbdebad4"
-                  },
+                  "destination": {},
                   "generative": {
                     "label": "Exit",
                     "properties": {
@@ -28516,16 +27175,42 @@
                     },
                     "suggestion": {
                       "label": "Exit",
-                      "condition": "lastNode=nd-b28e6179e2"
+                      "condition": "lastNode=nd-c127f41c68"
                     }
                   }
                 }
               ],
-              "nodeId": "nd-0468eb36be",
+              "nodeId": "nd-250410162e",
               "manualFields": []
             }
           ],
-          "id": "nd-0468eb36be"
+          "id": "nd-250410162e",
+          "defaultTransition": {
+            "targetNodeId": "nd-4d21d2bcc2"
+          }
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 660,
+          "y": 330,
+          "instructions": [
+            {
+              "id": "ins-587beba34d",
+              "type": "skill",
+              "name": "CreditPreferenceHandle",
+              "flowId": "wf-2e6b6506ba",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-47b0d977b7",
+              "manualFields": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-4d21d2bcc2"
+          },
+          "id": "nd-47b0d977b7",
+          "name": "handleCreditPreference"
         }
       ],
       "parentFolder": "dir-6338fb9c2f"
@@ -28601,49 +27286,8 @@
               "nodeId": "nd-c127f41c68"
             }
           ],
-          "x": 1335,
-          "y": 345
-        },
-        {
-          "id": "nd-173310017e",
-          "name": "Agreement_Message",
-          "type": "standard",
-          "deletable": true,
-          "instructions": [
-            {
-              "id": "ins-0452292e4b",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "De acuerdo",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
-                }
-              },
-              "nodeId": "nd-173310017e",
-              "transitions": []
-            },
-            {
-              "id": "ins-98eed6f8a3",
-              "type": "skill",
-              "name": "💾 saveUserData",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "nodeId": "nd-173310017e",
-              "manualFields": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-c127f41c68"
-          },
-          "x": 1740,
-          "y": -210
+          "x": 1200,
+          "y": 450
         },
         {
           "type": "standard",
@@ -28716,120 +27360,32 @@
               "transitions": []
             },
             {
-              "id": "ins-4a2b0eae0b",
-              "category": "Send Messages",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "No estoy autorizado para brindar descuentos. El día de mañana un compañero se pondrá en contacto con usted para informarle los descuentos que le podemos ofrecer. ¿Está de acuerdo con la llamada?",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
-                }
-              },
-              "nodeId": "nd-05089da066",
-              "transitions": []
-            },
-            {
-              "id": "ins-a37890f9a0",
-              "type": "wait",
-              "category": "Capture Information",
-              "label": "Wait for User Input",
-              "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
-              "nodeId": "nd-05089da066",
-              "transitions": []
-            },
-            {
-              "id": "ins-740881e422",
+              "id": "ins-1428717742",
               "type": "skill",
-              "name": "evaluateConfirmation1",
-              "flowId": "wf-f44160aa45",
-              "exitNodes": [
-                "nd-029e738c1a",
-                "nd-44f981d7c0",
-                "nd-d9bd76f4f9"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-0bb4eff51e",
-                  "type": "transition",
-                  "label": "UserHasConfirmed",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-029e738c1a"
-                  },
-                  "destination": {
-                    "node": "nd-87981a6ade"
-                  },
-                  "generative": {
-                    "label": "UserHasConfirmed",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasConfirmed",
-                      "condition": "lastNode=nd-029e738c1a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-2aae6671aa",
-                  "type": "transition",
-                  "label": "UserHasRejected",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-44f981d7c0"
-                  },
-                  "destination": {
-                    "node": "nd-2d3b086dcd"
-                  },
-                  "generative": {
-                    "label": "UserHasRejected",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasRejected",
-                      "condition": "lastNode=nd-44f981d7c0"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-409247aefb",
-                  "type": "transition",
-                  "label": "Questio_Answered",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-d9bd76f4f9"
-                  },
-                  "destination": {
-                    "node": "nd-c127f41c68"
-                  },
-                  "generative": {
-                    "label": "Questio_Answered",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Questio_Answered",
-                      "condition": "lastNode=nd-d9bd76f4f9"
-                    }
-                  }
-                }
-              ],
+              "name": "👤 questionWithUserName",
+              "flowId": "wf-9d5e1848de",
+              "exitNodes": [],
+              "transitions": [],
+              "category": "Flow Logic",
               "nodeId": "nd-05089da066",
               "manualFields": [],
               "variables": [
                 {
-                  "id": "var-b34d67ec67",
-                  "name": "userInput",
+                  "id": "var-db2f30c8bf",
+                  "name": "question",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "No estoy autorizado para brindar descuentos. El día de mañana un compañero se pondrá en contacto con usted para informarle los descuentos que le podemos ofrecer. ¿Está de acuerdo con la llamada?",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-81cc728a15",
+                  "name": "additionalConsiderations",
                   "description": "",
                   "type": "string",
                   "scope": "workflow",
@@ -28841,13 +27397,87 @@
                   }
                 },
                 {
-                  "id": "var-999f1cd8d0",
-                  "name": "answerType",
+                  "id": "var-5b7f702b3f",
+                  "name": "waitForUserInput",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "valueType": "static",
+                    "staticValue": true,
+                    "dynamicValue": ""
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ins-13ccc81975",
+              "type": "skill",
+              "name": "GetConfirmation",
+              "flowId": "wf-3e02a49614",
+              "exitNodes": [
+                "nd-a0e64ee3ce",
+                "nd-0b93ddef9b"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-2db768baac",
+                  "type": "transition",
+                  "label": "SUCCESS",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-a0e64ee3ce"
+                  },
+                  "destination": {
+                    "node": "nd-87981a6ade"
+                  },
+                  "generative": {
+                    "label": "SUCCESS",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "SUCCESS",
+                      "condition": "lastNode=nd-a0e64ee3ce"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-068c4224ce",
+                  "type": "transition",
+                  "label": "UNSUCESS",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-0b93ddef9b"
+                  },
+                  "destination": {
+                    "node": "nd-75f2070d05"
+                  },
+                  "generative": {
+                    "label": "UNSUCESS",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "UNSUCESS",
+                      "condition": "lastNode=nd-0b93ddef9b"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-05089da066",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-0e66ca5c99",
+                  "name": "userInput",
                   "description": "",
                   "type": "string",
                   "scope": "workflow",
                   "defaultValue": "",
-                  "storeAsTag": false,
                   "value": {
                     "staticValue": "",
                     "valueType": "static",
@@ -28872,7 +27502,7 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "✨ Positive Answer User interpreted",
+                "dynamicValue": "✨ Answer User interpreted: {{workflow.GetConfirmation.confirmationType}}",
                 "staticValue": ""
               },
               "nodeId": "nd-87981a6ade",
@@ -28882,58 +27512,48 @@
               "id": "ins-eeec62013a",
               "type": "action",
               "category": "Execute",
-              "code": "conversation.status = \"CALL_ATTENTION_PENDING\"",
+              "code": "const {confirmationType} = workflow.GetConfirmation\n\nconversation.status = confirmationType === 'ACCEPTED'  ? 'CALL_ATTENTION_PENDING' : 'ATTENTION_REJECTED'",
               "origin": "builtin",
               "nodeId": "nd-87981a6ade",
-              "label": "Manage Conversation Status for Attention Requests",
+              "label": "Update Conversation Status Based on Confirmation Type",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"CALL_ATTENTION_PENDING\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-173310017e"
-          },
-          "id": "nd-87981a6ade",
-          "name": "PendingAttention"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1305,
-          "y": -195,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-db9232a630",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "✨ Negative Answer User interpreted",
-                "staticValue": ""
-              },
-              "nodeId": "nd-2d3b086dcd",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { confirmationType } = workflow.GetConfirmation;\n  conversation.status = confirmationType === \"ACCEPTED\" ? \"CALL_ATTENTION_PENDING\" : \"ATTENTION_REJECTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
-              "id": "ins-844bc9c433",
-              "type": "action",
-              "category": "Execute",
-              "code": "conversation.status = \"ATTENTION_REJECTED\"",
-              "origin": "builtin",
-              "nodeId": "nd-2d3b086dcd",
-              "label": "\"Manage Conversation Status for Rejected Attention Cases\"",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.status = \"ATTENTION_REJECTED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "id": "ins-0452292e4b",
+              "type": "content",
+              "content": {
+                "type": "text",
+                "text": {
+                  "valueType": "dynamic",
+                  "dynamicValue": "De acuerdo",
+                  "staticValue": ""
+                },
+                "typing": {
+                  "valueType": "static",
+                  "staticValue": true
+                }
+              },
+              "nodeId": "nd-87981a6ade",
               "transitions": []
+            },
+            {
+              "id": "ins-98eed6f8a3",
+              "type": "skill",
+              "name": "💾 saveUserData",
+              "flowId": "wf-21d68eedc5",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-87981a6ade",
+              "manualFields": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-173310017e"
+            "targetNodeId": "nd-75f2070d05"
           },
-          "id": "nd-2d3b086dcd",
-          "name": "RejectedAttention"
+          "id": "nd-87981a6ade",
+          "name": "PendingAttention"
         },
         {
           "type": "comment",
@@ -29094,19 +27714,73 @@
           }
         },
         {
-          "type": "comment",
+          "name": "HandleCallRequestAnswer",
+          "type": "standard",
           "deletable": true,
-          "x": 1305,
-          "y": -345,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Rechaza. Se asigna el usuario como no desear atención.</span></strong></p>",
-          "id": "nd-a26d2983d4",
-          "name": "Comment6",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
+          "x": 1320,
+          "y": 105,
+          "instructions": [
+            {
+              "id": "ins-112eee55f2",
+              "type": "skill",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-7b82823ee1",
+                "nd-20fb14943e"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-ebb619d1a7",
+                  "type": "transition",
+                  "label": "CONTINUAR",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-7b82823ee1"
+                  },
+                  "destination": {
+                    "node": "nd-c127f41c68"
+                  },
+                  "generative": {
+                    "label": "CONTINUAR",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "CONTINUAR",
+                      "condition": "lastNode=nd-7b82823ee1"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-1ff47ab549",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-05089da066"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-75f2070d05"
+            }
+          ],
+          "id": "nd-75f2070d05"
         }
       ],
       "parentFolder": "dir-6338fb9c2f"
@@ -29907,7 +28581,23 @@
               "exitNodes": [],
               "transitions": [],
               "nodeId": "nd-3ffb366fd0",
-              "manualFields": []
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-4640e40e5f",
+                  "name": "noRequiereConsultar",
+                  "description": "Confirmación excepcional de que el no necesita repteir la pregunta.  Cuando es true, la transición \"REPITE\" no se cumplirá",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": true,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
             },
             {
               "id": "ins-c553de04f2",
@@ -30684,11 +29374,23 @@
               "category": "Execute",
               "code": "workflow.requestDocumentQuestion = workflow.QuestionWithUserName1.messageResult\nconsole.log('⭕️ ', workflow.requestDocumentQuestion)\n",
               "origin": "builtin",
-              "label": "\"Log User's Document Request Question to Console\"",
+              "label": "Log User's Document Request Question to Console",
               "nodeId": "nd-2b3da1255b",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.requestDocumentQuestion = workflow.QuestionWithUserName1.messageResult;\n  console.log(\"\\u2B55\\uFE0F \", workflow.requestDocumentQuestion);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-05eb984041",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Pregunta a para consultar documento: {{workflow.requestDocumentQuestion}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-2b3da1255b"
             },
             {
               "id": "ins-61f37dcd91",
@@ -30910,7 +29612,23 @@
               "exitNodes": [],
               "transitions": [],
               "nodeId": "nd-b84d919168",
-              "manualFields": []
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-4640e40e5f",
+                  "name": "noRequiereConsultar",
+                  "description": "Confirmación excepcional de que el no necesita repteir la pregunta.  Cuando es true, la transición \"REPITE\" no se cumplirá",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": true,
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "static",
+                    "staticValue": true,
+                    "dynamicValue": ""
+                  }
+                }
+              ]
             },
             {
               "id": "ins-c7f577cbe9",
@@ -31365,8 +30083,8 @@
           "name": "farewell",
           "type": "standard",
           "deletable": true,
-          "x": 1830,
-          "y": 705,
+          "x": 1875,
+          "y": 720,
           "instructions": [
             {
               "id": "ins-b0827bef26",
@@ -31401,7 +30119,7 @@
                   "storeAsTag": false,
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "",
+                    "dynamicValue": "CUPO_BRILLA",
                     "staticValue": ""
                   }
                 }
@@ -31531,8 +30249,7 @@
               "name": "getPopAuthorization",
               "flowId": "wf-b7871f9c43",
               "exitNodes": [
-                "nd-3bff816f62",
-                "nd-8927eac0a3"
+                "nd-3bff816f62"
               ],
               "transitions": [
                 {
@@ -31555,27 +30272,6 @@
                     "suggestion": {
                       "label": "Exit",
                       "condition": "lastNode=nd-3bff816f62"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-7a686dd531",
-                  "type": "transition",
-                  "label": "Success",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-8927eac0a3"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Success",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Success",
-                      "condition": "lastNode=nd-8927eac0a3"
                     }
                   }
                 }
@@ -35406,8 +34102,8 @@
         },
         {
           "id": "var-4640e40e5f",
-          "name": "requiereConsultar",
-          "description": "Confirmación de que el tiene pendiente consultar a la IA",
+          "name": "noRequiereConsultar",
+          "description": "Confirmación excepcional de que el no necesita repteir la pregunta.  Cuando es true, la transición \"REPITE\" no se cumplirá",
           "type": "boolean",
           "scope": "workflow",
           "defaultValue": false,
@@ -35422,7 +34118,8 @@
           "type": "entry",
           "deletable": false,
           "variables": [
-            "var-e1a27132cd"
+            "var-e1a27132cd",
+            "var-4640e40e5f"
           ],
           "instructions": [
             {
@@ -35478,8 +34175,8 @@
               "nodeId": "nd-7b82823ee1"
             }
           ],
-          "x": 2025,
-          "y": 255
+          "x": 2235,
+          "y": 240
         },
         {
           "id": "nd-4f5092aaef",
@@ -35704,8 +34401,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 1500,
-          "y": 30,
+          "x": 1170,
+          "y": 345,
           "variables": [],
           "instructions": [
             {
@@ -35782,11 +34479,11 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{bot.retryAttempts < 2 }}"
+                "payload": "{{bot.retryAttempts == 2 }}"
               },
-              "label": "Attempts don't over",
+              "label": "Attempts over",
               "generative": {
-                "label": "Attempts don't over",
+                "label": "Attempts over",
                 "suggestion": {},
                 "properties": {
                   "condition": false
@@ -35796,27 +34493,34 @@
               "nodeId": "nd-fdb5e29eb7",
               "description": "",
               "destination": {
-                "node": "nd-20fb14943e"
+                "node": "nd-587dde0db0"
               },
               "transitions": []
             },
             {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-fc04b8c69c",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Intentos agotados",
-                "staticValue": ""
+              "id": "ins-14784fc0f2",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!!workflow.noRequiereConsultar}}"
+              },
+              "label": "No requiere preguntar",
+              "generative": {
+                "label": "No requiere preguntar",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
               },
               "nodeId": "nd-fdb5e29eb7",
-              "transitions": []
+              "description": "",
+              "destination": {
+                "node": "nd-587dde0db0"
+              }
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-587dde0db0"
+            "targetNodeId": "nd-20fb14943e"
           },
           "id": "nd-fdb5e29eb7",
           "name": "handleAdaptiveResponse"
@@ -35965,11 +34669,11 @@
           "name": "handleMultimediaAnswer"
         },
         {
-          "name": "UnderstandUserInputCopy1",
+          "name": "goToUnderstandUserInput",
           "type": "standard",
           "deletable": true,
           "x": 660,
-          "y": 915,
+          "y": 795,
           "instructions": [
             {
               "id": "ins-851c7d54cc",
@@ -36058,7 +34762,7 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 1605,
+          "x": 1830,
           "y": 405,
           "instructions": [
             {
@@ -36095,6 +34799,470 @@
         }
       ],
       "parentFolder": "dir-6400c2779c"
+    },
+    {
+      "id": "wf-45eae1291b",
+      "name": "EvaluateAskingUserData",
+      "startNode": "nd-390c3f60a0",
+      "variables": [
+        {
+          "id": "var-d177285803",
+          "name": "requireUserDataReason",
+          "description": "Reason for user data request",
+          "type": "boolean",
+          "scope": "workflow",
+          "defaultValue": false,
+          "storeAsTag": false
+        }
+      ],
+      "links": [],
+      "nodes": [
+        {
+          "id": "nd-390c3f60a0",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-d565ab84a0",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-8f51f8022d"
+              },
+              "transitions": [],
+              "nodeId": "nd-390c3f60a0"
+            }
+          ],
+          "x": 105,
+          "y": 105
+        },
+        {
+          "id": "nd-1b6e060063",
+          "name": "SKIPPED",
+          "type": "exit",
+          "variables": [],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-b9410b344f",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-1b6e060063"
+            }
+          ],
+          "x": 1725,
+          "y": -285
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 345,
+          "y": -465,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 18px\">Validar si se debe preguntar los datos del cliente o no</span></strong></p>",
+          "id": "nd-00e7d617e1",
+          "name": "Comment1",
+          "height": 128,
+          "width": 296,
+          "defaultTransition": {
+            "targetNodeId": null
+          }
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 570,
+          "y": -225,
+          "instructions": [
+            {
+              "id": "ins-bd59e2f3e8",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!!user.purchasePreference}}"
+              },
+              "label": "Purchase type Asked before",
+              "generative": {
+                "label": "Purchase type Asked before",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-8f51f8022d",
+              "description": "",
+              "destination": {
+                "node": "nd-9a61b3041e"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-a9aebb148a",
+              "type": "action",
+              "code": "const { fullName, phone: celular } = user\nconst { askedBefore = false, answer: popAuthorized = '' } = user.authorizedPop || {}\n\nconsole.log(`🤖 user:`, {\n  askedBefore,\n  popAuthorized,\n  fullName,\n  phone: celular\n})\n\n// Verifica si NO tenemos nombre y teléfono del usuario\nconst isUserDataUndefined = !fullName || !celular\n\n// Si no tenemos nombre y teléfono...\nif (!isUserDataUndefined) {\n  // ... y el usuario no ha sido consultado antes\n  if (!askedBefore) {\n    workflow.requireUserDataReason = true // Asignamos true si no ha sido preguntado antes\n  }\n}\n else {\n  workflow.requireUserDataReason = false // Reiniciamos a false si se cumplen las condiciones anteriores\n }\n\n",
+              "origin": "builtin",
+              "label": "\"Check User Data and Authorization for Workflow Requirements\"",
+              "nodeId": "nd-8f51f8022d",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { fullName, phone: celular } = user;\n  const { askedBefore = false, answer: popAuthorized = \"\" } = user.authorizedPop || {};\n  console.log(`\\u{1F916} user:`, {\n    askedBefore,\n    popAuthorized,\n    fullName,\n    phone: celular\n  });\n  const isUserDataUndefined = !fullName || !celular;\n  if (!isUserDataUndefined) {\n    if (!askedBefore) {\n      workflow.requireUserDataReason = true;\n    }\n  } else {\n    workflow.requireUserDataReason = false;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-8a8d049d1e",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Razón para saltar datos: {{workflow.requireUserDataReason}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-8f51f8022d",
+              "transitions": []
+            },
+            {
+              "id": "ins-965ef5d838",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!workflow.requireUserDataReason}}"
+              },
+              "label": "No Requiere preguntar datos",
+              "generative": {
+                "label": "No Requiere preguntar datos",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-8f51f8022d",
+              "description": "",
+              "destination": {
+                "node": "nd-94b2b0181e"
+              },
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-5c7c408436"
+          },
+          "id": "nd-8f51f8022d",
+          "name": "validateSkipStep"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 570,
+          "y": 225,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 18px\">Preguntar los datos del cliente</span></strong></p>",
+          "id": "nd-7812783b55",
+          "name": "Comment2",
+          "height": 128,
+          "width": 296,
+          "defaultTransition": {
+            "targetNodeId": null
+          }
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1320,
+          "y": -300,
+          "instructions": [
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-05ddfa6821",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Saltar pregunta por que: {{user.purchasePreference ? 'Ya se sabe la preferencia de compra' : 'Por ya sabemos que quiere la moto a crédito pero no es cupo brilla'}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-9a61b3041e",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-1b6e060063"
+          },
+          "id": "nd-9a61b3041e",
+          "name": "skipStep"
+        },
+        {
+          "name": "retrieveUserData",
+          "type": "standard",
+          "deletable": true,
+          "x": 555,
+          "y": 375,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-bf5baa863c",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "⚠️ Es necesario preguntar datos",
+                "staticValue": ""
+              },
+              "nodeId": "nd-5c7c408436",
+              "transitions": []
+            },
+            {
+              "id": "ins-3ba0f64e7f",
+              "type": "skill",
+              "name": "getContact1",
+              "flowId": "wf-7e26022245",
+              "exitNodes": [
+                "nd-1b5f64341e",
+                "nd-8745dd86d3"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-f20442e033",
+                  "type": "transition",
+                  "label": "Exit",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-1b5f64341e"
+                  },
+                  "destination": {
+                    "node": "nd-94b2b0181e"
+                  },
+                  "generative": {
+                    "label": "Exit",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Exit",
+                      "condition": "lastNode=nd-1b5f64341e"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-4aa23294e3",
+                  "type": "transition",
+                  "label": "cupo_brilla",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-8745dd86d3"
+                  },
+                  "destination": {
+                    "node": "nd-57e476302a"
+                  },
+                  "generative": {
+                    "label": "cupo_brilla",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "cupo_brilla",
+                      "condition": "lastNode=nd-8745dd86d3"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-5c7c408436",
+              "manualFields": []
+            }
+          ],
+          "id": "nd-5c7c408436"
+        },
+        {
+          "name": "evaluateInterest",
+          "type": "standard",
+          "deletable": true,
+          "x": 1125,
+          "y": 105,
+          "instructions": [
+            {
+              "id": "ins-f7a11f5c49",
+              "type": "action",
+              "category": "Execute",
+              "code": "// Si no existe una preferencia de compra, verificar si el perfil crediticio del usuario es 'CUPO_BRILLA'\r\nif (user.creditProfile === 'CUPO_BRILLA') {\r\n  // Establecer el estado de interés como 'cupobrilla' para usuarios con perfil crediticio 'CUPO_BRILLA'\r\n  workflow.interestStatus = 'cupobrilla'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para alinearla con su perfil crediticio\r\n  user.purchasePreference = 'CREDIT'\r\n} else if (conversation.context === 'ABOUT_CREDIT_INFO') {\r\n  // Si el contexto de la conversación es sobre información crediticia, asumir que el usuario está interesado\r\n  workflow.interestStatus = 'interested'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para reflejar su interés\r\n  user.purchasePreference = 'CREDIT'\r\n} else {\r\n  // Si ninguna de las condiciones se cumple, establecer el estado de interés como unknown\r\n  workflow.interestStatus = 'unknown'\r\n}\r\n",
+              "origin": "builtin",
+              "nodeId": "nd-94b2b0181e",
+              "label": "\"Determine User Purchase Preference Based on Credit Profile\"",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  if (user.creditProfile === \"CUPO_BRILLA\") {\n    workflow.interestStatus = \"cupobrilla\";\n    user.purchasePreference = \"CREDIT\";\n  } else if (conversation.context === \"ABOUT_CREDIT_INFO\") {\n    workflow.interestStatus = \"interested\";\n    user.purchasePreference = \"CREDIT\";\n  } else {\n    workflow.interestStatus = \"unknown\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-ebce9f5bcf",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Interest status: {{workflow.interestStatus}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-94b2b0181e",
+              "transitions": []
+            },
+            {
+              "id": "ins-3546cbba8c",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.interestStatus === 'interested'}}"
+              },
+              "label": "Ya está interesado en crédito o sabemos su preferencia de compra",
+              "generative": {
+                "label": "Ya está interesado en crédito o sabemos su preferencia de compra",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-94b2b0181e",
+              "description": "",
+              "destination": {
+                "node": "nd-9a61b3041e"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-9c501767a5",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.interestStatus === 'unknown'}}"
+              },
+              "label": "No sabemos su interés de compra",
+              "generative": {
+                "label": "No sabemos su interés de compra",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-94b2b0181e",
+              "description": "",
+              "destination": {
+                "node": "nd-211df3e602"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-b34d42b719",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.interestStatus === 'cupobrilla'}}"
+              },
+              "label": "Es Perfil CupoBrilla",
+              "generative": {
+                "label": "Es Perfil CupoBrilla",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-94b2b0181e",
+              "description": "",
+              "destination": {
+                "node": "nd-57e476302a"
+              },
+              "transitions": []
+            }
+          ],
+          "id": "nd-94b2b0181e"
+        },
+        {
+          "type": "exit",
+          "deletable": true,
+          "x": 1725,
+          "y": 180,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-e6d3425d26",
+              "type": "transition",
+              "label": "",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "generative": {
+                "label": "",
+                "properties": {
+                  "label": true,
+                  "condition": true
+                },
+                "suggestion": {
+                  "label": "",
+                  "condition": "true"
+                }
+              },
+              "nodeId": "nd-211df3e602",
+              "transitions": []
+            }
+          ],
+          "id": "nd-211df3e602",
+          "name": "ASK_PURCHASE_PREFERENCE"
+        },
+        {
+          "name": "goToCupoBrillaProfile",
+          "type": "standard",
+          "deletable": true,
+          "x": 1545,
+          "y": 540,
+          "instructions": [
+            {
+              "id": "ins-01a94e4b1f",
+              "type": "skill",
+              "name": "CupoBrillaProfile1",
+              "flowId": "wf-bfe02f1d4e",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-57e476302a",
+              "manualFields": []
+            }
+          ],
+          "id": "nd-57e476302a"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 60,
+          "y": -225,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 32px\">Evaluar Preguntar datos del usuario</span></strong></p>",
+          "id": "nd-ad0c9fe76c",
+          "name": "Comment3",
+          "height": 218,
+          "width": 326,
+          "backgroundColor": "var(--jade-5)"
+        }
+      ],
+      "parentFolder": "dir-6fb4de4b07"
     }
   ],
   "intents": [
@@ -38612,29 +37780,29 @@
       "id": "version_01JRJD8FY84J036TAWW71KMX3T"
     }
   ],
-  "revision": 49509,
+  "revision": 50107,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-05-13T14:24:31.284Z",
-    "lastRevisionId": 49508,
+    "lastRevisionCheckAt": "2025-05-14T20:50:41.417Z",
+    "lastRevisionId": 50106,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-05-13T12:59:25.749Z (WAtc9fCHCf): connecting -> connected (ok)",
-      "2025-05-13T13:06:45.828Z (WAtc9fCHCf): connected -> disconnected (Websocket closed)",
-      "2025-05-13T13:06:45.836Z (WAtc9fCHCf): disconnected -> connecting (ok)",
-      "2025-05-13T13:06:46.605Z (WAtc9fCHCf): connecting -> connected (ok)",
-      "2025-05-13T13:16:14.011Z (WAtc9fCHCf): connected -> disconnected (Websocket closed)",
-      "2025-05-13T13:16:14.018Z (WAtc9fCHCf): disconnected -> connecting (ok)",
-      "2025-05-13T13:16:14.447Z (WAtc9fCHCf): connecting -> connected (ok)",
-      "2025-05-13T13:21:50.034Z (WAtc9fCHCf): connected -> disconnected (Websocket closed)",
-      "2025-05-13T13:21:50.043Z (WAtc9fCHCf): disconnected -> connecting (ok)",
-      "2025-05-13T13:21:50.426Z (WAtc9fCHCf): connecting -> connected (ok)"
+      "2025-05-14T18:30:26.091Z: initialized -> connecting (ok)",
+      "2025-05-14T18:30:27.168Z (K8TeCVllm4): connecting -> connected (ok)",
+      "2025-05-14T18:30:46.437Z: connected -> closing (Connection closing)",
+      "2025-05-14T18:30:46.437Z: closing -> closed (Connection closed)",
+      "2025-05-14T18:30:46.438Z: initialized -> connecting (ok)",
+      "2025-05-14T18:30:47.019Z (7mVCXAcx_A): connecting -> connected (ok)",
+      "2025-05-14T18:31:08.329Z: connected -> closing (Connection closing)",
+      "2025-05-14T18:31:08.329Z: closing -> closed (Connection closed)",
+      "2025-05-14T18:31:08.331Z: initialized -> connecting (ok)",
+      "2025-05-14T18:31:08.596Z (w3Ozscwtcr): connecting -> connected (ok)"
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01JV3TCWYNDK82VRSVCN23P7XS / Tue, 13 May 2025 04:26:29 GMT /  2025-05-13T14:24:41.627Z"
+      "jguzman@marxadigital.com / sess_01JV80PZ9Q47J5FG8TNDYFAHKG / Wed, 14 May 2025 18:31:08 GMT /  2025-05-14T20:53:27.326Z"
     ],
-    "savedAt": "2025-05-13T14:24:42.005Z",
+    "savedAt": "2025-05-14T20:53:28.830Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01JV3TCWYNDK82VRSVCN23P7XS"
+    "sessionId": "sess_01JV80PZ9Q47J5FG8TNDYFAHKG"
   },
   "identity": {
     "name": "asistente-lasmotos-dev",

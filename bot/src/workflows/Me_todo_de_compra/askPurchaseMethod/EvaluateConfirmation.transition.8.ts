@@ -1,8 +1,8 @@
 import { user } from "@main";
 // Node: EvaluateConfirmation - nd-9e115e2e1e
-// Comprar con cupo brilla - ins-91e85ae2da
+// Comprar a crédito - ins-b0cb1021ac
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins91e85ae2da = user.purchasePreference === 'CUPO_BRILLA';
-// Destination: nd-0468eb36be
+const insb0cb1021ac = user.purchasePreference === 'CREDIT';
+// Destination: nd-47b0d977b7

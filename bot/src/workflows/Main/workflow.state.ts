@@ -18,6 +18,8 @@ class MainState {
   welcome1: any;
   /** farewell1 */
   farewell1: any;
+  /** requestInterestedMoto1 */
+  requestInterestedMoto1: any;
 }
 
 export const workflow = new MainState();

@@ -1,4 +1,4 @@
-// Node: No_Reported - nd-761ade4356
+// Node: No_reportado - nd-761ade4356
 //  - trs-7e886a45cc
 
 // ------------------ TRANSITION CONDITION -------------------------

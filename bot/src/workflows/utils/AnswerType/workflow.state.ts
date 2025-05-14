@@ -4,8 +4,8 @@ class AnswerTypeState {
   answerType: string;
   /** Sin descripción */
   answerExplanation: string;
-  /** Confirmación de que el tiene pendiente consultar a la IA */
-  requiereConsultar: boolean;
+  /** Confirmación excepcional de que el no necesita repteir la pregunta.  Cuando es true, la transición "REPITE" no se cumplirá */
+  noRequiereConsultar: boolean;
   /** ❔mainKnowledgeBase */
   ❔mainKnowledgeBase: any;
   /** ✏️ RephraseQuestion */

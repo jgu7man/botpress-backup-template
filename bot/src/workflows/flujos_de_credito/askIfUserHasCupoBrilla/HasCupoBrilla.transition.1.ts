@@ -1,7 +1,7 @@
-// Node: ChangedContext - nd-d678baf7dd
-//  - trs-f9789747f9
+// Node: HasCupoBrilla - nd-e732116c1c
+//  - trs-8584b0e95a
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const trsf9789747f9 = true;
+const trs8584b0e95a = true;
 // Destination: #

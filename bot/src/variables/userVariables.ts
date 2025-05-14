@@ -54,11 +54,14 @@ export class userVariables {
   jobContractType: string;
   /** [var-fa90fc97e1] */
   phoneInvalid: boolean;
-  /** [var-1b5209edbb] */
-  negativeCreditReport: string;
   /**
   * [var-2946efe2f3]
   * @description Información de que el cliente autorizó o rechazó el guardado de sus datos. 
   */
   authorizedPop: AuthorizedPop;
+  /**
+  * [var-1b5209edbb]
+  * @description Estado del cliente ante data crédito. Se le pregunta si está reportado y los valores posibles son 'SÍ' o 'NO' 
+  */
+  negativeCreditReport: string;
 }

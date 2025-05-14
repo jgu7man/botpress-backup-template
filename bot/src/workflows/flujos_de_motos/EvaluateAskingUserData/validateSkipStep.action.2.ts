@@ -1,12 +1,12 @@
 import { user } from "@main";
 import { workflow } from "./workflow.state";
-// Node: ValidateSkipStep - nd-e1d01d900d
-// "Check User Data and Request Reason if Necessary" - ins-600c4e2756
+// Node: validateSkipStep - nd-8f51f8022d
+// "Check User Data and Authorization for Workflow Requirements" - ins-a9aebb148a
 
 // ------------------ EXECUTE CODE -------------------------
 
 const { fullName, phone: celular } = user
-const { askedBefore, answer: popAuthorized } = user.authorizedPop
+const { askedBefore = false, answer: popAuthorized = '' } = user.authorizedPop || {}
 
 console.log(`🤖 user:`, {
   askedBefore,
@@ -20,10 +20,11 @@ const isUserDataUndefined = !fullName || !celular
 
 // Si no tenemos nombre y teléfono...
 if (!isUserDataUndefined) {
-  // ... y el usuario no ha sido consultado antes, requerimos la razón de los datos
+  // ... y el usuario no ha sido consultado antes
   if (!askedBefore) {
     workflow.requireUserDataReason = true // Asignamos true si no ha sido preguntado antes
   }
 }
-
-workflow.requireUserDataReason = false // Reiniciamos a false si se cumplen las condiciones anteriores
+ else {
+  workflow.requireUserDataReason = false // Reiniciamos a false si se cumplen las condiciones anteriores
+ }

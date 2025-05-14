@@ -1,8 +1,8 @@
-import { bot } from "@main";
+import { workflow } from "./workflow.state";
 // Node: handleAdaptiveResponse - nd-fdb5e29eb7
-// Attempts over - ins-4ef7b69eb1
+// No requiere preguntar - ins-14784fc0f2
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const ins4ef7b69eb1 = bot.retryAttempts == 2;
+const ins14784fc0f2 = !!workflow.noRequiereConsultar;
 // Destination: nd-587dde0db0

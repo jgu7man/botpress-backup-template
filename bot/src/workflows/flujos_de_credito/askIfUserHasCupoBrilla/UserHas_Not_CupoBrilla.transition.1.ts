@@ -1,7 +1,7 @@
-// Node: UserHas_Not_CupoBrilla - nd-e732116c1c
-//  - trs-8584b0e95a
+// Node: UserHas_Not_CupoBrilla - nd-32b3b9b945
+// undefined - trs-5b9326607d
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const trs8584b0e95a = true;
+const trs5b9326607d = true;
 // Destination: #

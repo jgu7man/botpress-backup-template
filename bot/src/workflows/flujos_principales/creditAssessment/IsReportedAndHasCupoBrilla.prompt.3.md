@@ -1,5 +1,5 @@
 # IsReportedAndHasCupoBrilla
-<!-- Instruction:  -->
+<!-- Instruction: concernMessage -->
 
 
 Input:
@@ -29,6 +29,7 @@ The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  
+  /**  */
+"concernMessage": string
 }
 ```

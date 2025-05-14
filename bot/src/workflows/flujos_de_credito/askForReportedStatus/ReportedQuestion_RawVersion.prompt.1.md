@@ -4,7 +4,7 @@
 
 Input:
 ```
-{{workflow.userReportedAnswer}}
+Respuesta reportado o no: {{workflow.userReportedAnswer}}
 ```
 
 <!-- user -->

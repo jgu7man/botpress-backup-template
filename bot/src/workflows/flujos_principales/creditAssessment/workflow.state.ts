@@ -14,6 +14,8 @@ class CreditAssessmentState {
   askForNationalId: any;
   /** askForBillNumber */
   askForBillNumber: any;
+  /** saveDataUser2 */
+  saveDataUser2: any;
   /** questionWithName */
   questionWithName: any;
   /** financialStudyMessage */
@@ -24,6 +26,8 @@ class CreditAssessmentState {
   saveDataUser2: any;
   /** requestInterestedMoto2 */
   requestInterestedMoto2: any;
+  /** saveDataUser2 */
+  saveDataUser2: any;
   /** farewell1 */
   farewell1: any;
   /** askForReportedStatus */

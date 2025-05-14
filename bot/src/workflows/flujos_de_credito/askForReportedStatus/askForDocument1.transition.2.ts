@@ -1,8 +1,8 @@
 import { user } from "@main";
-// Node: ReportedQuestion_RawVersion - nd-e417adb2b2
+// Node: askForDocument1 - nd-a50fd7155c
 // No Reported - ins-b256dbe028
 
 // ------------------ TRANSITION CONDITION -------------------------
 
 const insb256dbe028 = user.negativeCreditReport === 'NO';
-// Destination: nd-74af5d584a
+// Destination: nd-761ade4356

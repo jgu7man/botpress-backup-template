@@ -1,7 +1,10 @@
 import { conversation } from "@main";
+import { workflow } from "./workflow.state";
 // Node: PendingAttention - nd-87981a6ade
-// Manage Conversation Status for Attention Requests - ins-eeec62013a
+// Update Conversation Status Based on Confirmation Type - ins-eeec62013a
 
 // ------------------ EXECUTE CODE -------------------------
 
-conversation.status = "CALL_ATTENTION_PENDING"
+const {confirmationType} = workflow.GetConfirmation
+
+conversation.status = confirmationType === 'ACCEPTED'  ? 'CALL_ATTENTION_PENDING' : 'ATTENTION_REJECTED'

@@ -1,7 +1,7 @@
 import { user, conversation } from "@main";
 import { workflow } from "./workflow.state";
-// Node: EvaluateInterest - nd-2e90e42efa
-// "Determine User Purchase Preference Based on Credit Profile" - ins-a7f0bfb760
+// Node: evaluateInterest - nd-94b2b0181e
+// "Determine User Purchase Preference Based on Credit Profile" - ins-f7a11f5c49
 
 // ------------------ EXECUTE CODE -------------------------
 

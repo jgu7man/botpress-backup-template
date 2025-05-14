@@ -4,10 +4,14 @@ class CashPreferenceHandleState {
   purchaseMethodAnswer: string;
   /** Sin descripción */
   priceInfoMessage: string;
+  /** 👤 questionWithUserName */
+  👤 questionWithUserName: any;
+  /** GetConfirmation */
+  GetConfirmation: any;
   /** 💾 saveUserData */
   💾 saveUserData: any;
-  /** evaluateConfirmation1 */
-  evaluateConfirmation1: any;
+  /** AnswerType1 */
+  AnswerType1: any;
 }
 
 export const workflow = new CashPreferenceHandleState();

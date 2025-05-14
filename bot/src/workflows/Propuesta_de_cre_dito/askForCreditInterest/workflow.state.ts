@@ -14,18 +14,12 @@ class AskForCreditInterestState {
   creditInterestQuestion: string;
   /** Sin descripción */
   retryAttempts: number;
-  /** saveDataUser */
-  saveDataUser: any;
-  /** questionWithUserName */
-  questionWithUserName: any;
   /** questionWithUserName */
   questionWithUserName: any;
   /** GetConfirmation */
   GetConfirmation: any;
   /** saveDataUser */
   saveDataUser: any;
-  /** incorrectInput2 */
-  incorrectInput2: any;
   /** farewell1 */
   farewell1: any;
   /** AnswerType1 */

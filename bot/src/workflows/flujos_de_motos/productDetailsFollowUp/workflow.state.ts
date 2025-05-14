@@ -18,6 +18,8 @@ class ProductDetailsFollowUpState {
   CashPreferenceHandle1: any;
   /** farewell1 */
   farewell1: any;
+  /** AnswerType1 */
+  AnswerType1: any;
 }
 
 export const workflow = new ProductDetailsFollowUpState();

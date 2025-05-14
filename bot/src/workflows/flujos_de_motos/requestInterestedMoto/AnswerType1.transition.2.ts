@@ -1,5 +1,5 @@
 import { workflow } from "./workflow.state";
-// Node: UnderstandUserInput1 - nd-90fea972b9
+// Node: AnswerType1 - nd-f10121fd93
 // Attempts Over - ins-48830bf676
 
 // ------------------ TRANSITION CONDITION -------------------------

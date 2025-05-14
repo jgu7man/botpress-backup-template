@@ -24,4 +24,9 @@ export class conversationVariables {
   * @description variable que controla cuando se debe contactar al usuario 
   */
   status: string;
+  /**
+  * [var-58f2dea691]
+  * @description El contexto del cual se habla en la conversación  
+  */
+  context: string;
 }

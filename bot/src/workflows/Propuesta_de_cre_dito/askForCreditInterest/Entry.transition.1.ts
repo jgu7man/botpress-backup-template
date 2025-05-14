@@ -1,6 +1,6 @@
 import { user } from "@main";
 // Node: Entry - nd-7c0b129c2d
-// Comes from moto - ins-77d6cbc6f3
+// Ya sabemos su preferencia de compra - ins-77d6cbc6f3
 
 // ------------------ TRANSITION CONDITION -------------------------
 

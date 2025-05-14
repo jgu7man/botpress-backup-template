@@ -8,8 +8,6 @@ class AskToKnowledgeBaseState {
   context: string;
   /** Respuesta dada por la base de conocimientos */
   kbAnswer: string;
-  /** setCupoBrillaProfile */
-  setCupoBrillaProfile: any;
 }
 
 export const workflow = new AskToKnowledgeBaseState();

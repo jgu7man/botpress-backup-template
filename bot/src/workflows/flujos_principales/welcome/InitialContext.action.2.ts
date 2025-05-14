@@ -1,4 +1,4 @@
-import { bot, user } from "@main";
+import { bot, user, conversation } from "@main";
 // Node: InitialContext - nd-6ecdfb7c32
 // "Validate User Information and Manage Bot Data Reset" - ins-480e1fe562
 
@@ -35,6 +35,6 @@ else if (leadRecords.length > 0) {
 
 // Helper function to reset bot data
 function resetBotData() {
-  bot.conversationContext = ''
+  conversation.context = ''
   bot.irregularState = ''
 }

@@ -296,6 +296,15 @@
         "scope": "conversation",
         "secret": false,
         "storeAsTag": false
+      },
+      {
+        "id": "var-58f2dea691",
+        "name": "context",
+        "description": "El contexto del cual se habla en la conversación ",
+        "type": "string",
+        "scope": "conversation",
+        "defaultValue": "",
+        "storeAsTag": false
       }
     ]
   },
@@ -3560,8 +3569,8 @@
               "category": "AI",
               "id": "ins-7a25905388",
               "task": {
-                "instructions": "## Estrategia\n\n1. Usa los siguientes templates según el caso:\n\n   - Si reconoces que @user.fullName es nombre femenino, usa: \"Señora `{{user.fullName}}` `{pregunta}`\"\n   - Si reconoces que @user.fullName es nombre masculino, usa: \"Señor `{{user.fullName}}` `{pregunta}`\"\n   - Si no reconoces el género de @user.fullName, usa: \"Sr@ `{{user.fullName}}` `{pregunta}`\"\n   - Si no tienes el valor de @user.fullName, usa: \"Sr@, `{pregunta}`\"\n\n2. Intercambia la pregunta según el caso:\n\n- Si sí existe valor en `@bot.conversationContext` : ¿hay algo más en lo que le pueda ayudar?\n- Si no existe valor en `@bot.conversationContext` : ¿en qué le puedo ayudar?\n",
-                "input": "Nombre del usuario: @user.fullName;\nContexto del bot: @bot.conversationContext",
+                "instructions": "## Estrategia\n\n1. Usa los siguientes templates según el caso:\n\n   - Si reconoces que @user.fullName es nombre femenino, usa: \"Señora `{{user.fullName}}` `{pregunta}`\"\n   - Si reconoces que @user.fullName es nombre masculino, usa: \"Señor `{{user.fullName}}` `{pregunta}`\"\n   - Si no reconoces el género de @user.fullName, usa: \"Sr@ `{{user.fullName}}` `{pregunta}`\"\n   - Si no tienes el valor de @user.fullName, usa: \"Sr@, `{pregunta}`\"\n\n2. Intercambia la pregunta según el caso:\n\n- Si sí existe valor en `@conversation.context` : ¿hay algo más en lo que le pueda ayudar?\n- Si no existe valor en `@conversation.context` : ¿en qué le puedo ayudar?\n",
+                "input": "Nombre del usuario: @user.fullName;\nContexto del bot: {{conversation.context}}",
                 "outputVariableIds": [
                   "var-f3ca6f33ef"
                 ],
@@ -3589,7 +3598,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia\n\n1. Usa los siguientes templates según el caso:\n\n   - Si reconoces que @user.fullName es nombre femenino, usa: \"Señora `{{user.fullName}}` `{pregunta}`\"\n   - Si reconoces que @user.fullName es nombre masculino, usa: \"Señor `{{user.fullName}}` `{pregunta}`\"\n   - Si no reconoces el género de @user.fullName, usa: \"Sr@ `{{user.fullName}}` `{pregunta}`\"\n   - Si no tienes el valor de @user.fullName, usa: \"Sr@, `{pregunta}`\"\n\n2. Intercambia la pregunta según el caso:\n\n- Si sí existe valor en `@bot.conversationContext` : ¿hay algo más en lo que le pueda ayudar?\n- Si no existe valor en `@bot.conversationContext` : ¿en qué le puedo ayudar?\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"message\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia\n\n1. Usa los siguientes templates según el caso:\n\n   - Si reconoces que @user.fullName es nombre femenino, usa: \"Señora `{{user.fullName}}` `{pregunta}`\"\n   - Si reconoces que @user.fullName es nombre masculino, usa: \"Señor `{{user.fullName}}` `{pregunta}`\"\n   - Si no reconoces el género de @user.fullName, usa: \"Sr@ `{{user.fullName}}` `{pregunta}`\"\n   - Si no tienes el valor de @user.fullName, usa: \"Sr@, `{pregunta}`\"\n\n2. Intercambia la pregunta según el caso:\n\n- Si sí existe valor en `@conversation.context` : ¿hay algo más en lo que le pueda ayudar?\n- Si no existe valor en `@conversation.context` : ¿en qué le puedo ayudar?\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"message\": string\n}"
                   },
                   {
                     "role": "user",
@@ -5205,8 +5214,8 @@
               "nodeId": "nd-36d6158290"
             }
           ],
-          "x": 1950,
-          "y": -630
+          "x": 2400,
+          "y": -615
         },
         {
           "name": "Ask_User_Data",
@@ -5325,12 +5334,25 @@
             {
               "id": "ins-600c4e2756",
               "type": "action",
-              "code": "const { askedBefore, popAuthorized, fullName, phone: celular } = user\nconsole.log(`🤖 user:`, {\n  askedBefore,\n  popAuthorized,\n  fullName,\n  phone: celular\n})\n\n// Verifica si NO tenemos nombre y teléfono del usuario\nconst isUserDataUndefined = !fullName || !celular\n\n// Si no tenemos nombre y teléfono...\nif (!isUserDataUndefined) {\n  // ... y el usuario no ha sido consultado antes, requerimos la razón de los datos\n  if (!askedBefore) {\n    workflow.requireUserDataReason = true // Asignamos true si no ha sido preguntado antes\n  }\n}\n\nworkflow.requireUserDataReason = false // Reiniciamos a false si se cumplen las condiciones anteriores\n",
+              "code": "const { fullName, phone: celular } = user\nconst { askedBefore, answer: popAuthorized } = user.authorizedPop\n\nconsole.log(`🤖 user:`, {\n  askedBefore,\n  popAuthorized,\n  fullName,\n  phone: celular\n})\n\n// Verifica si NO tenemos nombre y teléfono del usuario\nconst isUserDataUndefined = !fullName || !celular\n\n// Si no tenemos nombre y teléfono...\nif (!isUserDataUndefined) {\n  // ... y el usuario no ha sido consultado antes, requerimos la razón de los datos\n  if (!askedBefore) {\n    workflow.requireUserDataReason = true // Asignamos true si no ha sido preguntado antes\n  }\n}\n\nworkflow.requireUserDataReason = false // Reiniciamos a false si se cumplen las condiciones anteriores\n",
               "origin": "builtin",
               "label": "\"Check User Data and Request Reason if Necessary\"",
               "nodeId": "nd-e1d01d900d",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { askedBefore, popAuthorized, fullName, phone: celular } = user;\n  console.log(`\\u{1F916} user:`, {\n    askedBefore,\n    popAuthorized,\n    fullName,\n    phone: celular\n  });\n  const isUserDataUndefined = !fullName || !celular;\n  if (!isUserDataUndefined) {\n    if (!askedBefore) {\n      workflow.requireUserDataReason = true;\n    }\n  }\n  workflow.requireUserDataReason = false;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { fullName, phone: celular } = user;\n  const { askedBefore, answer: popAuthorized } = user.authorizedPop;\n  console.log(`\\u{1F916} user:`, {\n    askedBefore,\n    popAuthorized,\n    fullName,\n    phone: celular\n  });\n  const isUserDataUndefined = !fullName || !celular;\n  if (!isUserDataUndefined) {\n    if (!askedBefore) {\n      workflow.requireUserDataReason = true;\n    }\n  }\n  workflow.requireUserDataReason = false;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-cf0dde5c96",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Razón para saltar datos: {{workflow.requireUserDataReason}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-e1d01d900d",
               "transitions": []
             },
             {
@@ -5338,7 +5360,7 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{!!workflow.skipUserDataReason}}"
+                "payload": "{{!workflow.requireUserDataReason}}"
               },
               "label": "No Requiere preguntar datos",
               "generative": {
@@ -5442,7 +5464,7 @@
                     "payload": "lastNode=nd-87048ee08d"
                   },
                   "destination": {
-                    "node": "nd-36d6158290"
+                    "node": "nd-f1f066a469"
                   },
                   "generative": {
                     "label": "A_Credito",
@@ -5514,7 +5536,7 @@
           "type": "standard",
           "deletable": true,
           "x": 1545,
-          "y": 390,
+          "y": 105,
           "instructions": [
             {
               "id": "ins-bba2c70d3e",
@@ -5534,7 +5556,7 @@
                     "payload": "lastNode=nd-c127f41c68"
                   },
                   "destination": {
-                    "node": "nd-36d6158290"
+                    "node": "nd-f1f066a469"
                   },
                   "generative": {
                     "label": "Exit",
@@ -5558,8 +5580,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 1275,
-          "y": -465,
+          "x": 1395,
+          "y": -585,
           "instructions": [
             {
               "type": "log",
@@ -5576,7 +5598,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-36d6158290"
+            "targetNodeId": "nd-f1f066a469"
           },
           "id": "nd-9abaa9a7fa",
           "name": "SkipOut"
@@ -5641,8 +5663,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 855,
-          "y": 585,
+          "x": 825,
+          "y": 120,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Manejar el perfil de cupo brilla.</span></strong></p><p><strong><span style=\"font-size: 18px\">No requiere preguntar CREDITO o CASH</span></strong></p>",
           "id": "nd-a8c478ca7f",
@@ -5657,7 +5679,7 @@
           "type": "comment",
           "deletable": true,
           "x": 1260,
-          "y": -615,
+          "y": -735,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Saltar pregunta por que no se entiendió la respuesta del cliente</span></strong></p>",
           "id": "nd-20d396b1e3",
@@ -5672,7 +5694,7 @@
           "type": "comment",
           "deletable": true,
           "x": 1545,
-          "y": 270,
+          "y": -15,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Cliente contesta que desea comprar de contado</span></strong></p>",
           "id": "nd-9cce5ee2a6",
@@ -5694,12 +5716,12 @@
               "id": "ins-a7f0bfb760",
               "type": "action",
               "category": "Execute",
-              "code": "// Extrayendo el perfil crediticio del usuario para determinar su estado de interés\r\nconst { creditProfile } = user\r\n// Extrayendo el contexto de la conversación del bot para evaluar la interacción actual\r\nconst { conversationContext } = bot\r\n\r\n// Si no existe una preferencia de compra, verificar si el perfil crediticio del usuario es 'CUPO_BRILLA'\r\nif (creditProfile === 'CUPO_BRILLA') {\r\n  // Establecer el estado de interés como 'cupobrilla' para usuarios con perfil crediticio 'CUPO_BRILLA'\r\n  workflow.interestStatus = 'cupobrilla'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para alinearla con su perfil crediticio\r\n  user.purchasePreference = 'CREDIT'\r\n} else if (conversationContext === 'ABOUT_CREDIT_INFO') {\r\n  // Si el contexto de la conversación es sobre información crediticia, asumir que el usuario está interesado\r\n  workflow.interestStatus = 'interested'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para reflejar su interés\r\n  user.purchasePreference = 'CREDIT'\r\n} else {\r\n  // Si ninguna de las condiciones se cumple, establecer el estado de interés como unknown\r\n  workflow.interestStatus = 'unknown'\r\n}\r\n",
+              "code": "// Si no existe una preferencia de compra, verificar si el perfil crediticio del usuario es 'CUPO_BRILLA'\r\nif (user.creditProfile === 'CUPO_BRILLA') {\r\n  // Establecer el estado de interés como 'cupobrilla' para usuarios con perfil crediticio 'CUPO_BRILLA'\r\n  workflow.interestStatus = 'cupobrilla'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para alinearla con su perfil crediticio\r\n  user.purchasePreference = 'CREDIT'\r\n} else if (conversation.context === 'ABOUT_CREDIT_INFO') {\r\n  // Si el contexto de la conversación es sobre información crediticia, asumir que el usuario está interesado\r\n  workflow.interestStatus = 'interested'\r\n  // Asignar 'CREDIT' como la preferencia de compra del usuario para reflejar su interés\r\n  user.purchasePreference = 'CREDIT'\r\n} else {\r\n  // Si ninguna de las condiciones se cumple, establecer el estado de interés como unknown\r\n  workflow.interestStatus = 'unknown'\r\n}\r\n",
               "origin": "builtin",
               "nodeId": "nd-2e90e42efa",
-              "label": "Determine User Interest Status Based on Credit Profile and Context",
+              "label": "\"Determine User Purchase Preference Based on Credit Profile\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { creditProfile } = user;\n  const { conversationContext } = bot;\n  if (creditProfile === \"CUPO_BRILLA\") {\n    workflow.interestStatus = \"cupobrilla\";\n    user.purchasePreference = \"CREDIT\";\n  } else if (conversationContext === \"ABOUT_CREDIT_INFO\") {\n    workflow.interestStatus = \"interested\";\n    user.purchasePreference = \"CREDIT\";\n  } else {\n    workflow.interestStatus = \"unknown\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  if (user.creditProfile === \"CUPO_BRILLA\") {\n    workflow.interestStatus = \"cupobrilla\";\n    user.purchasePreference = \"CREDIT\";\n  } else if (conversation.context === \"ABOUT_CREDIT_INFO\") {\n    workflow.interestStatus = \"interested\";\n    user.purchasePreference = \"CREDIT\";\n  } else {\n    workflow.interestStatus = \"unknown\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -5805,8 +5827,8 @@
           "name": "CupoBrillaInterested",
           "type": "standard",
           "deletable": true,
-          "x": 855,
-          "y": 750,
+          "x": 840,
+          "y": 300,
           "instructions": [
             {
               "type": "log",
@@ -5862,6 +5884,75 @@
             }
           ],
           "id": "nd-effb5fef1a"
+        },
+        {
+          "name": "AnswerType1",
+          "type": "standard",
+          "deletable": true,
+          "x": 1935,
+          "y": -405,
+          "instructions": [
+            {
+              "id": "ins-7358e80ec0",
+              "type": "skill",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-7b82823ee1",
+                "nd-20fb14943e"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-fa10a1810d",
+                  "type": "transition",
+                  "label": "CONTINUAR",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-7b82823ee1"
+                  },
+                  "destination": {
+                    "node": "nd-36d6158290"
+                  },
+                  "generative": {
+                    "label": "CONTINUAR",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "CONTINUAR",
+                      "condition": "lastNode=nd-7b82823ee1"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-28d47c3dca",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-33d5ec26bc"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-f1f066a469"
+            }
+          ],
+          "id": "nd-f1f066a469"
         }
       ],
       "parentFolder": "dir-6fb4de4b07"
@@ -5949,9 +6040,9 @@
                 "type": "expression",
                 "payload": "{{ !!user.purchasePreference }}"
               },
-              "label": "Comes from moto",
+              "label": "Ya sabemos su preferencia de compra",
               "generative": {
-                "label": "Comes from moto",
+                "label": "Ya sabemos su preferencia de compra",
                 "suggestion": {
                   "condition": "true"
                 },
@@ -6016,15 +6107,38 @@
               "nodeId": "nd-06268df276"
             }
           ],
-          "x": 960,
-          "y": -330
+          "x": 840,
+          "y": -60
         },
         {
           "type": "standard",
           "deletable": true,
-          "x": 450,
-          "y": -225,
+          "x": 15,
+          "y": 240,
           "instructions": [
+            {
+              "id": "ins-eea075ee3e",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.creditInterestedAnswer != 'ACCEPTED'}}"
+              },
+              "label": "Acepta que se le hable de crédito",
+              "generative": {
+                "label": "Acepta que se le hable de crédito",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-62e16905f0",
+              "description": "",
+              "transitions": [],
+              "destination": {
+                "node": "nd-20733523a2"
+              }
+            },
             {
               "type": "log",
               "id": "ins-8834524b06",
@@ -6059,7 +6173,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-06268df276"
+            "targetNodeId": "nd-20733523a2"
           },
           "id": "nd-62e16905f0",
           "name": "AnswerCreditOptions"
@@ -6067,122 +6181,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 540,
-          "y": 210,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-97cd204a65",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 User answer negatively",
-                "staticValue": ""
-              },
-              "nodeId": "nd-c4ae58ab20",
-              "transitions": []
-            },
-            {
-              "id": "ins-9d15b2977a",
-              "type": "skill",
-              "name": "saveDataUser",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "nodeId": "nd-c4ae58ab20",
-              "manualFields": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-8a38b5212b"
-          },
-          "id": "nd-c4ae58ab20",
-          "name": "negative_Answer"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": -450,
-          "y": -60,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-969824a29c",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 User comes from moto context",
-                "staticValue": ""
-              },
-              "nodeId": "nd-b5a2dc146b",
-              "transitions": []
-            },
-            {
-              "id": "ins-e3cdc18a2e",
-              "type": "skill",
-              "name": "questionWithUserName",
-              "flowId": "wf-9d5e1848de",
-              "exitNodes": [],
-              "transitions": [],
-              "category": "Flow Logic",
-              "nodeId": "nd-b5a2dc146b",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-db2f30c8bf",
-                  "name": "question",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "value": {
-                    "valueType": "dynamic",
-                    "dynamicValue": "¿Igualmente, le gustaría que le informara los requisitos de crédito?",
-                    "staticValue": ""
-                  }
-                },
-                {
-                  "id": "var-81cc728a15",
-                  "name": "additionalConsiderations",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "value": {
-                    "staticValue": "",
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-5b7f702b3f",
-                  "name": "waitForUserInput",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "value": {
-                    "valueType": "static",
-                    "staticValue": true,
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-748c42cbce"
-          },
-          "id": "nd-b5a2dc146b",
-          "name": "AlternativeCreditInterestingQuestion"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
           "x": -435,
-          "y": 330,
+          "y": 195,
           "instructions": [
             {
               "id": "ins-c893c7909c",
@@ -6266,7 +6266,7 @@
                     "payload": "lastNode=nd-0b93ddef9b"
                   },
                   "destination": {
-                    "node": "nd-20733523a2"
+                    "node": "nd-62e16905f0"
                   },
                   "generative": {
                     "label": "UNSUCESS",
@@ -6304,11 +6304,11 @@
               "id": "ins-e6097fe885",
               "type": "action",
               "category": "Execute",
-              "code": "workflow.creditInterestedAnswer = workflow.GetConfirmation.confirmationType\n\n// Verificar si está interesado en que se le hable de crédito\nif (workflow.creditInterestedAnswer === 'ACCEPTED') {\n  // Establecer el estado de la conversación según el tipo de confirmación\n  conversation.status = 'CREDIT_INTERESTED'\n}\n",
+              "code": "workflow.creditInterestedAnswer = workflow.GetConfirmation.confirmationType\n\n// Verificar si está interesado en que se le hable de crédito\nif (workflow.creditInterestedAnswer === 'ACCEPTED') {\n  // Establecer el estado de la conversación como interés en crédito\n  conversation.status = 'CREDIT_INTERESTED'\n  // Asignar la preferencia de compra del cliente como crédito\n  user.purchasePreference = 'CREDIT'\n}\n",
               "origin": "builtin",
               "nodeId": "nd-4073f5c709",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.creditInterestedAnswer = workflow.GetConfirmation.confirmationType;\n  if (workflow.creditInterestedAnswer === \"ACCEPTED\") {\n    conversation.status = \"CREDIT_INTERESTED\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "Set Conversation Status Based on Credit Interest Confirmation",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.creditInterestedAnswer = workflow.GetConfirmation.confirmationType;\n  if (workflow.creditInterestedAnswer === \"ACCEPTED\") {\n    conversation.status = \"CREDIT_INTERESTED\";\n    user.purchasePreference = \"CREDIT\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "label": "Determine User's Credit Interest and Update Conversation Status",
               "isCustomLabel": false,
               "transitions": []
             },
@@ -6322,7 +6322,8 @@
                 "dynamicValue": "Conversation Status: {{ conversation.status }}",
                 "staticValue": ""
               },
-              "nodeId": "nd-4073f5c709"
+              "nodeId": "nd-4073f5c709",
+              "transitions": []
             },
             {
               "id": "ins-268c8da6ac",
@@ -6336,172 +6337,16 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-748c42cbce"
+            "targetNodeId": "nd-62e16905f0"
           },
           "id": "nd-4073f5c709",
           "name": "CreditInterestingQuestion"
         },
         {
-          "name": "HandleUnknownInterestingAnswer",
-          "type": "standard",
-          "deletable": true,
-          "x": 30,
-          "y": -120,
-          "instructions": [
-            {
-              "id": "ins-7c1e9dd7d1",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.retryAttempts >= 2}}"
-              },
-              "label": "Attempts Over",
-              "generative": {
-                "label": "Attempts Over",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-748c42cbce",
-              "description": "",
-              "destination": {
-                "node": "nd-eca5003fbf"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-a90e3d9a13",
-              "type": "action",
-              "code": "workflow.retryAttempts++\nconsole.log(`🤖 retryAttempts: ${workflow.retryAttempts}`)",
-              "origin": "builtin",
-              "label": "Increment and log retry attempts in a workflow process",
-              "nodeId": "nd-748c42cbce",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.retryAttempts++;\n  console.log(`\\u{1F916} retryAttempts: ${workflow.retryAttempts}`);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "id": "ins-ed3efb28d2",
-              "type": "skill",
-              "name": "incorrectInput2",
-              "flowId": "wf-f44160aa45",
-              "exitNodes": [
-                "nd-029e738c1a",
-                "nd-44f981d7c0",
-                "nd-d9bd76f4f9"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-a6760b72a9",
-                  "type": "transition",
-                  "label": "UserHasConfirmed",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-029e738c1a"
-                  },
-                  "destination": {
-                    "node": "nd-62e16905f0"
-                  },
-                  "generative": {
-                    "label": "UserHasConfirmed",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasConfirmed",
-                      "condition": "lastNode=nd-029e738c1a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-03a25d559a",
-                  "type": "transition",
-                  "label": "UserHasRejected",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-44f981d7c0"
-                  },
-                  "destination": {
-                    "node": "nd-c4ae58ab20"
-                  },
-                  "generative": {
-                    "label": "UserHasRejected",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "UserHasRejected",
-                      "condition": "lastNode=nd-44f981d7c0"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-0f96511b58",
-                  "type": "transition",
-                  "label": "Questio_Answered",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-d9bd76f4f9"
-                  },
-                  "destination": {
-                    "node": "nd-4073f5c709"
-                  },
-                  "generative": {
-                    "label": "Questio_Answered",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Questio_Answered",
-                      "condition": "lastNode=nd-d9bd76f4f9"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-748c42cbce",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-b34d67ec67",
-                  "name": "userInput",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "value": {
-                    "valueType": "dynamic",
-                    "dynamicValue": "{{event.preview}}",
-                    "staticValue": ""
-                  }
-                },
-                {
-                  "id": "var-999f1cd8d0",
-                  "name": "answerType",
-                  "description": "",
-                  "type": "string",
-                  "scope": "workflow",
-                  "defaultValue": "",
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": "",
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-748c42cbce"
-        },
-        {
           "type": "comment",
           "deletable": true,
-          "x": -1065,
-          "y": -240,
+          "x": -30,
+          "y": -435,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">PREGUNTAR POR INTERÉS EN EL CRÉDITO</span></strong></p><p><span style=\"font-size: 14px\">askForCreditInterest</span></p>",
           "id": "nd-b291ebc91f",
@@ -6514,37 +6359,10 @@
           }
         },
         {
-          "type": "standard",
-          "deletable": true,
-          "x": 495,
-          "y": 585,
-          "instructions": [
-            {
-              "type": "log",
-              "category": "Utilities",
-              "id": "ins-4f754b4922",
-              "label": "Log",
-              "level": "error",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Attempts to \"Ask for credit interest\" over",
-                "staticValue": ""
-              },
-              "nodeId": "nd-eca5003fbf",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-8a38b5212b"
-          },
-          "id": "nd-eca5003fbf",
-          "name": "AttemptsOverLog"
-        },
-        {
           "type": "comment",
           "deletable": true,
-          "x": -435,
-          "y": -540,
+          "x": -480,
+          "y": -360,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">El cliente proviene de un flujo de consulta de moto</span></strong></p>",
           "id": "nd-7b99cbc9cd",
@@ -6558,8 +6376,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -435,
-          "y": 180,
+          "x": -450,
+          "y": 15,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Realizar pregunta de interés en el crédito</span></strong></p>",
           "id": "nd-aeba2254e0",
@@ -6571,27 +6389,25 @@
           }
         },
         {
-          "type": "comment",
-          "deletable": true,
-          "x": 30,
-          "y": -285,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">El cliente proviene de un flujo de consulta de moto</span></strong></p>",
-          "id": "nd-d6553d26b4",
-          "name": "Comment4",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "name": "farewell",
+          "name": "farewell_ATTENDED",
           "type": "standard",
           "deletable": true,
-          "x": 975,
-          "y": 465,
+          "x": 885,
+          "y": 780,
           "instructions": [
+            {
+              "type": "log",
+              "id": "ins-97cd204a65",
+              "label": "Log",
+              "level": "info",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 User answer negatively",
+                "staticValue": ""
+              },
+              "nodeId": "nd-8a38b5212b",
+              "transitions": []
+            },
             {
               "id": "ins-82c85a88a0",
               "type": "skill",
@@ -6637,8 +6453,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": -435,
-          "y": -450,
+          "x": -465,
+          "y": -195,
           "instructions": [
             {
               "type": "log",
@@ -6664,8 +6480,8 @@
           "name": "getAnswerType",
           "type": "standard",
           "deletable": true,
-          "x": 30,
-          "y": 300,
+          "x": 450,
+          "y": 810,
           "instructions": [
             {
               "id": "ins-afaacde7ba",
@@ -6720,7 +6536,34 @@
               },
               "category": "Flow Logic",
               "nodeId": "nd-20733523a2",
-              "description": ""
+              "description": "",
+              "transitions": [],
+              "destination": {
+                "node": "nd-06268df276"
+              }
+            },
+            {
+              "id": "ins-270d76c4af",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.creditInterestedAnswer == 'REJECTED'}}"
+              },
+              "label": "Rechaza que se le hable de crédito",
+              "generative": {
+                "label": "Rechaza que se le hable de crédito",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-20733523a2",
+              "description": "",
+              "transitions": [],
+              "destination": {
+                "node": "nd-8a38b5212b"
+              }
             }
           ],
           "id": "nd-20733523a2"
@@ -10205,7 +10048,8 @@
           "type": "string",
           "scope": "workflow",
           "defaultValue": "",
-          "entityId": "ent-c79688d45f"
+          "entityId": "ent-c79688d45f",
+          "storeAsTag": false
         }
       ],
       "links": [],
@@ -10279,12 +10123,12 @@
               "id": "ins-2cfa9b4e54",
               "type": "action",
               "category": "Execute",
-              "code": "bot.conversationContext = workflow.conversationContext\nconversation.topics.push(workflow.conversationContext)",
+              "code": "conversation.context = workflow.conversationContext\nconversation.topics.push(workflow.conversationContext)",
               "origin": "builtin",
-              "label": "\"Update Conversation Context in Chatbot Workflow\"",
+              "label": "\"Manage Conversation Context and Topics in Workflow\"",
               "nodeId": "nd-8e79cee11c",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.conversationContext = workflow.conversationContext;\n  conversation.topics.push(workflow.conversationContext);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.context = workflow.conversationContext;\n  conversation.topics.push(workflow.conversationContext);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -10680,7 +10524,7 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 2730,
+          "x": 2670,
           "y": 975,
           "instructions": [
             {
@@ -10751,7 +10595,7 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{bot.conversationContext === 'ABOUT_CREDIT'}}"
+                "payload": "{{conversation.context === 'ABOUT_CREDIT_INFO'}}"
               },
               "label": "User credit interested",
               "generative": {
@@ -10837,11 +10681,11 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{user.creditProfile !== 'CUPO_BRILLA'}}"
+                "payload": "{{user.creditProfile === 'CUPO_BRILLA'}}"
               },
-              "label": "No es perfil cupo brilla",
+              "label": "Es perfil cupo brilla",
               "generative": {
-                "label": "No es perfil cupo brilla",
+                "label": "Es perfil cupo brilla",
                 "suggestion": {
                   "condition": "true"
                 },
@@ -11015,44 +10859,6 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 360,
-          "y": 1200,
-          "instructions": [
-            {
-              "id": "ins-d0d917c968",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.interestedProductAnswer = workflow.UnderstandUserInput1.correctedUserInput \nworkflow.interestedAnswerAttempts++",
-              "origin": "builtin",
-              "label": "Assign User Input to Interested Product Answer in Workflow",
-              "nodeId": "nd-dc2c073f87",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.interestedProductAnswer = workflow.UnderstandUserInput1.correctedUserInput;\n  workflow.interestedAnswerAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "id": "ins-287f5d0c49",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Reinterprate Again",
-                "staticValue": ""
-              },
-              "nodeId": "nd-dc2c073f87",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-10161316c4"
-          },
-          "id": "nd-dc2c073f87",
-          "name": "ParaphraseToRetry"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
           "x": 870,
           "y": 0,
           "instructions": [
@@ -11155,8 +10961,8 @@
                       "isTransition": true
                     },
                     {
-                      "label": "Consulta de categoría",
-                      "value": "Consulta de categoría",
+                      "label": "Consulta de categoría o estilo de moto",
+                      "value": "Consulta de categoría o estilo de moto",
                       "isTransition": true
                     },
                     {
@@ -11189,11 +10995,11 @@
                 "messages": [
                   {
                     "role": "system",
-                    "content": "This task requires precise categorization. The bot should associate the content with a category only if there's an evident, direct, and unambiguous relation. \nEschew inferred, indirect, or imaginative associations.\nPick from the provided categories only if the content unmistakably corresponds. If any uncertainty exists or the content doesn't clearly fit a category, select ANYTHING_ELSE.\n\nReply with a JSON with the following shape:\n```typescript\n{ \n/**\n* The chosen class for classification. Value can be one of:\n* - \"Consulta de moto específica\"\n* - \"Consulta de categoría\"\n* - \"No sabe la respuesta\"\n* - \"No le interesa ninguna moto\"\n* - \"Desea realizar el estudio en sucursal\"\n* - \"ANYTHING_ELSE\"\n*/\nvalue: string\n; \n/** A brief explanation for the chosen classification. */\nexplanation: string\n; \n/** The score of the chosen class. */\nscore: number\n}\n```\n\nEg:\n```json\n{\n \"value\": \"Consulta de moto específica\",\n \"explanation\": \"The content is about...\",\n \"score\": 0.9\n}\n```"
+                    "content": "This task requires precise categorization. The bot should associate the content with a category only if there's an evident, direct, and unambiguous relation. \nEschew inferred, indirect, or imaginative associations.\nPick from the provided categories only if the content unmistakably corresponds. If any uncertainty exists or the content doesn't clearly fit a category, select ANYTHING_ELSE.\n\nReply with a JSON with the following shape:\n```typescript\n{ \n/**\n* The chosen class for classification. Value can be one of:\n* - \"Consulta de moto específica\"\n* - \"Consulta de categoría o estilo de moto\"\n* - \"No sabe la respuesta\"\n* - \"No le interesa ninguna moto\"\n* - \"Desea realizar el estudio en sucursal\"\n* - \"ANYTHING_ELSE\"\n*/\nvalue: string\n; \n/** A brief explanation for the chosen classification. */\nexplanation: string\n; \n/** The score of the chosen class. */\nscore: number\n}\n```\n\nEg:\n```json\n{\n \"value\": \"Consulta de moto específica\",\n \"explanation\": \"The content is about...\",\n \"score\": 0.9\n}\n```"
                   },
                   {
                     "role": "user",
-                    "content": "Content: {{CLASSIFICATION_INPUT}}\n\nAvailable categories: \n  - Consulta de moto específica\n  - Consulta de categoría\n  - No sabe la respuesta\n  - No le interesa ninguna moto\n  - Desea realizar el estudio en sucursal\n  - ANYTHING_ELSE\n\nIf the content doesn't directly align with any categories, select ANYTHING_ELSE."
+                    "content": "Content: {{CLASSIFICATION_INPUT}}\n\nAvailable categories: \n  - Consulta de moto específica\n  - Consulta de categoría o estilo de moto\n  - No sabe la respuesta\n  - No le interesa ninguna moto\n  - Desea realizar el estudio en sucursal\n  - ANYTHING_ELSE\n\nIf the content doesn't directly align with any categories, select ANYTHING_ELSE."
                   }
                 ],
                 "model": "fast-model",
@@ -11217,10 +11023,10 @@
                 {
                   "id": "trs-18fde39f87",
                   "type": "transition",
-                  "label": "Consulta de categoría",
+                  "label": "Consulta de categoría o estilo de moto",
                   "condition": {
                     "type": "expression",
-                    "payload": "__CLASS=Consulta de categoría"
+                    "payload": "__CLASS=Consulta de categoría o estilo de moto"
                   },
                   "destination": {
                     "node": "nd-12fdf30a71"
@@ -11247,7 +11053,7 @@
                     "payload": "__CLASS=No le interesa ninguna moto"
                   },
                   "destination": {
-                    "node": "nd-0eb482712b"
+                    "node": "nd-e491a6dae4"
                   }
                 },
                 {
@@ -11266,7 +11072,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-90fea972b9"
+            "targetNodeId": "nd-f10121fd93"
           },
           "id": "nd-a7813360c2",
           "name": "EvaluateAnswer"
@@ -11319,8 +11125,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 345,
-          "y": 675,
+          "x": 405,
+          "y": 480,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">Entendimiento profundo</span></strong></p>",
           "id": "nd-cd373e5ae2",
@@ -11422,11 +11228,11 @@
           }
         },
         {
-          "name": "UnderstandUserInput1",
+          "name": "AnswerType1",
           "type": "standard",
           "deletable": true,
-          "x": 345,
-          "y": 825,
+          "x": 420,
+          "y": 630,
           "instructions": [
             {
               "id": "ins-a6e865d0ee",
@@ -11434,7 +11240,7 @@
               "code": "workflow.interestedAnswerAttempts++",
               "origin": "builtin",
               "label": "Increment Interested Answer Attempts in Workflow Logic",
-              "nodeId": "nd-90fea972b9",
+              "nodeId": "nd-f10121fd93",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.interestedAnswerAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
@@ -11455,7 +11261,7 @@
                 }
               },
               "category": "Flow Logic",
-              "nodeId": "nd-90fea972b9",
+              "nodeId": "nd-f10121fd93",
               "description": "",
               "destination": {
                 "node": "nd-d0a5d177bf"
@@ -11463,119 +11269,67 @@
               "transitions": []
             },
             {
-              "id": "ins-86e3e007bf",
+              "id": "ins-bb370ef77b",
               "type": "skill",
-              "name": "UnderstandUserInput2",
-              "flowId": "wf-cabe199fc6",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
               "exitNodes": [
-                "nd-ed7af360bf",
-                "nd-fb7e06f31a",
-                "nd-c9ade57441"
+                "nd-20fb14943e",
+                "nd-7b82823ee1"
               ],
               "transitions": [
                 {
-                  "id": "trs-6bc9ab1560",
+                  "id": "trs-db401f7f84",
                   "type": "transition",
-                  "label": "ChangeContext",
+                  "label": "REPITE",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-ed7af360bf"
+                    "payload": "lastNode=nd-20fb14943e"
                   },
                   "destination": {
-                    "node": "nd-0eb482712b"
+                    "node": "nd-10161316c4"
                   },
                   "generative": {
-                    "label": "ChangeContext",
+                    "label": "REPITE",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "ChangeContext",
-                      "condition": "lastNode=nd-ed7af360bf"
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
                     }
                   }
                 },
                 {
-                  "id": "trs-7068096661",
+                  "id": "trs-27065bf793",
                   "type": "transition",
-                  "label": "SUCCESS",
+                  "label": "CONTINUAR",
                   "condition": {
                     "type": "expression",
-                    "payload": "lastNode=nd-fb7e06f31a"
+                    "payload": "lastNode=nd-7b82823ee1"
                   },
                   "destination": {
-                    "node": "nd-dc2c073f87"
+                    "node": "nd-a7813360c2"
                   },
                   "generative": {
-                    "label": "SameContext",
+                    "label": "CONTINUAR",
                     "properties": {
                       "label": true,
                       "condition": true
                     },
                     "suggestion": {
-                      "label": "SameContext",
-                      "condition": "lastNode=nd-fb7e06f31a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-f2c6750732",
-                  "type": "transition",
-                  "label": "Refused",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-c9ade57441"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Refused",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Refused",
-                      "condition": "lastNode=nd-c9ade57441"
+                      "label": "CONTINUAR",
+                      "condition": "lastNode=nd-7b82823ee1"
                     }
                   }
                 }
               ],
-              "nodeId": "nd-90fea972b9",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-e6e441d563",
-                  "name": "allowAnswer",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "valueType": "static",
-                    "staticValue": true,
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-d2e43ac990",
-                  "name": "retry",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
+              "nodeId": "nd-f10121fd93",
+              "manualFields": []
             }
           ],
-          "id": "nd-90fea972b9"
+          "id": "nd-f10121fd93"
         }
       ],
       "parentFolder": "dir-6fb4de4b07"
@@ -14512,6 +14266,24 @@
               ]
             },
             {
+              "id": "ins-3311b94c5b",
+              "type": "content",
+              "content": {
+                "type": "text",
+                "text": {
+                  "valueType": "dynamic",
+                  "dynamicValue": "Déjeme revisar. Un momento por favor",
+                  "staticValue": ""
+                },
+                "typing": {
+                  "valueType": "static",
+                  "staticValue": true
+                }
+              },
+              "nodeId": "nd-2e9d5f16f2",
+              "transitions": []
+            },
+            {
               "id": "ins-e9d5c679c6",
               "type": "transition",
               "condition": {
@@ -14657,6 +14429,24 @@
               ]
             },
             {
+              "id": "ins-d70f9b7c5b",
+              "type": "content",
+              "content": {
+                "type": "text",
+                "text": {
+                  "valueType": "dynamic",
+                  "dynamicValue": "Déjeme revisar. Un momento por favor",
+                  "staticValue": ""
+                },
+                "typing": {
+                  "valueType": "static",
+                  "staticValue": true
+                }
+              },
+              "nodeId": "nd-f76c8a8ad5",
+              "transitions": []
+            },
+            {
               "id": "ins-6f8cd11654",
               "type": "transition",
               "condition": {
@@ -14679,24 +14469,6 @@
               "destination": {
                 "node": "nd-29bb96e68f"
               }
-            },
-            {
-              "id": "ins-d70f9b7c5b",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "Déjeme revisar. Un momento por favor",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
-                }
-              },
-              "nodeId": "nd-f76c8a8ad5",
-              "transitions": []
             },
             {
               "id": "ins-022d16bacf",
@@ -15310,8 +15082,54 @@
               "type": "skill",
               "name": "askToKnowledgeBase1",
               "flowId": "wf-3b13133a5d",
-              "exitNodes": [],
-              "transitions": [],
+              "exitNodes": [
+                "nd-8c3aab2e25",
+                "nd-30f649eb25"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-32e73bd5d8",
+                  "type": "transition",
+                  "label": "Success",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-8c3aab2e25"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Success",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Success",
+                      "condition": "lastNode=nd-8c3aab2e25"
+                    }
+                  }
+                },
+                {
+                  "id": "trs-ba77528657",
+                  "type": "transition",
+                  "label": "Unsuccess",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-30f649eb25"
+                  },
+                  "destination": {},
+                  "generative": {
+                    "label": "Unsuccess",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "Unsuccess",
+                      "condition": "lastNode=nd-30f649eb25"
+                    }
+                  }
+                }
+              ],
               "nodeId": "nd-76e8b3a0de",
               "manualFields": [],
               "variables": [
@@ -23103,112 +22921,6 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 570,
-          "y": -750,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-d0aa3b2680",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "💬 User input: {{event.preview}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-8b2c93f7f8",
-              "transitions": []
-            },
-            {
-              "id": "ins-75d505b759",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{!!workflow.interpretedInput}}"
-              },
-              "label": "There's interpretedInput",
-              "generative": {
-                "label": "There's interpretedInput",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-8b2c93f7f8",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "id": "ins-85637dbbd8",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "User made a question",
-                "staticValue": ""
-              },
-              "nodeId": "nd-8b2c93f7f8",
-              "transitions": []
-            },
-            {
-              "type": "ai",
-              "id": "ins-d5b8a9d9da",
-              "task": {
-                "instructions": "## Role Description*\n- Eres un asistente de ventas colombiano que interpretará lo que el usuario quiso decir considerando el contexto colombiano y los posibles errores o coloquialismos. Para cotejar si lo que respondió está dentro del contexto\n\n## Estrategia\n1. Tratarás de entender lo que el usuario dijo con base al resumen {{conversation.SummaryAgent.summary}}  o conceptualiza de manera que te auto expliques lo que el usuario quiso decir.\n2. Formularás una pregunta reinterpretando la intención del usuario. La pregunta es para una base de conocimiento.\n3. Asigna la pregunta resultante a la variable  `@workflow.interpretedInput`\n",
-                "input": "Lo que el usuario dijo: {{event.preview}}\nResumen de conversación: {{conversation.SummaryAgent.summary}}",
-                "outputVariableIds": [
-                  "var-5db80e4c28"
-                ],
-                "handleFailure": false,
-                "examples": [
-                  {
-                    "input": "",
-                    "output": {
-                      "interpretedInput": ""
-                    }
-                  }
-                ],
-                "model": "anthropic__claude-3-5-sonnet-20240620",
-                "temperature": 0.25,
-                "version": "1.0"
-              },
-              "nodeId": "nd-8b2c93f7f8",
-              "label": "interpretedInput",
-              "transitions": [],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
-                  },
-                  {
-                    "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Role Description*\n- Eres un asistente de ventas colombiano que interpretará lo que el usuario quiso decir considerando el contexto colombiano y los posibles errores o coloquialismos. Para cotejar si lo que respondió está dentro del contexto\n\n## Estrategia\n1. Tratarás de entender lo que el usuario dijo con base al resumen {{conversation.SummaryAgent.summary}}  o conceptualiza de manera que te auto expliques lo que el usuario quiso decir.\n2. Formularás una pregunta reinterpretando la intención del usuario. La pregunta es para una base de conocimiento.\n3. Asigna la pregunta resultante a la variable  `@workflow.interpretedInput`\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"interpretedInput\": string\n}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
-                  }
-                ],
-                "model": "anthropic__claude-3-5-sonnet-20240620",
-                "temperature": 0.25
-              }
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-8b2c93f7f8",
-          "name": "InterpreateQuestion"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
           "x": 465,
           "y": -195,
           "instructions": [
@@ -23469,144 +23181,6 @@
           "backgroundColor": "var(--jade-5)"
         },
         {
-          "type": "standard",
-          "deletable": true,
-          "x": 1905,
-          "y": -465,
-          "instructions": [
-            {
-              "type": "ai",
-              "id": "ins-2347577534",
-              "task": {
-                "instructions": "Analiza el contexto de la conversación y determina si está relacionado con 'CUPO BRILLA'.\n\nSi la conversación trata sobre 'CUPO BRILLA', asigna el valor 'CUPO_BRILLA' a @workflow.context.\nSi no hay relación con 'CUPO BRILLA', no realices ningún cambio",
-                "input": "{{workflow.kbUnderstanding}}",
-                "outputVariableIds": [
-                  "var-16c9816b07"
-                ],
-                "handleFailure": false,
-                "examples": [
-                  {
-                    "input": "",
-                    "output": {}
-                  }
-                ],
-                "model": "fast-model",
-                "temperature": 0,
-                "version": "1.0"
-              },
-              "nodeId": "nd-3419732a2c",
-              "label": "",
-              "transitions": [],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
-                  },
-                  {
-                    "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\nAnaliza el contexto de la conversación y determina si está relacionado con 'CUPO BRILLA'.\n\nSi la conversación trata sobre 'CUPO BRILLA', asigna el valor 'CUPO_BRILLA' a @workflow.context.\nSi no hay relación con 'CUPO BRILLA', no realices ningún cambio\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
-                  }
-                ],
-                "model": "fast-model",
-                "temperature": 0
-              }
-            },
-            {
-              "type": "log",
-              "id": "ins-f220289a73",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "User asked cupo brilla",
-                "staticValue": ""
-              },
-              "nodeId": "nd-3419732a2c",
-              "transitions": []
-            },
-            {
-              "id": "ins-d9cde0c97b",
-              "type": "skill",
-              "name": "setCupoBrillaProfile",
-              "flowId": "wf-bfe02f1d4e",
-              "exitNodes": [
-                "nd-b28e6179e2"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-618a716873",
-                  "type": "transition",
-                  "label": "Exit",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-b28e6179e2"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Exit",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Exit",
-                      "condition": "lastNode=nd-b28e6179e2"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-3419732a2c",
-              "manualFields": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-3419732a2c",
-          "name": "ValidateCreditProfile"
-        },
-        {
-          "type": "exit",
-          "deletable": true,
-          "x": 1890,
-          "y": -240,
-          "variables": [],
-          "instructions": [
-            {
-              "id": "trs-092aaa7159",
-              "type": "transition",
-              "label": "",
-              "condition": {
-                "type": "expression",
-                "payload": "true"
-              },
-              "destination": {
-                "node": "#"
-              },
-              "generative": {
-                "label": "",
-                "properties": {
-                  "label": true,
-                  "condition": true
-                },
-                "suggestion": {
-                  "label": "",
-                  "condition": "true"
-                }
-              },
-              "nodeId": "nd-35ea0d8403",
-              "transitions": []
-            }
-          ],
-          "id": "nd-35ea0d8403",
-          "name": "CupoBrilla"
-        },
-        {
           "type": "comment",
           "deletable": true,
           "x": 465,
@@ -23615,21 +23189,6 @@
           "comment": "<p><strong><span style=\"font-size: 18px\">Realiza pregunta directa a la base de conocimiento</span></strong></p>",
           "id": "nd-2c45d49ab2",
           "name": "Comment2",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 690,
-          "y": -900,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Escalrecer la pregunta</span></strong></p>",
-          "id": "nd-d4aa6a52cb",
-          "name": "Comment3",
           "height": 128,
           "width": 296,
           "defaultTransition": {
@@ -23665,202 +23224,6 @@
           "defaultTransition": {
             "targetNodeId": null
           }
-        },
-        {
-          "type": "comment",
-          "deletable": true,
-          "x": 1890,
-          "y": -585,
-          "instructions": [],
-          "comment": "<p><strong><span style=\"font-size: 18px\">Bifurcar si es cupobrilla</span></strong></p>",
-          "id": "nd-042ac203b7",
-          "name": "Comment6",
-          "height": 128,
-          "width": 296,
-          "defaultTransition": {
-            "targetNodeId": null
-          }
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1560,
-          "y": -480,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-e752e71f2d",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "✨Interprated input:  {{workflow.interpretedInput}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-31af3d0d78",
-              "transitions": []
-            },
-            {
-              "id": "ins-43708aa938",
-              "tutorialId": "knowledge-query",
-              "description": "Retrieve answer & citations from Knowledge Bases to a custom query",
-              "title": "Query Knowledge Bases",
-              "schema": {
-                "_def": {
-                  "unknownKeys": "strip",
-                  "catchall": {
-                    "_def": {
-                      "typeName": "ZodNever"
-                    }
-                  },
-                  "typeName": "ZodObject"
-                },
-                "_cached": null
-              },
-              "uiconfiguration": {
-                "type": "VerticalLayout",
-                "elements": [
-                  {
-                    "type": "Input",
-                    "scope": "#/properties/query",
-                    "options": {
-                      "superInput": true
-                    }
-                  },
-                  {
-                    "type": "KBPicker",
-                    "label": "Knowledge Bases",
-                    "scope": "#/properties/kbs"
-                  },
-                  {
-                    "type": "VariablePicker",
-                    "label": "Store answer in variable",
-                    "scope": "#/properties/answerVariableId"
-                  }
-                ]
-              },
-              "type": "action",
-              "label": "Query Knowledge Bases",
-              "origin": "agent",
-              "agent": {
-                "action": "knowledge-query",
-                "id": "KnowledgeAgent"
-              },
-              "nodeId": "nd-31af3d0d78",
-              "data": {
-                "query": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "Categoriza la pregunta del cliente: {{workflow.interpretedInput}} y provee sólo una de las categorizaciones previstas.",
-                  "staticValue": ""
-                },
-                "kbs": {
-                  "enabled": true,
-                  "searchScope": "specific",
-                  "kbs": [
-                    "kb-aecc750e64"
-                  ],
-                  "valueType": "static",
-                  "dynamicValue": ""
-                },
-                "answerVariableId": "var-021c5160b9"
-              },
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "type": "log",
-              "id": "ins-b8b2cc9d0d",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "💭 Context Understanding: {{workflow.kbUnderstanding}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-31af3d0d78",
-              "transitions": []
-            },
-            {
-              "type": "ai",
-              "id": "ins-4a3e669c1d",
-              "task": {
-                "instructions": "Extrae el valor del contexto que el agente de base de conocimiento evaluó y entrega sólo el resultado en cualquiera de estas opciones en la variable `@bot.conversationContext`",
-                "input": "Evaluación de base de conocimiento:\n{{workflow.kbUnderstanding}}",
-                "outputVariableIds": [
-                  "var-e76a72e7be"
-                ],
-                "handleFailure": false,
-                "examples": [
-                  {
-                    "input": "",
-                    "output": {}
-                  }
-                ],
-                "model": "fast-model",
-                "temperature": 0.15,
-                "version": "1.0"
-              },
-              "nodeId": "nd-31af3d0d78",
-              "label": "conversationContext",
-              "transitions": [],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
-                  },
-                  {
-                    "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\nExtrae el valor del contexto que el agente de base de conocimiento evaluó y entrega sólo el resultado en cualquiera de estas opciones en la variable `@bot.conversationContext`\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"conversationContext\": string\n}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
-                  }
-                ],
-                "model": "fast-model",
-                "temperature": 0.15
-              }
-            },
-            {
-              "type": "log",
-              "id": "ins-e45e41a73a",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "❗️ Change context: {{bot.conversationContext}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-31af3d0d78",
-              "transitions": []
-            },
-            {
-              "id": "ins-962b738d92",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{!workflow.context}}"
-              },
-              "label": "No Cupo brilla context",
-              "generative": {
-                "label": "No Cupo brilla context",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-31af3d0d78",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-31af3d0d78",
-          "name": "getCategorization"
         }
       ],
       "parentFolder": "dir-6400c2779c"
@@ -25430,7 +24793,7 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-2a6173d412"
+                "node": "nd-2482c24d68"
               },
               "transitions": [],
               "nodeId": "nd-c1883840a5"
@@ -25462,44 +24825,6 @@
           ],
           "x": 2235,
           "y": -30
-        },
-        {
-          "id": "nd-2a6173d412",
-          "name": "EvaluateAttempts",
-          "type": "standard",
-          "deletable": true,
-          "instructions": [
-            {
-              "id": "ins-045cc8d569",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.retryAttempts >= 2}}"
-              },
-              "label": "Attempts over",
-              "generative": {
-                "label": "Attempts over",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-2a6173d412",
-              "description": "",
-              "destination": {
-                "node": "nd-066484b43e"
-              },
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-2482c24d68"
-          },
-          "x": 465,
-          "y": -15
         },
         {
           "type": "standard",
@@ -25584,24 +24909,6 @@
           "y": 255,
           "instructions": [
             {
-              "id": "ins-9532b48be2",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "Ok",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
-                }
-              },
-              "nodeId": "nd-fcdfb7e4a7",
-              "transitions": []
-            },
-            {
               "type": "log",
               "category": "Utilities",
               "id": "ins-1329ccb4a3",
@@ -25609,7 +24916,7 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "😀 Assistance Mode Answer: {{workflow.assistanceModeAnswer}}",
+                "dynamicValue": "Assistance Mode Answer: {{workflow.assistanceModeAnswer}}",
                 "staticValue": ""
               },
               "nodeId": "nd-fcdfb7e4a7",
@@ -25665,15 +24972,15 @@
               "data": {
                 "query": {
                   "valueType": "dynamic",
-                  "dynamicValue": "Paraphrase or clarify the intent behind this user query briefly and directly: '{{event.preview}}'. Avoid unnecessary wordiness.",
+                  "dynamicValue": "Explica lo que el cliente ha seleccionado, ya que se le dio a elegir si desea ser atendido en sede o en línea: '{{workflow.assistanceModeAnswer}}. Avoid unnecessary wordiness.",
                   "staticValue": "Paraphrase or clarify the intent behind this user query briefly and directly: '{{event.preview}}'. Avoid unnecessary wordiness."
                 },
                 "kbs": {
                   "enabled": true,
+                  "searchScope": "specific",
                   "kbs": [
                     "kb-e2cf85fe7d"
                   ],
-                  "searchScope": "specific",
                   "valueType": "static",
                   "dynamicValue": ""
                 },
@@ -25699,10 +25006,10 @@
               "type": "ai",
               "id": "ins-df0d0dbd87",
               "task": {
-                "instructions": "**Instrucción:**\n\nAnaliza la siguiente respuesta del usuario: `{{workflow.assistanceModeAnswer}}`.\n\nClasifica la intención del usuario según estas categorías:\n\n1. `\"sede\"` → El usuario quiere ser atendido en persona (sede, tienda, sucursal, oficina).\n2. `\"linea\"` → El usuario quiere ser atendido en línea (virtual, por teléfono, chat, etc.).\n3. `\"rechazo\"` → El usuario rechaza o no está interesado en ser atendido.\n4. `\"consulta\"` → El usuario realiza una pregunta o consulta.\n\nDevuelve únicamente una palabra: `sede`, `linea`, `rechazo` o `consulta` según corresponda, y guárdala en `@workflow.userAnswerContext`.\n\nNo agregues explicaciones adicionales.",
+                "instructions": "**Instrucción:**\n\nAnaliza la siguiente respuesta del usuario: `{{workflow.assistanceModeAnswer}}`.\n\nClasifica la intención del usuario según estas categorías:\n\n1. `\"ON_STORE\"` → El usuario quiere ser atendido en persona (sede, tienda, sucursal, oficina).\n2. `\"ON_LINE\"` → El usuario quiere ser atendido en línea (virtual, por teléfono, chat, etc.).\n2. `\"RECHAZO\"` → El usuario no quiere ser atendido.\n\nDevuelve únicamente una palabra: `ON_STORE`, `ON_LINE`, `RECHAZO`,  según corresponda, y guárdala en `@workflow.userAnswerContext`.\n\nNo agregues explicaciones adicionales.\n**IMPORTANTE** Si alguna de esos valores no corresponde a alguna categorización deja la variable vacía\n",
                 "input": "Respuesta del usuario: {{workflow.assistanceModeAnswer}}",
                 "outputVariableIds": [
-                  "var-d48e6c9c8e"
+                  "var-cf5951486e"
                 ],
                 "handleFailure": false,
                 "examples": [
@@ -25716,7 +25023,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-fcdfb7e4a7",
-              "label": "userAnswerContext",
+              "label": "assistanceMode",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -25726,7 +25033,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n**Instrucción:**\n\nAnaliza la siguiente respuesta del usuario: `{{workflow.assistanceModeAnswer}}`.\n\nClasifica la intención del usuario según estas categorías:\n\n1. `\"sede\"` → El usuario quiere ser atendido en persona (sede, tienda, sucursal, oficina).\n2. `\"linea\"` → El usuario quiere ser atendido en línea (virtual, por teléfono, chat, etc.).\n3. `\"rechazo\"` → El usuario rechaza o no está interesado en ser atendido.\n4. `\"consulta\"` → El usuario realiza una pregunta o consulta.\n\nDevuelve únicamente una palabra: `sede`, `linea`, `rechazo` o `consulta` según corresponda, y guárdala en `@workflow.userAnswerContext`.\n\nNo agregues explicaciones adicionales.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"userAnswerContext\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n**Instrucción:**\n\nAnaliza la siguiente respuesta del usuario: `{{workflow.assistanceModeAnswer}}`.\n\nClasifica la intención del usuario según estas categorías:\n\n1. `\"ON_STORE\"` → El usuario quiere ser atendido en persona (sede, tienda, sucursal, oficina).\n2. `\"ON_LINE\"` → El usuario quiere ser atendido en línea (virtual, por teléfono, chat, etc.).\n2. `\"RECHAZO\"` → El usuario no quiere ser atendido.\n\nDevuelve únicamente una palabra: `ON_STORE`, `ON_LINE`, `RECHAZO`,  según corresponda, y guárdala en `@workflow.userAnswerContext`.\n\nNo agregues explicaciones adicionales.\n**IMPORTANTE** Si alguna de esos valores no corresponde a alguna categorización deja la variable vacía\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"assistanceMode\": string\n}"
                   },
                   {
                     "role": "user",
@@ -25744,7 +25051,20 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "🤖 Contexto: {{workflow.userAnswerContext}}",
+                "dynamicValue": "🤖 Modo de asistencia: {{user.assistanceMode}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-fcdfb7e4a7",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-59b170a128",
+              "label": "Log",
+              "level": "info",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 User wants to be assisted: {{user.assistanceMode}}",
                 "staticValue": ""
               },
               "nodeId": "nd-fcdfb7e4a7",
@@ -25755,33 +25075,11 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{workflow.userAnswerContext === 'sede'}}"
+                "payload": "{{ !user.assistanceMode }}"
               },
-              "label": "Usuario desea ser atendido en la sede (tienda)",
+              "label": "No hay valor",
               "generative": {
-                "label": "Usuario desea ser atendido en la sede (tienda)",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-fcdfb7e4a7",
-              "description": "",
-              "destination": {
-                "node": "nd-76690f3c69"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-3bfe25bb6a",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.userAnswerContext === 'linea'}}"
-              },
-              "label": "Ususario desea ser atendido en línea",
-              "generative": {
-                "label": "Ususario desea ser atendido en línea",
+                "label": "No hay valor",
                 "suggestion": {},
                 "properties": {
                   "condition": false
@@ -25795,35 +25093,23 @@
               "transitions": []
             },
             {
-              "id": "ins-507b2f6338",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.userAnswerContext === 'rechazo'}}"
-              },
-              "label": "El usuario se niega a ser atendido",
-              "generative": {
-                "label": "El usuario se niega a ser atendido",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
+              "id": "ins-e0dfadb63b",
+              "type": "skill",
+              "name": "saveDataUser",
+              "flowId": "wf-21d68eedc5",
+              "exitNodes": [],
+              "transitions": [],
               "nodeId": "nd-fcdfb7e4a7",
-              "description": "",
-              "destination": {
-                "node": "nd-09714d4d0e"
-              },
-              "transitions": []
+              "manualFields": []
             },
             {
-              "id": "ins-6e832ed3a0",
+              "id": "ins-94f7fb8517",
               "type": "content",
               "content": {
                 "type": "text",
                 "text": {
                   "valueType": "dynamic",
-                  "dynamicValue": "Ok, deme un momento.",
+                  "dynamicValue": "De acuerdo",
                   "staticValue": ""
                 },
                 "typing": {
@@ -25833,204 +25119,20 @@
               },
               "nodeId": "nd-fcdfb7e4a7",
               "transitions": []
-            },
-            {
-              "id": "ins-47fff54d44",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.userAnswerContext === 'consulta'}}"
-              },
-              "label": "Hace una consulta",
-              "generative": {
-                "label": "Hace una consulta",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-fcdfb7e4a7",
-              "description": "",
-              "destination": {
-                "node": "nd-3bdb5a73f6"
-              },
-              "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-3bdb5a73f6"
+            "targetNodeId": "nd-296255ca0e"
           },
           "id": "nd-fcdfb7e4a7",
           "name": "CatchAssistancePreferenceAnswer"
         },
         {
+          "name": "farewell_ATTENDED",
           "type": "standard",
           "deletable": true,
-          "x": 390,
-          "y": 945,
-          "instructions": [
-            {
-              "id": "ins-0fdeab9db7",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.retryAttempts++",
-              "origin": "builtin",
-              "label": "\"Retry Mechanism for Handling Failed Operations\"",
-              "nodeId": "nd-3bdb5a73f6",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.retryAttempts++;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "id": "ins-dc02042992",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.retryAttempts >= 2}}"
-              },
-              "label": "Attempts over",
-              "generative": {
-                "label": "Attempts over",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "category": "Flow Logic",
-              "nodeId": "nd-3bdb5a73f6",
-              "description": "",
-              "destination": {
-                "node": "nd-380515b053"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-219d7ad4ff",
-              "type": "skill",
-              "name": "UnderstandUserInput1",
-              "flowId": "wf-cabe199fc6",
-              "exitNodes": [
-                "nd-ed7af360bf",
-                "nd-fb7e06f31a",
-                "nd-c9ade57441"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-54c60a84af",
-                  "type": "transition",
-                  "label": "ChangeContext",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-ed7af360bf"
-                  },
-                  "destination": {
-                    "node": "nd-2482c24d68"
-                  },
-                  "generative": {
-                    "label": "ChangeContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "ChangeContext",
-                      "condition": "lastNode=nd-ed7af360bf"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-1ac8b1d5e2",
-                  "type": "transition",
-                  "label": "SUCCESS",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-fb7e06f31a"
-                  },
-                  "destination": {
-                    "node": "nd-6c0861d2b0"
-                  },
-                  "generative": {
-                    "label": "SameContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "SameContext",
-                      "condition": "lastNode=nd-fb7e06f31a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-8ab88f70ca",
-                  "type": "transition",
-                  "label": "Refused",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-c9ade57441"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Refused",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Refused",
-                      "condition": "lastNode=nd-c9ade57441"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-3bdb5a73f6",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-e6e441d563",
-                  "name": "allowAnswer",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "valueType": "static",
-                    "staticValue": true,
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-d2e43ac990",
-                  "name": "retry",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-fcdfb7e4a7"
-          },
-          "id": "nd-3bdb5a73f6",
-          "name": "UnderstandUserInput"
-        },
-        {
-          "name": "farewell",
-          "type": "standard",
-          "deletable": true,
-          "x": 1755,
-          "y": 1065,
+          "x": 1635,
+          "y": 570,
           "instructions": [
             {
               "id": "ins-bb08a2563f",
@@ -26064,9 +25166,9 @@
                   "defaultValue": "",
                   "storeAsTag": false,
                   "value": {
-                    "staticValue": "",
-                    "valueType": "static",
-                    "dynamicValue": ""
+                    "valueType": "dynamic",
+                    "dynamicValue": "ATTENDED",
+                    "staticValue": ""
                   }
                 }
               ]
@@ -26077,115 +25179,79 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 1335,
-          "y": 90,
+          "x": 1245,
+          "y": -165,
           "instructions": [
             {
-              "type": "log",
-              "id": "ins-59b170a128",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 User wants to be assisted ON STORE",
-                "staticValue": ""
-              },
-              "nodeId": "nd-76690f3c69",
-              "transitions": []
-            },
-            {
-              "id": "ins-d456ef93f5",
-              "type": "action",
-              "category": "Execute",
-              "code": "user.assistanceMode = 'IN_STORE'\r\nconversation.status = \"STORE_ATTENTION\"",
-              "origin": "builtin",
-              "nodeId": "nd-76690f3c69",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"IN_STORE\";\n  conversation.status = \"STORE_ATTENTION\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "\"Set User Assistance Mode to In-Store for Attention\"",
-              "isCustomLabel": false,
-              "transitions": []
-            },
-            {
-              "id": "ins-9278aefdf1",
+              "id": "ins-4272730919",
               "type": "skill",
-              "name": "saveDataUser",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "category": "Flow Logic",
-              "nodeId": "nd-76690f3c69",
+              "name": "AnswerType1",
+              "flowId": "wf-0cbc0a6d98",
+              "exitNodes": [
+                "nd-20fb14943e"
+              ],
+              "transitions": [
+                {
+                  "id": "trs-12aa8ab2f1",
+                  "type": "transition",
+                  "label": "REPITE",
+                  "condition": {
+                    "type": "expression",
+                    "payload": "lastNode=nd-20fb14943e"
+                  },
+                  "destination": {
+                    "node": "nd-2482c24d68"
+                  },
+                  "generative": {
+                    "label": "REPITE",
+                    "properties": {
+                      "label": true,
+                      "condition": true
+                    },
+                    "suggestion": {
+                      "label": "REPITE",
+                      "condition": "lastNode=nd-20fb14943e"
+                    }
+                  }
+                }
+              ],
+              "nodeId": "nd-296255ca0e",
               "manualFields": []
+            },
+            {
+              "id": "ins-7447b35eb0",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{ user.assistanceMode == 'RECHAZO' }}"
+              },
+              "label": "Cliente rechaza atención",
+              "generative": {
+                "label": "Cliente rechaza atención",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-296255ca0e",
+              "description": "",
+              "destination": {
+                "node": "nd-09714d4d0e"
+              },
+              "transitions": []
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-0d325cfedc"
-          },
-          "id": "nd-76690f3c69",
-          "name": "OnStore",
-          "agentConfigOverrides": {
-            "PersonalityAgent": {
-              "active": false,
-              "personality": {
-                "valueType": "dynamic",
-                "dynamicValue": "usa el primer nombre de la persona\n\n\n\n\n",
-                "staticValue": ""
-              }
-            }
-          }
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1485,
-          "y": 405,
-          "instructions": [
-            {
-              "type": "log",
-              "id": "ins-b780b4b4ef",
-              "label": "Log",
-              "level": "info",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "🤖 User wants to be assisted ON LINE",
-                "staticValue": ""
-              },
-              "nodeId": "nd-296255ca0e",
-              "transitions": []
-            },
-            {
-              "id": "ins-ae33b6fac3",
-              "type": "action",
-              "category": "Execute",
-              "code": "user.assistanceMode = \"ON_LINE\"\r\nconversation.status = \"PRE_EVALUATION_START\"",
-              "origin": "builtin",
-              "nodeId": "nd-296255ca0e",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  user.assistanceMode = \"ON_LINE\";\n  conversation.status = \"PRE_EVALUATION_START\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "label": "\"Activate Online Assistance for Pre-Evaluation Conversations\"",
-              "isCustomLabel": false,
-              "transitions": []
-            },
-            {
-              "id": "ins-e0dfadb63b",
-              "type": "skill",
-              "name": "saveDataUser",
-              "flowId": "wf-21d68eedc5",
-              "exitNodes": [],
-              "transitions": [],
-              "nodeId": "nd-296255ca0e",
-              "manualFields": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-0d325cfedc"
+            "targetNodeId": "nd-066484b43e"
           },
           "id": "nd-296255ca0e",
-          "name": "OnLine"
+          "name": "getAnswerType"
         },
         {
           "type": "standard",
           "deletable": true,
-          "x": 1380,
-          "y": 690,
+          "x": 1620,
+          "y": 240,
           "instructions": [
             {
               "type": "log",
@@ -26251,8 +25317,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -120,
-          "y": -180,
+          "x": 525,
+          "y": -150,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">CONSULTA EN LÍNEA O SEDE</span></strong></p>",
           "id": "nd-1db425adc9",
@@ -26260,87 +25326,6 @@
           "height": 128,
           "width": 296,
           "backgroundColor": "var(--iris-5)"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 525,
-          "y": 1350,
-          "instructions": [
-            {
-              "id": "ins-80be9e36be",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.assistanceModeAnswer = workflow.UnderstandUserInput1.correctedUserInput",
-              "origin": "builtin",
-              "label": "\"Assign Corrected User Input in Assistance Mode Workflow\"",
-              "nodeId": "nd-6c0861d2b0",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.assistanceModeAnswer = workflow.UnderstandUserInput1.correctedUserInput;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-fcdfb7e4a7"
-          },
-          "id": "nd-6c0861d2b0",
-          "name": "ParaphraseToRetry"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1125,
-          "y": 1020,
-          "instructions": [
-            {
-              "id": "ins-aea226c793",
-              "type": "action",
-              "category": "Execute",
-              "code": "bot.irregularState = 'CONFUSED'",
-              "origin": "builtin",
-              "label": "\"Automated Bot for Task Management and Scheduling\"",
-              "nodeId": "nd-380515b053",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  bot.irregularState = \"CONFUSED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-d7a8d1cec9"
-          },
-          "id": "nd-380515b053",
-          "name": "Set_Complexed"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 1860,
-          "y": 150,
-          "instructions": [
-            {
-              "id": "ins-94f7fb8517",
-              "type": "content",
-              "content": {
-                "type": "text",
-                "text": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "De acuerdo",
-                  "staticValue": ""
-                },
-                "typing": {
-                  "valueType": "static",
-                  "staticValue": true
-                }
-              },
-              "nodeId": "nd-0d325cfedc",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-066484b43e"
-          },
-          "id": "nd-0d325cfedc",
-          "name": "Confirmacion"
         }
       ],
       "parentFolder": "dir-6f096a3adf"
@@ -26364,7 +25349,7 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{bot.conversationContext === 'ABOUT_CREDIT_INFO' }}"
+                "payload": "{{conversation.context === 'ABOUT_CREDIT_INFO' }}"
               },
               "label": "Comes from credit info context",
               "generative": {
@@ -29058,8 +28043,8 @@
               "nodeId": "nd-4d21d2bcc2"
             }
           ],
-          "x": 900,
-          "y": 840
+          "x": 300,
+          "y": 720
         },
         {
           "id": "nd-93c34beabf",
@@ -29072,34 +28057,8 @@
               "type": "skill",
               "name": "questionWithUserName",
               "flowId": "wf-9d5e1848de",
-              "exitNodes": [
-                "nd-09447a4e34"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-ac9c2d4e70",
-                  "type": "transition",
-                  "label": "Success",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-09447a4e34"
-                  },
-                  "destination": {
-                    "node": "nd-9e115e2e1e"
-                  },
-                  "generative": {
-                    "label": "Success",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Success",
-                      "condition": "lastNode=nd-09447a4e34"
-                    }
-                  }
-                }
-              ],
+              "exitNodes": [],
+              "transitions": [],
               "nodeId": "nd-93c34beabf",
               "manualFields": [],
               "variables": [
@@ -29152,167 +28111,10 @@
           "y": -150
         },
         {
-          "name": "EvaluateConfirmation",
-          "type": "standard",
-          "deletable": true,
-          "x": 135,
-          "y": 375,
-          "instructions": [
-            {
-              "id": "ins-95e8936f11",
-              "type": "action",
-              "code": "if ( !workflow.clarificationAttempts ) {\n\tworkflow.clarificationAttempts = 1;\n} else {\n\tworkflow.clarificationAttempts++;\n}\n\nif (workflow.clarificationAttempts >= 2) {\n\tbot.irregularState = 'COMPLEXED'\n}",
-              "origin": "builtin",
-              "label": "\"Track and Update Workflow Clarification Attempts Status\"",
-              "nodeId": "nd-7bbc0d8ff4",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  if (!workflow.clarificationAttempts) {\n    workflow.clarificationAttempts = 1;\n  } else {\n    workflow.clarificationAttempts++;\n  }\n  if (workflow.clarificationAttempts >= 2) {\n    bot.irregularState = \"COMPLEXED\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            },
-            {
-              "id": "ins-71a4d6a6a3",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.clarificationAttempts >= 2}}"
-              },
-              "label": "Have been here",
-              "generative": {
-                "label": "Have been here",
-                "suggestion": {
-                  "condition": "true"
-                },
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-7bbc0d8ff4",
-              "description": "",
-              "destination": {
-                "node": "nd-4d21d2bcc2"
-              },
-              "transitions": []
-            },
-            {
-              "id": "ins-ed9743e8dd",
-              "type": "skill",
-              "name": "UnderstandUserInput",
-              "flowId": "wf-cabe199fc6",
-              "exitNodes": [
-                "nd-ed7af360bf",
-                "nd-fb7e06f31a",
-                "nd-c9ade57441"
-              ],
-              "transitions": [
-                {
-                  "id": "trs-e57246fb75",
-                  "type": "transition",
-                  "label": "ChangeContext",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-ed7af360bf"
-                  },
-                  "destination": {
-                    "node": "nd-2c66744ca0"
-                  },
-                  "generative": {
-                    "label": "ChangeContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "ChangeContext",
-                      "condition": "lastNode=nd-ed7af360bf"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-8bdc07df23",
-                  "type": "transition",
-                  "label": "SUCCESS",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-fb7e06f31a"
-                  },
-                  "destination": {
-                    "node": "nd-edb1a18379"
-                  },
-                  "generative": {
-                    "label": "SameContext",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "SameContext",
-                      "condition": "lastNode=nd-fb7e06f31a"
-                    }
-                  }
-                },
-                {
-                  "id": "trs-04a3c6110a",
-                  "type": "transition",
-                  "label": "Refused",
-                  "condition": {
-                    "type": "expression",
-                    "payload": "lastNode=nd-c9ade57441"
-                  },
-                  "destination": {},
-                  "generative": {
-                    "label": "Refused",
-                    "properties": {
-                      "label": true,
-                      "condition": true
-                    },
-                    "suggestion": {
-                      "label": "Refused",
-                      "condition": "lastNode=nd-c9ade57441"
-                    }
-                  }
-                }
-              ],
-              "nodeId": "nd-7bbc0d8ff4",
-              "manualFields": [],
-              "variables": [
-                {
-                  "id": "var-e6e441d563",
-                  "name": "allowAnswer",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "valueType": "static",
-                    "staticValue": true,
-                    "dynamicValue": ""
-                  }
-                },
-                {
-                  "id": "var-d2e43ac990",
-                  "name": "retry",
-                  "description": "",
-                  "type": "boolean",
-                  "scope": "workflow",
-                  "defaultValue": false,
-                  "storeAsTag": false,
-                  "value": {
-                    "staticValue": false,
-                    "valueType": "static",
-                    "dynamicValue": ""
-                  }
-                }
-              ]
-            }
-          ],
-          "id": "nd-7bbc0d8ff4"
-        },
-        {
           "type": "exit",
           "deletable": true,
-          "x": 1410,
-          "y": 120,
+          "x": 630,
+          "y": 345,
           "variables": [],
           "instructions": [
             {
@@ -29347,8 +28149,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 1005,
-          "y": -225,
+          "x": 540,
+          "y": 135,
           "variables": [],
           "instructions": [
             {
@@ -29383,8 +28185,8 @@
         {
           "type": "exit",
           "deletable": true,
-          "x": 1410,
-          "y": 450,
+          "x": 990,
+          "y": 480,
           "variables": [],
           "instructions": [
             {
@@ -29419,46 +28221,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 210,
-          "y": 750,
-          "instructions": [
-            {
-              "id": "ins-6bbb544cb1",
-              "type": "action",
-              "category": "Execute",
-              "code": "workflow.purchaseMethodAnswer = ''",
-              "origin": "builtin",
-              "label": "\"Initialize Purchase Method Selection in Workflow\"",
-              "nodeId": "nd-edb1a18379",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.purchaseMethodAnswer = \"\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": [],
-              "isCustomLabel": false
-            },
-            {
-              "type": "log",
-              "id": "ins-10eb4f05f6",
-              "label": "Log",
-              "level": "warning",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Ask Again",
-                "staticValue": ""
-              },
-              "nodeId": "nd-edb1a18379",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-9e115e2e1e"
-          },
-          "id": "nd-edb1a18379",
-          "name": "AskAgain"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
-          "x": 555,
-          "y": -195,
+          "x": 150,
+          "y": 90,
           "instructions": [
             {
               "id": "ins-4b7b941a22",
@@ -29699,7 +28463,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-7bbc0d8ff4"
+            "targetNodeId": "nd-4d21d2bcc2"
           },
           "id": "nd-9e115e2e1e",
           "name": "EvaluateConfirmation"
@@ -29718,35 +28482,11 @@
           "backgroundColor": "var(--jade-5)"
         },
         {
-          "type": "standard",
-          "deletable": true,
-          "x": -270,
-          "y": 765,
-          "instructions": [
-            {
-              "id": "ins-ba8fd40ae7",
-              "type": "action",
-              "code": "workflow.purchaseMethodAnswer = workflow.UnderstandUserInput?.correctedUserInput ?? workflow.purchaseMethodAnswer\n",
-              "origin": "builtin",
-              "label": "\"Update Purchase Method Based on User Input Correction\"",
-              "nodeId": "nd-2c66744ca0",
-              "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.purchaseMethodAnswer = workflow.UnderstandUserInput?.correctedUserInput ?? workflow.purchaseMethodAnswer;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": "nd-93c34beabf"
-          },
-          "id": "nd-2c66744ca0",
-          "name": "Re-SetValue"
-        },
-        {
           "name": "setCupoBrillaProfile",
           "type": "standard",
           "deletable": true,
-          "x": 1005,
-          "y": 435,
+          "x": 615,
+          "y": 555,
           "instructions": [
             {
               "id": "ins-a50e0bd576",
@@ -30236,7 +28976,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-d81f2d55d6",
-              "label": "",
+              "label": "priceInfoMessage",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -30246,7 +28986,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia\n- Si la moto SÍ tiene asignado un precio de contado, se responderá lo siguiente:\n\"El valor, con los documentos de SOAT y matrícula sería  $ {{VALOR}}\"\n\n- Si la moto NO tiene asignado un precio de contado, se responderá lo siguiente:\n\"Discúlpeme, no encuentro el valor de contado.\"\n\n\n## Consideraciones:\n- el {{VALOR}} debe ser expresados en numero enteros \n- el {{VALOR}} estará expresado en pesos colombianos\n- el {{VALOR}}  debe estar separado los miles por comas\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia\n- Si la moto SÍ tiene asignado un precio de contado, se responderá lo siguiente:\n\"El valor, con los documentos de SOAT y matrícula sería  $ {{VALOR}}\"\n\n- Si la moto NO tiene asignado un precio de contado, se responderá lo siguiente:\n\"Discúlpeme, no encuentro el valor de contado.\"\n\n\n## Consideraciones:\n- el {{VALOR}} debe ser expresados en numero enteros \n- el {{VALOR}} estará expresado en pesos colombianos\n- el {{VALOR}}  debe estar separado los miles por comas\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"priceInfoMessage\": string\n}"
                   },
                   {
                     "role": "user",
@@ -30445,7 +29185,7 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "{{!!bot.conversationContext}}"
+                "payload": "{{!!conversation.context}}"
               },
               "label": "Contexto previo",
               "generative": {
@@ -30552,12 +29292,12 @@
               "id": "ins-b9f8fb000f",
               "type": "action",
               "category": "Execute",
-              "code": "workflow.startedSummary = conversation.SummaryAgent.summary\n\nif (!workflow.startedSummary) {\n  console.log('❗️ Borrado de contexto: ', bot.conversationContext)\n  bot.conversationContext = ''\n} else {\n  console.warn('Hubo contexto previo pero había resumen')\n}\n\n",
+              "code": "workflow.startedSummary = conversation.SummaryAgent.summary\n\nif (!workflow.startedSummary) {\n  console.log('❗️ Borrado de contexto: ', conversation.context)\n  conversation.context = ''\n} else {\n  console.warn('Hubo contexto previo pero había resumen')\n}\n\n",
               "origin": "builtin",
               "label": "\"Manage Conversation Context Based on Summary Availability\"",
               "nodeId": "nd-b2cf6450f5",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.startedSummary = conversation.SummaryAgent.summary;\n  if (!workflow.startedSummary) {\n    console.log(\"\\u2757\\uFE0F Borrado de contexto: \", bot.conversationContext);\n    bot.conversationContext = \"\";\n  } else {\n    console.warn(\"Hubo contexto previo pero hab\\xEDa resumen\");\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.startedSummary = conversation.SummaryAgent.summary;\n  if (!workflow.startedSummary) {\n    console.log(\"\\u2757\\uFE0F Borrado de contexto: \", conversation.context);\n    conversation.context = \"\";\n  } else {\n    console.warn(\"Hubo contexto previo pero hab\\xEDa resumen\");\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -30951,7 +29691,7 @@
               "level": "warning",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "🤖 Contexto previo: {{bot.conversationContext}}",
+                "dynamicValue": "🤖 Contexto previo: {{conversation.context}}",
                 "staticValue": ""
               },
               "nodeId": "nd-6ecdfb7c32",
@@ -30961,12 +29701,12 @@
               "id": "ins-480e1fe562",
               "type": "action",
               "category": "Execute",
-              "code": "const userFullName = user.fullName\nconst userPhone = user.phone\nconst { conversationId } = event\n\n// Check if conversationId exists in leadClientsTable\nconst leadRecords = await leadClientsTable.findRecords({\n  filter: { CONVERSATION_ID: conversationId }\n})\n\n// Log user information if available\nif (userFullName && userPhone) {\n  console.log(`⭕️ User Full Name: ${userFullName}, User Phone: ${userPhone}`)\n}\n\n// Clear bot data if user information is incomplete\nif (!userFullName || !userPhone) {\n  console.log(\n    `⚠️ Clearing bot data: Missing user information. Name: ${\n      userFullName ? 'present' : 'missing'\n    }, Phone: ${userPhone ? 'present' : 'missing'}`\n  )\n  resetBotData()\n}\n// Clear bot data if this conversation already exists in records\nelse if (leadRecords.length > 0) {\n  console.log(`⚠️ Clearing bot data: Conversation ID ${conversationId} already exists in records`)\n  resetBotData()\n}\n\n// Helper function to reset bot data\nfunction resetBotData() {\n  bot.conversationContext = ''\n  bot.irregularState = ''\n}\n",
+              "code": "const userFullName = user.fullName\nconst userPhone = user.phone\nconst { conversationId } = event\n\n// Check if conversationId exists in leadClientsTable\nconst leadRecords = await leadClientsTable.findRecords({\n  filter: { CONVERSATION_ID: conversationId }\n})\n\n// Log user information if available\nif (userFullName && userPhone) {\n  console.log(`⭕️ User Full Name: ${userFullName}, User Phone: ${userPhone}`)\n}\n\n// Clear bot data if user information is incomplete\nif (!userFullName || !userPhone) {\n  console.log(\n    `⚠️ Clearing bot data: Missing user information. Name: ${\n      userFullName ? 'present' : 'missing'\n    }, Phone: ${userPhone ? 'present' : 'missing'}`\n  )\n  resetBotData()\n}\n// Clear bot data if this conversation already exists in records\nelse if (leadRecords.length > 0) {\n  console.log(`⚠️ Clearing bot data: Conversation ID ${conversationId} already exists in records`)\n  resetBotData()\n}\n\n// Helper function to reset bot data\nfunction resetBotData() {\n  conversation.context = ''\n  bot.irregularState = ''\n}\n",
               "origin": "builtin",
               "label": "\"Validate User Information and Manage Bot Data Reset\"",
               "nodeId": "nd-6ecdfb7c32",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const userFullName = user.fullName;\n  const userPhone = user.phone;\n  const { conversationId } = event;\n  const leadRecords = await leadClientsTable.findRecords({\n    filter: { CONVERSATION_ID: conversationId }\n  });\n  if (userFullName && userPhone) {\n    console.log(`\\u2B55\\uFE0F User Full Name: ${userFullName}, User Phone: ${userPhone}`);\n  }\n  if (!userFullName || !userPhone) {\n    console.log(\n      `\\u26A0\\uFE0F Clearing bot data: Missing user information. Name: ${userFullName ? \"present\" : \"missing\"}, Phone: ${userPhone ? \"present\" : \"missing\"}`\n    );\n    resetBotData();\n  } else if (leadRecords.length > 0) {\n    console.log(`\\u26A0\\uFE0F Clearing bot data: Conversation ID ${conversationId} already exists in records`);\n    resetBotData();\n  }\n  function resetBotData() {\n    bot.conversationContext = \"\";\n    bot.irregularState = \"\";\n  }\n  __name(resetBotData, \"resetBotData\");\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const userFullName = user.fullName;\n  const userPhone = user.phone;\n  const { conversationId } = event;\n  const leadRecords = await leadClientsTable.findRecords({\n    filter: { CONVERSATION_ID: conversationId }\n  });\n  if (userFullName && userPhone) {\n    console.log(`\\u2B55\\uFE0F User Full Name: ${userFullName}, User Phone: ${userPhone}`);\n  }\n  if (!userFullName || !userPhone) {\n    console.log(\n      `\\u26A0\\uFE0F Clearing bot data: Missing user information. Name: ${userFullName ? \"present\" : \"missing\"}, Phone: ${userPhone ? \"present\" : \"missing\"}`\n    );\n    resetBotData();\n  } else if (leadRecords.length > 0) {\n    console.log(`\\u26A0\\uFE0F Clearing bot data: Conversation ID ${conversationId} already exists in records`);\n    resetBotData();\n  }\n  function resetBotData() {\n    conversation.context = \"\";\n    bot.irregularState = \"\";\n  }\n  __name(resetBotData, \"resetBotData\");\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -36050,8 +34790,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 1575,
-          "y": 135,
+          "x": 1590,
+          "y": 165,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 18px\">Ciente solicita atención humana.</span></strong></p>",
           "id": "nd-2a2bc7c284",
@@ -39872,29 +38612,29 @@
       "id": "version_01JRJD8FY84J036TAWW71KMX3T"
     }
   ],
-  "revision": 49065,
+  "revision": 49509,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-05-13T01:01:15.305Z",
-    "lastRevisionId": 49064,
+    "lastRevisionCheckAt": "2025-05-13T14:24:31.284Z",
+    "lastRevisionId": 49508,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-05-12T22:42:57.907Z (CHmZX_ga7_): disconnected -> connecting (ok)",
-      "2025-05-12T22:42:58.194Z (CHmZX_ga7_): connecting -> connected (ok)",
-      "2025-05-13T00:25:49.367Z: connected -> closing (Connection closing)",
-      "2025-05-13T00:25:49.373Z: closing -> closed (Connection closed)",
-      "2025-05-13T00:25:49.437Z: connected -> closing (Connection closing)",
-      "2025-05-13T00:25:49.437Z: closing -> closed (Connection closed)",
-      "2025-05-13T00:25:49.437Z: connected -> closing (Connection closing)",
-      "2025-05-13T00:25:49.437Z: closing -> closed (Connection closed)",
-      "2025-05-13T00:25:49.454Z: initialized -> connecting (ok)",
-      "2025-05-13T00:25:49.855Z (HSfesadcYm): connecting -> connected (ok)"
+      "2025-05-13T12:59:25.749Z (WAtc9fCHCf): connecting -> connected (ok)",
+      "2025-05-13T13:06:45.828Z (WAtc9fCHCf): connected -> disconnected (Websocket closed)",
+      "2025-05-13T13:06:45.836Z (WAtc9fCHCf): disconnected -> connecting (ok)",
+      "2025-05-13T13:06:46.605Z (WAtc9fCHCf): connecting -> connected (ok)",
+      "2025-05-13T13:16:14.011Z (WAtc9fCHCf): connected -> disconnected (Websocket closed)",
+      "2025-05-13T13:16:14.018Z (WAtc9fCHCf): disconnected -> connecting (ok)",
+      "2025-05-13T13:16:14.447Z (WAtc9fCHCf): connecting -> connected (ok)",
+      "2025-05-13T13:21:50.034Z (WAtc9fCHCf): connected -> disconnected (Websocket closed)",
+      "2025-05-13T13:21:50.043Z (WAtc9fCHCf): disconnected -> connecting (ok)",
+      "2025-05-13T13:21:50.426Z (WAtc9fCHCf): connecting -> connected (ok)"
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01JV0080NEF3NKCMKNHEVNAEWQ / Tue, 13 May 2025 00:25:50 GMT /  2025-05-13T01:01:28.762Z"
+      "jguzman@marxadigital.com / sess_01JV3TCWYNDK82VRSVCN23P7XS / Tue, 13 May 2025 04:26:29 GMT /  2025-05-13T14:24:41.627Z"
     ],
-    "savedAt": "2025-05-13T01:01:35.162Z",
+    "savedAt": "2025-05-13T14:24:42.005Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01JV0080NEF3NKCMKNHEVNAEWQ"
+    "sessionId": "sess_01JV3TCWYNDK82VRSVCN23P7XS"
   },
   "identity": {
     "name": "asistente-lasmotos-dev",

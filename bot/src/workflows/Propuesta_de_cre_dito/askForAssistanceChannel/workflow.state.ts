@@ -8,14 +8,12 @@ class AskForAssistanceChannelState {
   userAnswerContext: string;
   /** QuestionWithUserName */
   QuestionWithUserName: any;
-  /** UnderstandUserInput1 */
-  UnderstandUserInput1: any;
+  /** saveDataUser */
+  saveDataUser: any;
   /** farewell1 */
   farewell1: any;
-  /** saveDataUser */
-  saveDataUser: any;
-  /** saveDataUser */
-  saveDataUser: any;
+  /** AnswerType1 */
+  AnswerType1: any;
   /** saveDataUser */
   saveDataUser: any;
 }

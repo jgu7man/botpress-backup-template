@@ -8,8 +8,6 @@ class AskPurchaseMethodState {
   clarificationAttempts: number;
   /** questionWithUserName */
   questionWithUserName: any;
-  /** UnderstandUserInput */
-  UnderstandUserInput: any;
   /** 💾 saveUserData */
   💾 saveUserData: any;
   /** CreditPreferenceHandle */

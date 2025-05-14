@@ -4,5 +4,5 @@ import { workflow } from "./workflow.state";
 
 // ------------------ TRANSITION CONDITION -------------------------
 
-const insdc03e843e7 = !!workflow.skipUserDataReason;
+const insdc03e843e7 = !workflow.requireUserDataReason;
 // Destination: nd-2e90e42efa

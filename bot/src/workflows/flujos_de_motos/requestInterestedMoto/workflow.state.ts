@@ -22,8 +22,8 @@ class RequestInterestedMotoState {
   MotoKnowledgeBase: any;
   /** askPurchasePreference1 */
   askPurchasePreference1: any;
-  /** UnderstandUserInput2 */
-  UnderstandUserInput2: any;
+  /** AnswerType1 */
+  AnswerType1: any;
 }
 
 export const workflow = new RequestInterestedMotoState();

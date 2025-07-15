@@ -23,7 +23,7 @@ export function generateImportStatements(
       : "",
     code.includes("luxon") ? `import * as luxon from "luxon";` : "",
     `// Node: ${node.name} - ${node.id}`,
-    `// ${instruction.label} - ${instruction.id}\n`,
+    `// ${instruction.label || node.name} - ${instruction.id}\n`,
     `// ------------------ ${separatorLabel} -------------------------\n`,
   ];
   return lines;

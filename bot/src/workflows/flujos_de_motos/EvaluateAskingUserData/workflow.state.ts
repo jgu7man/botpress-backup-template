@@ -1,11 +1,7 @@
 // Workflow: EvaluateAskingUserData - wf-45eae1291b
 class EvaluateAskingUserDataState {
-  /** Reason for user data request */
-  requireUserDataReason: boolean;
-  /** getContact1 */
-  getContact1: any;
-  /** CupoBrillaProfile1 */
-  CupoBrillaProfile1: any;
+  /** Marca que indica que se debe consultar los datos del cliente */
+  requireAskUserData: boolean;
 }
 
 export const workflow = new EvaluateAskingUserDataState();

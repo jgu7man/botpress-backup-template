@@ -1,6 +1,6 @@
 import { user } from "@main";
 // Node: negative_answer - nd-0107c4c77d
-// Update User Status and Credit Profile in Conversation System - ins-011caa888f
+// Update User Credit Profile and Conversation Status - ins-011caa888f
 
 // ------------------ EXECUTE CODE -------------------------
 

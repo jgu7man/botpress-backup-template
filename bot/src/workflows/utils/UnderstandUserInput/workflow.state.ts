@@ -10,16 +10,14 @@ class UnderstandUserInputState {
   expectedData: string;
   /** Sin descripción */
   retry: boolean;
-  /** Sin descripción */
-  paraphrasedQuestion: string;
   /** Contexto del mensaje del cliente. Puede ser: 'ESPERA', 'RECHAZO', 'ASISTENCIA_HUMANA', 'NO_APLICA' */
   context: string;
   /** Intentos de entender el mensaje del usuario */
   retryCount: number;
-  /** farewell1 */
-  farewell1: any;
-  /** HandleMultimediaMessage1 */
-  HandleMultimediaMessage1: any;
+  /** La explicación del contexto de parte de la base de conocimientos */
+  contextExplanation: string;
+  /** ValidateAttempts1 */
+  ValidateAttempts1: any;
   /** farewell2 */
   farewell2: any;
   /** farewell3 */

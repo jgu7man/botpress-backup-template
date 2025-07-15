@@ -1,7 +1,7 @@
-import { bot } from "@main";
+import { conversation } from "@main";
 // Node: resetAttempts - nd-587dde0db0
-// "Initialize Bot with Zero Retry Attempts" - ins-577ee310c8
+// "Initialize Conversation Attempt Counter to Zero" - ins-577ee310c8
 
 // ------------------ EXECUTE CODE -------------------------
 
-bot.retryAttempts = 0
+conversation.attemptsCount = 0

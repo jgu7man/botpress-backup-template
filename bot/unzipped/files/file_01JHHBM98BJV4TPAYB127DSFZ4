@@ -1,37 +1,11 @@
 window.botpress.init({
   "botId": "e8a85cb7-0432-4b73-9d64-6d6b0135e108",
   "configuration": {
-    "composerPlaceholder": "",
-    "botName": "Las motos dev",
-    "botAvatar": "",
-    "botDescription": "",
-    "website": {
-      "title": "",
-      "link": ""
-    },
-    "email": {
-      "title": "",
-      "link": ""
-    },
-    "phone": {
-      "title": "",
-      "link": ""
-    },
-    "termsOfService": {
-      "title": "",
-      "link": ""
-    },
-    "privacyPolicy": {
-      "title": "",
-      "link": ""
-    },
-    "color": "#2563eb",
-    "variant": "solid",
-    "themeMode": "light",
-    "fontFamily": "rubik",
-    "radius": 2,
-    "showPoweredBy": true,
-    "additionalStylesheet": ""
+    "website": {},
+    "email": {},
+    "phone": {},
+    "termsOfService": {},
+    "privacyPolicy": {}
   },
   "clientId": "b5a859d3-1c97-435b-9051-9ad07ce3e51e"
 });

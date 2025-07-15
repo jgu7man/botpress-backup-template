@@ -5,13 +5,13 @@
 Input:
 ```
 User name: @user.fullName;
-Contexto: {{conversation.SummaryAgent.summary}};
+Location: {{user.location}}
 ```
 
 <!-- user -->
 I have a task for you to complete. Here are the instructions:
 ## **Comportamiento**
-- Genera un mensaje de agradecimiento considerando el contexto y mencionando el nombre del cliente
+- Genera un mensaje parafraseado de una o 2 líneas basado en el siguiente template: "Gracias, bonito lugar {{LOCATION}}"
 
 ## **Consideraciones:**
 - Usa el primer nombre si tiene mas de uno

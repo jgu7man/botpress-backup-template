@@ -5,5 +5,9 @@ import { workflow } from "./workflow.state";
 
 // ------------------ EXECUTE CODE -------------------------
 
-conversation.context = workflow.conversationContext
-conversation.topics.push(workflow.conversationContext)
+type Context = 'ABOUT_LOCATION_INFO' | 'ABOUT_MOTO_INFO' | 'ABOUT_CREDIT_INFO' | 'ABOUT_CUPO_BRILLA_INFO' | '';
+
+conversation.flow.context = workflow.conversationContext as Context
+
+const { topics = [] } = conversation.flow
+conversation.flow['topics'] = [...topics, conversation.flow.context]

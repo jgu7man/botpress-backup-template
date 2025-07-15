@@ -10,12 +10,14 @@ class AskForAssistanceChannelState {
   QuestionWithUserName: any;
   /** saveDataUser */
   saveDataUser: any;
+  /** inviteToLocation */
+  inviteToLocation: any;
+  /** saveDataUser */
+  saveDataUser: any;
   /** farewell1 */
   farewell1: any;
   /** AnswerType1 */
   AnswerType1: any;
-  /** saveDataUser */
-  saveDataUser: any;
 }
 
 export const workflow = new AskForAssistanceChannelState();

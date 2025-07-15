@@ -6,10 +6,10 @@ class AskForReportedStatusState {
   userReportedQuestion: string;
   /** Respuesta a la pregunta de estar reportado o no */
   userReportedAnswer: string;
-  /** saveDataUser */
-  saveDataUser: any;
   /** QuestionWithUserName */
   QuestionWithUserName: any;
+  /** saveDataUser */
+  saveDataUser: any;
   /** AnswerType1 */
   AnswerType1: any;
 }

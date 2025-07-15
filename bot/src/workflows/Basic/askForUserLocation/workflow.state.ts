@@ -26,6 +26,10 @@ class AskForUserLocationState {
   saveDataUser: any;
   /** AnswerType2 */
   AnswerType2: any;
+  /** analyzeLocationUserInput1 */
+  analyzeLocationUserInput1: any;
+  /** saveDataUser */
+  saveDataUser: any;
 }
 
 export const workflow = new AskForUserLocationState();

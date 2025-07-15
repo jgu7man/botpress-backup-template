@@ -14,6 +14,8 @@ class AskIfUserHasCupoBrillaState {
   QuestionWithUserName: any;
   /** GetConfirmation */
   GetConfirmation: any;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
   /** AnswerType1 */
   AnswerType1: any;
 }

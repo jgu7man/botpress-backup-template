@@ -6,6 +6,8 @@ class CashPreferenceHandleState {
   priceInfoMessage: string;
   /** 👤 questionWithUserName */
   👤 questionWithUserName: any;
+  /** 👤 questionWithUserName */
+  👤 questionWithUserName: any;
   /** GetConfirmation */
   GetConfirmation: any;
   /** 💾 saveUserData */

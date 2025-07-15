@@ -1,5 +1,844 @@
 [
   {
+    "id": "file_01K04FDB6QC3YEEX0MEYT3FDHG",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 55118,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Preferencia de Estudio de Crédito.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-e2cf85fe7d/Preferencia de Estudio de Crédito (Sede vs.pdf",
+    "index": true,
+    "updatedAt": "2025-07-14T12:44:00.599Z"
+  },
+  {
+    "id": "file_01K04FDB0Y7J2EXHVTNKJGG4KF",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 33336,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-4e5d75775b",
+      "title": "Sedes Las Motos.docx.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-4e5d75775b/Sedes Las Motos.docx.pdf",
+    "index": true,
+    "updatedAt": "2025-07-14T12:44:00.414Z"
+  },
+  {
+    "id": "file_01K04FDARFSP07CKENNTXKKCNT",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 158372,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Frases de Interés en Colombia.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-e2cf85fe7d/Frases de Interés en Colombia.pdf",
+    "index": true,
+    "updatedAt": "2025-07-14T12:44:00.144Z"
+  },
+  {
+    "id": "file_01JYN0QJA85R90V8T69JYBW617",
+    "accessPolicies": [],
+    "contentType": "text/html; charset=utf-8",
+    "size": 2659,
+    "status": "indexing_completed",
+    "tags": {
+      "dsId": "ds-6df81fabe2",
+      "kbId": "kb-8de928102b",
+      "title": "ds-6df81fabe2.html",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-8de928102b/ds-6df81fabe2.html",
+    "index": true,
+    "updatedAt": "2025-06-26T02:23:08.616Z"
+  },
+  {
+    "id": "file_01JWEBCW95F03P3P4E95PCZ3GN",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 985317,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "e8548a7d5317ed835dacaa09323ba483cb93b7a49504fe9a8f3afea5574b2e7c",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748533407975.json",
+    "index": false,
+    "updatedAt": "2025-05-29T15:43:28.029Z"
+  },
+  {
+    "id": "file_01JWD3K171ZT92PT0EQ1QMGPNS",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 782,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JHHBJE021CQPDS8PAJ9H8PJP"
+    },
+    "key": "table_01JHHBJE021CQPDS8PAJ9H8PJP20250529040746.csv.zip",
+    "index": false,
+    "updatedAt": "2025-05-29T04:07:46.651Z"
+  },
+  {
+    "id": "file_01JW3WV0F9B1FKB3W9F5393XJ0",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1008967,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748182598019.json",
+    "index": false,
+    "updatedAt": "2025-05-25T14:16:38.112Z"
+  },
+  {
+    "id": "file_01JW1HX418HQPPBE6T8PRAA5SE",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1009670,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748104024036.json",
+    "index": false,
+    "updatedAt": "2025-05-24T16:27:04.091Z"
+  },
+  {
+    "id": "file_01JW1BPYB36JPZEZAEBC8TS05P",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1007244,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748097530166.json",
+    "index": false,
+    "updatedAt": "2025-05-24T14:38:50.203Z"
+  },
+  {
+    "id": "file_01JW1BPB495CNG25E42GQ1MT23",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1007244,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748097510474.json",
+    "index": false,
+    "updatedAt": "2025-05-24T14:38:30.526Z"
+  },
+  {
+    "id": "file_01JW067KD5MCZFW3M58YTXHSKY",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1006399,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748058230135.json",
+    "index": false,
+    "updatedAt": "2025-05-24T03:43:50.173Z"
+  },
+  {
+    "id": "file_01JW0293DPS3V5VPNY7V2M32EF",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1001064,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748054084977.json",
+    "index": false,
+    "updatedAt": "2025-05-24T02:34:45.038Z"
+  },
+  {
+    "id": "file_01JW001KXAHFM1MMFYR11VQ7YA",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 996134,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748051742565.json",
+    "index": false,
+    "updatedAt": "2025-05-24T01:55:42.618Z"
+  },
+  {
+    "id": "file_01JVZYGEHQTDJEHX608BGRKY5W",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 983418,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "90498bbcb09061726c8d81678356a4cf77d27e60bde20c8d8b0d99994138ac5b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1748050131464.json",
+    "index": false,
+    "updatedAt": "2025-05-24T01:28:51.503Z"
+  },
+  {
+    "id": "file_01JVNJP5X4JEDPN1Q3VW4R3DR0",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1076196,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747702191991.json",
+    "index": false,
+    "updatedAt": "2025-05-20T00:49:52.025Z"
+  },
+  {
+    "id": "file_01JVMEVDYEC43X5KJ13CQPAE26",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1072045,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747664615325.json",
+    "index": false,
+    "updatedAt": "2025-05-19T14:23:35.368Z"
+  },
+  {
+    "id": "file_01JVGE3QJWESGA90XJWF6A7GJZ",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1068481,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747529621024.json",
+    "index": false,
+    "updatedAt": "2025-05-18T00:53:41.076Z"
+  },
+  {
+    "id": "file_01JVFEDKG39Y7K9TDQH8A957H3",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1068090,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747496390001.json",
+    "index": false,
+    "updatedAt": "2025-05-17T15:39:50.141Z"
+  },
+  {
+    "id": "file_01JVE0H5DZSNTE0AW3YD08HP76",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079905,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747448272262.json",
+    "index": false,
+    "updatedAt": "2025-05-17T02:17:52.311Z"
+  },
+  {
+    "id": "file_01JVE00J4JAKK2RCTASZ372PF3",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079568,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747447728222.json",
+    "index": false,
+    "updatedAt": "2025-05-17T02:08:48.269Z"
+  },
+  {
+    "id": "file_01JVDZ2PMG2NM4BS0Y54ZVF1NJ",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079558,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747446749784.json",
+    "index": false,
+    "updatedAt": "2025-05-17T01:52:29.832Z"
+  },
+  {
+    "id": "file_01JVDY364A6CCHT1XSMYAWZKX0",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079211,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747445717076.json",
+    "index": false,
+    "updatedAt": "2025-05-17T01:35:17.124Z"
+  },
+  {
+    "id": "file_01JVDVP736TBCSVRX9KZNKHXSD",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079175,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747443194923.json",
+    "index": false,
+    "updatedAt": "2025-05-17T00:53:14.976Z"
+  },
+  {
+    "id": "file_01JVDVKGEENPE0S5WH8942J5BN",
+    "accessPolicies": [],
+    "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "size": 22120,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-980112fbf0",
+      "title": "Crédito Auteco Las Motos - Información Unificada.docx",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-980112fbf0/Crédito Auteco Las Motos - Información Unificada.docx",
+    "index": true,
+    "updatedAt": "2025-05-17T00:51:46.248Z"
+  },
+  {
+    "id": "file_01JVDSERP498WY8CAZPYG949JH",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1079174,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "4cee43aa5a5820369ad95395bd69cf7bcd824826eb4925877f62962b5992b017",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1747440853654.json",
+    "index": false,
+    "updatedAt": "2025-05-17T00:14:13.694Z"
+  },
+  {
+    "id": "file_01JVBM96V0BQSV9AXQ406900FB",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 48962,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM8F6MX25412QYPBS16S8G",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM8F6MX25412QYPBS16S8G_4",
+      "conversationId": "convo-30"
+    },
+    "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_4.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:05:19.828Z"
+  },
+  {
+    "id": "file_01JVBM96SKEW3PCS5EDWJ2G4V9",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 42029,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM8F6MX25412QYPBS16S8G",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM8F6MX25412QYPBS16S8G_2",
+      "conversationId": "convo-30"
+    },
+    "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_2.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:05:19.783Z"
+  },
+  {
+    "id": "file_01JVBM96SJFCTT0KH2R8FY33ZH",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 50493,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM8F6MX25412QYPBS16S8G",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM8F6MX25412QYPBS16S8G_5",
+      "conversationId": "convo-30"
+    },
+    "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_5.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:05:19.785Z"
+  },
+  {
+    "id": "file_01JVBM96SHKQGXWQJ616WQFKFT",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 25432,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM8F6MX25412QYPBS16S8G",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM8F6MX25412QYPBS16S8G_1",
+      "conversationId": "convo-30"
+    },
+    "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:05:19.781Z"
+  },
+  {
+    "id": "file_01JVBM96SBQB3M80G6P0WSXXJR",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 47406,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM8F6MX25412QYPBS16S8G",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM8F6MX25412QYPBS16S8G_3",
+      "conversationId": "convo-30"
+    },
+    "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_3.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:05:19.776Z"
+  },
+  {
+    "id": "file_01JVBM2XB4YTXZ640YAWFT2EFD",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 41609,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_2",
+      "conversationId": "convo-29"
+    },
+    "key": "improvements/iterations/llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_2.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:01:53.491Z"
+  },
+  {
+    "id": "file_01JVBM2XAF7Z76XPYYYSFVCQMP",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 42985,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_3",
+      "conversationId": "convo-29"
+    },
+    "key": "improvements/iterations/llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_3.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:01:53.474Z"
+  },
+  {
+    "id": "file_01JVBM2XAEXE4B52G0W3AYG1MH",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 25124,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_1",
+      "conversationId": "convo-29"
+    },
+    "key": "improvements/iterations/llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:01:53.475Z"
+  },
+  {
+    "id": "file_01JVBM147XHHE5JM3EYSQZS2VP",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 42347,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM0SYN6B3VBPXQQ71V17MM",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM0SYN6B3VBPXQQ71V17MM_3",
+      "conversationId": "convo-28"
+    },
+    "key": "improvements/iterations/llmz_01JVBM0SYN6B3VBPXQQ71V17MM_3.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:00:54.987Z"
+  },
+  {
+    "id": "file_01JVBM147PBMXAXJE44TV5Q643",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 25075,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM0SYN6B3VBPXQQ71V17MM",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM0SYN6B3VBPXQQ71V17MM_1",
+      "conversationId": "convo-28"
+    },
+    "key": "improvements/iterations/llmz_01JVBM0SYN6B3VBPXQQ71V17MM_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:00:55.012Z"
+  },
+  {
+    "id": "file_01JVBM146X3N7GF8PCBNQHJJPB",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 41383,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBM0SYN6B3VBPXQQ71V17MM",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBM0SYN6B3VBPXQQ71V17MM_2",
+      "conversationId": "convo-28"
+    },
+    "key": "improvements/iterations/llmz_01JVBM0SYN6B3VBPXQQ71V17MM_2.json",
+    "index": false,
+    "updatedAt": "2025-05-16T04:00:54.968Z"
+  },
+  {
+    "id": "file_01JVBKXZJ4W4F68BHKXD73RJWT",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 41609,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_2",
+      "conversationId": "convo-27"
+    },
+    "key": "improvements/iterations/llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_2.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:59:11.874Z"
+  },
+  {
+    "id": "file_01JVBKXZHCNKBM9WJWXHMHSMMH",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 25124,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_1",
+      "conversationId": "convo-27"
+    },
+    "key": "improvements/iterations/llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:59:11.873Z"
+  },
+  {
+    "id": "file_01JVBKXZGF24RTV49HAW4J0ET1",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 42985,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_3",
+      "conversationId": "convo-27"
+    },
+    "key": "improvements/iterations/llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_3.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:59:11.879Z"
+  },
+  {
+    "id": "file_01JVBKM4TMY7H338N1TVGBM5FH",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 44095,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_5",
+      "conversationId": "convo-26"
+    },
+    "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_5.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:53:49.640Z"
+  },
+  {
+    "id": "file_01JVBKM4TJVAG0H604ZS7QCMPK",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 42800,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_3",
+      "conversationId": "convo-26"
+    },
+    "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_3.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:53:49.641Z"
+  },
+  {
+    "id": "file_01JVBKM4TDX22RDEB34SS057PD",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 26113,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_1",
+      "conversationId": "convo-26"
+    },
+    "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:53:49.637Z"
+  },
+  {
+    "id": "file_01JVBKM4TCNVDHAQHQAP5VSN2Q",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 26481,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_2",
+      "conversationId": "convo-26"
+    },
+    "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_2.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:53:49.636Z"
+  },
+  {
+    "id": "file_01JVBKM4T53HTJ78M83FRRGKZ2",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 43192,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_4",
+      "conversationId": "convo-26"
+    },
+    "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_4.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:53:49.629Z"
+  },
+  {
+    "id": "file_01JVBKG8A2DRC964C96R70MGPZ",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 26077,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBKG6KKN96ENNQNG0C0M89B",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBKG6KKN96ENNQNG0C0M89B_1",
+      "conversationId": "convo-25"
+    },
+    "key": "improvements/iterations/llmz_01JVBKG6KKN96ENNQNG0C0M89B_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:51:42.138Z"
+  },
+  {
+    "id": "file_01JVBJRT8TYAR1E6FF08CN2JSY",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 26077,
+    "status": "upload_completed",
+    "tags": {
+      "uri": "workflow://wf-fc6c348277/nd-ef5b39d576",
+      "origin": "integration",
+      "userId": "user-21",
+      "eventId": "none",
+      "purpose": "iteration",
+      "executionId": "llmz_01JVBJRQ43MEHEJ9RFK6HYEFYE",
+      "integration": "Int_Improvement",
+      "iterationId": "llmz_01JVBJRQ43MEHEJ9RFK6HYEFYE_1",
+      "conversationId": "convo-23"
+    },
+    "key": "improvements/iterations/llmz_01JVBJRQ43MEHEJ9RFK6HYEFYE_1.json",
+    "index": false,
+    "updatedAt": "2025-05-16T03:38:54.097Z"
+  },
+  {
     "id": "file_01JV0X8NSRJMHA6SVMQH7Z0GXD",
     "accessPolicies": [],
     "contentType": "application/pdf",
@@ -265,22 +1104,6 @@
     "updatedAt": "2025-04-04T19:09:12.423Z"
   },
   {
-    "id": "file_01JQZN411FXYJG6EPXRXBEGW1B",
-    "accessPolicies": [],
-    "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "size": 10734,
-    "status": "indexing_completed",
-    "tags": {
-      "kbId": "kb-980112fbf0",
-      "title": "Articulo SEO crédito.docx",
-      "source": "knowledge-base",
-      "modalities": "[\"text\"]"
-    },
-    "key": "kb-980112fbf0/Articulo SEO crédito.docx",
-    "index": true,
-    "updatedAt": "2025-04-04T05:41:59.973Z"
-  },
-  {
     "id": "file_01JQZKSR9V8WNE69QWBBZYDNPQ",
     "accessPolicies": [],
     "contentType": "application/pdf",
@@ -300,7 +1123,7 @@
     "id": "file_01JQZGT6CMRJ51ERH4ACM2GSVS",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
-    "size": 4305,
+    "size": 4445,
     "status": "upload_completed",
     "tags": {
       "system": "true",
@@ -308,7 +1131,7 @@
     },
     "key": "bot->e8a85cb7-0432-4b73-9d64-6d6b0135e108->models.config.json",
     "index": false,
-    "updatedAt": "2025-04-04T04:26:43.467Z"
+    "updatedAt": "2025-06-19T03:12:48.880Z"
   },
   {
     "id": "file_01JQWHZR6G5XGA2CDS26J31Y4E",
@@ -425,16 +1248,17 @@
       "public_content"
     ],
     "contentType": "application/json",
-    "size": 728,
+    "size": 236,
     "status": "upload_completed",
     "tags": {
       "source": "integration",
+      "system": "true",
       "integrationName": "webchat",
       "webchatConfigVersion": "1"
     },
     "key": "webchatConfig.json",
     "index": false,
-    "updatedAt": "2025-04-16T12:44:34.487Z"
+    "updatedAt": "2025-06-26T02:23:08.115Z"
   },
   {
     "id": "file_01JHHBM98BJV4TPAYB127DSFZ4",
@@ -442,16 +1266,17 @@
       "public_content"
     ],
     "contentType": "application/javascript",
-    "size": 751,
+    "size": 259,
     "status": "upload_completed",
     "tags": {
       "source": "integration",
+      "system": "true",
       "integrationName": "webchat",
       "webchatInjectConfigVersion": "1"
     },
     "key": "webchatConfigInject.js",
     "index": false,
-    "updatedAt": "2025-04-16T12:44:33.959Z"
+    "updatedAt": "2025-06-26T02:23:07.951Z"
   },
   {
     "id": "file_01JHHBJB6BVCSTMEYG86NN40ZT",

@@ -3,17 +3,11 @@ class FarewellState {
   /** Sin descripción */
   inputError: boolean;
   /** Sin descripción */
-  colombiaTime: string;
-  /** Sin descripción */
   botState: string;
   /** Sin descripción */
   farewellMessage: string;
-  /** askForNationalId */
-  askForNationalId: any;
-  /** askForBillNumber */
-  askForBillNumber: any;
-  /** inviteToLocation */
-  inviteToLocation: any;
+  /** El template de mensaje de despedida seleccionado desde la BDC */
+  farewellTemplate: string;
   /** helpQuestion1 */
   helpQuestion1: any;
 }

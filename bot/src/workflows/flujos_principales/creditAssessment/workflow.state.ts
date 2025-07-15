@@ -10,22 +10,12 @@ class CreditAssessmentState {
   contractTypeAnswer: string;
   /** Sin descripción */
   concernMessage: string;
-  /** askForNationalId */
-  askForNationalId: any;
-  /** askForBillNumber */
-  askForBillNumber: any;
-  /** saveDataUser2 */
-  saveDataUser2: any;
-  /** questionWithName */
-  questionWithName: any;
   /** financialStudyMessage */
   financialStudyMessage: any;
   /** financialStudyMessage */
   financialStudyMessage: any;
   /** saveDataUser2 */
   saveDataUser2: any;
-  /** requestInterestedMoto2 */
-  requestInterestedMoto2: any;
   /** saveDataUser2 */
   saveDataUser2: any;
   /** farewell1 */
@@ -36,6 +26,14 @@ class CreditAssessmentState {
   askIfUserHasCupoBrilla1: any;
   /** askForJobContractType1 */
   askForJobContractType1: any;
+  /** CupoBrillaProfile1 */
+  CupoBrillaProfile1: any;
+  /** Get_InterestedProduct1 */
+  Get_InterestedProduct1: any;
+  /** EvaluateAskingUserData1 */
+  EvaluateAskingUserData1: any;
+  /** User Info Form */
+  User Info Form: any;
 }
 
 export const workflow = new CreditAssessmentState();

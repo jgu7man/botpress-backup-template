@@ -1,33 +1,63 @@
 # AnalyzeUserInput
-<!-- Instruction: location -->
+<!-- Instruction: serviceLocation, context -->
 
 
 Input:
 ```
-User input: {{workflow.locationInput}}
-Conversation summary: {{conversation.SummaryAgent.summary}}
-Conocimeinto de ubicación: {{workflow.knowledgeAboutLocation}}
-
+Ubicación del cliente: {{user.location}};
+Knowledge base answer:  @workflow.knowledgeAboutLocation;
 ```
 
 <!-- user -->
 I have a task for you to complete. Here are the instructions:
-## **ROL:**  
+Eres un **Asistente Colombiano de Servicio** encargado de determinar la ubicación del usuario a partir de la respuesta de nuestra base de conocimiento y guardarla en `@user.serviceLocation`.
 
-Eres un asistente colombiano diseñado para identificar ubicaciones.
+**Instrucciones paso a paso:**
 
-## **Estrategia:**  
+1. **Verifica si el usuario ya tiene `user.location`:**  
+   - Si **está vacío** (`""`, `null` o no existe), deja `@user.serviceLocation` vacío y termina aquí.  
+   - Si **NO está vacío**, continúa al paso 2.
 
-1. Analiza `@workflow.locationInput`, `@workflow.knowledgeAboutLocation` y apóyate en `{{conversation.SummaryAgent.summary}}` .  
-2. Si reconoces que la consulta del usuario incluye una ubicación específica (barrio o ciudad), guarda literalmente la ubicación que el Usuario haya mencionado en `@user.location`. Sólo modifica para corregir ortografía y gramática.
-3. Si el resultado es un barrio, omite la ciudad dentro del valor agregado a la variable `@user.location`
+2. **Interpreta la respuesta de la base de conocimiento (`Knowledge base answer`):**  
+   - Busca explícitamente una de estas ciudades / zonas:  
+     ```
+     SANTA MARTA │ RIOHACHA │ ZONA BANANERA
+     ```  
+   - Si la respuesta menciona una de ellas, asígnala a `@user.serviceLocation`.  
+   - Si no la menciona, **deja `@user.serviceLocation` vacío**.
+
+3. **Explicación breve**  
+   Después de asignar (o dejar vacío), añade **una línea** que explique por qué quedó ese valor en `@user.serviceLocation`.
+
+---
+
+**Ejemplo 1**  
+- **Input**  
+  - `user.location = ""`  
+  - `Knowledge base answer = "Tenemos tienda en Santa Marta y Cartagena."`  
+- **Output**  
+
+@user.serviceLocation = ""
+@workflow.context = El usuario no tenía ubicación previa, y aunque la KB menciona ciudades, no re-asignamos cuando está vacío.
+
+**Ejemplo 2**  
+- **Input**  
+- `user.location = "Medellín"`  
+- `Knowledge base answer = "Nuestro punto de servicio está en Zona Bananera."`  
+- **Output**  
+
+@user.serviceLocation = "ZONA BANANERA"
+@workflow.context = Explicación: Reemplazamos la ubicación previa porque la KB menciona una de las zonas cubiertas.
+
 
 --
 The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /** location of client */
-"location": string
+  /**  */
+"serviceLocation": string
+/**  */
+"context": string
 }
 ```

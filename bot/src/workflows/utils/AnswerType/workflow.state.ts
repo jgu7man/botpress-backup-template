@@ -8,14 +8,14 @@ class AnswerTypeState {
   noRequiereConsultar: boolean;
   /** ❔mainKnowledgeBase */
   ❔mainKnowledgeBase: any;
-  /** ✏️ RephraseQuestion */
-  ✏️ RephraseQuestion: any;
   /** ❔mainKnowledgeBase */
   ❔mainKnowledgeBase: any;
-  /** HandleMultimediaMessage1 */
-  HandleMultimediaMessage1: any;
   /** UnderstandUserInputCopy11 */
   UnderstandUserInputCopy11: any;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
+  /** HandleMultimediaMessage1 */
+  HandleMultimediaMessage1: any;
 }
 
 export const workflow = new AnswerTypeState();

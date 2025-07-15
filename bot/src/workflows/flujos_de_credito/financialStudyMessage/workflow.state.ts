@@ -6,6 +6,8 @@ class FinancialStudyMessageState {
   colombiaTime: string;
   /** Sin descripción */
   assessmentInvitationMsg: string;
+  /** 👤 questionWithUserName */
+  👤 questionWithUserName: any;
 }
 
 export const workflow = new FinancialStudyMessageState();

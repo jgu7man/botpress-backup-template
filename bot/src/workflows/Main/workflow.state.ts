@@ -1,25 +1,31 @@
 // Workflow: Main - wf-main
 class MainState {
-  /** Sin descripción */
-  data: string;
-  /** Sin descripción */
-  moto: string;
-  /** Sin descripción */
-  confirmation: unknown;
   /** credictStudy1 */
   credictStudy1: any;
   /** getContact1 */
   getContact1: any;
-  /** mainKnowledgeBase1 */
-  mainKnowledgeBase1: any;
-  /** creditProposal1 */
-  creditProposal1: any;
+  /** creditProposalFlow1 */
+  creditProposalFlow1: any;
+  /** askForAssistanceMode1 */
+  askForAssistanceMode1: any;
+  /** SyncUserData */
+  SyncUserData: any;
   /** welcome1 */
   welcome1: any;
   /** farewell1 */
   farewell1: any;
-  /** requestInterestedMoto1 */
-  requestInterestedMoto1: any;
+  /** mainKnowledgeBase1 */
+  mainKnowledgeBase1: any;
+  /** 💾 saveUserData */
+  💾 saveUserData: any;
+  /** StartWaConversation1 */
+  StartWaConversation1: any;
+  /** SyncUserData */
+  SyncUserData: any;
+  /** HandleWaResponse1 */
+  HandleWaResponse1: any;
+  /** Get_InterestedProduct */
+  Get_InterestedProduct: any;
 }
 
 export const workflow = new MainState();

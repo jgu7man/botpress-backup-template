@@ -37,9 +37,16 @@ export function generateContentFile(
   fs.writeFileSync(filePath, trueLines.join("\n") + "\n");
 }
 function generateCardContent(content: CardContent, id: string) {
-  const title = toBackticksValues(content.title.dynamicValue);
-  const subtitle = toBackticksValues(content.subtitle.dynamicValue);
-  const imageUrl = toBackticksValues(content.imageUrl.dynamicValue);
+  const title = content.title
+    ? toBackticksValues(content.title.dynamicValue)
+    : "";
+  const subtitle = content.subtitle
+    ? toBackticksValues(content.subtitle.dynamicValue)
+    : "";
+  const imageUrl = content.imageUrl
+    ? toBackticksValues(content.imageUrl.dynamicValue)
+    : "";
+
   const actions: string[] = [];
   content.actions.staticValue.forEach((action) => {
     actions.push(`${action}`);

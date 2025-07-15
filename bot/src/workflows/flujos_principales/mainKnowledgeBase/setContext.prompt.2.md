@@ -4,7 +4,7 @@
 
 Input:
 ```
-kbContextInterpretation:  @workflow.kbContextInterpretation
+kbContextInterpretation:  {{workflow.kbContextInterpretation}}
 ```
 
 <!-- user -->

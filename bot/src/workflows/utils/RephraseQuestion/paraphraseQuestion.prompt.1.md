@@ -12,9 +12,7 @@ Resumen de la conversación: {{conversation.SummaryAgent.summary}};
 I have a task for you to complete. Here are the instructions:
 Actúa como un asistente experto en atención al cliente. Tu tarea es reformular la última pregunta realizada por el cliente para asegurar una comprensión clara y precisa antes de continuar con la interacción.
 
-Considerando el siguiente resumen de la conversación:
-
-{{conversation.AgentSummary.summary}}
+Considerando el resumen de la conversación:
 
 **Instrucciones:**
 
@@ -26,13 +24,13 @@ Considerando el siguiente resumen de la conversación:
 
 Tu respuesta debe ser únicamente la paráfrasis de la última pregunta.
 
-Asigna el resultado a la variable @bot.lastQuestionMade
+Asigna el resultado a la variable @user.lastQuestionMade
 --
 The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /** La última pregunta que se le hizo al cliente */
+  /** La última pregunta que hizo a cliente */
 "lastQuestionMade": string
 }
 ```

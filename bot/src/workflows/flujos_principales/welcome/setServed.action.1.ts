@@ -1,7 +1,7 @@
-import { bot } from "@main";
+import { conversation } from "@main";
 // Node: setServed - nd-ed6692d686
-// "Initialize Bot with Empty Irregular State Variable" - ins-92104ee80f
+// Update User Conversation State to 'SERVED' Status - ins-92104ee80f
 
 // ------------------ EXECUTE CODE -------------------------
 
-bot.irregularState = 'SERVED'
+conversation.flow.state = 'SERVED'

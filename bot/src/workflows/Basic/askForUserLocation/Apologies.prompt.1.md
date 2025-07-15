@@ -1,5 +1,5 @@
 # Apologies
-<!-- Instruction: messageResult -->
+<!-- Instruction:  -->
 
 
 Input:
@@ -20,7 +20,6 @@ The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /**  */
-"messageResult": string
+  
 }
 ```

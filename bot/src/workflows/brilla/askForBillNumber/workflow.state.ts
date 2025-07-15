@@ -10,6 +10,8 @@ class AskForBillNumberState {
   kbAnswerInterpretation: string;
   /** Sin descripción */
   requestDocumentQuestion: string;
+  /** Mensaje para empatizar con el cliente */
+  reassuranceMessage: string;
   /** saveDataUser */
   saveDataUser: any;
   /** QuestionWithUserName1 */

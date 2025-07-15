@@ -18,10 +18,6 @@ class RequestInterestedMotoState {
   insistAttempts: number;
   /** questionWithUserName1 */
   questionWithUserName1: any;
-  /** MotoKnowledgeBase */
-  MotoKnowledgeBase: any;
-  /** askPurchasePreference1 */
-  askPurchasePreference1: any;
   /** AnswerType1 */
   AnswerType1: any;
 }

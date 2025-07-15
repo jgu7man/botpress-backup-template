@@ -13,6 +13,7 @@ export interface SensitiveData {
   CEDULA: string;
   NUMERO_DE_FACTURA: string;
   TIPO_DE_CONTRATO: string;
+  REPORTADO: string;
 }
 
 export const SensitiveDataSchema = z.object({
@@ -42,6 +43,11 @@ export const SensitiveDataSchema = z.object({
       })
       .default(""),
     TIPO_DE_CONTRATO: z
+      .string({
+        coerce: true,
+      })
+      .default(""),
+    REPORTADO: z
       .string({
         coerce: true,
       })

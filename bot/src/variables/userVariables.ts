@@ -13,13 +13,6 @@ export class userVariables {
   * @description telefono del cliente que contacta 
   */
   phone: string;
-  /** [var-f4f0ed016f] */
-  popAuthorized: boolean;
-  /**
-  * [var-83dcd249ff]
-  * @description variable que te dice si ya se ha preguntado por autorizacion antes 
-  */
-  askedBefore: boolean;
   /**
   * [var-9369e3e179]
   * @description location of client 
@@ -64,4 +57,9 @@ export class userVariables {
   * @description Estado del cliente ante data crédito. Se le pregunta si está reportado y los valores posibles son 'SÍ' o 'NO' 
   */
   negativeCreditReport: string;
+  /**
+  * [var-3261ad1899]
+  * @description La última pregunta que hizo a cliente 
+  */
+  lastQuestionMade: string;
 }

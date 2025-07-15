@@ -1,10 +1,10 @@
 # InvitationMessage
-<!-- Instruction:  -->
+<!-- Instruction: serviceLocationInfo -->
 
 
 Input:
 ```
- @workflow.serviceLocationAbout 
+Información de la zona de servicio:   {{workflow.serviceLocationAbout}}
 userLocation: {{ user.serviceLocation || user.location || '' }}
 ```
 
@@ -24,7 +24,7 @@ I have a task for you to complete. Here are the instructions:
 
    ¡Estaremos encantados de atenderle!"
 
-3. Si no existe valor en `@workflow.serviceLocationAbout` o si `@user.outOfService` es `true` o si no tenemos valor en `@user.serviceLocation` usa el siguiente template: "Muy bien. Sr@, para continuar atendiéndole, le esperamos en alguna de las siguiente ubicaciones:
+3. Si no existe valor en `@user.serviceLocation` o si `@user.outOfService` es `true` o si no tenemos valor en `@user.serviceLocation` usa el siguiente template: "Muy bien. Sr@, para continuar atendiéndole, le esperamos en alguna de las siguiente ubicaciones:
 
    - **Zona Bananera**: CL 5 NO 2
      - 135 BRR PRIMERO DE AGOSTO ORIHUECA, celular 3160263434.
@@ -37,7 +37,10 @@ I have a task for you to complete. Here are the instructions:
 
    No dude en llamarnos o visitarnos, estaremos encantados de atenderle."
 
+4. Guarda el mensaje resultante en @workflow.serviceLocationInfo
+
 ---
+
 
 ## **CONSIDERATIONS**:
 
@@ -54,6 +57,7 @@ The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  
+  /**  */
+"serviceLocationInfo": string
 }
 ```

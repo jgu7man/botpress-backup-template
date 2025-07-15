@@ -33,7 +33,13 @@ bot.flows.forEach((flow) => {
   ensureDir(targetDir);
   generateStateFile(flow, targetDir);
 
-  generateNodeFiles(flow.nodes, targetDir);
+  generateNodeFiles(flow.nodes, targetDir, [
+    "transition",
+    "content",
+    "log",
+    "skill",
+    "aiclassify",
+  ]);
   console.log(`✅ Workflow generado: ${flow.name}`);
 });
 

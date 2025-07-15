@@ -1,12 +1,12 @@
 # extractDataNode
-<!-- Instruction: expectedData, phone, location, fullName, assistanceMode, nationalID, brillaBillNumber, interestedProduct, purchasePreference, jobContractType, negativeCreditReport, authorizedPop -->
+<!-- Instruction: phone, location, fullName, assistanceMode, nationalID, brillaBillNumber, interestedProduct, purchasePreference, jobContractType, authorizedPop, negativeCreditReport -->
 
 
 Input:
 ```
 Resumen de conversación: {{conversation.SummaryAgent.summary}};
 Mensaje del cliente: {{event.preview}};
-Variable solicitada: {{bot.expectedData}}
+Variable solicitada: {{conversation.expectedData}}
 Data extraída: {{workflow.extractedData}}
 ```
 
@@ -22,7 +22,7 @@ Eres un extractor de información cuya única tarea es identificar si el usuario
 
 1. **Analizar el Resumen de conversación:** Identifica la última pregunta realizada por el bot al usuario
 2. **Analizar el mensajes del cliente:** Determina si la respuesta que dio el cliente contiene una respuesta a la pregunta anterior
-3. **Extraer el dato (si existe):** Si la base de conocimientos proporcionó el dato solicitado, extráelo y guárdalo en la variable @bot.extractedData para fines de respaldo. De lo contrario, deja la variable vacía.
+3. **Extraer el dato (si existe):** Si la base de conocimientos proporcionó el dato solicitado, extráelo y guárdalo en la variable @conversation.extractedData para fines de respaldo. De lo contrario, deja la variable vacía.
 4. Al final del análisis asigna el valor a la **variable solicitada** respetando la estructura de la misma
 
 
@@ -68,9 +68,7 @@ The following is the typescript interface I need as output of the task:
 
 ```typescript
 interface Output = {
-  /** El nombre de la variable que se espera capturar por la IA */
-"expectedData": string
-/** telefono del cliente que contacta */
+  /** telefono del cliente que contacta */
 "phone": string
 /** location of client */
 "location": string
@@ -88,9 +86,9 @@ interface Output = {
 "purchasePreference": string
 /**  */
 "jobContractType": string
-/**  */
-"negativeCreditReport": string
 /** Información de que el cliente autorizó o rechazó el guardado de sus datos. */
 "authorizedPop": { answer?: "ACCEPTED" | "REJECTED" | ""; askedBefore?: boolean }
+/** Estado del cliente ante data crédito. Se le pregunta si está reportado y los valores posibles son 'SÍ' o 'NO' */
+"negativeCreditReport": string
 }
 ```

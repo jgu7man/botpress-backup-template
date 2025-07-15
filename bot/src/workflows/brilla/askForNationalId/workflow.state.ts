@@ -10,6 +10,8 @@ class AskForNationalIdState {
   kbAnswerInterpretation: string;
   /** Sin descripción */
   requestDocumentQuestion: string;
+  /** Mensaje de descargo de compromiso */
+  reassuranceMessage: string;
   /** AnswerType1 */
   AnswerType1: any;
   /** QuestionWithUserName1 */

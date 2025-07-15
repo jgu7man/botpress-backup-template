@@ -9,8 +9,6 @@ class MotoKnowledgeBaseState {
   /** The type of the request of user */
   answerType: string;
   /** Sin descripción */
-  interpretedMotorcycle: string;
-  /** Sin descripción */
   foundMessage: string;
   /** Sin descripción */
   styleOptionList: unknown[];
@@ -24,6 +22,10 @@ class MotoKnowledgeBaseState {
   styleMenuOffer: boolean;
   /** Sin descripción */
   ownReference: string;
+  /** Sin descripción */
+  answerCategory: string;
+  /** Nombre de la referencia que se ha interpretado */
+  interpretedMotorcycle: string;
   /** Sin descripción */
   interpretedStyle: string;
   /** motoSyleFlow1 */

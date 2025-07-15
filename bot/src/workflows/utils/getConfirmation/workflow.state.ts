@@ -14,8 +14,6 @@ class GetConfirmationState {
   confirmationType: string;
   /** El entendimiento acerca de la confirmación que el cliente mencionó */
   confirmationAnalysis: string;
-  /** farewell1 */
-  farewell1: any;
 }
 
 export const workflow = new GetConfirmationState();

@@ -14,10 +14,14 @@ class ProductDetailsFollowUpState {
   askPurchaseMethod1: any;
   /** CashPreferenceHandle1 */
   CashPreferenceHandle1: any;
-  /** AnswerType1 */
-  AnswerType1: any;
+  /** OfferCashToCredit */
+  OfferCashToCredit: any;
   /** EvaluateAskingUserData1 */
   EvaluateAskingUserData1: any;
+  /** User Info Form */
+  User Info Form: any;
+  /** CreditPreferenceHandle1 */
+  CreditPreferenceHandle1: any;
 }
 
 export const workflow = new ProductDetailsFollowUpState();

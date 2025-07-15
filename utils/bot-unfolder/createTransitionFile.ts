@@ -12,7 +12,7 @@ export function createTransitionFile(
 ) {
   const condition = replaceKeysExpressions(instruction.condition?.payload);
   const transitionName = instruction.id.replace("-", "");
-  const code = `const ${transitionName} = ${condition};`;
+  const code = `const _${transitionName} = ${condition};`;
   const separatorLabel = "TRANSITION CONDITION";
 
   const lines: string[] = generateImportStatements(

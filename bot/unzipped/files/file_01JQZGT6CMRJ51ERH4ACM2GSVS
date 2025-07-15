@@ -95,5 +95,11 @@
     "groq:llama3-8b-8192",
     "openai:gpt-4-turbo-2024-04-09"
   ],
-  "downtimes": []
+  "downtimes": [
+    {
+      "ref": "openai:gpt-4o-mini-2024-07-18",
+      "startedAt": "2025-06-19T03:12:48.468Z",
+      "reason": "Model is down"
+    }
+  ]
 }

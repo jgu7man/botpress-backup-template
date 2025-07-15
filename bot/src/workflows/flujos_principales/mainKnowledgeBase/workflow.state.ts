@@ -14,8 +14,8 @@ class MainKnowledgeBaseState {
   ✨ askToKnowledgeBase: any;
   /** setConversationContext */
   setConversationContext: any;
-  /** locationKnowledgeBase1 */
-  locationKnowledgeBase1: any;
+  /** LocationKnowledgeBase */
+  LocationKnowledgeBase: any;
   /** setConversationContext */
   setConversationContext: any;
   /** MotoKnowledgeBase */
@@ -32,6 +32,8 @@ class MainKnowledgeBaseState {
   askToKnowledgeBase1: any;
   /** CupoBrillaProfile1 */
   CupoBrillaProfile1: any;
+  /** askToKnowledgeBase1 */
+  askToKnowledgeBase1: any;
 }
 
 export const workflow = new MainKnowledgeBaseState();

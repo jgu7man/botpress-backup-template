@@ -1,16 +1,16 @@
-# RetrieveMoto2
+# retrieveCompetitorMoto
 <!-- Instruction: competitorReference, ownReference -->
 
 
 Input:
 ```
 User Input: {{event.preview}} 
-Knowledege Response: {{workflow.kbResponse}} 
+Respuesta de base de conocimientos: {{workflow.kbResponse}} 
 ```
 
 <!-- user -->
 I have a task for you to complete. Here are the instructions:
-Analiza el contenido de la base de conocimiento proporcionado en el formato `Knowledege Response: {{workflow.kbResponse}}` y extrae referencias específicas de motocicletas mencionadas, ya sean de la competencia o de la marca propia.
+Analiza el contenido de la respuesta de la base de conocimientos proporcionado la variable `workflow.kbResponse` y extrae referencias (nombres) específicas de motocicletas mencionadas, ya sean de la competencia o de la marca propia.
 
 ## **Variables para completar:**
 
@@ -25,23 +25,24 @@ Analiza el contenido de la base de conocimiento proporcionado en el formato `Kno
 ## **Ejemplo de entradas y salidas:**
 
 1. **Input:**  
-   `"Knowledge Base: La consulta "puedo ver la boxer en gaira" parece referirse a una referencia de moto competidora, ya que "boxer" se menciona como una referencia de competencia para la "sport 100" en la tabla de referencias."`
+   `Respuesta de la base de conocimientos: 'La consulta "puedo ver la boxer en gaira" parece referirse a una referencia de moto competidora, ya que "boxer" se menciona como una referencia de competencia para la "sport 100" en la tabla de referencias'.
 
    - **@workflow.ownReference:** Sport 100
    - **@workflow.competitorReference:** Boxer
 
 2. **Input:**  
-   `"Knowledge Base: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo."`
+   `"Respuesta de base de conocimientos: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo."`
 
    - **@workflow.ownReference:** Sport 100
    - **@workflow.competitorReference:** (vacío)
 
 3. **Input:**  
-   `"Knowledge Base: Las motocicletas urbanas son ideales para principiantes."`
+   `"Respuesta de base de conocimientos: Las motocicletas urbanas son ideales para principiantes."`
 
    - **@workflow.ownReference:** (vacío)
    - **@workflow.competitorReference:** (vacío)
 
+NOTA: El `user Input` se comparte como parte del contexto.
 --
 The following is the typescript interface I need as output of the task:
 

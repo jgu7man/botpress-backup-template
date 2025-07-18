@@ -1,5 +1,34 @@
 [
   {
+    "id": "file_01K0EV8661XF0QZ4JNAX6S49VY",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1126816,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "39fdbc0f1d9ad0ae6760cb748005fb9ba09e9bf7075a0af083cc74cd79935e99",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752844998785.json",
+    "index": false,
+    "updatedAt": "2025-07-18T13:23:18.842Z"
+  },
+  {
+    "id": "file_01K0ET1QRXTQM3YRJ6N613GGDR",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 408,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A"
+    },
+    "key": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A20250718130218.csv.zip",
+    "index": false,
+    "updatedAt": "2025-07-18T13:02:18.899Z"
+  },
+  {
     "id": "file_01K04FDB6QC3YEEX0MEYT3FDHG",
     "accessPolicies": [],
     "contentType": "application/pdf",
@@ -1248,7 +1277,7 @@
       "public_content"
     ],
     "contentType": "application/json",
-    "size": 236,
+    "size": 263,
     "status": "upload_completed",
     "tags": {
       "source": "integration",
@@ -1258,7 +1287,7 @@
     },
     "key": "webchatConfig.json",
     "index": false,
-    "updatedAt": "2025-06-26T02:23:08.115Z"
+    "updatedAt": "2025-07-18T13:23:34.712Z"
   },
   {
     "id": "file_01JHHBM98BJV4TPAYB127DSFZ4",
@@ -1266,7 +1295,7 @@
       "public_content"
     ],
     "contentType": "application/javascript",
-    "size": 259,
+    "size": 286,
     "status": "upload_completed",
     "tags": {
       "source": "integration",
@@ -1276,7 +1305,7 @@
     },
     "key": "webchatConfigInject.js",
     "index": false,
-    "updatedAt": "2025-06-26T02:23:07.951Z"
+    "updatedAt": "2025-07-18T13:23:34.569Z"
   },
   {
     "id": "file_01JHHBJB6BVCSTMEYG86NN40ZT",

@@ -196,8 +196,8 @@
       "openAi": {}
     },
     "useLlmz": true,
-    "defaultBestModel": "anthropic__claude-3-7-sonnet-20250219",
-    "defaultFastModel": "anthropic__claude-3-5-haiku-20241022",
+    "defaultBestModel": "anthropic__claude-sonnet-4-20250514",
+    "defaultFastModel": "fireworks-ai__accounts/fireworks/models/deepseek-r1-0528",
     "useClient": true,
     "llmzVersion": "01-Oct-2024",
     "autonomousModel": "openai__o4-mini-2025-04-16",
@@ -1670,66 +1670,6 @@
             "description": "El usuario saluda o tal vez no, pero expresa un deseo de saber información sobre motos, la ubicación de las sedes o los requisitos para créditos"
           },
           "disabled": false
-        },
-        {
-          "deletable": true,
-          "x": -2730,
-          "y": -1875,
-          "type": "trigger",
-          "integrationId": "webhook",
-          "triggerId": "event",
-          "instructions": [
-            {
-              "id": "trs-cfd2dd8b22",
-              "type": "transition",
-              "label": "",
-              "condition": {
-                "type": "expression",
-                "payload": "true"
-              },
-              "destination": {
-                "node": "nd-052db612d7"
-              },
-              "generative": {
-                "label": "",
-                "properties": {
-                  "label": true,
-                  "condition": true
-                },
-                "suggestion": {
-                  "label": "",
-                  "condition": "true"
-                }
-              },
-              "nodeId": "nd-fa8c32004e",
-              "transitions": []
-            }
-          ],
-          "id": "nd-fa8c32004e",
-          "name": "Trigger1",
-          "examples": [],
-          "disabled": true
-        },
-        {
-          "deletable": true,
-          "x": -2730,
-          "y": -1560,
-          "type": "standard",
-          "instructions": [
-            {
-              "id": "ins-e5711f7676",
-              "type": "wait",
-              "label": "Wait for User Input",
-              "description": "This card will wait for the user to send a message before continuing to the next card. It does not validate or manipulate the user input. You can access the user input in the next card using the `{{event.preview}}` variable.",
-              "nodeId": "nd-052db612d7",
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-052db612d7",
-          "name": "Standard1"
         }
       ],
       "parentFolder": "root"
@@ -5264,7 +5204,7 @@
           "name": "answerAsCompetitor"
         },
         {
-          "name": "RetrieveMoto1",
+          "name": "retrieveOwnMoto",
           "type": "standard",
           "deletable": true,
           "x": 75,
@@ -5442,7 +5382,7 @@
           "id": "nd-9fb02e392a"
         },
         {
-          "name": "RetrieveMoto2",
+          "name": "retrieveCompetitorMoto",
           "type": "standard",
           "deletable": true,
           "x": 150,
@@ -5487,8 +5427,8 @@
               "type": "ai",
               "id": "ins-e26a504e80",
               "task": {
-                "instructions": "Analiza el contenido de la base de conocimiento proporcionado en el formato `Knowledege Response: {{workflow.kbResponse}}` y extrae referencias específicas de motocicletas mencionadas, ya sean de la competencia o de la marca propia.\n\n## **Variables para completar:**\n\n1. `@workflow.competitorReference:` La referencia que es de un competidor.\n2. `@workflow.ownReference:` La referencia que es de nuestra marca y que es equivalente al competidor\n\n## **Reglas:**\n\n- Si se menciona una referencia de la competencia (como \"Boxer\") y está asociada con otra referencia principal en una tabla de sinónimos, identifica la referencia equivalente.\n- Si se menciona una referencia equivalente a la marca propia (como \"Sport 100\"), indícalo directamente.\n\n## **Ejemplo de entradas y salidas:**\n\n1. **Input:**  \n   `\"Knowledge Base: La consulta \"puedo ver la boxer en gaira\" parece referirse a una referencia de moto competidora, ya que \"boxer\" se menciona como una referencia de competencia para la \"sport 100\" en la tabla de referencias.\"`\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** Boxer\n\n2. **Input:**  \n   `\"Knowledge Base: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo.\"`\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** (vacío)\n\n3. **Input:**  \n   `\"Knowledge Base: Las motocicletas urbanas son ideales para principiantes.\"`\n\n   - **@workflow.ownReference:** (vacío)\n   - **@workflow.competitorReference:** (vacío)\n",
-                "input": "User Input: {{event.preview}} \nKnowledege Response: {{workflow.kbResponse}} ",
+                "instructions": "Analiza el contenido de la respuesta de la base de conocimientos proporcionado la variable `workflow.kbResponse` y extrae referencias (nombres) específicas de motocicletas mencionadas, ya sean de la competencia o de la marca propia.\n\n## **Variables para completar:**\n\n1. `@workflow.competitorReference:` La referencia que es de un competidor.\n2. `@workflow.ownReference:` La referencia que es de nuestra marca y que es equivalente al competidor\n\n## **Reglas:**\n\n- Si se menciona una referencia de la competencia (como \"Boxer\") y está asociada con otra referencia principal en una tabla de sinónimos, identifica la referencia equivalente.\n- Si se menciona una referencia equivalente a la marca propia (como \"Sport 100\"), indícalo directamente.\n\n## **Ejemplo de entradas y salidas:**\n\n1. **Input:**  \n   `Respuesta de la base de conocimientos: 'La consulta \"puedo ver la boxer en gaira\" parece referirse a una referencia de moto competidora, ya que \"boxer\" se menciona como una referencia de competencia para la \"sport 100\" en la tabla de referencias'.\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** Boxer\n\n2. **Input:**  \n   `\"Respuesta de base de conocimientos: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo.\"`\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** (vacío)\n\n3. **Input:**  \n   `\"Respuesta de base de conocimientos: Las motocicletas urbanas son ideales para principiantes.\"`\n\n   - **@workflow.ownReference:** (vacío)\n   - **@workflow.competitorReference:** (vacío)\n\nNOTA: El `user Input` se comparte como parte del contexto.",
+                "input": "User Input: {{event.preview}} \nRespuesta de base de conocimientos: {{workflow.kbResponse}} ",
                 "outputVariableIds": [
                   "var-217c8d36dd",
                   "var-c8bdf099e2"
@@ -5500,8 +5440,8 @@
                     "output": {}
                   }
                 ],
-                "model": "anthropic__claude-3-5-haiku-20241022",
-                "temperature": 0.25,
+                "model": "anthropic__claude-sonnet-4-20250514",
+                "temperature": 0.6,
                 "version": "1.0"
               },
               "nodeId": "nd-dbf9e21563",
@@ -5515,15 +5455,15 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\nAnaliza el contenido de la base de conocimiento proporcionado en el formato `Knowledege Response: {{workflow.kbResponse}}` y extrae referencias específicas de motocicletas mencionadas, ya sean de la competencia o de la marca propia.\n\n## **Variables para completar:**\n\n1. `@workflow.competitorReference:` La referencia que es de un competidor.\n2. `@workflow.ownReference:` La referencia que es de nuestra marca y que es equivalente al competidor\n\n## **Reglas:**\n\n- Si se menciona una referencia de la competencia (como \"Boxer\") y está asociada con otra referencia principal en una tabla de sinónimos, identifica la referencia equivalente.\n- Si se menciona una referencia equivalente a la marca propia (como \"Sport 100\"), indícalo directamente.\n\n## **Ejemplo de entradas y salidas:**\n\n1. **Input:**  \n   `\"Knowledge Base: La consulta \"puedo ver la boxer en gaira\" parece referirse a una referencia de moto competidora, ya que \"boxer\" se menciona como una referencia de competencia para la \"sport 100\" en la tabla de referencias.\"`\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** Boxer\n\n2. **Input:**  \n   `\"Knowledge Base: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo.\"`\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** (vacío)\n\n3. **Input:**  \n   `\"Knowledge Base: Las motocicletas urbanas son ideales para principiantes.\"`\n\n   - **@workflow.ownReference:** (vacío)\n   - **@workflow.competitorReference:** (vacío)\n\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"competitorReference\": string\n/**  */\n\"ownReference\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\nAnaliza el contenido de la respuesta de la base de conocimientos proporcionado la variable `workflow.kbResponse` y extrae referencias (nombres) específicas de motocicletas mencionadas, ya sean de la competencia o de la marca propia.\n\n## **Variables para completar:**\n\n1. `@workflow.competitorReference:` La referencia que es de un competidor.\n2. `@workflow.ownReference:` La referencia que es de nuestra marca y que es equivalente al competidor\n\n## **Reglas:**\n\n- Si se menciona una referencia de la competencia (como \"Boxer\") y está asociada con otra referencia principal en una tabla de sinónimos, identifica la referencia equivalente.\n- Si se menciona una referencia equivalente a la marca propia (como \"Sport 100\"), indícalo directamente.\n\n## **Ejemplo de entradas y salidas:**\n\n1. **Input:**  \n   `Respuesta de la base de conocimientos: 'La consulta \"puedo ver la boxer en gaira\" parece referirse a una referencia de moto competidora, ya que \"boxer\" se menciona como una referencia de competencia para la \"sport 100\" en la tabla de referencias'.\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** Boxer\n\n2. **Input:**  \n   `\"Respuesta de base de conocimientos: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo.\"`\n\n   - **@workflow.ownReference:** Sport 100\n   - **@workflow.competitorReference:** (vacío)\n\n3. **Input:**  \n   `\"Respuesta de base de conocimientos: Las motocicletas urbanas son ideales para principiantes.\"`\n\n   - **@workflow.ownReference:** (vacío)\n   - **@workflow.competitorReference:** (vacío)\n\nNOTA: El `user Input` se comparte como parte del contexto.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"competitorReference\": string\n/**  */\n\"ownReference\": string\n}"
                   },
                   {
                     "role": "user",
                     "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
                   }
                 ],
-                "model": "anthropic__claude-3-5-haiku-20241022",
-                "temperature": 0.25
+                "model": "anthropic__claude-sonnet-4-20250514",
+                "temperature": 0.6
               }
             },
             {
@@ -7262,15 +7202,16 @@
               "manualFields": [],
               "variables": [
                 {
-                  "id": "var-a17345527b",
-                  "name": "financialLink",
-                  "description": "",
+                  "id": "var-5d42f36359",
+                  "name": "financialEntity",
+                  "description": "Identificador de la entidad financiera para buscarlo en la tabla FinancialEntities",
                   "type": "string",
                   "scope": "workflow",
                   "defaultValue": "",
+                  "storeAsTag": false,
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "https://documentos.crediorbe.com/adjuntar-documentos/#/profileLogin/AUTOG/LasMotos",
+                    "dynamicValue": "CREDIORBE",
                     "staticValue": ""
                   }
                 }
@@ -7338,15 +7279,16 @@
               "manualFields": [],
               "variables": [
                 {
-                  "id": "var-a17345527b",
-                  "name": "financialLink",
-                  "description": "",
+                  "id": "var-5d42f36359",
+                  "name": "financialEntity",
+                  "description": "Identificador de la entidad financiera para buscarlo en la tabla FinancialEntities",
                   "type": "string",
                   "scope": "workflow",
                   "defaultValue": "",
+                  "storeAsTag": false,
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "https://bit.ly/bdbcc0172",
+                    "dynamicValue": "BANCO_BOGOTA",
                     "staticValue": ""
                   }
                 }
@@ -7536,7 +7478,7 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": 975,
+          "x": 945,
           "y": 690,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">CREDIORBE PROFILE</span></strong></p>",
@@ -8695,6 +8637,16 @@
           "scope": "workflow",
           "defaultValue": "",
           "storeAsTag": false
+        },
+        {
+          "id": "var-1b340554ba",
+          "name": "financialEntity",
+          "type": "string",
+          "description": "Identificador de la entidad financiera para buscarlo en la tabla FinancialEntities",
+          "linkedTableId": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
         }
       ],
       "links": [],
@@ -8705,9 +8657,24 @@
           "type": "entry",
           "deletable": false,
           "variables": [
-            "var-a17345527b"
+            "var-5d42f36359",
+            "var-1b340554ba"
           ],
           "instructions": [
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-68c0a59651",
+              "label": "Log",
+              "level": "info",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "{{workflow.financialEntity}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-999a90f8f6",
+              "transitions": []
+            },
             {
               "id": "trs-e450172508",
               "type": "transition",
@@ -8755,6 +8722,30 @@
           "type": "standard",
           "deletable": true,
           "instructions": [
+            {
+              "id": "ins-2c8ee12e0a",
+              "type": "action",
+              "code": "console.log('⭕️', workflow.financialEntity)\n\nconst searchResult = await EntiedadesFinancierasTable.findRecords({\n  filter: { Identificador: workflow.financialEntity }\n})\n\nconsole.log('⭕️', searchResult)\n\nif (searchResult.length) {\n  workflow.financialLink = searchResult[0].Enlace\n} else {\n  workflow.financialLink = 'https://slm.bancodebogota.com/mctn45s5'\n}\n",
+              "origin": "builtin",
+              "label": "\"Fetch Financial Entity Link Based on Identifier\"",
+              "nodeId": "nd-45f911b1da",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  console.log(\"\\u2B55\\uFE0F\", workflow.financialEntity);\n  const searchResult = await EntiedadesFinancierasTable.findRecords({\n    filter: { Identificador: workflow.financialEntity }\n  });\n  console.log(\"\\u2B55\\uFE0F\", searchResult);\n  if (searchResult.length) {\n    workflow.financialLink = searchResult[0].Enlace;\n  } else {\n    workflow.financialLink = \"https://slm.bancodebogota.com/mctn45s5\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-2993051a60",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Financial Link Result: {{workflow.financialLink}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-45f911b1da",
+              "transitions": []
+            },
             {
               "type": "ai",
               "category": "AI",
@@ -33979,116 +33970,16 @@
     }
   },
   "tables": {
-    "table_01JYN0QHMD521ARG5ZGSQPQHV4": {
-      "id": "table_01JYN0QHMD521ARG5ZGSQPQHV4",
-      "name": "Int_Improvement_Feedback_Table",
-      "factor": 30,
-      "frozen": true,
-      "tags": {
-        "origin": "integration",
-        "purpose": "improvement",
-        "version": "Nov-2024",
-        "integration": "Int_Improvement",
-        "x-studio-icon": "lucide://atom",
-        "x-studio-color": "green",
-        "x-studio-title": "Feedback",
-        "x-studio-readonly": "true",
-        "x-studio-description": "Table to store acquired feedback on iterations for active learning"
-      },
-      "createdAt": "2025-06-26T01:49:31.082Z",
-      "updatedAt": "2025-06-26T01:49:31.082Z",
-      "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": null,
-      "isComputeEnabled": true,
-      "schema": {
-        "type": "object",
-        "x-zui": {},
-        "required": [
-          "uri",
-          "after",
-          "before",
-          "feedback",
-          "iterationId"
-        ],
-        "properties": {
-          "uri": {
-            "type": "string",
-            "x-zui": {
-              "index": 0,
-              "searchable": true
-            },
-            "maxLength": 250,
-            "minLength": 1
-          },
-          "after": {
-            "type": "string",
-            "x-zui": {
-              "index": 1,
-              "searchable": true
-            },
-            "minLength": 1
-          },
-          "before": {
-            "type": "string",
-            "x-zui": {
-              "index": 2,
-              "searchable": true
-            },
-            "minLength": 1
-          },
-          "feedback": {
-            "type": "string",
-            "x-zui": {
-              "index": 3,
-              "searchable": true
-            },
-            "minLength": 1
-          },
-          "learning": {
-            "type": "string",
-            "x-zui": {
-              "index": 4,
-              "computed": {
-                "model": "fast-model",
-                "action": "ai",
-                "prompt": "What would you tell your future self to improve next time?\nCode Before:\n\n```\n{{before}}\n```\n\nFeedback: \"{{feedback}}\"\n\nCode After:\n\n```\n{{after}}\n```\n\nFor the learning, it must be standalone, concise but also accurately depict the situation and feedback you were given.\n\nTry to follow one of the below structures:\n\n<example>\nIn [situation X], I learned that I should [use tool `X` rather than `Y` because ...]\n</example>\n\n<example>\nWhen trying to [...], I should use [tool X, tool Y or tool Z] like this:\n\n\\`\\`\\`\n// snippet to explain a drastic code change between before and after, or a non-obvious code snippet\n\\`\\`\\`\n</example>\n\n<example>\nWhenever [Y] happens, I should avoid [...] and instead [...].\n</example>\n\nKeep it concise. Do not refer to \"this situation\" or to the feedback. Both have been provided by an expert reviewing the conversation, NOT the actual user. So you must embed the content from the above inside your learning so it is standalone.\n",
-                "dependencies": [
-                  "before",
-                  "feedback",
-                  "after"
-                ]
-              },
-              "searchable": true
-            },
-            "default": null,
-            "nullable": true,
-            "minLength": 1
-          },
-          "iterationId": {
-            "type": "string",
-            "x-zui": {
-              "index": 5,
-              "searchable": true
-            },
-            "maxLength": 100,
-            "minLength": 1
-          }
-        },
-        "additionalProperties": true
-      },
-      "parentFolder": "root",
-      "selectors": []
-    },
     "table_01JHHBJCJ9C8T79QE7XT7TYRM7": {
       "id": "table_01JHHBJCJ9C8T79QE7XT7TYRM7",
       "name": "motosStockTable",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:31.145Z",
-      "updatedAt": "2025-06-26T01:49:31.145Z",
+      "createdAt": "2025-01-14T02:51:31.784Z",
+      "updatedAt": "2025-04-15T13:27:08.537Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": null,
+      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34138,7 +34029,7 @@
           "brillaPrice": {
             "type": "number",
             "x-zui": {
-              "index": 5,
+              "index": 6,
               "searchable": false
             },
             "nullable": true,
@@ -34147,7 +34038,7 @@
           "referenciaCompetencia": {
             "type": "string",
             "x-zui": {
-              "index": 6,
+              "index": 5,
               "searchable": false
             },
             "nullable": true
@@ -34215,10 +34106,10 @@
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:31.294Z",
-      "updatedAt": "2025-06-26T01:49:31.294Z",
+      "createdAt": "2025-01-14T02:51:31.961Z",
+      "updatedAt": "2025-05-29T15:30:22.311Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": null,
+      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34227,7 +34118,7 @@
           "COSTO": {
             "type": "string",
             "x-zui": {
-              "index": 0,
+              "index": 10,
               "typings": "",
               "searchable": false
             },
@@ -34240,7 +34131,7 @@
               "x-zui": {}
             },
             "x-zui": {
-              "index": 1,
+              "index": 17,
               "searchable": false
             },
             "nullable": true,
@@ -34249,7 +34140,7 @@
           "CEDULA": {
             "type": "string",
             "x-zui": {
-              "index": 2,
+              "index": 4,
               "typings": "",
               "searchable": false
             },
@@ -34259,45 +34150,12 @@
           "NOMBRE": {
             "type": "string",
             "x-zui": {
-              "index": 3,
+              "index": 2,
               "searchable": false
             },
             "nullable": true
           },
           "ESTATUS": {
-            "type": "string",
-            "x-zui": {
-              "index": 4,
-              "typings": "",
-              "searchable": false
-            },
-            "nullable": true
-          },
-          "RESUMEN": {
-            "type": "string",
-            "x-zui": {
-              "index": 5,
-              "searchable": false
-            },
-            "nullable": true
-          },
-          "TELEFONO": {
-            "type": "string",
-            "x-zui": {
-              "index": 6,
-              "searchable": true
-            },
-            "nullable": true
-          },
-          "REPORTADO": {
-            "type": "string",
-            "x-zui": {
-              "index": 7,
-              "searchable": false
-            },
-            "nullable": true
-          },
-          "ASISTENCIA": {
             "type": "string",
             "x-zui": {
               "index": 8,
@@ -34306,7 +34164,31 @@
             },
             "nullable": true
           },
-          "CONCLUSION": {
+          "RESUMEN": {
+            "type": "string",
+            "x-zui": {
+              "index": 1,
+              "searchable": false
+            },
+            "nullable": true
+          },
+          "TELEFONO": {
+            "type": "string",
+            "x-zui": {
+              "index": 0,
+              "searchable": true
+            },
+            "nullable": true
+          },
+          "REPORTADO": {
+            "type": "string",
+            "x-zui": {
+              "index": 12,
+              "searchable": false
+            },
+            "nullable": true
+          },
+          "ASISTENCIA": {
             "type": "string",
             "x-zui": {
               "index": 9,
@@ -34315,10 +34197,19 @@
             },
             "nullable": true
           },
+          "CONCLUSION": {
+            "type": "string",
+            "x-zui": {
+              "index": 6,
+              "typings": "",
+              "searchable": false
+            },
+            "nullable": true
+          },
           "SENTIMIENTO": {
             "type": "string",
             "x-zui": {
-              "index": 10,
+              "index": 19,
               "searchable": false
             },
             "nullable": true,
@@ -34327,14 +34218,13 @@
           "CONVERSATION_ID": {
             "type": "string",
             "x-zui": {
-              "index": 11,
-              "searchable": true
+              "index": 16
             }
           },
           "PRECIO_INFORMADO": {
             "type": "number",
             "x-zui": {
-              "index": 12,
+              "index": 18,
               "searchable": false
             },
             "nullable": true,
@@ -34343,7 +34233,7 @@
           "TIPO_DE_CONTRATO": {
             "type": "string",
             "x-zui": {
-              "index": 13,
+              "index": 7,
               "typings": "",
               "searchable": false
             },
@@ -34352,7 +34242,7 @@
           "NUMERO_DE_FACTURA": {
             "type": "string",
             "x-zui": {
-              "index": 14,
+              "index": 5,
               "typings": "",
               "searchable": false
             },
@@ -34361,7 +34251,7 @@
           "PERFIL_CREDITICIO": {
             "type": "string",
             "x-zui": {
-              "index": 15,
+              "index": 11,
               "typings": "",
               "searchable": false
             },
@@ -34370,7 +34260,7 @@
           "PRODUCTO_DE_INTERES": {
             "type": "string",
             "x-zui": {
-              "index": 16,
+              "index": 14,
               "typings": "",
               "searchable": false
             },
@@ -34379,7 +34269,7 @@
           "PREFERENCIA_DE_COMPRA": {
             "type": "string",
             "x-zui": {
-              "index": 17,
+              "index": 13,
               "typings": "",
               "searchable": false
             },
@@ -34388,7 +34278,7 @@
           "UBICACION_DEL_USUARIO": {
             "type": "string",
             "x-zui": {
-              "index": 18,
+              "index": 3,
               "searchable": false
             },
             "nullable": true
@@ -34396,7 +34286,7 @@
           "UBICACION_DE_SERVICIO": {
             "type": "string",
             "x-zui": {
-              "index": 19,
+              "index": 15,
               "typings": "",
               "searchable": false
             },
@@ -34530,8 +34420,8 @@
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:31.457Z",
-      "updatedAt": "2025-06-26T01:49:31.457Z",
+      "createdAt": "2025-01-14T02:51:32.180Z",
+      "updatedAt": "2025-01-14T02:51:32.180Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
@@ -34569,8 +34459,8 @@
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:31.649Z",
-      "updatedAt": "2025-06-26T01:49:31.649Z",
+      "createdAt": "2025-01-14T02:51:32.706Z",
+      "updatedAt": "2025-01-14T02:51:32.706Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
@@ -34626,8 +34516,8 @@
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:31.780Z",
-      "updatedAt": "2025-06-26T01:49:31.780Z",
+      "createdAt": "2025-01-14T02:51:32.870Z",
+      "updatedAt": "2025-01-14T02:51:32.870Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
@@ -34665,10 +34555,10 @@
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:31.947Z",
-      "updatedAt": "2025-06-26T01:49:31.947Z",
+      "createdAt": "2025-01-14T02:51:33.045Z",
+      "updatedAt": "2025-04-15T13:18:41.965Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": null,
+      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34705,10 +34595,10 @@
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-06-26T01:49:32.095Z",
-      "updatedAt": "2025-06-26T01:49:32.095Z",
+      "createdAt": "2025-01-14T02:51:33.248Z",
+      "updatedAt": "2025-04-15T13:53:56.433Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": null,
+      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34726,7 +34616,7 @@
           "comments": {
             "type": "string",
             "x-zui": {
-              "index": 1,
+              "index": 2,
               "searchable": false
             }
           },
@@ -34734,7 +34624,7 @@
             "type": "string",
             "x-zui": {
               "id": "reference",
-              "index": 2,
+              "index": 1,
               "searchable": false
             },
             "nullable": true
@@ -34761,9 +34651,9 @@
         "x-studio-readonly": "true",
         "x-studio-description": "Table for storing the KB Analytics"
       },
-      "createdAt": "2025-06-26T01:49:32.202Z",
-      "updatedAt": "2025-06-26T01:49:32.202Z",
-      "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "createdAt": "2025-04-03T00:48:58.219Z",
+      "updatedAt": "2025-04-03T00:48:58.219Z",
+      "createdBy": "integration:agi/kbo",
       "updatedBy": null,
       "isComputeEnabled": false,
       "schema": {
@@ -34771,8 +34661,8 @@
         "x-zui": {},
         "required": [
           "uri",
-          "kbId",
-          "fileId"
+          "fileId",
+          "kbId"
         ],
         "properties": {
           "uri": {
@@ -34789,14 +34679,14 @@
           "kbId": {
             "type": "string",
             "x-zui": {
-              "index": 1,
+              "index": 2,
               "searchable": true
             }
           },
           "count": {
             "type": "number",
             "x-zui": {
-              "index": 2,
+              "index": 3,
               "searchable": true
             },
             "default": 0
@@ -34804,7 +34694,7 @@
           "fileId": {
             "type": "string",
             "x-zui": {
-              "index": 3,
+              "index": 1,
               "searchable": true
             }
           }
@@ -34813,6 +34703,187 @@
       },
       "parentFolder": "root",
       "selectors": []
+    },
+    "table_01JYN0QHMD521ARG5ZGSQPQHV4": {
+      "id": "table_01JYN0QHMD521ARG5ZGSQPQHV4",
+      "name": "Int_Improvement_Feedback_Table",
+      "factor": 30,
+      "frozen": true,
+      "tags": {
+        "origin": "integration",
+        "purpose": "improvement",
+        "version": "Nov-2024",
+        "integration": "Int_Improvement",
+        "x-studio-icon": "lucide://atom",
+        "x-studio-color": "green",
+        "x-studio-title": "Feedback",
+        "x-studio-readonly": "true",
+        "x-studio-description": "Table to store acquired feedback on iterations for active learning"
+      },
+      "createdAt": "2025-06-26T02:23:07.918Z",
+      "updatedAt": "2025-06-26T02:23:07.918Z",
+      "createdBy": "integration:agi/improvement",
+      "updatedBy": null,
+      "isComputeEnabled": true,
+      "schema": {
+        "type": "object",
+        "x-zui": {},
+        "required": [
+          "uri",
+          "iterationId",
+          "before",
+          "feedback",
+          "after"
+        ],
+        "properties": {
+          "uri": {
+            "type": "string",
+            "x-zui": {
+              "index": 0,
+              "searchable": true
+            },
+            "maxLength": 250,
+            "minLength": 1
+          },
+          "after": {
+            "type": "string",
+            "x-zui": {
+              "index": 4,
+              "searchable": true
+            },
+            "minLength": 1
+          },
+          "before": {
+            "type": "string",
+            "x-zui": {
+              "index": 2,
+              "searchable": true
+            },
+            "minLength": 1
+          },
+          "feedback": {
+            "type": "string",
+            "x-zui": {
+              "index": 3,
+              "searchable": true
+            },
+            "minLength": 1
+          },
+          "learning": {
+            "type": "string",
+            "x-zui": {
+              "index": 5,
+              "computed": {
+                "model": "fast-model",
+                "action": "ai",
+                "prompt": "What would you tell your future self to improve next time?\nCode Before:\n\n```\n{{before}}\n```\n\nFeedback: \"{{feedback}}\"\n\nCode After:\n\n```\n{{after}}\n```\n\nFor the learning, it must be standalone, concise but also accurately depict the situation and feedback you were given.\n\nTry to follow one of the below structures:\n\n<example>\nIn [situation X], I learned that I should [use tool `X` rather than `Y` because ...]\n\n\\`\\`\\`\n// snippet using the right tool\n\\`\\`\\`\n</example>\n\n<example>\nWhen trying to [...], I should use [tool X, tool Y or tool Z] like this:\n\n\\`\\`\\`\n// snippet to explain a drastic code change between before and after, or a non-obvious code snippet\n\\`\\`\\`\n</example>\n\n<example>\nWhenever [Y] happens, I should avoid [...] and instead [...].\n\n\\`\\`\\`\n// snippet to implement the behavior change\n\\`\\`\\`\n</example>\n\nKeep it concise. Do not refer to \"this situation\" or to the feedback. Both have been provided by an expert reviewing the conversation, NOT the actual user. So you must embed the content from the above inside your learning so it is standalone.\nMake sure to include a code snippet that teaches the right behavior, but remaining generic enough to adapt to different conversations in the future.\n",
+                "dependencies": [
+                  "before",
+                  "feedback",
+                  "after"
+                ]
+              },
+              "searchable": true
+            },
+            "default": null,
+            "nullable": true,
+            "minLength": 1
+          },
+          "iterationId": {
+            "type": "string",
+            "x-zui": {
+              "index": 1,
+              "searchable": true
+            },
+            "maxLength": 100,
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      },
+      "parentFolder": "root",
+      "selectors": []
+    },
+    "table_01K0B5FQXJ2YFBV74Y6YTK5C9A": {
+      "id": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A",
+      "name": "EntiedadesFinancierasTable",
+      "factor": 1,
+      "frozen": false,
+      "tags": {},
+      "createdAt": "2025-07-17T03:05:14.419Z",
+      "updatedAt": "2025-07-17T03:08:25.142Z",
+      "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "isComputeEnabled": false,
+      "schema": {
+        "type": "object",
+        "x-zui": {},
+        "required": [
+          "Nombre",
+          "Enlace",
+          "Identificador"
+        ],
+        "properties": {
+          "Enlace": {
+            "type": "string",
+            "x-zui": {
+              "index": 1,
+              "searchable": true
+            },
+            "description": "Ruta de enlace que se le provee al cliente para que realice su estudio de crédito"
+          },
+          "Nombre": {
+            "type": "string",
+            "x-zui": {
+              "index": 0,
+              "searchable": true
+            },
+            "description": "El nombre con el que se relaciona la entidad financiera"
+          },
+          "Identificador": {
+            "type": "string",
+            "x-zui": {
+              "index": 2,
+              "searchable": true
+            },
+            "description": "Cadana de texto que permite consultar la información"
+          }
+        },
+        "additionalProperties": true
+      },
+      "parentFolder": "root",
+      "selectors": [],
+      "metadata": {
+        "columns": [
+          {
+            "index": 0,
+            "width": 50
+          },
+          {
+            "index": 1,
+            "width": 120
+          },
+          {
+            "index": 2,
+            "width": 120
+          },
+          {
+            "index": 7,
+            "width": 140,
+            "hidden": false
+          },
+          {
+            "index": 5,
+            "width": 140,
+            "hidden": false
+          },
+          {
+            "index": 6,
+            "width": 140,
+            "hidden": false
+          }
+        ]
+      }
     }
   },
   "schemas": [
@@ -35609,41 +35680,37 @@
   ],
   "versions": [
     {
+      "name": "18 Jul 25 07:23",
+      "id": "version_01K0EV8PS7PEWKE0DNJDFD1RJN"
+    },
+    {
+      "name": "16 Jul 25 09:38",
+      "id": "version_01K0B7DFDYX4YMYX7S97MZYVTS"
+    },
+    {
       "name": "13 Jul 25 04:04",
       "id": "version_01K02X29KZPEAX9K9Y8Z6M835V"
-    },
-    {
-      "name": "13 Jul 25 04:02",
-      "id": "version_01K02WZ9X1Z4AKMQWXEVAWBGGP"
-    },
-    {
-      "name": "13 Jul 25 03:24",
-      "id": "version_01K02TT0XJBZT2NDS6FP61T3QF"
     }
   ],
-  "revision": 56825,
+  "revision": 56961,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-07-14T12:56:12.330Z",
-    "lastRevisionId": 56824,
+    "lastRevisionCheckAt": "2025-07-18T13:23:07.379Z",
+    "lastRevisionId": 56960,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-07-14T12:44:17.494Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-07-14T12:44:17.496Z: Connection State: initialized -> connecting (ok)",
-      "2025-07-14T12:44:18.754Z (_ExY1padej): Connection State: connecting -> connected (ok)",
-      "2025-07-14T12:44:19.022Z (_ExY1padej): Multiplayer session initialized!",
-      "2025-07-14T12:44:19.315Z (_ExY1padej): Player entered channel - {\"sessionId\":\"sess_01K04FDSXYT6MF4ZVPKXSJWWFG\",\"connectionId\":\"_ExY1padej\",\"joinedAt\":\"2025-07-14T12:44:19.228Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Mon, 14 Jul 2025 12:44:19 GMT\",\"connectedAt\":\"Mon, 14 Jul 2025 12:44:19 GMT\",\"sections\":[]}",
-      "2025-07-14T12:44:19.315Z (_ExY1padej): jguzman@marxadigital.com was elected as master - \"sess_01K04FDSXYT6MF4ZVPKXSJWWFG\"",
-      "2025-07-14T12:55:32.384Z (_ExY1padej): Connection State: connected -> disconnected (Websocket closed)",
-      "2025-07-14T12:55:32.390Z (_ExY1padej): Connection State: disconnected -> connecting (ok)",
-      "2025-07-14T12:55:32.774Z (_ExY1padej): Connection State: connecting -> connected (ok)",
-      "2025-07-14T12:55:43.125Z (_ExY1padej): jguzman@marxadigital.com was elected as master - \"sess_01K04FDSXYT6MF4ZVPKXSJWWFG\""
+      "2025-07-18T13:23:09.155Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-07-18T13:23:09.161Z: Connection State: initialized -> connecting (ok)",
+      "2025-07-18T13:23:09.421Z (4_UyeiT_b3): Connection State: connecting -> connected (ok)",
+      "2025-07-18T13:23:09.536Z (4_UyeiT_b3): Multiplayer session initialized!",
+      "2025-07-18T13:23:09.611Z (4_UyeiT_b3): Player entered channel - {\"sessionId\":\"sess_01K0EV7TYEKYXSAAK0P11Z8789\",\"connectionId\":\"4_UyeiT_b3\",\"joinedAt\":\"2025-07-18T13:23:09.540Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 18 Jul 2025 13:23:09 GMT\",\"connectedAt\":\"Fri, 18 Jul 2025 13:23:09 GMT\",\"sections\":[]}",
+      "2025-07-18T13:23:09.612Z (4_UyeiT_b3): jguzman@marxadigital.com was elected as master - \"sess_01K0EV7TYEKYXSAAK0P11Z8789\""
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K04FDSXYT6MF4ZVPKXSJWWFG / Mon, 14 Jul 2025 12:44:19 GMT /  2025-07-14T12:56:02.765Z"
+      "jguzman@marxadigital.com / sess_01K0EV7TYEKYXSAAK0P11Z8789 / Fri, 18 Jul 2025 13:23:09 GMT /  2025-07-18T13:23:29.422Z"
     ],
-    "savedAt": "2025-07-14T12:56:12.330Z",
+    "savedAt": "2025-07-18T13:23:38.344Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K04FDSXYT6MF4ZVPKXSJWWFG"
+    "sessionId": "sess_01K0EV7TYEKYXSAAK0P11Z8789"
   },
   "identity": {
     "name": "asistente-lasmotos-dev",

@@ -6,6 +6,8 @@ class FinancialStudyMessageState {
   colombiaTime: string;
   /** Sin descripción */
   assessmentInvitationMsg: string;
+  /** Identificador de la entidad financiera para buscarlo en la tabla FinancialEntities */
+  financialEntity: string;
   /** 👤 questionWithUserName */
   👤 questionWithUserName: any;
 }

@@ -5,7 +5,8 @@ window.botpress.init({
     "email": {},
     "phone": {},
     "termsOfService": {},
-    "privacyPolicy": {}
+    "privacyPolicy": {},
+    "showPoweredBy": true
   },
   "clientId": "b5a859d3-1c97-435b-9051-9ad07ce3e51e"
 });

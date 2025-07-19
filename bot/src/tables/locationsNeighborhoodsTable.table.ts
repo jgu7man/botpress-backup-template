@@ -11,6 +11,8 @@
   Updated: 2025-01-14T02:51:32.180Z
 */
 export interface locationsNeighborhoodsTable {
+  /** Record ID */
+  id: string;
   /** The city where the neighborhood belongs */
   city: string | null;
   /** This words are the neighborhood to search */

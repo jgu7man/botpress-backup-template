@@ -1,6 +1,7 @@
-import { user, conversation } from "@main";
 // Node: CatchAssistancePreferenceAnswer - nd-fcdfb7e4a7
 // Manage User Conversation Status Based on Assistance Mode - ins-1f563e3a4d
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

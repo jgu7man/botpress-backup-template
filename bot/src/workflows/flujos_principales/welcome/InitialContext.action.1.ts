@@ -1,6 +1,7 @@
-import { user, event, conversation } from "@main";
 // Node: InitialContext - nd-6ecdfb7c32
 // "Validate User Information and Manage Bot Data Reset" - ins-480e1fe562
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

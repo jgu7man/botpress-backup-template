@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: validatePopAccepted - nd-dcc6b9eebe
 // Manage User Conversation Status and POP Authorization Checks - ins-5891189766
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

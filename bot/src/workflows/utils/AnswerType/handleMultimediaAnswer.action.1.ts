@@ -1,6 +1,7 @@
-import { conversation } from "@main";
 // Node: handleMultimediaAnswer - nd-fdab444b00
 // "Resetting Bot Attempt Count to Zero" - ins-fa76d3abe5
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

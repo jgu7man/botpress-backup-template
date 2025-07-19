@@ -7,9 +7,9 @@ class AskForJobContractTypeState {
   /** Sin descripción */
   understandingAttempts: number;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
   /** AnswerType1 */
   AnswerType1: any;
 }

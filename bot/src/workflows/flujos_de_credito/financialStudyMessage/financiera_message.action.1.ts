@@ -2,6 +2,8 @@ import { workflow } from "./workflow.state";
 // Node: financiera_message - nd-45f911b1da
 // "Fetch Financial Entity Link Based on Identifier" - ins-2c8ee12e0a
 
+export {};
+
 // ------------------ EXECUTE CODE -------------------------
 
 console.log('⭕️', workflow.financialEntity)

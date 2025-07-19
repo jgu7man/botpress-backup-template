@@ -11,7 +11,7 @@ class RetrieveUserLocationState {
   /** Sin descripción */
   understandingAttempts: number;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
   /** analyzeLocationUserInput */
   analyzeLocationUserInput: any;
   /** AnswerType1 */

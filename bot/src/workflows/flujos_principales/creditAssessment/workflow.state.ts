@@ -33,7 +33,7 @@ class CreditAssessmentState {
   /** EvaluateAskingUserData1 */
   EvaluateAskingUserData1: any;
   /** User Info Form */
-  User Info Form: any;
+  'User Info Form': any;
 }
 
 export const workflow = new CreditAssessmentState();

@@ -11,7 +11,7 @@ class MainKnowledgeBaseState {
   /** setConversationContext */
   setConversationContext: any;
   /** ✨ askToKnowledgeBase */
-  ✨ askToKnowledgeBase: any;
+  '✨ askToKnowledgeBase': any;
   /** setConversationContext */
   setConversationContext: any;
   /** LocationKnowledgeBase */

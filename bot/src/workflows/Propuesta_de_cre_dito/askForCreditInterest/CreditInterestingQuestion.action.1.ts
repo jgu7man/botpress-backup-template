@@ -1,7 +1,8 @@
-import { user, conversation } from "@main";
 import { workflow } from "./workflow.state";
 // Node: CreditInterestingQuestion - nd-4073f5c709
 // Determine User's Credit Interest Status in Conversation Flow - ins-e6097fe885
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

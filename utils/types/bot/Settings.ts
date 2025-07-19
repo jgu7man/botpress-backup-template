@@ -21,7 +21,7 @@ export interface BotSettings {
 
 export type ScopeVariables = keyof Pick<
   BotSettings,
-  "botVariables" | "userVariables" | "conversationVariables"
+  "botVariables" | "userVariables" | "conversationVariables" 
 >;
 export interface CognitiveConfigs {
   openAi: OpenAi;

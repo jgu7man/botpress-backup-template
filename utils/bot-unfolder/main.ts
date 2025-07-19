@@ -6,7 +6,10 @@ import { ensureDir } from "./fileUtils";
 import { generateFlowPath } from "./generateFlowPath";
 import { generateNodeFiles } from "./generateNodes";
 import { generateStateFile } from "./generateState";
-import { generateTableInterfaces } from "./generateTables";
+import {
+  generateGlobalTableDeclarations,
+  generateTableInterfaces,
+} from "./generateTables";
 
 function readExportedBot(): BotExport {
   const exportPath = path.join(__dirname, "../../", "bot/unzipped/bot.json");
@@ -46,6 +49,10 @@ bot.flows.forEach((flow) => {
 // Export table interfaces
 generateTableInterfaces(bot, tablesBase);
 console.log("✅ Tablas exportadas");
+
+// Generate global table declarations
+generateGlobalTableDeclarations(bot, path.join(__dirname, `${targetDir}`));
+console.log("✅ Declaraciones globales de tablas generadas");
 
 generateVariablesClasses(bot, variablesBase, schemasBase);
 console.log("✅ Variables exportadas");

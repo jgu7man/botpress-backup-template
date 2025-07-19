@@ -1,7 +1,8 @@
-import { user, event, conversation } from "@main";
 import { workflow } from "./workflow.state";
 // Node: SendMessage - nd-852a227ee4
 // "User Data Initialization for Pre-Engagement Workflow" - ins-00a2e88f7c
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

@@ -11,6 +11,8 @@
   Updated: 2025-04-15T13:53:56.433Z
 */
 export interface Own_Reference_Synonyms_Table {
+  /** Record ID */
+  id: string;
   /** Sin descripción */
   alias: string | null;
   /** Sin descripción */

@@ -11,6 +11,8 @@
   Updated: 2025-06-26T02:23:07.918Z
 */
 export interface Int_Improvement_Feedback_Table {
+  /** Record ID */
+  id: string;
   /** Sin descripción */
   uri: string;
   /** Sin descripción */

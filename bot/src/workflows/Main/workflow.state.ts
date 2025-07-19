@@ -17,7 +17,7 @@ class MainState {
   /** mainKnowledgeBase1 */
   mainKnowledgeBase1: any;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
   /** StartWaConversation1 */
   StartWaConversation1: any;
   /** SyncUserData */

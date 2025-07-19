@@ -7,7 +7,7 @@ class TimeoutState {
   /** Mensaje para mandar cuando el cliente no ha contestado en mucho rato. */
   timeoutMessage: string;
   /** 👋 farewell */
-  👋 farewell: any;
+  '👋 farewell': any;
 }
 
 export const workflow = new TimeoutState();

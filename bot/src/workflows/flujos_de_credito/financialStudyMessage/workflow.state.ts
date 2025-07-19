@@ -9,7 +9,7 @@ class FinancialStudyMessageState {
   /** Identificador de la entidad financiera para buscarlo en la tabla FinancialEntities */
   financialEntity: string;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
 }
 
 export const workflow = new FinancialStudyMessageState();

@@ -3,11 +3,11 @@ class OfferCashToCreditState {
   /** El mensaje de información sobre crédito que el cliente solicitó */
   creditInfoMessage: string;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
   /** GetConfirmation */
   GetConfirmation: any;
   /** 🗣️ AnswerType */
-  🗣️ AnswerType: any;
+  '🗣️ AnswerType': any;
   /** farewell1 */
   farewell1: any;
 }

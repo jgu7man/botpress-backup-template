@@ -1,7 +1,8 @@
-import { event } from "@main";
 import { workflow } from "./workflow.state";
 // Node: Standard1 - nd-09f27ece95
 // Log Event Creation and Update Message Buffer Conditionally - ins-4204e0b78d
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

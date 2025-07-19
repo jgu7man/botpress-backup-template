@@ -9,7 +9,7 @@ class AskPurchaseMethodState {
   /** questionWithUserName */
   questionWithUserName: any;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
   /** setCupoBrillaProfile1 */
   setCupoBrillaProfile1: any;
   /** AnswerType1 */

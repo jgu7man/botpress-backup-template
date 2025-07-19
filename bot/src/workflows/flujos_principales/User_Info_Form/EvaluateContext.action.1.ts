@@ -1,7 +1,8 @@
-import { user, conversation } from "@main";
 import { workflow } from "./workflow.state";
 // Node: EvaluateContext - nd-8071d38c80
 // "Determine User Interest and Credit Context for Workflow" - ins-aee73310ff
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

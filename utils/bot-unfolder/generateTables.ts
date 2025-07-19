@@ -32,10 +32,12 @@ export function generateTableInterfaces(
       `  Updated: ${tbl.updatedAt}`,
       `*/`,
       `export interface ${ifaceName} {`,
+      `  /** Record ID */`,
+      `  id: string;`,
     ];
 
     Object.entries(props).forEach(([key, def]) => {
-      const tsType = mapJsonType(def.type);
+      const tsType = mapJsonType(def.type, key);
       const nullable = def.nullable ? " | null" : "";
       const desc = `/** ${
         def.description ? def.description : "Sin descripción"
@@ -52,7 +54,63 @@ export function generateTableInterfaces(
   });
 }
 
-function mapJsonType(t: string): string {
+/**
+ * Genera declaraciones globales TypeScript para todas las tablas del bot y variables principales
+ */
+export function generateGlobalTableDeclarations(
+  botExport: BotExport,
+  outDir: string
+): void {
+  const tables = botExport.tables;
+  if (!tables) return;
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+  const tableNames = Object.values(tables).map((tbl: Table) => tbl.name);
+
+  const lines: string[] = [
+    `/**`,
+    ` * Declaraciones globales para el bot`,
+    ` * Generado automáticamente desde bot.json`,
+    ` * Fecha de generación: ${new Date().toISOString()}`,
+    ` */`,
+    ``,
+    `// Interfaz genérica para operaciones de tabla`,
+    `interface TableOperations<T> {`,
+    `  findRecords(params?: { filter?: any; sort?: any; maxRecords?: number }): Promise<T[]>;`,
+    `  createRecord(data: Partial<T>): Promise<T>;`,
+    `  updateRecord(id: string, data: Partial<T>): Promise<T>;`,
+    `  deleteRecord(id: string): Promise<void>;`,
+    `  findFirst(params?: { filter?: any; sort?: any }): Promise<T | null>;`,
+    `}`,
+    ``,
+    `// Declaraciones globales para el bot`,
+    `declare global {`,
+    `  // Variables principales del bot`,
+    `  const bot: import('./variables/botVariables').botVariables;`,
+    `  const user: import('./variables/userVariables').userVariables;`,
+    `  const conversation: import('../utils/types/core/MainConversation').MainConversation;`,
+    `  const event: import('../utils/types/core/event.type').BotpressEvent;`,
+    `  const turn: import('../utils/types/core/Turn').Turn;`,
+    `  const env: import('./variables/ConfigVariables').ConfigVariables;`,
+    ``,
+    `  // Tablas del bot`,
+  ];
+
+  // Agregar cada tabla como una declaración global
+  tableNames.forEach((tableName) => {
+    lines.push(
+      `  const ${tableName}: TableOperations<import('./tables/${tableName}.table').${tableName}>;`
+    );
+  });
+
+  lines.push(`}`);
+  lines.push(``);
+  lines.push(`export {};`);
+
+  fs.writeFileSync(path.join(outDir, `globals.d.ts`), lines.join("\n"));
+}
+
+function mapJsonType(t: string, fieldName?: string): string {
   switch (t) {
     case "string":
       return "string";
@@ -63,6 +121,10 @@ function mapJsonType(t: string): string {
     case "object":
       return "Record<string, unknown>";
     case "array":
+      // Especial handling para campos conocidos que son arrays de strings
+      if (fieldName === "TEMAS") {
+        return "string[]";
+      }
       return "unknown[]";
     default:
       return "any";

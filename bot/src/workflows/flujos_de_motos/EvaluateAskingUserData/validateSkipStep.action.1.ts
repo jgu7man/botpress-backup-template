@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: validateSkipStep - nd-8f51f8022d
 // "Check User Data and Request if Missing Information" - ins-a9aebb148a
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

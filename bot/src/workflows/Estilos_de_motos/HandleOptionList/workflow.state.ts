@@ -19,7 +19,7 @@ class HandleOptionListState {
   /** RequestSelectProduct */
   RequestSelectProduct: any;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
   /** AnswerType1 */
   AnswerType1: any;
 }

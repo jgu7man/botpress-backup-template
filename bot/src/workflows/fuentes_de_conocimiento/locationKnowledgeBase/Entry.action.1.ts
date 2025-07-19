@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: Entry - nd-3dca6f37e1
 // "Skip Workflow Based on User Location Status" - ins-48db3b62ce
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

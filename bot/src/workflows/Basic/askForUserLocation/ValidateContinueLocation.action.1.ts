@@ -2,6 +2,8 @@ import { workflow } from "./workflow.state";
 // Node: ValidateContinueLocation - nd-7600f4a513
 // "Determine User's Service Status and Location Handling" - ins-1cadde6c2c
 
+export {};
+
 // ------------------ EXECUTE CODE -------------------------
 
 const { location, serviceLocation, outOfServiceRange } = user;

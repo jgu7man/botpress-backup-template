@@ -5,13 +5,13 @@ class CashPreferenceHandleState {
   /** Sin descripción */
   priceInfoMessage: string;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
   /** GetConfirmation */
   GetConfirmation: any;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
   /** AnswerType1 */
   AnswerType1: any;
 }

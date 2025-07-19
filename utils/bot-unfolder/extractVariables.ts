@@ -1,7 +1,7 @@
 import fs from "fs";
 import { BotExport } from "utils/types/bot/BotExport";
 import { BotSchemas } from "utils/types/bot/BotSchema";
-import { ScopeVariables } from "utils/types/bot/Settings";
+import { BotSettings, ScopeVariables } from "utils/types/bot/Settings";
 
 const filesMap: Record<string, string> = {};
 const scopeVariableLines: string[] = [];
@@ -67,6 +67,26 @@ export function generateVariablesClasses(
     );
     scopeVariableLines.length = 0; // Clear lines for the next scope
   });
+
+  // Extract config variables
+  createConfigVariables(settings, variablesPath);
+}
+
+function createConfigVariables(settings: BotSettings, variablesPath: string) {
+  const configVariables = settings.configVariables;
+  if (configVariables) {
+    scopeVariableLines.push(`\nexport class ConfigVariables {`);
+    for (const [key, value] of Object.entries(configVariables)) {
+      scopeVariableLines.push(`  ${key}: ${typeof value};`);
+    }
+    scopeVariableLines.push("}");
+    fs.writeFileSync(
+      `${variablesPath}/ConfigVariables.ts`,
+      scopeVariableLines.join("\n") + "\n",
+      "utf8"
+    );
+    scopeVariableLines.length = 0;
+  }
 }
 
 function addSchemaImport(schemaName: string) {

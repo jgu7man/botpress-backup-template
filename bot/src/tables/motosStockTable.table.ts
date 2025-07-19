@@ -11,6 +11,8 @@
   Updated: 2025-04-15T13:27:08.537Z
 */
 export interface motosStockTable {
+  /** Record ID */
+  id: string;
   /** Sin descripción */
   url: string | null;
   /** Sin descripción */

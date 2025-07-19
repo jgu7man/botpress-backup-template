@@ -11,6 +11,8 @@
   Updated: 2025-04-15T13:18:41.965Z
 */
 export interface Competitor_Synonyms_Table {
+  /** Record ID */
+  id: string;
   /** Alias del motos de marcas competencia con el cuál se relaciona la referencia de una motocicleta de nuestra marca */
   alias: string | null;
   /** Sin descripción */

@@ -11,7 +11,7 @@ class User_Info_FormState {
   /** getUserLocation */
   getUserLocation: any;
   /** 👋 farewell */
-  👋 farewell: any;
+  '👋 farewell': any;
   /** CupoBrillaProfile1 */
   CupoBrillaProfile1: any;
 }

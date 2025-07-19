@@ -7,13 +7,13 @@ class AnswerTypeState {
   /** Confirmación excepcional de que el no necesita repteir la pregunta.  Cuando es true, la transición "REPITE" no se cumplirá */
   noRequiereConsultar: boolean;
   /** ❔mainKnowledgeBase */
-  ❔mainKnowledgeBase: any;
+  '❔mainKnowledgeBase': any;
   /** ❔mainKnowledgeBase */
-  ❔mainKnowledgeBase: any;
+  '❔mainKnowledgeBase': any;
   /** UnderstandUserInputCopy11 */
   UnderstandUserInputCopy11: any;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
   /** HandleMultimediaMessage1 */
   HandleMultimediaMessage1: any;
 }

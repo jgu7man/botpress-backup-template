@@ -11,7 +11,7 @@ class StartWaConversationState {
   /** Sin descripción */
   whTemplateVariables: string;
   /** 💾 saveUserData */
-  💾 saveUserData: any;
+  '💾 saveUserData': any;
 }
 
 export const workflow = new StartWaConversationState();

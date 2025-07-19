@@ -1,7 +1,8 @@
-import { event } from "@main";
 import { workflow } from "./workflow.state";
 // Node: evaluateMultimediaMessage - nd-18463ec851
 // Log Event Payload  - ins-c655cfce0b
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

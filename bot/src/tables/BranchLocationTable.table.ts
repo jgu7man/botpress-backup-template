@@ -11,6 +11,8 @@
   Updated: 2025-01-14T02:51:32.706Z
 */
 export interface BranchLocationTable {
+  /** Record ID */
+  id: string;
   /** Sin descripción */
   city: string | null;
   /** Sin descripción */

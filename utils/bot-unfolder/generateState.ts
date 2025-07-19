@@ -14,11 +14,11 @@ export function generateStateFile(flow: Workflow, baseDir: string): void {
 
   (flow.variables || []).forEach((v) => {
     lines.push(`  /** ${v.description || "Sin descripción"} */`);
-    lines.push(`  ${v.name}: ${mapType(v.type)};`);
+    lines.push(`  ${wrapPropertyName(v.name)}: ${mapType(v.type)};`);
   });
   skillsInstructions.forEach((skill) => {
     lines.push(`  /** ${skill} */`);
-    lines.push(`  ${skill}: any;`);
+    lines.push(`  ${wrapPropertyName(skill)}: any;`);
   });
 
   lines.push(`}`);
@@ -31,6 +31,23 @@ export function generateStateFile(flow: Workflow, baseDir: string): void {
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+/**
+ * Determina si un nombre de propiedad necesita comillas para ser válido en TypeScript
+ */
+function needsQuotes(propertyName: string): boolean {
+  // Regex para identificar nombres válidos de JavaScript/TypeScript
+  const validIdentifier = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/;
+  return !validIdentifier.test(propertyName);
+}
+
+/**
+ * Envuelve un nombre de propiedad en comillas si es necesario
+ */
+function wrapPropertyName(propertyName: string): string {
+  return needsQuotes(propertyName) ? `'${propertyName}'` : propertyName;
+}
+
 function mapType(type: string): string {
   switch (type) {
     case "string":

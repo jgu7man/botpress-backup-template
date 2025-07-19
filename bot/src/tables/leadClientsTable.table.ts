@@ -11,10 +11,12 @@
   Updated: 2025-05-29T15:30:22.311Z
 */
 export interface leadClientsTable {
+  /** Record ID */
+  id: string;
   /** Sin descripción */
   COSTO: string | null;
   /** Los temas de los que se hablaron en la conversación */
-  TEMAS: unknown[] | null;
+  TEMAS: string[] | null;
   /** cedula del cliente */
   CEDULA: string | null;
   /** Sin descripción */

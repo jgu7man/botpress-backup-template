@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: ValidateExistence - nd-4143eba3a5
 // "Retrieve and Assign User's Interested Motorcycle from List" - ins-0c9a8ecd5f
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

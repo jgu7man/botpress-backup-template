@@ -1,7 +1,8 @@
-import { user, conversation } from "@main";
 import { workflow } from "./workflow.state";
 // Node: SetCupoBrillaProfile - nd-7992eecf06
 // "Manage User Conversation Status and Product Interest" - ins-11f09d8cf7
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

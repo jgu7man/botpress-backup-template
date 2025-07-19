@@ -8,47 +8,32 @@
       // compilerOptions specified here will override those declared below,
       // but *only* in ts-node.  Useful if you want ts-node and tsc to use
       // different options with a single tsconfig.json.
+      "module": "CommonJS"
     }
   },
   "compilerOptions": {
+    "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "."
-      ],
-      "@test/*": [
-        "./test/*"
-      ],
-      "@main": [
-        "bot/main.ts"
-      ],
-      "@workflows/*": [
-        "bot/src/workflows/*"
-      ],
-      "@variables/*": [
-        "bot/src/variables/*"
-      ],
-      "@schemas/*": [
-        "bot/src/schemas/*"
-      ],
-      "@tables/*": [
-        "bot/src/tables/*"
-      ],
-      "@core-types/*": [
-        "utils/types/core/*"
-      ],
+      "@/*": ["."],
+      "@test/*": ["./test/*"],
+      "@main": ["bot/main.ts"],
+      "@workflows/*": ["bot/src/workflows/*"],
+      "@variables/*": ["bot/src/variables/*"],
+      "@schemas/*": ["bot/src/schemas/*"],
+      "@tables/*": ["bot/src/tables/*"],
+      "@core-types/*": ["utils/types/core/*"]
     },
-    "lib": [
-      "es2019",
-      "dom"
-    ],
+    "lib": ["es2019", "dom"],
     "target": "es2020",
-    "module": "commonjs",
+    "module": "esnext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strictPropertyInitialization": false
-  }
+  },
+  "include": ["**/*", "bot/src/globals.d.ts"]
 }

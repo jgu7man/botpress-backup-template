@@ -11,6 +11,8 @@
   Updated: 2025-01-14T02:51:32.870Z
 */
 export interface Style_Synonyms_Table {
+  /** Record ID */
+  id: string;
   /** Sin descripción */
   alias: string | null;
   /** Sin descripción */

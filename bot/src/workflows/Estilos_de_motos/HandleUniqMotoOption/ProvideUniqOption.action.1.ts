@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: ProvideUniqOption - nd-396c7b291c
 // "Set Acknowledgment Message Based on Confirmation Type" - ins-90a218e8f6
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

@@ -19,7 +19,7 @@ class AskForUserPhoneState {
   /** QuestionWithUserName */
   QuestionWithUserName: any;
   /** 🗣️ AnswerType - Copy1 */
-  🗣️ AnswerType - Copy1: any;
+  '🗣️ AnswerType - Copy1': any;
 }
 
 export const workflow = new AskForUserPhoneState();

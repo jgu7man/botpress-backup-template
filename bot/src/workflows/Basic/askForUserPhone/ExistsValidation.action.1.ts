@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: ExistsValidation - nd-ef7b11568b
 // "Check User Phone and Authorization Status for Workflow" - ins-f74da0894d
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

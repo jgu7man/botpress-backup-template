@@ -1,7 +1,8 @@
-import { user } from "@main";
 import { workflow } from "./workflow.state";
 // Node: ExistsValidation - nd-717959226c
 // "Determine User Data Consent and Skip Workflow Logic" - ins-9efc3a1bd1
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

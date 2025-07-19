@@ -7,7 +7,7 @@ class HandleWaResponseState {
   /** GetConfirmation */
   GetConfirmation: any;
   /** 👤 questionWithUserName */
-  👤 questionWithUserName: any;
+  '👤 questionWithUserName': any;
   /** AnswerType */
   AnswerType: any;
   /** farewell1 */

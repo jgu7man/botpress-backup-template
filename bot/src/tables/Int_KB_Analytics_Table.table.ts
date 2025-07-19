@@ -11,6 +11,8 @@
   Updated: 2025-04-03T00:48:58.219Z
 */
 export interface Int_KB_Analytics_Table {
+  /** Record ID */
+  id: string;
   /** A URI of the format "analytics://<ULID>". */
   uri: string;
   /** Sin descripción */

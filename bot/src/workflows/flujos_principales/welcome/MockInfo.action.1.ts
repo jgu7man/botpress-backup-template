@@ -1,6 +1,7 @@
-import { user } from "@main";
 // Node: MockInfo - nd-43f2179813
 // User Profile Initialization with Authorization and Location Details - ins-e78e21c7be
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

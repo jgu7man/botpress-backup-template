@@ -19,7 +19,7 @@ class ProductDetailsFollowUpState {
   /** EvaluateAskingUserData1 */
   EvaluateAskingUserData1: any;
   /** User Info Form */
-  User Info Form: any;
+  'User Info Form': any;
   /** CreditPreferenceHandle1 */
   CreditPreferenceHandle1: any;
 }

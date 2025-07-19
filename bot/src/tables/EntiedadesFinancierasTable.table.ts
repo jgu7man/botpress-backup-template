@@ -11,6 +11,8 @@
   Updated: 2025-07-17T03:08:25.142Z
 */
 export interface EntiedadesFinancierasTable {
+  /** Record ID */
+  id: string;
   /** Ruta de enlace que se le provee al cliente para que realice su estudio de crédito */
   Enlace: string;
   /** El nombre con el que se relaciona la entidad financiera */

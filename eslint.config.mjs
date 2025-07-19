@@ -16,9 +16,16 @@ export default defineConfig([
     }
   },
   {
-    file: ["**/*.state.{ts,tsx}"], rules: {
+    files: ["**/*.state.{ts,tsx}"], rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/await-thenable": "off"
+    }
+  },
+  {
+    files: ["**/*.action.*.{ts,tsx}"], rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "no-restricted-globals": ["error", "fdescribe"]
     }
   }
 ]);

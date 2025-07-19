@@ -1,7 +1,8 @@
-import { conversation } from "@main";
 import { workflow } from "./workflow.state";
 // Node: BuildMessage - nd-8ab11acdac
 // "Track Conversation Attempts and Set Bot Attention Status" - ins-15485ce2aa
+
+export {};
 
 // ------------------ EXECUTE CODE -------------------------
 

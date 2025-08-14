@@ -53,4 +53,6 @@ export interface leadClientsTable {
   UBICACION_DEL_USUARIO: string | null;
   /** Sin descripción */
   UBICACION_DE_SERVICIO: string | null;
+  /** Sin descripción */
+  NOTION_PAGE_ID: string | null;
 }

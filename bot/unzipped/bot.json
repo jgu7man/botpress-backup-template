@@ -6,7 +6,7 @@
       "en"
     ],
     "description": "",
-    "id": "e8a85cb7-0432-4b73-9d64-6d6b0135e108",
+    "id": "0139107b-e956-4207-ad28-23ed5b780b12",
     "inactivityTimeout": 360,
     "botVariables": [
       {
@@ -190,14 +190,15 @@
       "WAB_TEMPLATE": "general_leads",
       "WAB_ALLOW_VARIABLES": "true",
       "WAB_SENDER_ID": "626547297219911",
-      "WAB_CONTEXT": "'El usuario ha contestado a una pregunta realizada desde whatsapp sobre su interés en hacer uso de su crédito para adquirir una moto'"
+      "WAB_CONTEXT": "'El usuario ha contestado a una pregunta realizada desde whatsapp sobre su interés en hacer uso de su crédito para adquirir una moto'",
+      "MOCK_HOOK": ""
     },
     "cognitiveConfigs": {
       "openAi": {}
     },
     "useLlmz": true,
     "defaultBestModel": "anthropic__claude-sonnet-4-20250514",
-    "defaultFastModel": "fireworks-ai__accounts/fireworks/models/deepseek-r1-0528",
+    "defaultFastModel": "google-ai__gemini-2.5-flash",
     "useClient": true,
     "llmzVersion": "01-Oct-2024",
     "autonomousModel": "openai__o4-mini-2025-04-16",
@@ -753,8 +754,8 @@
               "nodeId": "nd-2bb9db230d"
             }
           ],
-          "x": -2070,
-          "y": -1230,
+          "x": -2610,
+          "y": -1215,
           "kbPriority": {
             "enabled": true,
             "searchScope": "all",
@@ -922,7 +923,7 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -1710,
+          "x": -2220,
           "y": -1215,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">BIENVENIDA</span></strong></p>",
@@ -1037,8 +1038,8 @@
         },
         {
           "deletable": true,
-          "x": -2100,
-          "y": -1905,
+          "x": -2355,
+          "y": -2085,
           "type": "trigger",
           "integrationId": "webhook",
           "triggerId": "event",
@@ -1252,8 +1253,8 @@
           "name": "Welcome",
           "type": "standard",
           "deletable": true,
-          "x": -1710,
-          "y": -1080,
+          "x": -2250,
+          "y": -1050,
           "instructions": [
             {
               "id": "ins-498c04e6e5",
@@ -1265,6 +1266,28 @@
               "category": "Flow Logic",
               "nodeId": "nd-db4e37e320",
               "manualFields": []
+            },
+            {
+              "id": "ins-5b0f2e6922",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{conversation.flow.ending === 'HOOKED'}}"
+              },
+              "label": "Was hooked",
+              "generative": {
+                "label": "Was hooked",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-db4e37e320",
+              "description": "",
+              "destination": {
+                "node": "nd-a16d9bd09d"
+              },
+              "transitions": []
             },
             {
               "id": "ins-aa9cdd2f90",
@@ -1500,8 +1523,8 @@
           "name": "StartWaConversation",
           "type": "standard",
           "deletable": true,
-          "x": -2115,
-          "y": -1650,
+          "x": -2355,
+          "y": -1845,
           "instructions": [
             {
               "id": "ins-7c1c543fc1",
@@ -1519,8 +1542,8 @@
         {
           "type": "trigger",
           "deletable": true,
-          "x": -1605,
-          "y": -2025,
+          "x": -1665,
+          "y": -2355,
           "integrationId": "intent",
           "triggerId": "intent",
           "instructions": [
@@ -1533,7 +1556,7 @@
                 "payload": "true"
               },
               "destination": {
-                "node": "nd-a16d9bd09d"
+                "node": "nd-056cb7d799"
               },
               "generative": {
                 "label": "",
@@ -1558,23 +1581,36 @@
             "title": "Interés o desinterés",
             "description": "Cuando el mensaje del usuario denote un interés o desinterés como si la intención fuese contestar a una pregunta que se le ha realizado antes. Sobre todo cuando el usuario no saluda y acepta o rechaza algo."
           },
-          "disabled": false
+          "disabled": true
         },
         {
-          "name": "HandleWaResponse1",
+          "name": "HandleInterest",
           "type": "standard",
           "deletable": true,
-          "x": -1620,
-          "y": -1560,
+          "x": -1635,
+          "y": -1665,
           "instructions": [
             {
-              "id": "ins-9973d9986e",
+              "type": "log",
+              "id": "ins-25ae8023e3",
+              "label": "Log",
+              "level": "info",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "💬 Mensaje del usuario: {{event.preview}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-a16d9bd09d",
+              "transitions": []
+            },
+            {
+              "id": "ins-d30458e1dc",
               "type": "skill",
-              "name": "SyncUserData",
-              "flowId": "wf-9a7c13277c",
+              "name": "StopPromotions",
+              "flowId": "wf-259e297ca2",
               "exitNodes": [],
+              "label": "StopPromotions",
               "transitions": [],
-              "category": "Flow Logic",
               "nodeId": "nd-a16d9bd09d",
               "manualFields": []
             },
@@ -1630,8 +1666,8 @@
         {
           "type": "trigger",
           "deletable": true,
-          "x": -2115,
-          "y": -915,
+          "x": -2715,
+          "y": -945,
           "integrationId": "intent",
           "triggerId": "intent",
           "instructions": [
@@ -1669,7 +1705,31 @@
             "title": "Saludo y pregunta",
             "description": "El usuario saluda o tal vez no, pero expresa un deseo de saber información sobre motos, la ubicación de las sedes o los requisitos para créditos"
           },
-          "disabled": false
+          "disabled": true
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": -1650,
+          "y": -1935,
+          "instructions": [
+            {
+              "id": "ins-9973d9986e",
+              "type": "skill",
+              "name": "SyncUserData",
+              "flowId": "wf-9a7c13277c",
+              "exitNodes": [],
+              "transitions": [],
+              "category": "Flow Logic",
+              "nodeId": "nd-056cb7d799",
+              "manualFields": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-a16d9bd09d"
+          },
+          "id": "nd-056cb7d799",
+          "name": "HandleHook"
         }
       ],
       "parentFolder": "root"
@@ -3556,7 +3616,7 @@
               "id": "ins-f2b05d5361",
               "task": {
                 "instructions": "Con base en la información proporcionada en {{conversation.SummaryAgent.summary}}, \n- Crea una descripción de la conversación considerando los puntos claves para la venta como sus intereses y perfiles y guárdala en @user.description\n- Evalúa el sentimiento de la conversación y guárdala en @conversation.sentiment\n- Si no hay valor en el summary, entonces deja ambas variables vacías.",
-                "input": "sumary:{{conversation.SummaryAgent.summary}}",
+                "input": "summary: {{conversation.SummaryAgent.summary}}",
                 "outputVariableIds": [
                   "var-a0df57cac0",
                   "var-39eb5e182a"
@@ -3569,7 +3629,7 @@
                   }
                 ],
                 "model": "fast-model",
-                "temperature": 0.25,
+                "temperature": 0.5,
                 "version": "1.0"
               },
               "nodeId": "nd-bb06b713d9",
@@ -3591,7 +3651,7 @@
                   }
                 ],
                 "model": "fast-model",
-                "temperature": 0.25
+                "temperature": 0.5
               }
             },
             {
@@ -3624,12 +3684,12 @@
               "id": "ins-648c840c43",
               "type": "action",
               "category": "Execute",
-              "code": "const userId = event.userId || ''\r\nconst phone = user.phone\r\nconst conversationId = event.conversationId || ''\r\n\r\nconst { status, ending, topics } = conversation.flow || {}\r\nconst { reference, brillaPrice, cashPrice, price } = user.interestedProduct || {}\r\nconsole.log(`💾 saving conversationId:`, conversationId)\r\n\r\nconversation.sensitiveData = {\r\n  TELEFONO: phone,\r\n  NOMBRE: user.fullName,\r\n  UBICACION_DEL_USUARIO: user.location,\r\n  CEDULA: user.nationalID,\r\n  NUMERO_DE_FACTURA: user.brillaBillNumber,\r\n  TIPO_DE_CONTRATO: user.jobContractType,\r\n  REPORTADO: user.negativeCreditReport\r\n}\r\n\r\nlet precioInformado: number\r\nif (user.creditProfile === 'CUPO_BRILLA') {\r\n  precioInformado = brillaPrice\r\n} else if (user.purchasePreference === 'CASH') {\r\n  precioInformado = cashPrice\r\n} else {\r\n  precioInformado = price\r\n}\r\n\r\nconversation.nonSensitiveData = {\r\n  RESUMEN: user.description,\r\n  PRODUCTO_DE_INTERES: reference,\r\n  UBICACION_DE_SERVICIO: user.serviceLocation,\r\n  ESTATUS: status,\r\n  ASISTENCIA: user.assistanceMode,\r\n  ROL_DE_CLIENTE: user.clientRole,\r\n  PERFIL_CREDITICIO: user.creditProfile,\r\n  PREFERENCIA_DE_COMPRA: user.purchasePreference,\r\n  CONCLUSION: ending,\r\n  TEMAS: topics,\r\n  PRECIO_INFORMADO: precioInformado,\r\n  SENTIMIENTO: workflow.sentiment\r\n}\r\n\r\nconst isAuthorizedPop = user.authorizedPop?.answer === 'ACCEPTED' \r\nconst isColdProspect = conversation.flow.status == 'COLD_PROSPECT'\r\nconst saveSensitiveData = isAuthorizedPop || isColdProspect\r\n\r\nlet rowData: {\r\n  CONVERSATION_ID: string\r\n  [key: string]: string | string[] | number\r\n} = {\r\n  CONVERSATION_ID: conversationId,\r\n  ...(saveSensitiveData\r\n    ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData }\r\n    : { ...conversation.nonSensitiveData })\r\n}\r\n\r\nconsole.log(`🤖 Saving rowData:`, rowData)\r\n\r\ntry {\r\n  const existingRecord = await leadClientsTable.findRecords({\r\n    filter: { \r\n      $or: [\r\n        { TELEFONO: phone }, \r\n        { TELEFONO: phone.slice(-10) }, \r\n        { CONVERSATION_ID: conversationId }\r\n      ]\r\n    }\r\n  })\r\n\r\n  if (existingRecord.length > 0) {\r\n    console.log(`✅ Updating record with id: ${existingRecord[0].id}`)\r\n    const recordId = existingRecord[0].id\r\n    await leadClientsTable.updateRecord(recordId, rowData)\r\n  } else {\r\n    console.log(`🔅 Creating new record`)\r\n    await leadClientsTable.createRecord(rowData)\r\n  }\r\n} catch (error) {\r\n  console.error('❌ Error saving data:', error)\r\n}\r\n",
+              "code": "const phone = user.phone\r\nconst conversationId = event.conversationId || ''\r\n\r\nconst { status, ending, topics } = conversation.flow || {}\r\nconst { reference, brillaPrice, cashPrice, price } = user.interestedProduct || {}\r\nconsole.log(`💾 saving conversation:`, conversationId || phone)\r\n\r\nconversation.sensitiveData = {\r\n  TELEFONO: phone,\r\n  NOMBRE: user.fullName,\r\n  UBICACION_DEL_USUARIO: user.location,\r\n  CEDULA: user.nationalID,\r\n  NUMERO_DE_FACTURA: user.brillaBillNumber,\r\n  TIPO_DE_CONTRATO: user.jobContractType,\r\n  REPORTADO: user.negativeCreditReport\r\n}\r\n\r\nlet precioInformado: number\r\nif (user.creditProfile === 'CUPO_BRILLA') {\r\n  precioInformado = brillaPrice\r\n} else if (user.purchasePreference === 'CASH') {\r\n  precioInformado = cashPrice\r\n} else {\r\n  precioInformado = price\r\n}\r\n\r\nconversation.nonSensitiveData = {\r\n  RESUMEN: user.description,\r\n  PRODUCTO_DE_INTERES: reference,\r\n  UBICACION_DE_SERVICIO: user.serviceLocation,\r\n  ESTATUS: status,\r\n  ASISTENCIA: user.assistanceMode,\r\n  ROL_DE_CLIENTE: user.clientRole,\r\n  PERFIL_CREDITICIO: user.creditProfile,\r\n  PREFERENCIA_DE_COMPRA: user.purchasePreference,\r\n  CONCLUSION: ending,\r\n  TEMAS: topics,\r\n  PRECIO_INFORMADO: precioInformado,\r\n  SENTIMIENTO: workflow.sentiment\r\n}\r\n\r\nconst isAuthorizedPop = user.authorizedPop?.answer === 'ACCEPTED' \r\nconst isColdProspect = conversation.flow.status == 'COLD_PROSPECT'\r\nconst saveSensitiveData = isAuthorizedPop || isColdProspect\r\n\r\nlet rowData: {\r\n  CONVERSATION_ID: string\r\n  [key: string]: string | string[] | number\r\n} = {\r\n  CONVERSATION_ID: conversationId,\r\n  ...(saveSensitiveData\r\n    ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData }\r\n    : { ...conversation.nonSensitiveData })\r\n}\r\n\r\nconsole.log(`🤖 Saving rowData:`, rowData)\r\nconst lastTenDigitsOfPhone = phone.slice(-10)\r\nconsole.log('🔎 lastTenDigitsOfPhone', lastTenDigitsOfPhone)\r\n\r\ntry {\r\n    const recordResults = await leadClientsTable.findRecords({\r\n    filter: { \r\n      $or: [\r\n        { TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } }, \r\n        { CONVERSATION_ID: conversationId }\r\n      ]\r\n    }\r\n  })\r\n\r\n  console.log('❕ Records result', recordResults)\r\n\r\n  if (recordResults.length > 0) {\r\n    console.log(`✅ Updating record with id: ${recordResults[0].id}`)\r\n    const recordId = recordResults[0].id\r\n    await leadClientsTable.updateRecord(recordId, rowData)\r\n  } else {\r\n    console.log(`🔅 Creating new record`)\r\n    await leadClientsTable.createRecord(rowData)\r\n  }\r\n} catch (error) {\r\n  console.error('❌ Error saving data:', error)\r\n}\r\n",
               "origin": "builtin",
               "nodeId": "nd-bb06b713d9",
               "label": "\"Save and Update User Conversation Data in Database\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const userId = event.userId || \"\";\n  const phone = user.phone;\n  const conversationId = event.conversationId || \"\";\n  const { status, ending, topics } = conversation.flow || {};\n  const { reference, brillaPrice, cashPrice, price } = user.interestedProduct || {};\n  console.log(`\\u{1F4BE} saving conversationId:`, conversationId);\n  conversation.sensitiveData = {\n    TELEFONO: phone,\n    NOMBRE: user.fullName,\n    UBICACION_DEL_USUARIO: user.location,\n    CEDULA: user.nationalID,\n    NUMERO_DE_FACTURA: user.brillaBillNumber,\n    TIPO_DE_CONTRATO: user.jobContractType,\n    REPORTADO: user.negativeCreditReport\n  };\n  let precioInformado;\n  if (user.creditProfile === \"CUPO_BRILLA\") {\n    precioInformado = brillaPrice;\n  } else if (user.purchasePreference === \"CASH\") {\n    precioInformado = cashPrice;\n  } else {\n    precioInformado = price;\n  }\n  conversation.nonSensitiveData = {\n    RESUMEN: user.description,\n    PRODUCTO_DE_INTERES: reference,\n    UBICACION_DE_SERVICIO: user.serviceLocation,\n    ESTATUS: status,\n    ASISTENCIA: user.assistanceMode,\n    ROL_DE_CLIENTE: user.clientRole,\n    PERFIL_CREDITICIO: user.creditProfile,\n    PREFERENCIA_DE_COMPRA: user.purchasePreference,\n    CONCLUSION: ending,\n    TEMAS: topics,\n    PRECIO_INFORMADO: precioInformado,\n    SENTIMIENTO: workflow.sentiment\n  };\n  const isAuthorizedPop = user.authorizedPop?.answer === \"ACCEPTED\";\n  const isColdProspect = conversation.flow.status == \"COLD_PROSPECT\";\n  const saveSensitiveData = isAuthorizedPop || isColdProspect;\n  let rowData = {\n    CONVERSATION_ID: conversationId,\n    ...saveSensitiveData ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData } : { ...conversation.nonSensitiveData }\n  };\n  console.log(`\\u{1F916} Saving rowData:`, rowData);\n  try {\n    const existingRecord = await leadClientsTable.findRecords({\n      filter: {\n        $or: [\n          { TELEFONO: phone },\n          { TELEFONO: phone.slice(-10) },\n          { CONVERSATION_ID: conversationId }\n        ]\n      }\n    });\n    if (existingRecord.length > 0) {\n      console.log(`\\u2705 Updating record with id: ${existingRecord[0].id}`);\n      const recordId = existingRecord[0].id;\n      await leadClientsTable.updateRecord(recordId, rowData);\n    } else {\n      console.log(`\\u{1F505} Creating new record`);\n      await leadClientsTable.createRecord(rowData);\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error saving data:\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const phone = user.phone;\n  const conversationId = event.conversationId || \"\";\n  const { status, ending, topics } = conversation.flow || {};\n  const { reference, brillaPrice, cashPrice, price } = user.interestedProduct || {};\n  console.log(`\\u{1F4BE} saving conversation:`, conversationId || phone);\n  conversation.sensitiveData = {\n    TELEFONO: phone,\n    NOMBRE: user.fullName,\n    UBICACION_DEL_USUARIO: user.location,\n    CEDULA: user.nationalID,\n    NUMERO_DE_FACTURA: user.brillaBillNumber,\n    TIPO_DE_CONTRATO: user.jobContractType,\n    REPORTADO: user.negativeCreditReport\n  };\n  let precioInformado;\n  if (user.creditProfile === \"CUPO_BRILLA\") {\n    precioInformado = brillaPrice;\n  } else if (user.purchasePreference === \"CASH\") {\n    precioInformado = cashPrice;\n  } else {\n    precioInformado = price;\n  }\n  conversation.nonSensitiveData = {\n    RESUMEN: user.description,\n    PRODUCTO_DE_INTERES: reference,\n    UBICACION_DE_SERVICIO: user.serviceLocation,\n    ESTATUS: status,\n    ASISTENCIA: user.assistanceMode,\n    ROL_DE_CLIENTE: user.clientRole,\n    PERFIL_CREDITICIO: user.creditProfile,\n    PREFERENCIA_DE_COMPRA: user.purchasePreference,\n    CONCLUSION: ending,\n    TEMAS: topics,\n    PRECIO_INFORMADO: precioInformado,\n    SENTIMIENTO: workflow.sentiment\n  };\n  const isAuthorizedPop = user.authorizedPop?.answer === \"ACCEPTED\";\n  const isColdProspect = conversation.flow.status == \"COLD_PROSPECT\";\n  const saveSensitiveData = isAuthorizedPop || isColdProspect;\n  let rowData = {\n    CONVERSATION_ID: conversationId,\n    ...saveSensitiveData ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData } : { ...conversation.nonSensitiveData }\n  };\n  console.log(`\\u{1F916} Saving rowData:`, rowData);\n  const lastTenDigitsOfPhone = phone.slice(-10);\n  console.log(\"\\u{1F50E} lastTenDigitsOfPhone\", lastTenDigitsOfPhone);\n  try {\n    const recordResults = await leadClientsTable.findRecords({\n      filter: {\n        $or: [\n          { TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } },\n          { CONVERSATION_ID: conversationId }\n        ]\n      }\n    });\n    console.log(\"\\u2755 Records result\", recordResults);\n    if (recordResults.length > 0) {\n      console.log(`\\u2705 Updating record with id: ${recordResults[0].id}`);\n      const recordId = recordResults[0].id;\n      await leadClientsTable.updateRecord(recordId, rowData);\n    } else {\n      console.log(`\\u{1F505} Creating new record`);\n      await leadClientsTable.createRecord(rowData);\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error saving data:\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -4379,136 +4439,6 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": -1170,
-          "y": -645,
-          "instructions": [
-            {
-              "type": "ai",
-              "id": "ins-48ac508a13",
-              "task": {
-                "instructions": "## **ESTRATEGIA**\n\n1. Analiza el `kbResponse` para identificar el contexto de la siguiente manera\n\n   - **`own_reference`:** Si el contenido menciona o se asocia con una referencia **de la marca propia**. Busca explícitamente frases como \"marca propia\", \"nuestra marca\", o referencias directas a modelos específicos que el contexto previo haya identificado como propios. Considera que la mención de un modelo específico puede ser una referencia de marca propia si el contexto anterior así lo establece. Comprende la característica `marca propia` para considerarlo como `own_reference`.\n\n   - **`style`:** Si el contenido hace referencia a un **estilo de motocicleta**, como \"Deportiva\", \"Urbana\", \"Doble propósito\", \"Semiautomática\", etc.\n\n   - **`competitor`:** Si el contenido **menciona explícitamente una marca o modelo de la competencia, o si el contexto asocia claramente la referencia con la idea de comparar o contrastar con productos propios.** La mera mención de una marca diferente no debe ser automáticamente clasificada como \"competitor\" si el contexto no lo sugiere. Sobretodo ubica la palabra `competencia` para determinarlo como `competitor`.\n\n   - **`general_motorcycles`:** Si el contenido es amplio y no se relaciona con estilos, referencias propias, ni competidores, pero habla sobre motocicletas en general.\n\n2. Define si es `style`, `competitor`, `own_reference`, o `general_motorcycles` en `@workflow.answerType`\n\n\n## **Ejemplo de entradas y salidas:**\n\n1. **Input:**\n   `\"Knowledge Base: La consulta \"puedo ver la boxer en gaira\" parece referirse a una referencia de moto competidora.\"`\n   - **@workflow.answerType:** competitor\n\n2. **Input:**\n   `\"Knowledge Base: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo.\"`\n   - **@workflow.answerType:** own_reference\n\n3. **Input:**\n   `\"Knowledge Base: Las motocicletas urbanas son prácticas para la ciudad.\"`\n   - **@workflow.answerType:** style\n\n4. **Input:**\n   `\"Knowledge Base: Las motos son ideales para viajar largas distancias si se elige el modelo correcto.\"`\n   - **@workflow.answerType:** general_motorcycles\n\n5. **Input (Nuevo Ejemplo):**\n   `\"Knowledge Base: Basado en el contexto proporcionado, la entrada \"quiero saber si tiene la ktm\" se clasifica como una referencia a una moto de marca propia, específicamente la KTM 200.\"`\n   - **@workflow.answerType:** own_reference",
-                "input": "User Input: {{event.preview}} \nKnowledege Response: {{workflow.kbResponse}} ",
-                "outputVariableIds": [
-                  "var-05e2d75106"
-                ],
-                "handleFailure": false,
-                "examples": [
-                  {
-                    "input": "",
-                    "output": {
-                      "answerType": ""
-                    }
-                  }
-                ],
-                "model": "google-ai__models/gemini-2.0-flash",
-                "temperature": 0.2,
-                "version": "1.0"
-              },
-              "nodeId": "nd-c839253166",
-              "label": "answerType",
-              "transitions": [],
-              "prompt": {
-                "messages": [
-                  {
-                    "role": "system",
-                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
-                  },
-                  {
-                    "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## **ESTRATEGIA**\n\n1. Analiza el `kbResponse` para identificar el contexto de la siguiente manera\n\n   - **`own_reference`:** Si el contenido menciona o se asocia con una referencia **de la marca propia**. Busca explícitamente frases como \"marca propia\", \"nuestra marca\", o referencias directas a modelos específicos que el contexto previo haya identificado como propios. Considera que la mención de un modelo específico puede ser una referencia de marca propia si el contexto anterior así lo establece. Comprende la característica `marca propia` para considerarlo como `own_reference`.\n\n   - **`style`:** Si el contenido hace referencia a un **estilo de motocicleta**, como \"Deportiva\", \"Urbana\", \"Doble propósito\", \"Semiautomática\", etc.\n\n   - **`competitor`:** Si el contenido **menciona explícitamente una marca o modelo de la competencia, o si el contexto asocia claramente la referencia con la idea de comparar o contrastar con productos propios.** La mera mención de una marca diferente no debe ser automáticamente clasificada como \"competitor\" si el contexto no lo sugiere. Sobretodo ubica la palabra `competencia` para determinarlo como `competitor`.\n\n   - **`general_motorcycles`:** Si el contenido es amplio y no se relaciona con estilos, referencias propias, ni competidores, pero habla sobre motocicletas en general.\n\n2. Define si es `style`, `competitor`, `own_reference`, o `general_motorcycles` en `@workflow.answerType`\n\n\n## **Ejemplo de entradas y salidas:**\n\n1. **Input:**\n   `\"Knowledge Base: La consulta \"puedo ver la boxer en gaira\" parece referirse a una referencia de moto competidora.\"`\n   - **@workflow.answerType:** competitor\n\n2. **Input:**\n   `\"Knowledge Base: La SPORT 100 es una motocicleta de nuestra marca asociada al estilo deportivo.\"`\n   - **@workflow.answerType:** own_reference\n\n3. **Input:**\n   `\"Knowledge Base: Las motocicletas urbanas son prácticas para la ciudad.\"`\n   - **@workflow.answerType:** style\n\n4. **Input:**\n   `\"Knowledge Base: Las motos son ideales para viajar largas distancias si se elige el modelo correcto.\"`\n   - **@workflow.answerType:** general_motorcycles\n\n5. **Input (Nuevo Ejemplo):**\n   `\"Knowledge Base: Basado en el contexto proporcionado, la entrada \"quiero saber si tiene la ktm\" se clasifica como una referencia a una moto de marca propia, específicamente la KTM 200.\"`\n   - **@workflow.answerType:** own_reference\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /** The type of the request of user */\n\"answerType\": string\n}"
-                  },
-                  {
-                    "role": "user",
-                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
-                  }
-                ],
-                "model": "google-ai__models/gemini-2.0-flash",
-                "temperature": 0.2
-              }
-            },
-            {
-              "type": "log",
-              "id": "ins-244e883b9f",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Answer type: {{workflow.answerType}} ",
-                "staticValue": ""
-              },
-              "nodeId": "nd-c839253166",
-              "transitions": []
-            },
-            {
-              "id": "ins-5603c1f7bf",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.answerType == 'competitor'}}"
-              },
-              "label": "Answer type is competitors reference",
-              "generative": {
-                "label": "Answer type is competitors reference",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-c839253166",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            },
-            {
-              "id": "ins-3f5fc18604",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.answerType == 'own_reference'}}"
-              },
-              "label": "Answer type is own reference",
-              "generative": {
-                "label": "Answer type is own reference",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-c839253166",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            },
-            {
-              "id": "ins-94d8948b05",
-              "type": "transition",
-              "condition": {
-                "type": "expression",
-                "payload": "{{workflow.answerType === 'style' || workflow.answerType === 'general_motorcycles'}}"
-              },
-              "label": "Answer type is style",
-              "generative": {
-                "label": "Answer type is style",
-                "suggestion": {},
-                "properties": {
-                  "condition": false
-                }
-              },
-              "nodeId": "nd-c839253166",
-              "description": "",
-              "destination": {},
-              "transitions": []
-            }
-          ],
-          "defaultTransition": {
-            "targetNodeId": null
-          },
-          "id": "nd-c839253166",
-          "name": "Router"
-        },
-        {
-          "type": "standard",
-          "deletable": true,
           "x": -645,
           "y": -720,
           "instructions": [
@@ -4528,7 +4458,7 @@
             {
               "id": "ins-172c041319",
               "tutorialId": "knowledge-query",
-              "description": "Retrieve the user input explanation",
+              "description": "Dime qué quiso decir el cliente en las siguientes clasificacioness.",
               "title": "Query Knowledge Bases",
               "schema": {
                 "_def": {
@@ -4575,7 +4505,7 @@
               "data": {
                 "query": {
                   "valueType": "dynamic",
-                  "dynamicValue": "Analiza la entrada del usuario: \"{{event.preview}}\". Determina si la pregunta se refiere a: \n1) un estilo de moto, \n2) una referencia a una moto de la competencia (basándote en coincidencias con los alias en la tabla Competitor_Synonyms_Table), \n3) una referencia a una moto de marca propia (basándote en coincidencias con el nombre del alias en la tabla own_reference_table), o \n4) una pregunta general sobre motos. \n\nEntrega sólo el resultado de la clasificación, no se requiere saber referencias ni detalles.",
+                  "dynamicValue": "Mensaje a clasificar. {{event.preview}}\".\n\n- Primero, determina la categoría principal del mensaje: Estilo, Competencia, Marca Propia o General.\n- Basándote en la clasificación, responde de la siguiente manera:\n  - Si es Estilo: Identifica y responde que el cliente ha mencionado un estilo de moto y di al que se refiere la entrada.\n  - Si es Competencia: Usando Competitor_Synonyms_Table para encontrar coincidencias, responde indicando cual es el nombre de la moto de la marca propia y cuál es el nombre de la moto de la competencia.\n  - Si es Marca Propia: Usando own_reference_table para encontrar coincidencias, responde \"Marca propia:\" y con el nombre oficial de la moto de la marca propia.\n  - Si es General: Proporciona una explicación concisa y directa que explique a la pregunta del usuario. No que la responda\n\n**IMPORTANTE:** No des ejemplos, tu respuesta debe ser máximo de 1 línea\n\n",
                   "staticValue": "Retrieve a response about the user message: \"{{event.preview}}\"; and retrieve if the user question is about moto style, about competitor moto reference (name matched on competitor_synonyms_table) or a own reference (name matched on own_reference_table) or general question about motos."
                 },
                 "kbs": {
@@ -4706,7 +4636,7 @@
               "type": "ai",
               "id": "ins-5810bc5962",
               "task": {
-                "instructions": "## ROLE:\nEres un asistente vendedor de motos, cortés y cordial.\n\n## Estrategia:\nGenera un texto y guárdalo en @workflow.foundMessage con la siguiente plantilla:\n\"De acuerdo, señor {{user.fullName}}\"\n\n## Consideraciones:\n- Cambia el señor por señora si identificas que el nombre del usuario es femenino\n- Si no tienes el nombre del usuario, usa \"sr@\"\n- Cuida la ortografía y la gramática",
+                "instructions": "## Estrategia:\nGenera un texto y guárdalo en @workflow.foundMessage que indique que has encontrado la moto que busca y que compartirás los datos.",
                 "input": "@user.fullName ",
                 "outputVariableIds": [
                   "var-f27d000ff7"
@@ -4735,7 +4665,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## ROLE:\nEres un asistente vendedor de motos, cortés y cordial.\n\n## Estrategia:\nGenera un texto y guárdalo en @workflow.foundMessage con la siguiente plantilla:\n\"De acuerdo, señor {{user.fullName}}\"\n\n## Consideraciones:\n- Cambia el señor por señora si identificas que el nombre del usuario es femenino\n- Si no tienes el nombre del usuario, usa \"sr@\"\n- Cuida la ortografía y la gramática\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"foundMessage\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia:\nGenera un texto y guárdalo en @workflow.foundMessage que indique que has encontrado la moto que busca y que compartirás los datos.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"foundMessage\": string\n}"
                   },
                   {
                     "role": "user",
@@ -5053,8 +4983,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": -660,
-          "y": 30,
+          "x": -510,
+          "y": 120,
           "instructions": [
             {
               "type": "log",
@@ -5609,7 +5539,7 @@
                 },
                 "outputVariableId": "var-5a93a5c657",
                 "forceClassify": false,
-                "model": "google-ai__models/gemini-2.0-flash"
+                "model": "fast-model"
               },
               "prompt": {
                 "response_format": {
@@ -5625,7 +5555,7 @@
                     "content": "Content: {{CLASSIFICATION_INPUT}}\n\nAvailable categories: \n  - own_reference\n  - competitor\n  - style\n  - ANYTHING_ELSE\n\nIf the content doesn't directly align with any categories, select ANYTHING_ELSE."
                   }
                 ],
-                "model": "google-ai__models/gemini-2.0-flash",
+                "model": "fast-model",
                 "temperature": 0,
                 "signatureVersion": "Jan-2024"
               },
@@ -6601,8 +6531,8 @@
         {
           "type": "comment",
           "deletable": true,
-          "x": -30,
-          "y": -435,
+          "x": -1140,
+          "y": -240,
           "instructions": [],
           "comment": "<p><strong><span style=\"font-size: 32px\">PREGUNTAR POR INTERÉS EN EL CRÉDITO</span></strong></p><p><span style=\"font-size: 14px\">askForCreditInterest</span></p>",
           "id": "nd-b291ebc91f",
@@ -8220,13 +8150,13 @@
             {
               "id": "ins-aee73310ff",
               "type": "action",
-              "code": "const { context, status } = conversation.flow\n\n// Verifica si el usuario está interesado en un producto de moto\nconst isMotoInterested = user.interestedProduct !== null\n\n// Verifica si el perfil de crédito del usuario está disponible\nconst isCreditProfile = user.creditProfile !== null\n\n// Verifica si el contexto de la conversación es sobre información de crédito\nconst isCreditContext =\n  status === 'CREDIT_INTERESTED' || context === 'ABOUT_CREDIT_INFO' || context === 'ABOUT_CUPO_BRILLA_INFO'\n\n// Si el contexto es sobre información de crédito, actualiza el estado del flujo de trabajo\nif (isCreditContext) {\n  workflow.isContextToContinue = isCreditProfile\n}\n// Si el contexto es sobre información de moto, actualiza el estado del flujo de trabajo\nelse if (context === 'ABOUT_MOTO_INFO') {\n  workflow.isContextToContinue = isMotoInterested\n}\n\nconst contextSummary = {\n  isMotoInterested,\n  isCreditProfile,\n  isCreditContext,\n  context\n}\n\nconsole.log(`🤖 contextSummary:`, contextSummary)\nconsole.log(`🤖 isContextToContinue:`, workflow.isContextToContinue)\n",
+              "code": "const { context, status } = conversation.flow\n\n// Verifica si el usuario está interesado en un producto de moto\nconst isMotoInterested = user.interestedProduct !== null\n\n// Verifica si el perfil de crédito del usuario está disponible\nconst isCreditProfile = user.creditProfile !== null\n\n// Verifica si el contexto de la conversación es sobre información de crédito\nconst isCreditContext =\n  status === 'CREDIT_INTERESTED' || context === 'ABOUT_CREDIT_INFO' || context === 'ABOUT_CUPO_BRILLA_INFO'\n\nif (context === 'PRE_ENGAGEMENT'){\n  workflow.isContextToContinue = true\n}\n// Si el contexto es sobre información de crédito, actualiza el estado del flujo de trabajo\nelse if (isCreditContext) {\n  workflow.isContextToContinue = true\n}\n// Si el contexto es sobre información de moto, actualiza el estado del flujo de trabajo\nelse if (context === 'ABOUT_MOTO_INFO') {\n  workflow.isContextToContinue = isMotoInterested\n}\n\nconst contextSummary = {\n  isMotoInterested,\n  isCreditProfile,\n  isCreditContext,\n  context\n}\n\nconsole.log(`🤖 contextSummary:`, contextSummary)\nconsole.log(`🤖 isContextToContinue:`, workflow.isContextToContinue)\n",
               "origin": "builtin",
-              "label": "\"Determine User Interest and Credit Context for Workflow\"",
+              "label": "\"Determine User Interest and Context for Product Engagement\"",
               "transitions": [],
               "nodeId": "nd-8071d38c80",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { context, status } = conversation.flow;\n  const isMotoInterested = user.interestedProduct !== null;\n  const isCreditProfile = user.creditProfile !== null;\n  const isCreditContext = status === \"CREDIT_INTERESTED\" || context === \"ABOUT_CREDIT_INFO\" || context === \"ABOUT_CUPO_BRILLA_INFO\";\n  if (isCreditContext) {\n    workflow.isContextToContinue = isCreditProfile;\n  } else if (context === \"ABOUT_MOTO_INFO\") {\n    workflow.isContextToContinue = isMotoInterested;\n  }\n  const contextSummary = {\n    isMotoInterested,\n    isCreditProfile,\n    isCreditContext,\n    context\n  };\n  console.log(`\\u{1F916} contextSummary:`, contextSummary);\n  console.log(`\\u{1F916} isContextToContinue:`, workflow.isContextToContinue);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { context, status } = conversation.flow;\n  const isMotoInterested = user.interestedProduct !== null;\n  const isCreditProfile = user.creditProfile !== null;\n  const isCreditContext = status === \"CREDIT_INTERESTED\" || context === \"ABOUT_CREDIT_INFO\" || context === \"ABOUT_CUPO_BRILLA_INFO\";\n  if (context === \"PRE_ENGAGEMENT\") {\n    workflow.isContextToContinue = true;\n  } else if (isCreditContext) {\n    workflow.isContextToContinue = true;\n  } else if (context === \"ABOUT_MOTO_INFO\") {\n    workflow.isContextToContinue = isMotoInterested;\n  }\n  const contextSummary = {\n    isMotoInterested,\n    isCreditProfile,\n    isCreditContext,\n    context\n  };\n  console.log(`\\u{1F916} contextSummary:`, contextSummary);\n  console.log(`\\u{1F916} isContextToContinue:`, workflow.isContextToContinue);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
             },
             {
               "type": "log",
@@ -8643,7 +8573,7 @@
           "name": "financialEntity",
           "type": "string",
           "description": "Identificador de la entidad financiera para buscarlo en la tabla FinancialEntities",
-          "linkedTableId": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A",
+          "linkedTableId": "table_01K0B78E2N9NHJA8KS9CHB8FBV",
           "scope": "workflow",
           "defaultValue": "",
           "storeAsTag": false
@@ -8991,12 +8921,12 @@
               "id": "ins-7816ee7c57",
               "type": "action",
               "category": "Execute",
-              "code": "const { DateTime } = luxon\r\nconst CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nbot.colombiaTime = CurrentTime\r\n\r\n// -----\r\n\r\ntype ConversationState =\r\n  | ''\r\n  | 'COMPLEXED'\r\n  | 'SERVED'\r\n  | 'WAITING'\r\n  | 'CONFUSED'\r\n  | 'ATTENTION_REQUESTED'\r\n  | 'FINISHED'\r\n  | 'TIMEOUT'\r\n\r\nconst botState: ConversationState = workflow.botState as ConversationState\r\nconsole.log(`🤖 botState:`, botState)\r\nconsole.log(`🤖 1 conversation.state:`, conversation.flow?.state)\r\n\r\nif (botState) {\r\n  conversation.flow = {\r\n    ...conversation.flow,\r\n    state: botState,\r\n    status: 'COLD_PROSPECT'\r\n  }\r\n}\r\n\r\nconsole.log(`🤖 2 conversation.state:`, conversation.flow?.state)\r\n\r\n// Si no existe estado, significa que debemos ofrecer ayuda\r\nif (!conversation.flow?.state) {\r\n  conversation.flow = {\r\n    ...conversation.flow,\r\n    state: 'WAITING'\r\n  }\r\n}\r\n\r\nconsole.log(`🤖 3 conversation.state:`, conversation.flow?.state)\r\nconversation.flow = {\r\n  ...conversation.flow,\r\n  status: 'COLD_PROSPECT'\r\n}\r\n",
+              "code": "const { DateTime } = luxon\r\nconst CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nbot.colombiaTime = CurrentTime\r\n\r\n// -----\r\n\r\ntype ConversationState =\r\n  | ''\r\n  | 'COMPLEXED'\r\n  | 'SERVED'\r\n  | 'WAITING'\r\n  | 'CONFUSED'\r\n  | 'ATTENTION_REQUESTED'\r\n  | 'FINISHED'\r\n  | 'TIMEOUT'\r\n\r\nconst botState: ConversationState = workflow.botState as ConversationState\r\nconsole.log(`🤖 botState:`, botState)\r\nconsole.log(`🤖 1 conversation.state:`, conversation.flow?.state)\r\n\r\nif (botState) {\r\n  conversation.flow = {\r\n    ...conversation.flow,\r\n    state: botState,\r\n  }\r\n}\r\n\r\nconsole.log(`🤖 2 conversation.state:`, conversation.flow?.state)\r\n\r\n// Si no existe estado, significa que debemos ofrecer ayuda\r\nif (!conversation.flow?.state) {\r\n  conversation.flow = {\r\n    ...conversation.flow,\r\n    state: 'WAITING'\r\n  }\r\n}\r\n\r\nconsole.log(`🤖 3 conversation.state:`, conversation.flow?.state)",
               "origin": "builtin",
               "nodeId": "nd-96a14bb62e",
               "label": "\"Manage Bot Conversation States and Current Time Display\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { DateTime } = luxon;\n  const CurrentTime = DateTime.now().setZone(\"America/Bogota\").toLocaleString(DateTime.TIME_SIMPLE);\n  bot.colombiaTime = CurrentTime;\n  const botState = workflow.botState;\n  console.log(`\\u{1F916} botState:`, botState);\n  console.log(`\\u{1F916} 1 conversation.state:`, conversation.flow?.state);\n  if (botState) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: botState,\n      status: \"COLD_PROSPECT\"\n    };\n  }\n  console.log(`\\u{1F916} 2 conversation.state:`, conversation.flow?.state);\n  if (!conversation.flow?.state) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: \"WAITING\"\n    };\n  }\n  console.log(`\\u{1F916} 3 conversation.state:`, conversation.flow?.state);\n  conversation.flow = {\n    ...conversation.flow,\n    status: \"COLD_PROSPECT\"\n  };\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { DateTime } = luxon;\n  const CurrentTime = DateTime.now().setZone(\"America/Bogota\").toLocaleString(DateTime.TIME_SIMPLE);\n  bot.colombiaTime = CurrentTime;\n  const botState = workflow.botState;\n  console.log(`\\u{1F916} botState:`, botState);\n  console.log(`\\u{1F916} 1 conversation.state:`, conversation.flow?.state);\n  if (botState) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: botState\n    };\n  }\n  console.log(`\\u{1F916} 2 conversation.state:`, conversation.flow?.state);\n  if (!conversation.flow?.state) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: \"WAITING\"\n    };\n  }\n  console.log(`\\u{1F916} 3 conversation.state:`, conversation.flow?.state);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -9534,12 +9464,12 @@
               "id": "ins-14558d82d4",
               "type": "action",
               "category": "Execute",
-              "code": "conversation.flow.state = 'WAITING'\n",
+              "code": "conversation.flow.state = 'WAITING'\nconversation.flow.ending = ''",
               "origin": "builtin",
-              "label": "\"Set Conversation State to Attended in Flow Management\"",
+              "label": "\"Manage Conversation Flow State and Ending Conditions\"",
               "nodeId": "nd-43f0eb185b",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow.state = \"WAITING\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow.state = \"WAITING\";\n  conversation.flow.ending = \"\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -9644,12 +9574,12 @@
               "id": "ins-9b5ed14c83",
               "type": "action",
               "category": "Execute",
-              "code": "conversation.flow.state = 'CONFUSED'\n",
+              "code": "conversation.flow.state = 'CONFUSED'\nconversation.flow.ending = 'WRONG'",
               "origin": "builtin",
               "nodeId": "nd-d5eedd5f2c",
-              "label": "Manage User Conversation State for Clarity and Understanding",
+              "label": "\"Manage Conversation Flow State and Ending Conditions\"",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow.state = \"CONFUSED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow.state = \"CONFUSED\";\n  conversation.flow.ending = \"WRONG\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -10001,6 +9931,19 @@
           "variables": [],
           "instructions": [
             {
+              "type": "log",
+              "id": "ins-af7df7f4e0",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ RequestInterestedMoto",
+                "staticValue": ""
+              },
+              "nodeId": "nd-b2c3ad0577",
+              "transitions": []
+            },
+            {
               "id": "trs-82ceebadc8",
               "type": "transition",
               "condition": {
@@ -10154,7 +10097,7 @@
                 "type": "text",
                 "text": {
                   "valueType": "dynamic",
-                  "dynamicValue": "Ok",
+                  "dynamicValue": "De acuerdo, permítame un momento",
                   "staticValue": ""
                 },
                 "typing": {
@@ -10504,7 +10447,7 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "🤖 Respuesta del usuario: {{workflow.interestedProductAnswer}}",
+                "dynamicValue": "🤖 Respuesta del usuario: {{workflow.interestedProductAnswer}}\n{{turn.KnowledgeAgent.answer}}",
                 "staticValue": ""
               },
               "nodeId": "nd-a7813360c2",
@@ -11830,10 +11773,10 @@
               "type": "log",
               "id": "ins-de2d2f8664",
               "label": "Log",
-              "level": "info",
+              "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "{{workflow.tryAttemptMessage}}",
+                "dynamicValue": "🤖 {{workflow.tryAttemptMessage}}",
                 "staticValue": ""
               },
               "nodeId": "nd-8ab11acdac",
@@ -12434,6 +12377,7 @@
                   "scope": "workflow",
                   "defaultValue": "",
                   "entityId": "ent-c79688d45f",
+                  "storeAsTag": false,
                   "value": {
                     "valueType": "dynamic",
                     "dynamicValue": "ABOUT_LOCATION_INFO",
@@ -16567,7 +16511,7 @@
           "name": "HandleUniqMotoOption1"
         },
         {
-          "name": "HandleOptionList1",
+          "name": "HandleOptionList",
           "type": "standard",
           "deletable": true,
           "x": 1440,
@@ -18714,6 +18658,19 @@
           "variables": [],
           "instructions": [
             {
+              "type": "log",
+              "id": "ins-7cacb6fc51",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ askForAssistanceChannel",
+                "staticValue": ""
+              },
+              "nodeId": "nd-c1883840a5",
+              "transitions": []
+            },
+            {
               "id": "trs-ac1602e55c",
               "type": "transition",
               "condition": {
@@ -18928,10 +18885,10 @@
                 },
                 "kbs": {
                   "enabled": true,
-                  "searchScope": "specific",
                   "kbs": [
-                    "kb-e2cf85fe7d"
+                    "kb-3437bc5deb"
                   ],
+                  "searchScope": "specific",
                   "valueType": "static",
                   "dynamicValue": ""
                 },
@@ -21178,8 +21135,10 @@
                 },
                 "kbs": {
                   "enabled": true,
-                  "searchScope": "all",
-                  "kbs": [],
+                  "kbs": [
+                    "kb-3e05460869"
+                  ],
+                  "searchScope": "specific",
                   "valueType": "static",
                   "dynamicValue": ""
                 },
@@ -21427,7 +21386,7 @@
           "name": "Router"
         },
         {
-          "name": "AnswerType1",
+          "name": "AnswerType",
           "type": "standard",
           "deletable": true,
           "x": 405,
@@ -22263,6 +22222,19 @@
           "deletable": false,
           "variables": [],
           "instructions": [
+            {
+              "type": "log",
+              "id": "ins-cd07b57af5",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ Welcome",
+                "staticValue": ""
+              },
+              "nodeId": "nd-b6a7151a19",
+              "transitions": []
+            },
             {
               "id": "ins-a48c7f2966",
               "type": "action",
@@ -25572,8 +25544,8 @@
                     "output": {}
                   }
                 ],
-                "model": "google-ai__models/gemini-2.0-flash",
-                "temperature": 0.2,
+                "model": "fast-model",
+                "temperature": 0.5,
                 "version": "1.0"
               },
               "nodeId": "nd-9f39b5e95a",
@@ -25594,8 +25566,8 @@
                     "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
                   }
                 ],
-                "model": "google-ai__models/gemini-2.0-flash",
-                "temperature": 0.2
+                "model": "fast-model",
+                "temperature": 0.5
               }
             },
             {
@@ -27374,7 +27346,7 @@
               "category": "Execute",
               "code": "const userInput = workflow.userInput\nconsole.log(`👤 userInput: `, userInput)\nconsole.log(`👤 event.preview: `, event.preview)\nworkflow.userInput = userInput ? userInput : event.preview\nconsole.log(`🤖 userInput result: `, workflow.userInput)",
               "origin": "builtin",
-              "label": "\"Set User Input from Workflow or Event Preview\"",
+              "label": "\"Set User Input Based on Workflow or Event Preview\"",
               "nodeId": "nd-6fb54baaab",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const userInput = workflow.userInput;\n  console.log(`\\u{1F464} userInput: `, userInput);\n  console.log(`\\u{1F464} event.preview: `, event.preview);\n  workflow.userInput = userInput ? userInput : event.preview;\n  console.log(`\\u{1F916} userInput result: `, workflow.userInput);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -27662,7 +27634,7 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "💬 User Input: {{event.preview}}",
+                "dynamicValue": "💬 User Input : {{event.preview}}",
                 "staticValue": ""
               },
               "nodeId": "nd-0e1d0dfbfe",
@@ -28247,7 +28219,7 @@
                   "secret": false,
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "@workflow.answerType",
+                    "dynamicValue": "{{workflow.answerType}}",
                     "staticValue": ""
                   }
                 }
@@ -28815,7 +28787,7 @@
           "type": "standard",
           "deletable": true,
           "x": 900,
-          "y": 270,
+          "y": 300,
           "instructions": [
             {
               "type": "log",
@@ -28989,10 +28961,34 @@
               "type": "action",
               "code": "workflow.motoListLength = workflow.motoList?.length ?? 0\n",
               "origin": "builtin",
-              "label": "Calculate Length of Moto List in Workflow Object",
+              "label": "Calculate Length of Moto List with Fallback to Zero",
               "nodeId": "nd-3887953802",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.motoListLength = workflow.motoList?.length ?? 0;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "id": "ins-a9e47d8426",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.motoListLength == 0}}"
+              },
+              "label": "No hay lista de motos",
+              "generative": {
+                "label": "No hay lista de motos",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-3887953802",
+              "description": "",
+              "destination": {
+                "node": "nd-8d56b4af53"
+              },
               "transitions": []
             },
             {
@@ -29033,11 +29029,24 @@
               "transitions": []
             },
             {
+              "type": "log",
+              "id": "ins-345ad1347b",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤖 Variables:\nResponse:  {{workflow.kbResponse}}; \nLast user message: {{event.preview}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-c430cb8581",
+              "transitions": []
+            },
+            {
               "type": "ai",
               "id": "ins-82159d4e49",
               "task": {
-                "instructions": "## Estrategia:\n1. Interpreta lo que dice `@workflow.kbResponse` y considera el estado actual de la conversación.\n2. Genera un mensaje que dé continuidad, con tono amable y cercano. No debe sonar como un nuevo saludo o un reinicio de conversación.\n3. Considera estos escenarios:\n  a. Si la pregunta del usuario es general (por ejemplo, “¿Qué estilos hay?”), responde sin ofrecer disculpas, y sugiere amablemente explorar el menú de estilos. No menciones que su pregunta es general ni clasifiques la intención.\n  b. Si no se pudo entender el estilo o referencia de moto mencionada, responde con empatía, ofrece disculpas breves y sugiere el menú de estilos de manera útil y fluida.\n  c. Si el usuario dice que no sabe qué estilo desea, enfócate en tranquilizarlo, mostrar comprensión y guiarlo con el menú de estilos para que explore opciones.\n\n## Consideraciones:\n- IMPORTANTE: No listes los estilos aquí. Usa el nodo correspondiente para eso.\n- Toma como base la información del `@workflow.kbResponse` para enriquecer el mensaje con amabilidad y creatividad.\n- IMPORTANTE: Usa Sr., Sra. o Sr@ según corresponda con `@user.fullName`, si es adecuado según el tono de la conversación. Solo úsalo si ya se ha usado antes o si aporta cercanía.\n- El mensaje debe sentirse como una continuación natural del flujo conversacional iniciado por el bot.",
-                "input": "Response =  {{workflow.kbResponse}}; \nUser name =  {{user.fullName}};\nLast user message = {{event.preview}}",
+                "instructions": "## Estrategia:\n1. Interpreta lo que dice `@workflow.kbResponse` y considera el estado actual de la conversación.\n2. Genera un mensaje que dé continuidad, con tono amable y cercano. No debe sonar como un nuevo saludo o un reinicio de conversación.\n3. Considera estos escenarios:\n  a. Si la pregunta del usuario es general (por ejemplo, “¿Qué estilos hay?”), responde sin ofrecer disculpas, y sugiere amablemente explorar el menú de estilos. No menciones que su pregunta es general ni clasifiques la intención.\n  b. Si no se pudo entender el estilo o referencia de moto mencionada, responde con empatía, ofrece disculpas breves y sugiere el menú de estilos de manera útil y fluida.\n  c. Si el usuario dice que no sabe qué estilo desea, enfócate en tranquilizarlo, mostrar comprensión y guiarlo con el menú de estilos para que explore opciones.\n4. Guarda el mensaje en la variable {{workflow.stlyeMenuOfferMessage}}\n\n## Consideraciones:\n- Toma como base la información del `@workflow.kbResponse` para enriquecer el mensaje con amabilidad y creatividad.\n- El mensaje debe sentirse como una continuación natural del flujo conversacional iniciado por el bot.\n- **IMPORTANTE:** No listes los estilos en el mensaje; se usará un nodo independiente.\n- **IMPORTANTE:** No dejes la variable @workflow.stlyeMenuOfferMessage sin contenido",
+                "input": "Response =  {{workflow.kbResponse}}; \nLast user message = {{event.preview}};",
                 "outputVariableIds": [
                   "var-b3d819d26c"
                 ],
@@ -29045,7 +29054,9 @@
                 "examples": [
                   {
                     "input": "",
-                    "output": {}
+                    "output": {
+                      "stlyeMenuOfferMessage": ""
+                    }
                   }
                 ],
                 "model": "fast-model",
@@ -29053,7 +29064,7 @@
                 "version": "1.0"
               },
               "nodeId": "nd-c430cb8581",
-              "label": "",
+              "label": "stlyeMenuOfferMessage",
               "transitions": [],
               "prompt": {
                 "messages": [
@@ -29063,7 +29074,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia:\n1. Interpreta lo que dice `@workflow.kbResponse` y considera el estado actual de la conversación.\n2. Genera un mensaje que dé continuidad, con tono amable y cercano. No debe sonar como un nuevo saludo o un reinicio de conversación.\n3. Considera estos escenarios:\n  a. Si la pregunta del usuario es general (por ejemplo, “¿Qué estilos hay?”), responde sin ofrecer disculpas, y sugiere amablemente explorar el menú de estilos. No menciones que su pregunta es general ni clasifiques la intención.\n  b. Si no se pudo entender el estilo o referencia de moto mencionada, responde con empatía, ofrece disculpas breves y sugiere el menú de estilos de manera útil y fluida.\n  c. Si el usuario dice que no sabe qué estilo desea, enfócate en tranquilizarlo, mostrar comprensión y guiarlo con el menú de estilos para que explore opciones.\n\n## Consideraciones:\n- IMPORTANTE: No listes los estilos aquí. Usa el nodo correspondiente para eso.\n- Toma como base la información del `@workflow.kbResponse` para enriquecer el mensaje con amabilidad y creatividad.\n- IMPORTANTE: Usa Sr., Sra. o Sr@ según corresponda con `@user.fullName`, si es adecuado según el tono de la conversación. Solo úsalo si ya se ha usado antes o si aporta cercanía.\n- El mensaje debe sentirse como una continuación natural del flujo conversacional iniciado por el bot.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  \n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia:\n1. Interpreta lo que dice `@workflow.kbResponse` y considera el estado actual de la conversación.\n2. Genera un mensaje que dé continuidad, con tono amable y cercano. No debe sonar como un nuevo saludo o un reinicio de conversación.\n3. Considera estos escenarios:\n  a. Si la pregunta del usuario es general (por ejemplo, “¿Qué estilos hay?”), responde sin ofrecer disculpas, y sugiere amablemente explorar el menú de estilos. No menciones que su pregunta es general ni clasifiques la intención.\n  b. Si no se pudo entender el estilo o referencia de moto mencionada, responde con empatía, ofrece disculpas breves y sugiere el menú de estilos de manera útil y fluida.\n  c. Si el usuario dice que no sabe qué estilo desea, enfócate en tranquilizarlo, mostrar comprensión y guiarlo con el menú de estilos para que explore opciones.\n4. Guarda el mensaje en la variable {{workflow.stlyeMenuOfferMessage}}\n\n## Consideraciones:\n- Toma como base la información del `@workflow.kbResponse` para enriquecer el mensaje con amabilidad y creatividad.\n- El mensaje debe sentirse como una continuación natural del flujo conversacional iniciado por el bot.\n- **IMPORTANTE:** No listes los estilos en el mensaje; se usará un nodo independiente.\n- **IMPORTANTE:** No dejes la variable @workflow.stlyeMenuOfferMessage sin contenido\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /** El mensaje para ofrecer un menú de estilos */\n\"stlyeMenuOfferMessage\": string\n}"
                   },
                   {
                     "role": "user",
@@ -29280,7 +29291,7 @@
                   "defaultValue": "",
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "{{workflow.stlyeMenuOfferMessage}}",
+                    "dynamicValue": "{{workflow.stlyeMenuOfferMessage || 'Por favor, elija un estilo de moto del menú'}}",
                     "staticValue": ""
                   }
                 },
@@ -29346,7 +29357,8 @@
                 "enabled": true,
                 "searchScope": "specific",
                 "kbs": [
-                  "kb-c98fe20d96"
+                  "kb-c98fe20d96",
+                  "kb-06dfee802d"
                 ]
               },
               "nodeId": "nd-258688b7df",
@@ -29361,8 +29373,6 @@
               },
               "choice": {
                 "options": {
-                  "valueType": "dynamic",
-                  "dynamicValue": "{{workflow.styleOptionList}}",
                   "staticValue": [
                     {
                       "label": {
@@ -29373,6 +29383,8 @@
                       "enabled": true
                     }
                   ],
+                  "dynamicValue": "{{workflow.styleOptionList}}",
+                  "valueType": "dynamic",
                   "isExpression": true
                 }
               },
@@ -30007,6 +30019,19 @@
           "instructions": [
             {
               "type": "log",
+              "id": "ins-2de4f517b1",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ HandleOptionList",
+                "staticValue": ""
+              },
+              "nodeId": "nd-401d200595",
+              "transitions": []
+            },
+            {
+              "type": "log",
               "id": "ins-fbde24c422",
               "label": "Log",
               "level": "debug",
@@ -30077,8 +30102,8 @@
               "nodeId": "nd-a25bfa2fb8"
             }
           ],
-          "x": 1965,
-          "y": 60
+          "x": 2040,
+          "y": 90
         },
         {
           "type": "standard",
@@ -30180,12 +30205,12 @@
               "id": "ins-ff730b2338",
               "type": "action",
               "category": "Execute",
-              "code": "workflow.resultMessage = workflow.RequestSelectProduct.messageResult",
+              "code": "workflow.resultMessage = workflow.RequestSelectProduct.messageResult\nif (!workflow.optionsList.length ) {\n    workflow.optionsList = []\n}\n",
               "origin": "builtin",
-              "label": "\"Assign Product Selection Result to Workflow Message\"",
+              "label": "\"Set Result Message and Initialize Options List\"",
               "nodeId": "nd-4a7d73f69a",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.resultMessage = workflow.RequestSelectProduct.messageResult;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.resultMessage = workflow.RequestSelectProduct.messageResult;\n  if (!workflow.optionsList.length) {\n    workflow.optionsList = [];\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -30195,9 +30220,11 @@
               "entityId": "prompts://SingleChoice/v1",
               "entityName": "Single Choice",
               "kbPriority": {
-                "enabled": false,
+                "enabled": true,
                 "searchScope": "specific",
-                "kbs": []
+                "kbs": [
+                  "kb-06dfee802d"
+                ]
               },
               "nodeId": "nd-4a7d73f69a",
               "question": {
@@ -30211,13 +30238,10 @@
               "choice": {
                 "options": {
                   "valueType": "dynamic",
-                  "dynamicValue": "{{workflow.optionsList || []}}",
+                  "dynamicValue": "{{ workflow.optionsList }}",
                   "staticValue": [
                     {
-                      "label": {
-                        "valueType": "dynamic",
-                        "dynamicValue": ""
-                      },
+                      "label": "",
                       "value": "",
                       "enabled": true
                     }
@@ -30255,7 +30279,7 @@
                     "payload": "failed"
                   },
                   "destination": {
-                    "node": "nd-1543a5290e"
+                    "node": "nd-58cbb689ad"
                   }
                 }
               ],
@@ -30290,7 +30314,7 @@
               "level": "info",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "Option selected: {{workflow.interestedMotoReference}}",
+                "dynamicValue": "✅ Option selected: {{workflow.interestedMotoReference}}",
                 "staticValue": ""
               },
               "nodeId": "nd-4a7d73f69a",
@@ -30396,8 +30420,8 @@
           "name": "AnswerType1",
           "type": "standard",
           "deletable": true,
-          "x": 1410,
-          "y": -495,
+          "x": 1545,
+          "y": 450,
           "instructions": [
             {
               "id": "ins-8ed4a9d082",
@@ -30490,7 +30514,7 @@
               "level": "debug",
               "message": {
                 "valueType": "dynamic",
-                "dynamicValue": "🤖 Imprimiendo moto: {{workflow.count}}",
+                "dynamicValue": "🤖 Imprimiendo moto: {{workflow.count }}",
                 "staticValue": ""
               },
               "nodeId": "nd-c320217d8e",
@@ -30528,12 +30552,12 @@
                 "type": "card",
                 "title": {
                   "valueType": "dynamic",
-                  "dynamicValue": "{{workflow.details.reference}}\n",
+                  "dynamicValue": "{{workflow.details.reference}}",
                   "staticValue": ""
                 },
                 "subtitle": {
                   "valueType": "dynamic",
-                  "dynamicValue": "[Ver detalles]({{workflow.details.link}})",
+                  "dynamicValue": "Ver detalles: {{workflow.details.link}}",
                   "staticValue": ""
                 },
                 "imageUrl": {
@@ -30606,6 +30630,74 @@
           },
           "x": 495,
           "y": 60
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1500,
+          "y": -195,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-0ea9b9020f",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "🤔 {{turn.KnowledgeAgent.answer}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-58cbb689ad",
+              "transitions": []
+            },
+            {
+              "type": "ai",
+              "id": "ins-0f37e5b785",
+              "task": {
+                "instructions": "## Estrategia\n\n1. Evalúa KnowledgeAgentAnswer\n2. Busca entre la lista de motos alguna opción que se parezca a lo que dice la respuesta de KnowledgeAgent\n3. Si encuentras una moto, asíganala a la variable {{user.interestedProduct}}. De lo contrario, deja esa misma variable vacía.",
+                "input": "Producto de interés del usuario: {{user.interestedProduct}};\nKnowledgeAgentAnswer: {{turn.KnowledgeAgent.answer}};\nLista de motos: {{workflow.motoList}}",
+                "outputVariableIds": [
+                  "var-25c7be938a"
+                ],
+                "handleFailure": false,
+                "examples": [
+                  {
+                    "input": "",
+                    "output": {}
+                  }
+                ],
+                "model": "google-ai__models/gemini-2.0-flash",
+                "temperature": 0.25,
+                "version": "1.0"
+              },
+              "nodeId": "nd-58cbb689ad",
+              "label": "interestedProduct",
+              "transitions": [],
+              "prompt": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are a helper assistant at the hands of a chatbot developer using Botpress workflow editor. Your main goal is to generate useful content in JSON format for the developer to use.\nHere are the task instructions provided by the developer:"
+                  },
+                  {
+                    "role": "user",
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Estrategia\n\n1. Evalúa KnowledgeAgentAnswer\n2. Busca entre la lista de motos alguna opción que se parezca a lo que dice la respuesta de KnowledgeAgent\n3. Si encuentras una moto, asíganala a la variable {{user.interestedProduct}}. De lo contrario, deja esa misma variable vacía.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"interestedProduct\": { reference: string; price: number; image: string; link: string; brillaPrice: number; cashPrice: number }\n}"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
+                  }
+                ],
+                "model": "google-ai__models/gemini-2.0-flash",
+                "temperature": 0.25
+              }
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-1543a5290e"
+          },
+          "id": "nd-58cbb689ad",
+          "name": "handleFailure"
         }
       ],
       "parentFolder": "dir-5ec1f4b8e3"
@@ -30955,6 +31047,19 @@
           "variables": [],
           "instructions": [
             {
+              "type": "log",
+              "id": "ins-8b41a1b64f",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ Get_InterestProduct",
+                "staticValue": ""
+              },
+              "nodeId": "nd-cf8bb1290b",
+              "transitions": []
+            },
+            {
               "id": "ins-f6f61b34b2",
               "type": "transition",
               "condition": {
@@ -31184,6 +31289,19 @@
             }
           ],
           "id": "nd-c7378938c7"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": 15,
+          "y": -300,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 32px\">Coseguir producto de interés</span></strong></p><p></p><pre><code>Get_InterestedProduct</code></pre>",
+          "id": "nd-4c952f3e19",
+          "name": "Comment1",
+          "height": 248,
+          "width": 311,
+          "backgroundColor": "var(--blue-5)"
         }
       ],
       "parentFolder": "dir-6fb4de4b07"
@@ -32294,6 +32412,19 @@
           "variables": [],
           "instructions": [
             {
+              "type": "log",
+              "id": "ins-3d4fd5bcc0",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ HandleWaResponse",
+                "staticValue": ""
+              },
+              "nodeId": "nd-ded1c7fa12",
+              "transitions": []
+            },
+            {
               "id": "trs-9db7957c1b",
               "type": "transition",
               "condition": {
@@ -32419,7 +32550,7 @@
               "type": "ai",
               "id": "ins-4eeb8ca1d7",
               "task": {
-                "instructions": "Responde al mensaje del cliente de una manera amable considerando que puede tratarse de\n- Haber aceptado continuar con la conversación\n- Rechaza continuar con la conversación\n\n**IMPORTANTE:**\n- No saludes\n- No ofrezcas más asistencia",
+                "instructions": "## Instruciones\nResponde al mensaje del cliente de manera amable y cordial, basándote en su intención:\n\n- Si el cliente confirma que quiere continuar: Acepta la confirmación de forma positiva. Usa frases como, \"De acuerdo\" o \"Listo\". \n\n- Si el cliente rechaza continuar: Usa frases como \"Entiendo\", \"Claro\" o \"Ya\".\n\n- A lo anterior comenta en una línea cualquier mensaje congruente con la respuesta\n\n## Reglas a Seguir:\n- NO saludes (ej. \"Hola\", \"Buenos días\").\n- NO ofrezcas asistencia adicional (ej. \"¿Hay algo más en lo que pueda ayudarte?\").",
                 "input": "Mensaje del cliente: {{event.preview}}",
                 "outputVariableIds": [
                   "var-d9d7bd8489"
@@ -32431,7 +32562,7 @@
                     "output": {}
                   }
                 ],
-                "model": "openai__o3-mini-2025-01-31",
+                "model": "openai__gpt-4.1-2025-04-14",
                 "temperature": 0.7,
                 "version": "1.0"
               },
@@ -32446,14 +32577,14 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\nResponde al mensaje del cliente de una manera amable considerando que puede tratarse de\n- Haber aceptado continuar con la conversación\n- Rechaza continuar con la conversación\n\n**IMPORTANTE:**\n- No saludes\n- No ofrezcas más asistencia\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /** El mensaje de respuesta a la confirmación que el cliente haya emitido */\n\"responseConfirmation\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Instruciones\nResponde al mensaje del cliente de manera amable y cordial, basándote en su intención:\n\n- Si el cliente confirma que quiere continuar: Acepta la confirmación de forma positiva. Usa frases como, \"De acuerdo\" o \"Listo\". \n\n- Si el cliente rechaza continuar: Usa frases como \"Entiendo\", \"Claro\" o \"Ya\".\n\n- A lo anterior comenta en una línea cualquier mensaje congruente con la respuesta\n\n## Reglas a Seguir:\n- NO saludes (ej. \"Hola\", \"Buenos días\").\n- NO ofrezcas asistencia adicional (ej. \"¿Hay algo más en lo que pueda ayudarte?\").\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /** El mensaje de respuesta a la confirmación que el cliente haya emitido */\n\"responseConfirmation\": string\n}"
                   },
                   {
                     "role": "user",
                     "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
                   }
                 ],
-                "model": "openai__o3-mini-2025-01-31",
+                "model": "openai__gpt-4.1-2025-04-14",
                 "temperature": 0.7
               }
             },
@@ -32597,7 +32728,7 @@
           "name": "farewell",
           "type": "standard",
           "deletable": true,
-          "x": 765,
+          "x": 855,
           "y": 630,
           "instructions": [
             {
@@ -32654,7 +32785,7 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
-                "payload": "user.creditProfile === 'CUPO_BRILLA'"
+                "payload": "user.creditProfile !== 'CUPO_BRILLA'"
               },
               "label": "No es perfil Cupo Brilla",
               "generative": {
@@ -32690,7 +32821,7 @@
     },
     {
       "id": "wf-3b416ba254",
-      "name": "StartWaConversation",
+      "name": "🟢 StartWaConversation",
       "startNode": "nd-1dcbe94e86",
       "variables": [
         {
@@ -32798,12 +32929,12 @@
               "id": "ins-00a2e88f7c",
               "type": "action",
               "category": "Execute",
-              "code": "conversation.flow = {\n  ending: '',\n  topics: ['PRE_ENGAGEMENT'],\n  status: 'COLD_PROSPECT',\n  state: '',\n  context: 'PRE_ENGAGEMENT'\n}\n\nconst { name, phone } = event.payload.body\nuser.phone = phone\n\nif (name) {\n  user.fullName = name\n}\n\nworkflow.whValid = !!phone\nconsole.log('✅ workflow valid: ', workflow.whValid)\n\nworkflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : ''\nconsole.log('⭕️ workflow.whTemplateVariables:', workflow.whTemplateVariables)",
+              "code": "conversation.flow = {\n  ending: 'HOOKED',\n  topics: ['PRE_ENGAGEMENT'],\n  status: 'COLD_PROSPECT',\n  state: '',\n  context: 'PRE_ENGAGEMENT'\n}\n\nconst { name, phone } = event.payload.body\nuser.phone = phone\n\nif (name) {\n  user.fullName = name\n}\n\nworkflow.whValid = !!phone\nconsole.log('✅ workflow valid: ', workflow.whValid)\n\nworkflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : ''\nconsole.log('⭕️ workflow.whTemplateVariables:', workflow.whTemplateVariables)\nconsole.log(phone)\n\nif ( env.WAB_TEMPLATE == 'leads_cupo_brilla' ) {\n  user.creditProfile = 'CUPO_BRILLA'\n}",
               "origin": "builtin",
-              "label": "\"User Data Initialization for Pre-Engagement Workflow\"",
+              "label": "\"User Data Processing for Pre-Engagement Workflow\"",
               "nodeId": "nd-852a227ee4",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow = {\n    ending: \"\",\n    topics: [\"PRE_ENGAGEMENT\"],\n    status: \"COLD_PROSPECT\",\n    state: \"\",\n    context: \"PRE_ENGAGEMENT\"\n  };\n  const { name, phone } = event.payload.body;\n  user.phone = phone;\n  if (name) {\n    user.fullName = name;\n  }\n  workflow.whValid = !!phone;\n  console.log(\"\\u2705 workflow valid: \", workflow.whValid);\n  workflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : \"\";\n  console.log(\"\\u2B55\\uFE0F workflow.whTemplateVariables:\", workflow.whTemplateVariables);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow = {\n    ending: \"HOOKED\",\n    topics: [\"PRE_ENGAGEMENT\"],\n    status: \"COLD_PROSPECT\",\n    state: \"\",\n    context: \"PRE_ENGAGEMENT\"\n  };\n  const { name, phone } = event.payload.body;\n  user.phone = phone;\n  if (name) {\n    user.fullName = name;\n  }\n  workflow.whValid = !!phone;\n  console.log(\"\\u2705 workflow valid: \", workflow.whValid);\n  workflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : \"\";\n  console.log(\"\\u2B55\\uFE0F workflow.whTemplateVariables:\", workflow.whTemplateVariables);\n  console.log(phone);\n  if (env.WAB_TEMPLATE == \"leads_cupo_brilla\") {\n    user.creditProfile = \"CUPO_BRILLA\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -33021,6 +33152,17 @@
           "y": 450,
           "instructions": [
             {
+              "id": "ins-6dee91ec60",
+              "type": "action",
+              "code": "event.conversationId = workflow.messageSentResult.conversationId",
+              "origin": "builtin",
+              "label": "\"Assign Conversation ID from Workflow Message Result\"",
+              "nodeId": "nd-681c1c17e6",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  event.conversationId = workflow.messageSentResult.conversationId;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
               "type": "log",
               "id": "ins-a9eb6c4e98",
               "label": "Log",
@@ -33034,11 +33176,12 @@
               "transitions": []
             },
             {
-              "id": "ins-0634ae55ad",
+              "id": "ins-5167acd90f",
               "type": "skill",
-              "name": "💾 saveUserData",
-              "flowId": "wf-21d68eedc5",
+              "name": "💾 saveHookedUserData",
+              "flowId": "wf-81efb7fe91",
               "exitNodes": [],
+              "label": "💾 saveHookedUserData",
               "transitions": [],
               "nodeId": "nd-681c1c17e6",
               "manualFields": []
@@ -33274,6 +33417,41 @@
           "variables": [],
           "instructions": [
             {
+              "type": "log",
+              "id": "ins-7b348c181d",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ SyncUserData",
+                "staticValue": ""
+              },
+              "nodeId": "nd-1cb5701be6",
+              "transitions": []
+            },
+            {
+              "id": "ins-b07249ca6a",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{env.MOCK_HOOK === 'true'}}"
+              },
+              "label": "Mock enable",
+              "generative": {
+                "label": "Mock enable",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-1cb5701be6",
+              "description": "",
+              "destination": {
+                "node": "nd-b722467149"
+              },
+              "transitions": []
+            },
+            {
               "id": "trs-815b4a6ad0",
               "type": "transition",
               "condition": {
@@ -33311,8 +33489,8 @@
               "nodeId": "nd-d0f842a0f5"
             }
           ],
-          "x": 870,
-          "y": 105
+          "x": 1110,
+          "y": 225
         },
         {
           "id": "nd-b2aae07e53",
@@ -33321,29 +33499,40 @@
           "deletable": true,
           "instructions": [
             {
+              "id": "ins-c9660f58eb",
+              "type": "action",
+              "code": "  console.log('⭕️ Start turn', event.conversationId)\n  const phoneNumber = event.tags?.user?.['whatsapp:userId'] || ''\n  console.log('👉🏼', phoneNumber)\n\n  if (!user.phone && phoneNumber) {\n    user.phone = phoneNumber\n  }",
+              "origin": "builtin",
+              "label": "\"Assign WhatsApp Number to User if Not Present\"",
+              "nodeId": "nd-b2aae07e53",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  console.log(\"\\u2B55\\uFE0F Start turn\", event.conversationId);\n  const phoneNumber = event.tags?.user?.[\"whatsapp:userId\"] || \"\";\n  console.log(\"\\u{1F449}\\u{1F3FC}\", phoneNumber);\n  if (!user.phone && phoneNumber) {\n    user.phone = phoneNumber;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
               "id": "ins-5d95da0fa3",
               "type": "action",
               "category": "Execute",
-              "code": "if (env.WAB_TEMPLATE === 'leads_cupo_brilla') {\n  user.creditProfile = 'CUPO_BRILLA'\n  user.purchasePreference = 'CUPO_BRILLA'\n}\n\nconst { phone } = user\nlet topics: string[] = [] // Explicitly type topics as a string array\n\nif (phone) {\n  try {\n    const lastTenDigitsOfPhone = phone.slice(-10)\n\n    const existingRecords = await leadClientsTable.findRecords({\n      filter: {\n        // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'\n        // El `$` al final de la expresión regular significa 'termina con'\n        TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n      }\n    })\n\n    if (existingRecords.length > 0) {\n      const record = existingRecords[0] // Use a single record if multiple are found\n      console.log(`✅ Record found: ${record.id}`)\n\n      // Map Airtable field names to user object keys for cleaner assignment\n      const fieldMap = {\n        NOMBRE: 'fullName',\n        UBICACION_DEL_USUARIO: 'location',\n        UBICACION_DE_SERVICIO: 'serviceLocation',\n        CEDULA: 'nationalID',\n        NUMERO_DE_FACTURA: 'brillaBillNumber',\n        REPORTADO: 'negativeCreditReport'\n      }\n\n      for (const airtableField in fieldMap) {\n        const userField = fieldMap[airtableField as keyof typeof fieldMap] // Type assertion for correct key access\n        const airtableValue = record[airtableField as keyof typeof record] // Type assertion for correct key access\n\n        // Assign only if the user's field is not already set and Airtable has a value\n        if (!user[userField as keyof typeof user] && airtableValue) {\n          user[userField] = airtableValue\n        }\n      }\n\n      // Ensure TEMAS is always an array\n      topics = Array.isArray(record.TEMAS) ? record.TEMAS : []\n    } else {\n      throw new Error(`❌ Record not found 🥹`)\n    }\n  } catch (error) {\n    console.error('❌ Error getting data:', error)\n    // Consider re-throwing or handling the error more gracefully depending on your application's needs\n  }\n}\n\nconst { flow } = conversation || {}\n\nconversation.flow = {\n  ending: flow?.ending || '',\n  state: flow?.state || '',\n  topics: [...topics, 'PRE_ENGAGEMENT', 'CUPO_BRILLA'],\n  status: 'COLD_PROSPECT',\n  context: 'PRE_ENGAGEMENT'\n}\n\nconversation.SummaryAgent.summary = env.WAB_CONTEXT\n",
+              "code": "const { phone } = user\nconsole.log('🤖 Buscando cliente con el teléfono:', phone)\n\nlet topics: string[] = [] // Explicitly type topics as a string array\n\nif (env.WAB_TEMPLATE === 'leads_cupo_brilla') {\n  user.creditProfile = 'CUPO_BRILLA'\n  user.purchasePreference = 'CUPO_BRILLA'\n  topics.push('CUPO_BRILLA')\n}\n\nif (phone) {\n  try {\n    const lastTenDigitsOfPhone = phone.slice(-10)\n    const recordResults = await leadClientsTable.findRecords({\n      filter: {\n        // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'\n        // El `$` al final de la expresión regular significa 'termina con'\n        TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n      }\n    })\n    console.log('❕ recordResults:', recordResults)\n    const record = recordResults.length ? recordResults[0] : undefined\n\n    if (record) {\n      console.log(`✅ Record found: ${record.id}`)\n\n      // Map Airtable field names to user object keys for cleaner assignment\n      updateUserFromRecord(record)\n      user.authorizedPop = {\n        answer: 'ACCEPTED',\n        askedBefore: true\n      }\n\n      updateUserEngagement(record)\n      // Ensure TEMAS is always an array\n    } else {\n      console.error(`❌ Record not found 🥹`)\n      conversation.flow = {\n        ending: '',\n        state: '',\n        topics: ['PRE_ENGAGEMENT'],\n        status: 'COLD_PROSPECT',\n        context: 'PRE_ENGAGEMENT'\n      }\n    }\n\n  } catch (error) {\n    console.error('❌ Error getting data:', error)\n    // Consider re-throwing or handling the error more gracefully depending on your application's needs\n    throw error\n  }\n}\n\nfunction updateUserFromRecord(record: leadClientsTableRecord) {\n  const fieldMap = {\n    NOMBRE: 'fullName',\n    UBICACION_DEL_USUARIO: 'location',\n    UBICACION_DE_SERVICIO: 'serviceLocation',\n    CEDULA: 'nationalID',\n    NUMERO_DE_FACTURA: 'brillaBillNumber',\n    REPORTADO: 'negativeCreditReport'\n  }\n\n  for (const airtableField in fieldMap) {\n    const userField = fieldMap[airtableField as keyof typeof fieldMap] // Type assertion for correct key access\n    const airtableValue = record[airtableField as keyof typeof record] // Type assertion for correct key access\n\n    // Assign only if the user's field is not already set and Airtable has a value\n    if (!user[userField as keyof typeof user] && airtableValue) {\n      user[userField] = airtableValue\n    }\n  }\n}\n\ntype Conclusion = 'COMPLEXED' | 'WRONG' | 'SERVED' | 'TIMEDOUT' | 'HOOKED' | ''\n\nfunction updateUserEngagement(record: leadClientsTableRecord) {\n  const ending = record.CONCLUSION as Conclusion\n  const { flow } = conversation || {}\n\n  conversation.flow = {\n    ending: ending || flow?.ending || '',\n    state: flow?.state || '',\n    topics: [...topics, 'PRE_ENGAGEMENT'],\n    status: 'COLD_PROSPECT',\n    context: 'PRE_ENGAGEMENT'\n  }\n\n  topics = Array.isArray(record.TEMAS) ? record.TEMAS : []\n  conversation.SummaryAgent.summary = env.WAB_CONTEXT\n}\n",
               "origin": "builtin",
-              "label": "\"Update User Profile Based on Phone Number Records\"",
+              "label": "\"Retrieve and Update User Data Based on Phone Number\"",
               "nodeId": "nd-b2aae07e53",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  if (env.WAB_TEMPLATE === \"leads_cupo_brilla\") {\n    user.creditProfile = \"CUPO_BRILLA\";\n    user.purchasePreference = \"CUPO_BRILLA\";\n  }\n  const { phone } = user;\n  let topics = [];\n  if (phone) {\n    try {\n      const lastTenDigitsOfPhone = phone.slice(-10);\n      const existingRecords = await leadClientsTable.findRecords({\n        filter: {\n          // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'\n          // El `$` al final de la expresión regular significa 'termina con'\n          TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n        }\n      });\n      if (existingRecords.length > 0) {\n        const record = existingRecords[0];\n        console.log(`\\u2705 Record found: ${record.id}`);\n        const fieldMap = {\n          NOMBRE: \"fullName\",\n          UBICACION_DEL_USUARIO: \"location\",\n          UBICACION_DE_SERVICIO: \"serviceLocation\",\n          CEDULA: \"nationalID\",\n          NUMERO_DE_FACTURA: \"brillaBillNumber\",\n          REPORTADO: \"negativeCreditReport\"\n        };\n        for (const airtableField in fieldMap) {\n          const userField = fieldMap[airtableField];\n          const airtableValue = record[airtableField];\n          if (!user[userField] && airtableValue) {\n            user[userField] = airtableValue;\n          }\n        }\n        topics = Array.isArray(record.TEMAS) ? record.TEMAS : [];\n      } else {\n        throw new Error(`\\u274C Record not found \\u{1F979}`);\n      }\n    } catch (error) {\n      console.error(\"\\u274C Error getting data:\", error);\n    }\n  }\n  const { flow } = conversation || {};\n  conversation.flow = {\n    ending: flow?.ending || \"\",\n    state: flow?.state || \"\",\n    topics: [...topics, \"PRE_ENGAGEMENT\", \"CUPO_BRILLA\"],\n    status: \"COLD_PROSPECT\",\n    context: \"PRE_ENGAGEMENT\"\n  };\n  conversation.SummaryAgent.summary = env.WAB_CONTEXT;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { phone } = user;\n  console.log(\"\\u{1F916} Buscando cliente con el tel\\xE9fono:\", phone);\n  let topics = [];\n  if (env.WAB_TEMPLATE === \"leads_cupo_brilla\") {\n    user.creditProfile = \"CUPO_BRILLA\";\n    user.purchasePreference = \"CUPO_BRILLA\";\n    topics.push(\"CUPO_BRILLA\");\n  }\n  if (phone) {\n    try {\n      const lastTenDigitsOfPhone = phone.slice(-10);\n      const recordResults = await leadClientsTable.findRecords({\n        filter: {\n          // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'\n          // El `$` al final de la expresión regular significa 'termina con'\n          TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n        }\n      });\n      console.log(\"\\u2755 recordResults:\", recordResults);\n      const record = recordResults.length ? recordResults[0] : void 0;\n      if (record) {\n        console.log(`\\u2705 Record found: ${record.id}`);\n        updateUserFromRecord(record);\n        user.authorizedPop = {\n          answer: \"ACCEPTED\",\n          askedBefore: true\n        };\n        updateUserEngagement(record);\n      } else {\n        console.error(`\\u274C Record not found \\u{1F979}`);\n        conversation.flow = {\n          ending: \"\",\n          state: \"\",\n          topics: [\"PRE_ENGAGEMENT\"],\n          status: \"COLD_PROSPECT\",\n          context: \"PRE_ENGAGEMENT\"\n        };\n      }\n    } catch (error) {\n      console.error(\"\\u274C Error getting data:\", error);\n      throw error;\n    }\n  }\n  function updateUserFromRecord(record) {\n    const fieldMap = {\n      NOMBRE: \"fullName\",\n      UBICACION_DEL_USUARIO: \"location\",\n      UBICACION_DE_SERVICIO: \"serviceLocation\",\n      CEDULA: \"nationalID\",\n      NUMERO_DE_FACTURA: \"brillaBillNumber\",\n      REPORTADO: \"negativeCreditReport\"\n    };\n    for (const airtableField in fieldMap) {\n      const userField = fieldMap[airtableField];\n      const airtableValue = record[airtableField];\n      if (!user[userField] && airtableValue) {\n        user[userField] = airtableValue;\n      }\n    }\n  }\n  __name(updateUserFromRecord, \"updateUserFromRecord\");\n  function updateUserEngagement(record) {\n    const ending = record.CONCLUSION;\n    const { flow } = conversation || {};\n    conversation.flow = {\n      ending: ending || flow?.ending || \"\",\n      state: flow?.state || \"\",\n      topics: [...topics, \"PRE_ENGAGEMENT\"],\n      status: \"COLD_PROSPECT\",\n      context: \"PRE_ENGAGEMENT\"\n    };\n    topics = Array.isArray(record.TEMAS) ? record.TEMAS : [];\n    conversation.SummaryAgent.summary = env.WAB_CONTEXT;\n  }\n  __name(updateUserEngagement, \"updateUserEngagement\");\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
           "defaultTransition": {
             "targetNodeId": "nd-d0f842a0f5"
           },
-          "x": 450,
-          "y": 100
+          "x": 600,
+          "y": 210
         },
         {
           "type": "exception-handler",
           "deletable": true,
-          "x": 465,
-          "y": 405,
+          "x": 555,
+          "y": 555,
           "instructions": [
             {
               "id": "trs-276d6cdcff",
@@ -33373,6 +33562,384 @@
           ],
           "id": "nd-126d4b3475",
           "name": "Exception Handler1"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 555,
+          "y": -150,
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-5df2df47a1",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Mock Hook Enable",
+                "staticValue": ""
+              },
+              "nodeId": "nd-b722467149",
+              "transitions": []
+            },
+            {
+              "id": "ins-c45e78833d",
+              "type": "action",
+              "code": "const TELEFONO = '573011050979'\nconst NOMBRE = 'CRISTEL GUERRA STIVENSON'\n\nevent.tags.user['whatsapp:userId'] = TELEFONO\n\nconst mockData: Partial<leadClientsTableRecord> = {\n    NOMBRE,\n    TELEFONO,\n    CONCLUSION: 'HOOKED',\n    ESTATUS: 'COLD_PROSPECT'\n  }\n\nconst records = await leadClientsTable.findRecords({\n  filter: { TELEFONO }\n})\n\nif (!records.length) {\n  console.log('⚠️ Record No Encontrado')\n  leadClientsTable.createRecord(mockData)\n} else {\n  const row = records[0].id\n  console.log('✅ Record Encontrado', row)\n  leadClientsTable.updateRecord(row, mockData)\n}\n\n\n",
+              "origin": "builtin",
+              "label": "\"Manage Lead Records Based on Phone Number Lookup\"",
+              "nodeId": "nd-b722467149",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const TELEFONO = \"573011050979\";\n  const NOMBRE = \"CRISTEL GUERRA STIVENSON\";\n  event.tags.user[\"whatsapp:userId\"] = TELEFONO;\n  const mockData = {\n    NOMBRE,\n    TELEFONO,\n    CONCLUSION: \"HOOKED\",\n    ESTATUS: \"COLD_PROSPECT\"\n  };\n  const records = await leadClientsTable.findRecords({\n    filter: { TELEFONO }\n  });\n  if (!records.length) {\n    console.log(\"\\u26A0\\uFE0F Record No Encontrado\");\n    leadClientsTable.createRecord(mockData);\n  } else {\n    const row = records[0].id;\n    console.log(\"\\u2705 Record Encontrado\", row);\n    leadClientsTable.updateRecord(row, mockData);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-b2aae07e53"
+          },
+          "id": "nd-b722467149",
+          "name": "MockHook"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": -30,
+          "y": -330,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 32px\">Sincronizar la data del usuario</span></strong></p><pre><code>SyncUserData</code></pre>",
+          "id": "nd-c649b82617",
+          "name": "Comment1",
+          "height": 188,
+          "width": 296,
+          "backgroundColor": "var(--blue-5)"
+        }
+      ],
+      "parentFolder": "dir-8e245963b2"
+    },
+    {
+      "id": "wf-81efb7fe91",
+      "name": "💾 saveHookedUserData",
+      "startNode": "nd-48cb9596fa",
+      "variables": [
+        {
+          "id": "var-85582fad59",
+          "name": "sentiment",
+          "description": "Sentimiento de la conversación",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        }
+      ],
+      "links": [],
+      "nodes": [
+        {
+          "id": "nd-48cb9596fa",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [],
+          "instructions": [
+            {
+              "id": "trs-4678f9e6a9",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-722b5b1c14"
+              },
+              "transitions": [],
+              "nodeId": "nd-48cb9596fa"
+            }
+          ],
+          "x": -195,
+          "y": 60
+        },
+        {
+          "id": "nd-df4851e735",
+          "name": "Exit",
+          "type": "exit",
+          "variables": [],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-3fd1058d3e",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-df4851e735"
+            }
+          ],
+          "x": 660,
+          "y": 15
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 270,
+          "y": 0,
+          "instructions": [
+            {
+              "id": "ins-a00077bd2d",
+              "type": "action",
+              "category": "Execute",
+              "code": "const phone = user.phone\r\nconst conversationId = event.conversationId || ''\r\n\r\nconst { status, ending, topics } = conversation.flow || {}\r\nconsole.log(`💾 saving conversation:`, conversationId || phone)\r\n\r\nconversation.sensitiveData = {\r\n  TELEFONO: phone,\r\n  NOMBRE: user.fullName,\r\n  UBICACION_DEL_USUARIO: user.location,\r\n  CEDULA: user.nationalID,\r\n  NUMERO_DE_FACTURA: user.brillaBillNumber,\r\n  TIPO_DE_CONTRATO: user.jobContractType,\r\n  REPORTADO: user.negativeCreditReport\r\n}\r\n\r\nconversation.nonSensitiveData = {\r\n  RESUMEN: user.description,\r\n  PRODUCTO_DE_INTERES: '',\r\n  UBICACION_DE_SERVICIO: user.serviceLocation,\r\n  ESTATUS: status,\r\n  ASISTENCIA: user.assistanceMode,\r\n  ROL_DE_CLIENTE: user.clientRole,\r\n  PERFIL_CREDITICIO: user.creditProfile,\r\n  PREFERENCIA_DE_COMPRA: user.purchasePreference,\r\n  CONCLUSION: ending,\r\n  TEMAS: topics,\r\n  PRECIO_INFORMADO: 0,\r\n  SENTIMIENTO: workflow.sentiment\r\n}\r\n\r\nlet rowData: SensitiveData & NonSensitiveData & { CONVERSATION_ID: string } = {\r\n  CONVERSATION_ID: conversationId,\r\n  ...conversation.sensitiveData,\r\n  ...conversation.nonSensitiveData\r\n}\r\n\r\nconsole.log(`🤖 Saving rowData:`, rowData)\r\nconst lastTenDigitsOfPhone = phone.slice(-10)\r\nconsole.log('🔎 lastTenDigitsOfPhone', lastTenDigitsOfPhone)\r\n\r\ntry {\r\n  const recordResults = await leadClientsTable.findRecords({\r\n    filter: {\r\n      $or: [{ TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } }]\r\n    }\r\n  })\r\n\r\n  console.log('❕ Records result', recordResults)\r\n\r\n  if (recordResults.length > 0) {\r\n    console.log(`✅ Updating record with id: ${recordResults[0].id}`)\r\n    const recordId = recordResults[0].id\r\n    await leadClientsTable.updateRecord(recordId, rowData)\r\n  } else {\r\n    console.log(`🔅 Creating new record`)\r\n    await leadClientsTable.createRecord(rowData)\r\n  }\r\n} catch (error) {\r\n  console.error('❌ Error saving data:', error)\r\n}\r\n",
+              "origin": "builtin",
+              "nodeId": "nd-722b5b1c14",
+              "label": "\"Save and Update User Conversation Data in Database\"",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const phone = user.phone;\n  const conversationId = event.conversationId || \"\";\n  const { status, ending, topics } = conversation.flow || {};\n  console.log(`\\u{1F4BE} saving conversation:`, conversationId || phone);\n  conversation.sensitiveData = {\n    TELEFONO: phone,\n    NOMBRE: user.fullName,\n    UBICACION_DEL_USUARIO: user.location,\n    CEDULA: user.nationalID,\n    NUMERO_DE_FACTURA: user.brillaBillNumber,\n    TIPO_DE_CONTRATO: user.jobContractType,\n    REPORTADO: user.negativeCreditReport\n  };\n  conversation.nonSensitiveData = {\n    RESUMEN: user.description,\n    PRODUCTO_DE_INTERES: \"\",\n    UBICACION_DE_SERVICIO: user.serviceLocation,\n    ESTATUS: status,\n    ASISTENCIA: user.assistanceMode,\n    ROL_DE_CLIENTE: user.clientRole,\n    PERFIL_CREDITICIO: user.creditProfile,\n    PREFERENCIA_DE_COMPRA: user.purchasePreference,\n    CONCLUSION: ending,\n    TEMAS: topics,\n    PRECIO_INFORMADO: 0,\n    SENTIMIENTO: workflow.sentiment\n  };\n  let rowData = {\n    CONVERSATION_ID: conversationId,\n    ...conversation.sensitiveData,\n    ...conversation.nonSensitiveData\n  };\n  console.log(`\\u{1F916} Saving rowData:`, rowData);\n  const lastTenDigitsOfPhone = phone.slice(-10);\n  console.log(\"\\u{1F50E} lastTenDigitsOfPhone\", lastTenDigitsOfPhone);\n  try {\n    const recordResults = await leadClientsTable.findRecords({\n      filter: {\n        $or: [{ TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } }]\n      }\n    });\n    console.log(\"\\u2755 Records result\", recordResults);\n    if (recordResults.length > 0) {\n      console.log(`\\u2705 Updating record with id: ${recordResults[0].id}`);\n      const recordId = recordResults[0].id;\n      await leadClientsTable.updateRecord(recordId, rowData);\n    } else {\n      console.log(`\\u{1F505} Creating new record`);\n      await leadClientsTable.createRecord(rowData);\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error saving data:\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-df4851e735"
+          },
+          "id": "nd-722b5b1c14",
+          "name": "save_data_client"
+        },
+        {
+          "type": "exception-handler",
+          "deletable": true,
+          "x": 285,
+          "y": 315,
+          "instructions": [
+            {
+              "id": "trs-567b3be460",
+              "type": "transition",
+              "label": "",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-df4851e735"
+              },
+              "generative": {
+                "label": "",
+                "properties": {
+                  "label": true,
+                  "condition": true
+                },
+                "suggestion": {
+                  "label": "",
+                  "condition": "true"
+                }
+              },
+              "nodeId": "nd-9e8e587cfb",
+              "transitions": []
+            }
+          ],
+          "id": "nd-9e8e587cfb",
+          "name": "Exception Handler1"
+        },
+        {
+          "type": "comment",
+          "deletable": true,
+          "x": -240,
+          "y": -315,
+          "instructions": [],
+          "comment": "<p><strong><span style=\"font-size: 32px\">Guardar datos del usuario</span></strong></p><pre><code>saveUserData</code></pre>",
+          "id": "nd-0da48d5c14",
+          "name": "Comment1",
+          "height": 188,
+          "width": 326,
+          "backgroundColor": "var(--jade-5)"
+        }
+      ],
+      "parentFolder": "dir-6400c2779c"
+    },
+    {
+      "id": "wf-259e297ca2",
+      "name": "StopPromotions",
+      "startNode": "nd-97c37a88ba",
+      "variables": [
+        {
+          "id": "var-7e05653540",
+          "name": "stopPromotions",
+          "description": "Valor que indica que se debe detener promociones",
+          "type": "boolean",
+          "scope": "workflow",
+          "defaultValue": false,
+          "storeAsTag": false
+        }
+      ],
+      "links": [],
+      "nodes": [
+        {
+          "id": "nd-97c37a88ba",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [],
+          "instructions": [
+            {
+              "type": "log",
+              "id": "ins-ecfce26885",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "➡️ Stop Promotions",
+                "staticValue": ""
+              },
+              "nodeId": "nd-97c37a88ba",
+              "transitions": []
+            },
+            {
+              "id": "trs-d383b26563",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-d7992b76dd"
+              },
+              "transitions": [],
+              "nodeId": "nd-97c37a88ba"
+            }
+          ],
+          "x": 100,
+          "y": 100
+        },
+        {
+          "id": "nd-18bda99649",
+          "name": "Exit",
+          "type": "exit",
+          "variables": [],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-5134c7896b",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-18bda99649"
+            }
+          ],
+          "x": 795,
+          "y": 360
+        },
+        {
+          "id": "nd-d7992b76dd",
+          "name": "EvaluateStop",
+          "type": "standard",
+          "deletable": true,
+          "instructions": [
+            {
+              "id": "ins-4ad9b05230",
+              "type": "action",
+              "code": "const message = event.preview\n\nif (message.includes('Detener promociones')) {\n    workflow.stopPromotions = true\n}",
+              "origin": "builtin",
+              "label": "\"Stop Promotions Based on Event Message Content\"",
+              "nodeId": "nd-d7992b76dd",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const message = event.preview;\n  if (message.includes(\"Detener promociones\")) {\n    workflow.stopPromotions = true;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "id": "ins-cce471c7d6",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{workflow.stopPromotions == true}}"
+              },
+              "label": "Detener promociones seleccionado",
+              "generative": {
+                "label": "Detener promociones seleccionado",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-d7992b76dd",
+              "description": "",
+              "destination": {
+                "node": "nd-02a9e5b207"
+              },
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-18bda99649"
+          },
+          "x": 450,
+          "y": 105
+        },
+        {
+          "name": "farewell",
+          "type": "standard",
+          "deletable": true,
+          "x": 840,
+          "y": 0,
+          "instructions": [
+            {
+              "id": "ins-a83a686041",
+              "type": "action",
+              "code": "conversation.SummaryAgent.summary = 'El cliente ha sido contactado previamente por ha decidido ya no querer recibir más mensajes de promociones. Sin embargo, se le ha ofrecido estar pendiente de alguna nueva necesidad que pueda tener'",
+              "origin": "builtin",
+              "label": "\"Client Opts Out of Promotions but Open to Future Needs\"",
+              "nodeId": "nd-02a9e5b207",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.SummaryAgent.summary = \"El cliente ha sido contactado previamente por ha decidido ya no querer recibir m\\xE1s mensajes de promociones. Sin embargo, se le ha ofrecido estar pendiente de alguna nueva necesidad que pueda tener\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "id": "ins-7775ff5733",
+              "type": "skill",
+              "name": "farewell1",
+              "flowId": "wf-066a81d084",
+              "exitNodes": [],
+              "transitions": [],
+              "nodeId": "nd-02a9e5b207",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-28a6148a19",
+                  "name": "inputError",
+                  "description": "",
+                  "type": "boolean",
+                  "scope": "workflow",
+                  "defaultValue": false,
+                  "value": {
+                    "staticValue": false,
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-5229f73ac9",
+                  "name": "botState",
+                  "description": "",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "SERVED",
+                    "staticValue": ""
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "nd-02a9e5b207"
         }
       ],
       "parentFolder": "dir-8e245963b2"
@@ -33426,16 +33993,7 @@
   ],
   "list_entities": [],
   "pattern_entities": [],
-  "actions": [
-    {
-      "type": "code",
-      "id": "act-3d077a219a",
-      "description": "",
-      "name": "New Action",
-      "raw_code": "",
-      "transpiled_code": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();"
-    }
-  ],
+  "actions": [],
   "hooks": [
     {
       "id": "hk-b4e6be1486",
@@ -33505,7 +34063,7 @@
     },
     {
       "id": "hk-0e59ca5e42",
-      "name": "Conversartion_Definitions",
+      "name": ".Conversartion_Definitions",
       "content": "  console.log('⭕️ Start turn', event.conversationId)\n  const phoneNumber = event.tags?.user?.['whatsapp:userId'] || ''\n  console.log('👉🏼', phoneNumber)\n\n  if (!user.phone && phoneNumber) {\n    user.phone = phoneNumber\n  }",
       "hookType": "before_incoming_middleware",
       "origin": {
@@ -33557,7 +34115,7 @@
         {
           "created_on": 1737033453936,
           "data": {
-            "dataTableId": "table_01JHHBJCJ9C8T79QE7XT7TYRM7",
+            "dataTableId": "table_01JYMYT046PVRBZ7FA7CFX3S7J",
             "excludedColumnIds": []
           },
           "disabled": false,
@@ -33580,10 +34138,46 @@
     {
       "dataSources": [
         {
-          "created_on": 1737034616163,
+          "created_on": 1754096964619,
           "data": {},
           "disabled": false,
-          "id": "ds-c1683d3140",
+          "id": "ds-77bce57aac",
+          "type": "file-api"
+        }
+      ],
+      "description": "This is about Modo de atención",
+      "id": "kb-3437bc5deb",
+      "modalities": [
+        "text"
+      ],
+      "name": "Modo de atención",
+      "parentFolder": "root"
+    },
+    {
+      "dataSources": [
+        {
+          "created_on": 1754094949244,
+          "data": {},
+          "disabled": false,
+          "id": "ds-68b9bd09ae",
+          "type": "file-api"
+        }
+      ],
+      "description": "This is about Formas de compra",
+      "id": "kb-3e05460869",
+      "modalities": [
+        "text"
+      ],
+      "name": "Formas de compra",
+      "parentFolder": "root"
+    },
+    {
+      "dataSources": [
+        {
+          "created_on": 1753319071298,
+          "data": {},
+          "disabled": false,
+          "id": "ds-1ba7b6fc4f",
           "type": "file-api"
         }
       ],
@@ -33645,7 +34239,7 @@
         {
           "created_on": 1734993083139,
           "data": {
-            "dataTableId": "table_01JHHBJCYQYHXCQRBPFPHH7G17",
+            "dataTableId": "table_01JYMYT0DY4GT9XR5FZ3S8A0WP",
             "excludedColumnIds": [
               "neigborhood"
             ]
@@ -33735,7 +34329,7 @@
         {
           "created_on": 1737035525336,
           "data": {
-            "dataTableId": "table_01JHHBJDM9H7BJQ7DMV2HKAJQX",
+            "dataTableId": "table_01JYMYT0R2WR0VFEQSCZ9A828C",
             "excludedColumnIds": []
           },
           "disabled": false,
@@ -33745,7 +34339,7 @@
         {
           "created_on": 1737035525336,
           "data": {
-            "dataTableId": "table_01JHHBJCJ9C8T79QE7XT7TYRM7",
+            "dataTableId": "table_01JYMYT046PVRBZ7FA7CFX3S7J",
             "excludedColumnIds": []
           },
           "disabled": false,
@@ -33906,13 +34500,13 @@
         "answerManually": true,
         "context": {
           "valueType": "dynamic",
-          "dynamicValue": "## Contexto Adicional para el Bot\n\nEres el **Asesor Motos Expert** de nuestra empresa: dominas a la perfección precios, modelos y competencia del mercado colombiano. Conoces a fondo las distintas opciones de financiamiento y aliados financieros, y tu misión es ayudar a cada persona a encontrar la moto ideal y la mejor alternativa de crédito según su situación.\n\n**Cómo debes responder:**\n\n1. Habla con confianza y cercanía, asumiendo nuestra experiencia como si fuera propia.  \n2. Ofrece explicaciones claras, directas y concretas: enfócate en el “qué” y el “por qué” de cada recomendación, evitando explicaciones de procesos internos.  \n3. Transmite empatía: reconoce las necesidades del cliente y comparte soluciones prácticas, adaptadas a sus circunstancias.  \n4. Cuando menciones asistencia o necesidad de apoyo humano, usa siempre **“nosotros”** en lugar de referirte a terceros (la tienda, un asesor, Auteco), para reforzar nuestra cercanía.\n\n**Ejemplo de tono:**\n\n> “Para un crédito con tasa competitiva, te recomendamos X: solemos aprobar hasta el 80% del valor de la moto sin mucho papeleo, ideal si necesitas agilidad.”\n\n**Objetivo:**  \nDar respuestas ágiles, con fundamento de experto, incorporando la visión y el compromiso de nuestra compañía como si fuera propia, sin mencionar aspectos técnicos de funcionamiento interno.\n\n\n- Summary of the conversation:\n\"\"\"\n{{conversation.SummaryAgent.summary}}\n\"\"\"\n\n- Transcript:\n\"\"\"\n{{conversation.SummaryAgent.transcript}}\n\"\"\"\n\nIMPORTANT:  Avoid unnecessary wordiness",
+          "dynamicValue": "Usarás el resumen y la transcripción a continuación para que tengas contexto y logres dar respuestas coherentes. Se breve y directo. \n\n- Summary of the conversation:\n\"\"\"\n{{conversation.SummaryAgent.summary}}\n\"\"\"\n\n- Transcript:\n\"\"\"\n{{conversation.SummaryAgent.transcript}}\n\"\"\"\n\nIMPORTANT:  Avoid unnecessary wordiness",
           "staticValue": ""
         },
-        "bestModel": "anthropic__claude-3-7-sonnet-20250219",
-        "fastestModel": "anthropic__claude-3-5-haiku-20241022",
-        "questionModel": "anthropic__claude-3-7-sonnet-reasoning-20250219",
-        "strategy": "hybrid",
+        "bestModel": "best-model",
+        "fastestModel": "fast-model",
+        "questionModel": "fast-model",
+        "strategy": "fastest",
         "chunks": 10
       }
     },
@@ -33970,16 +34564,116 @@
     }
   },
   "tables": {
-    "table_01JHHBJCJ9C8T79QE7XT7TYRM7": {
-      "id": "table_01JHHBJCJ9C8T79QE7XT7TYRM7",
+    "table_01JYMYT027THWNVEA11X20JKMX": {
+      "id": "table_01JYMYT027THWNVEA11X20JKMX",
+      "name": "Int_Improvement_Feedback_Table",
+      "factor": 30,
+      "frozen": true,
+      "tags": {
+        "origin": "integration",
+        "purpose": "improvement",
+        "version": "Nov-2024",
+        "integration": "Int_Improvement",
+        "x-studio-icon": "lucide://atom",
+        "x-studio-color": "green",
+        "x-studio-title": "Feedback",
+        "x-studio-readonly": "true",
+        "x-studio-description": "Table to store acquired feedback on iterations for active learning"
+      },
+      "createdAt": "2025-06-26T01:49:31.082Z",
+      "updatedAt": "2025-06-26T01:49:31.082Z",
+      "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": null,
+      "isComputeEnabled": true,
+      "schema": {
+        "type": "object",
+        "x-zui": {},
+        "required": [
+          "uri",
+          "after",
+          "before",
+          "feedback",
+          "iterationId"
+        ],
+        "properties": {
+          "uri": {
+            "type": "string",
+            "x-zui": {
+              "index": 0,
+              "searchable": true
+            },
+            "maxLength": 250,
+            "minLength": 1
+          },
+          "after": {
+            "type": "string",
+            "x-zui": {
+              "index": 1,
+              "searchable": true
+            },
+            "minLength": 1
+          },
+          "before": {
+            "type": "string",
+            "x-zui": {
+              "index": 2,
+              "searchable": true
+            },
+            "minLength": 1
+          },
+          "feedback": {
+            "type": "string",
+            "x-zui": {
+              "index": 3,
+              "searchable": true
+            },
+            "minLength": 1
+          },
+          "learning": {
+            "type": "string",
+            "x-zui": {
+              "index": 4,
+              "computed": {
+                "model": "fast-model",
+                "action": "ai",
+                "prompt": "What would you tell your future self to improve next time?\nCode Before:\n\n```\n{{before}}\n```\n\nFeedback: \"{{feedback}}\"\n\nCode After:\n\n```\n{{after}}\n```\n\nFor the learning, it must be standalone, concise but also accurately depict the situation and feedback you were given.\n\nTry to follow one of the below structures:\n\n<example>\nIn [situation X], I learned that I should [use tool `X` rather than `Y` because ...]\n</example>\n\n<example>\nWhen trying to [...], I should use [tool X, tool Y or tool Z] like this:\n\n\\`\\`\\`\n// snippet to explain a drastic code change between before and after, or a non-obvious code snippet\n\\`\\`\\`\n</example>\n\n<example>\nWhenever [Y] happens, I should avoid [...] and instead [...].\n</example>\n\nKeep it concise. Do not refer to \"this situation\" or to the feedback. Both have been provided by an expert reviewing the conversation, NOT the actual user. So you must embed the content from the above inside your learning so it is standalone.\n",
+                "dependencies": [
+                  "before",
+                  "feedback",
+                  "after"
+                ]
+              },
+              "searchable": true
+            },
+            "default": null,
+            "nullable": true,
+            "minLength": 1
+          },
+          "iterationId": {
+            "type": "string",
+            "x-zui": {
+              "index": 5,
+              "searchable": true
+            },
+            "maxLength": 100,
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      },
+      "parentFolder": "root",
+      "selectors": []
+    },
+    "table_01JYMYT046PVRBZ7FA7CFX3S7J": {
+      "id": "table_01JYMYT046PVRBZ7FA7CFX3S7J",
       "name": "motosStockTable",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:31.784Z",
-      "updatedAt": "2025-04-15T13:27:08.537Z",
+      "createdAt": "2025-06-26T01:49:31.145Z",
+      "updatedAt": "2025-06-26T01:49:31.145Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": null,
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34029,7 +34723,7 @@
           "brillaPrice": {
             "type": "number",
             "x-zui": {
-              "index": 6,
+              "index": 5,
               "searchable": false
             },
             "nullable": true,
@@ -34038,7 +34732,7 @@
           "referenciaCompetencia": {
             "type": "string",
             "x-zui": {
-              "index": 5,
+              "index": 6,
               "searchable": false
             },
             "nullable": true
@@ -34100,16 +34794,16 @@
         ]
       }
     },
-    "table_01JHHBJCQV4EEVEWE96NPC0BSV": {
-      "id": "table_01JHHBJCQV4EEVEWE96NPC0BSV",
+    "table_01JYMYT08T0J6FJPBR6FBHP6D7": {
+      "id": "table_01JYMYT08T0J6FJPBR6FBHP6D7",
       "name": "leadClientsTable",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:31.961Z",
-      "updatedAt": "2025-05-29T15:30:22.311Z",
+      "createdAt": "2025-06-26T01:49:31.294Z",
+      "updatedAt": "2025-06-26T01:49:31.294Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": null,
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34118,7 +34812,7 @@
           "COSTO": {
             "type": "string",
             "x-zui": {
-              "index": 10,
+              "index": 0,
               "typings": "",
               "searchable": false
             },
@@ -34131,7 +34825,7 @@
               "x-zui": {}
             },
             "x-zui": {
-              "index": 17,
+              "index": 1,
               "searchable": false
             },
             "nullable": true,
@@ -34140,7 +34834,7 @@
           "CEDULA": {
             "type": "string",
             "x-zui": {
-              "index": 4,
+              "index": 2,
               "typings": "",
               "searchable": false
             },
@@ -34150,7 +34844,7 @@
           "NOMBRE": {
             "type": "string",
             "x-zui": {
-              "index": 2,
+              "index": 3,
               "searchable": false
             },
             "nullable": true
@@ -34158,7 +34852,7 @@
           "ESTATUS": {
             "type": "string",
             "x-zui": {
-              "index": 8,
+              "index": 4,
               "typings": "",
               "searchable": false
             },
@@ -34167,7 +34861,7 @@
           "RESUMEN": {
             "type": "string",
             "x-zui": {
-              "index": 1,
+              "index": 5,
               "searchable": false
             },
             "nullable": true
@@ -34175,7 +34869,7 @@
           "TELEFONO": {
             "type": "string",
             "x-zui": {
-              "index": 0,
+              "index": 6,
               "searchable": true
             },
             "nullable": true
@@ -34183,7 +34877,7 @@
           "REPORTADO": {
             "type": "string",
             "x-zui": {
-              "index": 12,
+              "index": 7,
               "searchable": false
             },
             "nullable": true
@@ -34191,7 +34885,7 @@
           "ASISTENCIA": {
             "type": "string",
             "x-zui": {
-              "index": 9,
+              "index": 8,
               "typings": "",
               "searchable": false
             },
@@ -34200,7 +34894,7 @@
           "CONCLUSION": {
             "type": "string",
             "x-zui": {
-              "index": 6,
+              "index": 9,
               "typings": "",
               "searchable": false
             },
@@ -34209,7 +34903,7 @@
           "SENTIMIENTO": {
             "type": "string",
             "x-zui": {
-              "index": 19,
+              "index": 10,
               "searchable": false
             },
             "nullable": true,
@@ -34218,13 +34912,14 @@
           "CONVERSATION_ID": {
             "type": "string",
             "x-zui": {
-              "index": 16
+              "index": 11,
+              "searchable": true
             }
           },
           "PRECIO_INFORMADO": {
             "type": "number",
             "x-zui": {
-              "index": 18,
+              "index": 12,
               "searchable": false
             },
             "nullable": true,
@@ -34233,7 +34928,7 @@
           "TIPO_DE_CONTRATO": {
             "type": "string",
             "x-zui": {
-              "index": 7,
+              "index": 13,
               "typings": "",
               "searchable": false
             },
@@ -34242,7 +34937,7 @@
           "NUMERO_DE_FACTURA": {
             "type": "string",
             "x-zui": {
-              "index": 5,
+              "index": 14,
               "typings": "",
               "searchable": false
             },
@@ -34251,7 +34946,7 @@
           "PERFIL_CREDITICIO": {
             "type": "string",
             "x-zui": {
-              "index": 11,
+              "index": 15,
               "typings": "",
               "searchable": false
             },
@@ -34260,7 +34955,7 @@
           "PRODUCTO_DE_INTERES": {
             "type": "string",
             "x-zui": {
-              "index": 14,
+              "index": 16,
               "typings": "",
               "searchable": false
             },
@@ -34269,7 +34964,7 @@
           "PREFERENCIA_DE_COMPRA": {
             "type": "string",
             "x-zui": {
-              "index": 13,
+              "index": 17,
               "typings": "",
               "searchable": false
             },
@@ -34278,7 +34973,7 @@
           "UBICACION_DEL_USUARIO": {
             "type": "string",
             "x-zui": {
-              "index": 3,
+              "index": 18,
               "searchable": false
             },
             "nullable": true
@@ -34286,7 +34981,7 @@
           "UBICACION_DE_SERVICIO": {
             "type": "string",
             "x-zui": {
-              "index": 15,
+              "index": 19,
               "typings": "",
               "searchable": false
             },
@@ -34414,14 +35109,14 @@
         ]
       }
     },
-    "table_01JHHBJCYQYHXCQRBPFPHH7G17": {
-      "id": "table_01JHHBJCYQYHXCQRBPFPHH7G17",
+    "table_01JYMYT0DY4GT9XR5FZ3S8A0WP": {
+      "id": "table_01JYMYT0DY4GT9XR5FZ3S8A0WP",
       "name": "locationsNeighborhoodsTable",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:32.180Z",
-      "updatedAt": "2025-01-14T02:51:32.180Z",
+      "createdAt": "2025-06-26T01:49:31.457Z",
+      "updatedAt": "2025-06-26T01:49:31.457Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
@@ -34453,14 +35148,14 @@
       "parentFolder": "root",
       "selectors": []
     },
-    "table_01JHHBJDF5VT7EGWH552K8J164": {
-      "id": "table_01JHHBJDF5VT7EGWH552K8J164",
+    "table_01JYMYT0KYG8YPPN1V4D3ZPFM8": {
+      "id": "table_01JYMYT0KYG8YPPN1V4D3ZPFM8",
       "name": "BranchLocationTable",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:32.706Z",
-      "updatedAt": "2025-01-14T02:51:32.706Z",
+      "createdAt": "2025-06-26T01:49:31.649Z",
+      "updatedAt": "2025-06-26T01:49:31.649Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
@@ -34510,14 +35205,14 @@
       "parentFolder": "root",
       "selectors": []
     },
-    "table_01JHHBJDM9H7BJQ7DMV2HKAJQX": {
-      "id": "table_01JHHBJDM9H7BJQ7DMV2HKAJQX",
+    "table_01JYMYT0R2WR0VFEQSCZ9A828C": {
+      "id": "table_01JYMYT0R2WR0VFEQSCZ9A828C",
       "name": "Style_Synonyms_Table",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:32.870Z",
-      "updatedAt": "2025-01-14T02:51:32.870Z",
+      "createdAt": "2025-06-26T01:49:31.780Z",
+      "updatedAt": "2025-06-26T01:49:31.780Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
@@ -34549,16 +35244,16 @@
       "parentFolder": "root",
       "selectors": []
     },
-    "table_01JHHBJDSR50YXR62ZJC51AN2K": {
-      "id": "table_01JHHBJDSR50YXR62ZJC51AN2K",
+    "table_01JYMYT0X9NV6G3B137EJQX3B1": {
+      "id": "table_01JYMYT0X9NV6G3B137EJQX3B1",
       "name": "Competitor_Synonyms_Table",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:33.045Z",
-      "updatedAt": "2025-04-15T13:18:41.965Z",
+      "createdAt": "2025-06-26T01:49:31.947Z",
+      "updatedAt": "2025-06-26T01:49:31.947Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": null,
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34589,16 +35284,16 @@
       "parentFolder": "root",
       "selectors": []
     },
-    "table_01JHHBJE021CQPDS8PAJ9H8PJP": {
-      "id": "table_01JHHBJE021CQPDS8PAJ9H8PJP",
+    "table_01JYMYT11XHEG24S98T5EV10FF": {
+      "id": "table_01JYMYT11XHEG24S98T5EV10FF",
       "name": "Own_Reference_Synonyms_Table",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-01-14T02:51:33.248Z",
-      "updatedAt": "2025-04-15T13:53:56.433Z",
+      "createdAt": "2025-06-26T01:49:32.095Z",
+      "updatedAt": "2025-06-26T01:49:32.095Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
-      "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": null,
       "isComputeEnabled": false,
       "schema": {
         "type": "object",
@@ -34616,7 +35311,7 @@
           "comments": {
             "type": "string",
             "x-zui": {
-              "index": 2,
+              "index": 1,
               "searchable": false
             }
           },
@@ -34624,7 +35319,7 @@
             "type": "string",
             "x-zui": {
               "id": "reference",
-              "index": 1,
+              "index": 2,
               "searchable": false
             },
             "nullable": true
@@ -34635,8 +35330,8 @@
       "parentFolder": "root",
       "selectors": []
     },
-    "table_01JQWHYRB8VM0GSFT37KETF7CN": {
-      "id": "table_01JQWHYRB8VM0GSFT37KETF7CN",
+    "table_01JYMYT15786XS3963Z0AR1K04": {
+      "id": "table_01JYMYT15786XS3963Z0AR1K04",
       "name": "Int_KB_Analytics_Table",
       "factor": 1,
       "frozen": true,
@@ -34651,9 +35346,9 @@
         "x-studio-readonly": "true",
         "x-studio-description": "Table for storing the KB Analytics"
       },
-      "createdAt": "2025-04-03T00:48:58.219Z",
-      "updatedAt": "2025-04-03T00:48:58.219Z",
-      "createdBy": "integration:agi/kbo",
+      "createdAt": "2025-06-26T01:49:32.202Z",
+      "updatedAt": "2025-06-26T01:49:32.202Z",
+      "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": null,
       "isComputeEnabled": false,
       "schema": {
@@ -34661,8 +35356,8 @@
         "x-zui": {},
         "required": [
           "uri",
-          "fileId",
-          "kbId"
+          "kbId",
+          "fileId"
         ],
         "properties": {
           "uri": {
@@ -34679,14 +35374,14 @@
           "kbId": {
             "type": "string",
             "x-zui": {
-              "index": 2,
+              "index": 1,
               "searchable": true
             }
           },
           "count": {
             "type": "number",
             "x-zui": {
-              "index": 3,
+              "index": 2,
               "searchable": true
             },
             "default": 0
@@ -34694,7 +35389,7 @@
           "fileId": {
             "type": "string",
             "x-zui": {
-              "index": 1,
+              "index": 3,
               "searchable": true
             }
           }
@@ -34704,114 +35399,14 @@
       "parentFolder": "root",
       "selectors": []
     },
-    "table_01JYN0QHMD521ARG5ZGSQPQHV4": {
-      "id": "table_01JYN0QHMD521ARG5ZGSQPQHV4",
-      "name": "Int_Improvement_Feedback_Table",
-      "factor": 30,
-      "frozen": true,
-      "tags": {
-        "origin": "integration",
-        "purpose": "improvement",
-        "version": "Nov-2024",
-        "integration": "Int_Improvement",
-        "x-studio-icon": "lucide://atom",
-        "x-studio-color": "green",
-        "x-studio-title": "Feedback",
-        "x-studio-readonly": "true",
-        "x-studio-description": "Table to store acquired feedback on iterations for active learning"
-      },
-      "createdAt": "2025-06-26T02:23:07.918Z",
-      "updatedAt": "2025-06-26T02:23:07.918Z",
-      "createdBy": "integration:agi/improvement",
-      "updatedBy": null,
-      "isComputeEnabled": true,
-      "schema": {
-        "type": "object",
-        "x-zui": {},
-        "required": [
-          "uri",
-          "iterationId",
-          "before",
-          "feedback",
-          "after"
-        ],
-        "properties": {
-          "uri": {
-            "type": "string",
-            "x-zui": {
-              "index": 0,
-              "searchable": true
-            },
-            "maxLength": 250,
-            "minLength": 1
-          },
-          "after": {
-            "type": "string",
-            "x-zui": {
-              "index": 4,
-              "searchable": true
-            },
-            "minLength": 1
-          },
-          "before": {
-            "type": "string",
-            "x-zui": {
-              "index": 2,
-              "searchable": true
-            },
-            "minLength": 1
-          },
-          "feedback": {
-            "type": "string",
-            "x-zui": {
-              "index": 3,
-              "searchable": true
-            },
-            "minLength": 1
-          },
-          "learning": {
-            "type": "string",
-            "x-zui": {
-              "index": 5,
-              "computed": {
-                "model": "fast-model",
-                "action": "ai",
-                "prompt": "What would you tell your future self to improve next time?\nCode Before:\n\n```\n{{before}}\n```\n\nFeedback: \"{{feedback}}\"\n\nCode After:\n\n```\n{{after}}\n```\n\nFor the learning, it must be standalone, concise but also accurately depict the situation and feedback you were given.\n\nTry to follow one of the below structures:\n\n<example>\nIn [situation X], I learned that I should [use tool `X` rather than `Y` because ...]\n\n\\`\\`\\`\n// snippet using the right tool\n\\`\\`\\`\n</example>\n\n<example>\nWhen trying to [...], I should use [tool X, tool Y or tool Z] like this:\n\n\\`\\`\\`\n// snippet to explain a drastic code change between before and after, or a non-obvious code snippet\n\\`\\`\\`\n</example>\n\n<example>\nWhenever [Y] happens, I should avoid [...] and instead [...].\n\n\\`\\`\\`\n// snippet to implement the behavior change\n\\`\\`\\`\n</example>\n\nKeep it concise. Do not refer to \"this situation\" or to the feedback. Both have been provided by an expert reviewing the conversation, NOT the actual user. So you must embed the content from the above inside your learning so it is standalone.\nMake sure to include a code snippet that teaches the right behavior, but remaining generic enough to adapt to different conversations in the future.\n",
-                "dependencies": [
-                  "before",
-                  "feedback",
-                  "after"
-                ]
-              },
-              "searchable": true
-            },
-            "default": null,
-            "nullable": true,
-            "minLength": 1
-          },
-          "iterationId": {
-            "type": "string",
-            "x-zui": {
-              "index": 1,
-              "searchable": true
-            },
-            "maxLength": 100,
-            "minLength": 1
-          }
-        },
-        "additionalProperties": true
-      },
-      "parentFolder": "root",
-      "selectors": []
-    },
-    "table_01K0B5FQXJ2YFBV74Y6YTK5C9A": {
-      "id": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A",
+    "table_01K0B78E2N9NHJA8KS9CHB8FBV": {
+      "id": "table_01K0B78E2N9NHJA8KS9CHB8FBV",
       "name": "EntiedadesFinancierasTable",
       "factor": 1,
       "frozen": false,
       "tags": {},
-      "createdAt": "2025-07-17T03:05:14.419Z",
-      "updatedAt": "2025-07-17T03:08:25.142Z",
+      "createdAt": "2025-07-17T03:36:12.118Z",
+      "updatedAt": "2025-07-18T13:04:39.187Z",
       "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "updatedBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
       "isComputeEnabled": false,
@@ -34819,15 +35414,15 @@
         "type": "object",
         "x-zui": {},
         "required": [
-          "Nombre",
           "Enlace",
+          "Nombre",
           "Identificador"
         ],
         "properties": {
           "Enlace": {
             "type": "string",
             "x-zui": {
-              "index": 1,
+              "index": 0,
               "searchable": true
             },
             "description": "Ruta de enlace que se le provee al cliente para que realice su estudio de crédito"
@@ -34835,7 +35430,7 @@
           "Nombre": {
             "type": "string",
             "x-zui": {
-              "index": 0,
+              "index": 1,
               "searchable": true
             },
             "description": "El nombre con el que se relaciona la entidad financiera"
@@ -35602,9 +36197,10 @@
               "WRONG",
               "SERVED",
               "TIMEDOUT",
+              "HOOKED",
               ""
             ],
-            "description": "La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT'",
+            "description": "La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED'",
             "x-zui": {}
           },
           "topics": {
@@ -35673,47 +36269,47 @@
         "additionalProperties": false,
         "x-zui": {}
       },
-      "code": "z.object({\n  ending: z\n    .enum(['COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', ''])\n    .describe(\n      \"La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT'\"\n    ),\n\n  topics: z.array(z.string()).describe('Temas que se han manejado en la conversación'),\n\n  status: z\n    .enum([\n      'STARTED',\n      'BOT_ATTENTION',\n      'CREDIT_INTERESTED',\n      'STORE_ATTENTION',\n      'CREDIORBE_ATTENTION',\n      'BANCO_BOGOTA_ATTENTION',\n      'ATTENTION_REJECTED',\n      'PRE_EVALUATION_STARTED',\n      'PENDING_CALL',\n      'COLD_PROSPECT',\n      ''\n    ])\n    .describe('Variable que controla el nivel de calidad de la conversación'),\n\n  context: z\n    .enum(['ABOUT_LOCATION_INFO', 'ABOUT_MOTO_INFO', 'ABOUT_CREDIT_INFO', 'ABOUT_CUPO_BRILLA_INFO',\n    'PRE_ENGAGEMENT', ''])\n    .describe('El contexto del cual se habla en la conversación'),\n\n  state: z\n    .enum(['', 'COMPLEXED', 'SERVED', 'WAITING', 'CONFUSED', 'ATTENTION_REQUESTED', 'FINISHED', 'TIMEOUT'])\n    .describe('State of bot when get a answer from user')\n})\n",
+      "code": "z.object({\n  ending: z\n    .enum(['COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED', ''])\n    .describe(\n      \"La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED'\"\n    ),\n\n  topics: z.array(z.string()).describe('Temas que se han manejado en la conversación'),\n\n  status: z\n    .enum([\n      'STARTED',\n      'BOT_ATTENTION',\n      'CREDIT_INTERESTED',\n      'STORE_ATTENTION',\n      'CREDIORBE_ATTENTION',\n      'BANCO_BOGOTA_ATTENTION',\n      'ATTENTION_REJECTED',\n      'PRE_EVALUATION_STARTED',\n      'PENDING_CALL',\n      'COLD_PROSPECT',\n      ''\n    ])\n    .describe('Variable que controla el nivel de calidad de la conversación'),\n\n  context: z\n    .enum(['ABOUT_LOCATION_INFO', 'ABOUT_MOTO_INFO', 'ABOUT_CREDIT_INFO', 'ABOUT_CUPO_BRILLA_INFO',\n    'PRE_ENGAGEMENT', ''])\n    .describe('El contexto del cual se habla en la conversación'),\n\n  state: z\n    .enum(['', 'COMPLEXED', 'SERVED', 'WAITING', 'CONFUSED', 'ATTENTION_REQUESTED', 'FINISHED', 'TIMEOUT'])\n    .describe('State of bot when get a answer from user')\n})\n",
       "typings": "",
       "id": "schema-25651dffcc"
     }
   ],
   "versions": [
     {
-      "name": "18 Jul 25 07:23",
-      "id": "version_01K0EV8PS7PEWKE0DNJDFD1RJN"
+      "name": "01 Aug 25 08:07",
+      "id": "version_01K1M8H1QKJ0Y5K4V2HK7D4ZFQ"
     },
     {
-      "name": "16 Jul 25 09:38",
-      "id": "version_01K0B7DFDYX4YMYX7S97MZYVTS"
+      "name": "01 Aug 25 08:05",
+      "id": "version_01K1M8DAN8ZDFKN502XPMNV2XP"
     },
     {
-      "name": "13 Jul 25 04:04",
-      "id": "version_01K02X29KZPEAX9K9Y8Z6M835V"
+      "name": "26 Jul 25 08:15",
+      "id": "version_01K13HE8V34Z5H4P5TB74YRQ67"
     }
   ],
-  "revision": 56961,
+  "revision": 57990,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-07-18T13:23:07.379Z",
-    "lastRevisionId": 56960,
+    "lastRevisionCheckAt": "2025-08-11T15:50:27.814Z",
+    "lastRevisionId": -1,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-07-18T13:23:09.155Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-07-18T13:23:09.161Z: Connection State: initialized -> connecting (ok)",
-      "2025-07-18T13:23:09.421Z (4_UyeiT_b3): Connection State: connecting -> connected (ok)",
-      "2025-07-18T13:23:09.536Z (4_UyeiT_b3): Multiplayer session initialized!",
-      "2025-07-18T13:23:09.611Z (4_UyeiT_b3): Player entered channel - {\"sessionId\":\"sess_01K0EV7TYEKYXSAAK0P11Z8789\",\"connectionId\":\"4_UyeiT_b3\",\"joinedAt\":\"2025-07-18T13:23:09.540Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 18 Jul 2025 13:23:09 GMT\",\"connectedAt\":\"Fri, 18 Jul 2025 13:23:09 GMT\",\"sections\":[]}",
-      "2025-07-18T13:23:09.612Z (4_UyeiT_b3): jguzman@marxadigital.com was elected as master - \"sess_01K0EV7TYEKYXSAAK0P11Z8789\""
+      "2025-08-11T15:50:29.665Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-08-11T15:50:30.805Z: Connection State: initialized -> connecting (ok)",
+      "2025-08-11T15:50:31.802Z (IM0L-J5NI9): Connection State: connecting -> connected (ok)",
+      "2025-08-11T15:50:31.989Z (IM0L-J5NI9): Multiplayer session initialized!",
+      "2025-08-11T15:50:32.069Z (IM0L-J5NI9): Player entered channel - {\"sessionId\":\"sess_01K2CX6W63CJPXV2Y4959V6VM9\",\"connectionId\":\"IM0L-J5NI9\",\"joinedAt\":\"2025-08-11T15:50:31.989Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Mon, 11 Aug 2025 15:50:31 GMT\",\"connectedAt\":\"Mon, 11 Aug 2025 15:50:31 GMT\",\"sections\":[]}",
+      "2025-08-11T15:50:32.069Z (IM0L-J5NI9): jguzman@marxadigital.com was elected as master - \"sess_01K2CX6W63CJPXV2Y4959V6VM9\""
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K0EV7TYEKYXSAAK0P11Z8789 / Fri, 18 Jul 2025 13:23:09 GMT /  2025-07-18T13:23:29.422Z"
+      "jguzman@marxadigital.com / sess_01K2CX6W63CJPXV2Y4959V6VM9 / Mon, 11 Aug 2025 15:50:31 GMT /  Mon, 11 Aug 2025 15:50:31 GMT"
     ],
-    "savedAt": "2025-07-18T13:23:38.344Z",
+    "savedAt": "2025-08-11T15:50:34.549Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K0EV7TYEKYXSAAK0P11Z8789"
+    "sessionId": "sess_01K2CX6W63CJPXV2Y4959V6VM9"
   },
   "identity": {
-    "name": "asistente-lasmotos-dev",
+    "name": "asistente-lasmotos-general",
     "manual_instructions": "You are a Colombian customer service assistant for a company that sells motorcycles on credit. Your name is Juan Pablo, and your primary role is to delegate to programmed flows and transitions based on user interaction.\n\nThe company is called Tienda Las Motos and is located in Colombia. It has 5 branches in the departments of Santa Marta, Riohacha, and Zona Bananera.\n\nYou will assist people from neighborhoods in Colombia who are looking for quick information. Their messages are sometimes unclear, may include spelling mistakes, or typing errors. These are customers who tend to write informally.",
     "icon": {
       "type": "emoji",

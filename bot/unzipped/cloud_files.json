@@ -1,51 +1,179 @@
 [
   {
-    "id": "file_01K0EV8661XF0QZ4JNAX6S49VY",
+    "id": "file_01K2CVCA7C3TTKZZXT11DPSHP3",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 1716,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT0DY4GT9XR5FZ3S8A0WP"
+    },
+    "key": "table_01JYMYT0DY4GT9XR5FZ3S8A0WP20250811151828.csv.zip",
+    "index": false,
+    "updatedAt": "2025-08-11T15:18:28.820Z"
+  },
+  {
+    "id": "file_01K20Q23H8H82A3C5C9D4HXJAP",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 11605,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250806221206.csv.zip",
+    "index": false,
+    "updatedAt": "2025-08-06T22:12:06.817Z"
+  },
+  {
+    "id": "file_01K20FSCKXV3CQPMASSQRWJBVH",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 10104,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250806200500.csv.zip",
+    "index": false,
+    "updatedAt": "2025-08-06T20:05:01.172Z"
+  },
+  {
+    "id": "file_01K1Y2AY7TZEE49Y3GDT36AEZJ",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 9786,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250805213126.csv.zip",
+    "index": false,
+    "updatedAt": "2025-08-05T21:31:27.247Z"
+  },
+  {
+    "id": "file_01K1NR2769AG4VDA36HF9E7888",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 6698,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250802155800.csv.zip",
+    "index": false,
+    "updatedAt": "2025-08-02T15:58:00.389Z"
+  },
+  {
+    "id": "file_01K1NM8R5TB0VNRDCTADJZYTJ6",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 2091,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT046PVRBZ7FA7CFX3S7J"
+    },
+    "key": "table_01JYMYT046PVRBZ7FA7CFX3S7J20250802145140.csv.zip",
+    "index": false,
+    "updatedAt": "2025-08-02T14:51:40.084Z"
+  },
+  {
+    "id": "file_01K1M8GG0KSFZB8WBXC2HSM9ZN",
     "accessPolicies": [],
     "contentType": "application/json",
-    "size": 1126816,
+    "size": 1141312,
     "status": "upload_completed",
     "tags": {
       "dm": "studio/dialog-manager",
-      "dmHash": "39fdbc0f1d9ad0ae6760cb748005fb9ba09e9bf7075a0af083cc74cd79935e99",
+      "dmHash": "b9dd4d5ba2b50bf336dbd864f3ac008fa27d5ab44d3f40fe6dc62974c3715597",
       "system": "true",
       "purpose": "bot-content"
     },
-    "key": "deployments/1752844998785.json",
+    "key": "deployments/1754100416475.json",
     "index": false,
-    "updatedAt": "2025-07-18T13:23:18.842Z"
+    "updatedAt": "2025-08-02T02:06:56.526Z"
   },
   {
-    "id": "file_01K0ET1QRXTQM3YRJ6N613GGDR",
-    "accessPolicies": [],
-    "contentType": "application/zip",
-    "size": 408,
-    "status": "upload_completed",
-    "tags": {
-      "tableId": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A"
-    },
-    "key": "table_01K0B5FQXJ2YFBV74Y6YTK5C9A20250718130218.csv.zip",
-    "index": false,
-    "updatedAt": "2025-07-18T13:02:18.899Z"
-  },
-  {
-    "id": "file_01K04FDB6QC3YEEX0MEYT3FDHG",
+    "id": "file_01K1M8E5AMNJF7ASBE787K51MA",
     "accessPolicies": [],
     "contentType": "application/pdf",
-    "size": 55118,
+    "size": 165756,
     "status": "indexing_completed",
     "tags": {
-      "kbId": "kb-e2cf85fe7d",
-      "title": "Preferencia de Estudio de Crédito.pdf",
+      "kbId": "kb-3e05460869",
+      "title": "Formas de compra.pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-3e05460869/Formas de compra.pdf",
+    "index": true,
+    "updatedAt": "2025-08-02T02:05:40.052Z"
+  },
+  {
+    "id": "file_01K1M8E532MP8Y0ZHE5M8ZPQZX",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 212366,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-3437bc5deb",
+      "title": "Preferencia de Estudio de Crédito - Aug 2025.pdf",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
+    },
+    "key": "kb-3437bc5deb/Preferencia de Estudio de Crédito - Aug 2025.pdf",
+    "index": true,
+    "updatedAt": "2025-08-02T02:05:39.810Z"
+  },
+  {
+    "id": "file_01K1GF1EEQXBATXN3GFYAA298D",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1141356,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "b9dd4d5ba2b50bf336dbd864f3ac008fa27d5ab44d3f40fe6dc62974c3715597",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1753973045505.json",
+    "index": false,
+    "updatedAt": "2025-07-31T14:44:05.650Z"
+  },
+  {
+    "id": "file_01K1GEZNFRXH9PVCT86VPFEWW7",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 38245,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-4e5d75775b",
+      "title": "Sedes de Atención de Auteco Las Motos.pdf",
+      "source": "knowledge-base"
+    },
+    "key": "kb-4e5d75775b/Sedes de Atención de Auteco Las Motos.pdf",
+    "index": true,
+    "updatedAt": "2025-07-31T14:43:07.384Z"
+  },
+  {
+    "id": "file_01K1GEZN97NTZJBWY1PNKENTBR",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 4196,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-4e5d75775b",
+      "title": "Preferencia_Estudio_Credito.pdf",
       "source": "knowledge-base",
       "modalities": "[]"
     },
-    "key": "kb-e2cf85fe7d/Preferencia de Estudio de Crédito (Sede vs.pdf",
+    "key": "kb-4e5d75775b/Preferencia_Estudio_Credito.pdf",
     "index": true,
-    "updatedAt": "2025-07-14T12:44:00.599Z"
+    "updatedAt": "2025-07-31T14:43:07.175Z"
   },
   {
-    "id": "file_01K04FDB0Y7J2EXHVTNKJGG4KF",
+    "id": "file_01K1GEZN4JG3RKXY7WE2RVHX25",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 33336,
@@ -58,10 +186,277 @@
     },
     "key": "kb-4e5d75775b/Sedes Las Motos.docx.pdf",
     "index": true,
-    "updatedAt": "2025-07-14T12:44:00.414Z"
+    "updatedAt": "2025-07-31T14:43:07.026Z"
   },
   {
-    "id": "file_01K04FDARFSP07CKENNTXKKCNT",
+    "id": "file_01K1GEXJDHDE3FKH6NJFSQWT90",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 3603,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250731144158.csv.zip",
+    "index": false,
+    "updatedAt": "2025-07-31T14:41:58.700Z"
+  },
+  {
+    "id": "file_01K1EGRVNK1PJZAF52WCN3KRYV",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 3560,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250730203552.csv.zip",
+    "index": false,
+    "updatedAt": "2025-07-30T20:35:52.623Z"
+  },
+  {
+    "id": "file_01K1DXT95V4NW0JVF8JVTHG99K",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 3386,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250730150436.csv.zip",
+    "index": false,
+    "updatedAt": "2025-07-30T15:04:36.276Z"
+  },
+  {
+    "id": "file_01K13HDP41CEH6DQR4AVV33J9K",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1127729,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "b9dd4d5ba2b50bf336dbd864f3ac008fa27d5ab44d3f40fe6dc62974c3715597",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1753539336269.json",
+    "index": false,
+    "updatedAt": "2025-07-26T14:15:36.316Z"
+  },
+  {
+    "id": "file_01K1113BKQAJXZC0AE5AAQDGRN",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 197289,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "677314595350651"
+    },
+    "key": "whatsapp-media_677314595350651",
+    "index": false,
+    "updatedAt": "2025-07-25T14:51:51.788Z"
+  },
+  {
+    "id": "file_01K0YZ3S02APB1MPB33E6X843X",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 2254,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250724193839.csv.zip",
+    "index": false,
+    "updatedAt": "2025-07-24T19:38:39.486Z"
+  },
+  {
+    "id": "file_01K0WZCRGCK0CX5JZK95MFE4B3",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1127068,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "b9dd4d5ba2b50bf336dbd864f3ac008fa27d5ab44d3f40fe6dc62974c3715597",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1753319104969.json",
+    "index": false,
+    "updatedAt": "2025-07-24T01:05:05.030Z"
+  },
+  {
+    "id": "file_01K0WZBWXNZPMA25948EVKMRHB",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 51432,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-4e5d75775b",
+      "title": "Sedes de Atención de Auteco Las Motos.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-4e5d75775b/Sedes de Atención de Auteco Las Motos (1).pdf",
+    "index": true,
+    "updatedAt": "2025-07-24T01:05:00.953Z"
+  },
+  {
+    "id": "file_01K0WP3RR8XSX7G6NRFH3ZTS6P",
+    "accessPolicies": [],
+    "contentType": "application/zip",
+    "size": 1590,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01JYMYT08T0J6FJPBR6FBHP6D7"
+    },
+    "key": "table_01JYMYT08T0J6FJPBR6FBHP6D720250723222253.csv.zip",
+    "index": false,
+    "updatedAt": "2025-07-23T22:22:53.186Z"
+  },
+  {
+    "id": "file_01K0G4KDNQFV7EWB7138DZEQ0Y",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1127446,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "39fdbc0f1d9ad0ae6760cb748005fb9ba09e9bf7075a0af083cc74cd79935e99",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752888358523.json",
+    "index": false,
+    "updatedAt": "2025-07-19T01:25:58.575Z"
+  },
+  {
+    "id": "file_01K0G48C87Z2HDEKG9PY7PGCDV",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1127446,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "39fdbc0f1d9ad0ae6760cb748005fb9ba09e9bf7075a0af083cc74cd79935e99",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752887996622.json",
+    "index": false,
+    "updatedAt": "2025-07-19T01:19:56.671Z"
+  },
+  {
+    "id": "file_01K0FY84YB9VX3TQ41CF522FAE",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1126843,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "39fdbc0f1d9ad0ae6760cb748005fb9ba09e9bf7075a0af083cc74cd79935e99",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752881697686.json",
+    "index": false,
+    "updatedAt": "2025-07-18T23:34:57.729Z"
+  },
+  {
+    "id": "file_01K0EV6WD5X4RSKAZFX9DBR2ZN",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1126428,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "39fdbc0f1d9ad0ae6760cb748005fb9ba09e9bf7075a0af083cc74cd79935e99",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752844955974.json",
+    "index": false,
+    "updatedAt": "2025-07-18T13:22:36.062Z"
+  },
+  {
+    "id": "file_01K0ET62MQ3EB8FH75XXC8798P",
+    "accessPolicies": [],
+    "contentType": "text/plain; charset=utf-8",
+    "size": 198,
+    "status": "upload_completed",
+    "tags": {
+      "tableId": "table_01K0B78E2N9NHJA8KS9CHB8FBV"
+    },
+    "key": "table_01K0B78E2N9NHJA8KS9CHB8FBV20250718130441.log",
+    "index": false,
+    "updatedAt": "2025-07-18T13:04:41.105Z"
+  },
+  {
+    "id": "file_01K0ET611MVEGM7JQZAXG7PHRQ",
+    "accessPolicies": [],
+    "contentType": "application/octet-stream",
+    "size": 327,
+    "status": "upload_completed",
+    "tags": {},
+    "key": "my-file-1752843879257",
+    "index": false,
+    "updatedAt": "2025-07-18T13:04:39.469Z"
+  },
+  {
+    "id": "file_01K0B7DQ7MG3W281MT9F9KY36B",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1126536,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752723545274.json",
+    "index": false,
+    "updatedAt": "2025-07-17T03:39:05.324Z"
+  },
+  {
+    "id": "file_01K0B78EC2VZRK0B2XTWS3EPDV",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 4196,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Preferencia_Estudio_Credito.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-e2cf85fe7d/Preferencia_Estudio_Credito.pdf",
+    "index": true,
+    "updatedAt": "2025-07-17T03:36:12.418Z"
+  },
+  {
+    "id": "file_01K02X1T75954G5RHWB9RCX0CZ",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1104762,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752444233901.json",
+    "index": false,
+    "updatedAt": "2025-07-13T22:03:53.948Z"
+  },
+  {
+    "id": "file_01K02X0A60D98MEKAZS6JJYDDN",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 158372,
@@ -74,27 +469,302 @@
     },
     "key": "kb-e2cf85fe7d/Frases de Interés en Colombia.pdf",
     "index": true,
-    "updatedAt": "2025-07-14T12:44:00.144Z"
+    "updatedAt": "2025-07-13T22:03:04.768Z"
   },
   {
-    "id": "file_01JYN0QJA85R90V8T69JYBW617",
+    "id": "file_01K02THVS0S0GMP2X5QB63GBXF",
     "accessPolicies": [],
-    "contentType": "text/html; charset=utf-8",
-    "size": 2659,
+    "contentType": "application/json",
+    "size": 1104575,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752441614043.json",
+    "index": false,
+    "updatedAt": "2025-07-13T21:20:14.106Z"
+  },
+  {
+    "id": "file_01K02KAYFH5HMYZP1K3JQ7M5MS",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1102685,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752434046539.json",
+    "index": false,
+    "updatedAt": "2025-07-13T19:14:07.230Z"
+  },
+  {
+    "id": "file_01K02HYNQGYPMNYCQH8TR568D4",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1102172,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752432596668.json",
+    "index": false,
+    "updatedAt": "2025-07-13T18:49:56.715Z"
+  },
+  {
+    "id": "file_01K02HE9ECFTS76QK626NFN2VB",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1101830,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752432059790.json",
+    "index": false,
+    "updatedAt": "2025-07-13T18:40:59.843Z"
+  },
+  {
+    "id": "file_01K02H8GK5HWXX6P1PNGYG0TRQ",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1101696,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752431870496.json",
+    "index": false,
+    "updatedAt": "2025-07-13T18:37:50.554Z"
+  },
+  {
+    "id": "file_01K02H3NE2JSS5AX6D2T67NATG",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1101728,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752431711624.json",
+    "index": false,
+    "updatedAt": "2025-07-13T18:35:11.676Z"
+  },
+  {
+    "id": "file_01JZS2E7Y6WSQXTP83MFMVP5DN",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1101455,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752114339719.json",
+    "index": false,
+    "updatedAt": "2025-07-10T02:25:39.773Z"
+  },
+  {
+    "id": "file_01JZS18RS8NJAKRX1P4KP5QG34",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1099653,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d3d20012c0cef3d3bb96bedfb869f187260942d4a45f001e6eb1386b048d99a1",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1752113111784.json",
+    "index": false,
+    "updatedAt": "2025-07-10T02:05:11.839Z"
+  },
+  {
+    "id": "file_01JZBH3A4WWFWFXKVEWDADDN15",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 225618,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integration": "webchat"
+    },
+    "key": "bot-0139107b-e956-4207-ad28-23ed5b780b12-avatar-IPVhhn",
+    "index": false,
+    "updatedAt": "2025-07-04T20:12:28.182Z"
+  },
+  {
+    "id": "file_01JZBH2VX3VZPZVFP2J6MVR5S7",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/png",
+    "size": 190241,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integration": "webchat"
+    },
+    "key": "bot-0139107b-e956-4207-ad28-23ed5b780b12-fab-G48etq",
+    "index": false,
+    "updatedAt": "2025-07-04T20:12:13.598Z"
+  },
+  {
+    "id": "file_01JZBGYMDM9N8JCRZ4RQSWBKJP",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 225618,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integration": "webchat"
+    },
+    "key": "bot-0139107b-e956-4207-ad28-23ed5b780b12-avatar-KjvCL4",
+    "index": false,
+    "updatedAt": "2025-07-04T20:09:54.859Z"
+  },
+  {
+    "id": "file_01JZ6TJ1HFF7QABM9N82W3YRZG",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1073057,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d300c9831f0719d5d7d54f9bedf3adf53a39ae0ebfbe9e9c3e7158ecbd616f1e",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1751502095862.json",
+    "index": false,
+    "updatedAt": "2025-07-03T00:21:35.911Z"
+  },
+  {
+    "id": "file_01JYVFJRZR15XY7VTRHKXD56C5",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/json",
+    "size": 978,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "system": "true",
+      "integrationName": "webchat",
+      "webchatConfigVersion": "1"
+    },
+    "key": "webchatConfig.json",
+    "index": false,
+    "updatedAt": "2025-08-02T02:07:13.794Z"
+  },
+  {
+    "id": "file_01JYVFJRW80G7GKV1RJP2BDK7G",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/javascript",
+    "size": 1001,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "system": "true",
+      "integrationName": "webchat",
+      "webchatInjectConfigVersion": "1"
+    },
+    "key": "webchatConfigInject.js",
+    "index": false,
+    "updatedAt": "2025-08-02T02:07:13.594Z"
+  },
+  {
+    "id": "file_01JYVFJ993TGNG8G2H1PV3PP9W",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1068486,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "d300c9831f0719d5d7d54f9bedf3adf53a39ae0ebfbe9e9c3e7158ecbd616f1e",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1751121470579.json",
+    "index": false,
+    "updatedAt": "2025-06-28T14:37:50.746Z"
+  },
+  {
+    "id": "file_01JYT1BZ5RN6PQMZRD73EZ8QDC",
+    "accessPolicies": [],
+    "contentType": "application/json; charset=utf-8",
+    "size": 4999,
+    "status": "upload_completed",
+    "tags": {
+      "system": "true",
+      "purpose": "config"
+    },
+    "key": "bot->0139107b-e956-4207-ad28-23ed5b780b12->models.config.json",
+    "index": false,
+    "updatedAt": "2025-06-28T01:10:29.296Z"
+  },
+  {
+    "id": "file_01JYSZ6JDTFSXY2GNZXCRHC1M9",
+    "accessPolicies": [],
+    "contentType": "text/markdown",
+    "size": 4107,
     "status": "indexing_completed",
     "tags": {
-      "dsId": "ds-6df81fabe2",
-      "kbId": "kb-8de928102b",
-      "title": "ds-6df81fabe2.html",
+      "dsId": "ds-68bdd7c616",
+      "kbId": "kb-8020182bea",
       "source": "knowledge-base",
-      "modalities": "[\"text\"]"
+      "favicon": "https://marxa-digital.atlassian.net/wiki/s/-1257954834/6452/60eab475accd858db5647b01e921079bdbc0d299/1/_/favicon-update.ico",
+      "pageUrl": "https://marxa-digital.atlassian.net/wiki/external/ZDcyM2NhMjQ3ZWRlNDZiZmFkZThiYjc5ZmUwYjc5MTY",
+      "lastCrawledAt": "2025-04-26T14:23:15.512+00:00"
     },
-    "key": "kb-8de928102b/ds-6df81fabe2.html",
+    "key": "zdcym2nhmjq3zwrlndzizmfkzthiyjc5zmuwyjc5mty.html",
     "index": true,
-    "updatedAt": "2025-06-26T02:23:08.616Z"
+    "updatedAt": "2025-06-28T00:32:35.258Z"
   },
   {
-    "id": "file_01JWEBCW95F03P3P4E95PCZ3GN",
+    "id": "file_01JYSXEM04C4AM0DDPWWMEBC59",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 55118,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Preferencia de Estudio de Crédito.pdf",
+      "source": "knowledge-base",
+      "modalities": "[]"
+    },
+    "key": "kb-e2cf85fe7d/Preferencia de Estudio de Crédito (Sede vs.pdf",
+    "index": true,
+    "updatedAt": "2025-06-28T00:02:01.861Z"
+  },
+  {
+    "id": "file_01JYMYSZXBQVEQZXEHB4K6GJKY",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 985317,
@@ -107,10 +777,10 @@
     },
     "key": "deployments/1748533407975.json",
     "index": false,
-    "updatedAt": "2025-05-29T15:43:28.029Z"
+    "updatedAt": "2025-06-26T01:49:30.914Z"
   },
   {
-    "id": "file_01JWD3K171ZT92PT0EQ1QMGPNS",
+    "id": "file_01JYMYSZSE70WAWBVT3NEJ3QJZ",
     "accessPolicies": [],
     "contentType": "application/zip",
     "size": 782,
@@ -120,10 +790,10 @@
     },
     "key": "table_01JHHBJE021CQPDS8PAJ9H8PJP20250529040746.csv.zip",
     "index": false,
-    "updatedAt": "2025-05-29T04:07:46.651Z"
+    "updatedAt": "2025-06-26T01:49:30.789Z"
   },
   {
-    "id": "file_01JW3WV0F9B1FKB3W9F5393XJ0",
+    "id": "file_01JYMYSZJTCMP2942FB8B1JDK2",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1008967,
@@ -136,10 +806,10 @@
     },
     "key": "deployments/1748182598019.json",
     "index": false,
-    "updatedAt": "2025-05-25T14:16:38.112Z"
+    "updatedAt": "2025-06-26T01:49:30.578Z"
   },
   {
-    "id": "file_01JW1HX418HQPPBE6T8PRAA5SE",
+    "id": "file_01JYMYSZAY4DX2C89X45SA3QKE",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1009670,
@@ -152,10 +822,10 @@
     },
     "key": "deployments/1748104024036.json",
     "index": false,
-    "updatedAt": "2025-05-24T16:27:04.091Z"
+    "updatedAt": "2025-06-26T01:49:30.323Z"
   },
   {
-    "id": "file_01JW1BPYB36JPZEZAEBC8TS05P",
+    "id": "file_01JYMYSZ3PNZ9BDSNJGTMN4FT1",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1007244,
@@ -168,10 +838,10 @@
     },
     "key": "deployments/1748097530166.json",
     "index": false,
-    "updatedAt": "2025-05-24T14:38:50.203Z"
+    "updatedAt": "2025-06-26T01:49:30.097Z"
   },
   {
-    "id": "file_01JW1BPB495CNG25E42GQ1MT23",
+    "id": "file_01JYMYSYYKNDC2YZVJJ83JAKWK",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1007244,
@@ -184,10 +854,10 @@
     },
     "key": "deployments/1748097510474.json",
     "index": false,
-    "updatedAt": "2025-05-24T14:38:30.526Z"
+    "updatedAt": "2025-06-26T01:49:29.931Z"
   },
   {
-    "id": "file_01JW067KD5MCZFW3M58YTXHSKY",
+    "id": "file_01JYMYSYRC884BDW6Y1ZD1PGEF",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1006399,
@@ -200,10 +870,10 @@
     },
     "key": "deployments/1748058230135.json",
     "index": false,
-    "updatedAt": "2025-05-24T03:43:50.173Z"
+    "updatedAt": "2025-06-26T01:49:29.732Z"
   },
   {
-    "id": "file_01JW0293DPS3V5VPNY7V2M32EF",
+    "id": "file_01JYMYSYJE5Z14DTPQC001Q23Q",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1001064,
@@ -216,10 +886,10 @@
     },
     "key": "deployments/1748054084977.json",
     "index": false,
-    "updatedAt": "2025-05-24T02:34:45.038Z"
+    "updatedAt": "2025-06-26T01:49:29.538Z"
   },
   {
-    "id": "file_01JW001KXAHFM1MMFYR11VQ7YA",
+    "id": "file_01JYMYSYAXPPBTSMZHMN2BSAZN",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 996134,
@@ -232,10 +902,10 @@
     },
     "key": "deployments/1748051742565.json",
     "index": false,
-    "updatedAt": "2025-05-24T01:55:42.618Z"
+    "updatedAt": "2025-06-26T01:49:29.304Z"
   },
   {
-    "id": "file_01JVZYGEHQTDJEHX608BGRKY5W",
+    "id": "file_01JYMYSY4GC7MDXFKVSJ2NTMZC",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 983418,
@@ -248,10 +918,10 @@
     },
     "key": "deployments/1748050131464.json",
     "index": false,
-    "updatedAt": "2025-05-24T01:28:51.503Z"
+    "updatedAt": "2025-06-26T01:49:29.094Z"
   },
   {
-    "id": "file_01JVNJP5X4JEDPN1Q3VW4R3DR0",
+    "id": "file_01JYMYSXWV5EN3PRA5MJ5X5BCC",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1076196,
@@ -264,10 +934,10 @@
     },
     "key": "deployments/1747702191991.json",
     "index": false,
-    "updatedAt": "2025-05-20T00:49:52.025Z"
+    "updatedAt": "2025-06-26T01:49:28.844Z"
   },
   {
-    "id": "file_01JVMEVDYEC43X5KJ13CQPAE26",
+    "id": "file_01JYMYSXNWZGV4MW3KZKNMF0R7",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1072045,
@@ -280,10 +950,10 @@
     },
     "key": "deployments/1747664615325.json",
     "index": false,
-    "updatedAt": "2025-05-19T14:23:35.368Z"
+    "updatedAt": "2025-06-26T01:49:28.628Z"
   },
   {
-    "id": "file_01JVGE3QJWESGA90XJWF6A7GJZ",
+    "id": "file_01JYMYSXF17B2Z3JQ6J8NNCMAS",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1068481,
@@ -296,10 +966,10 @@
     },
     "key": "deployments/1747529621024.json",
     "index": false,
-    "updatedAt": "2025-05-18T00:53:41.076Z"
+    "updatedAt": "2025-06-26T01:49:28.409Z"
   },
   {
-    "id": "file_01JVFEDKG39Y7K9TDQH8A957H3",
+    "id": "file_01JYMYSX8M4K8ZFBHSAWJEZXRZ",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1068090,
@@ -312,10 +982,10 @@
     },
     "key": "deployments/1747496390001.json",
     "index": false,
-    "updatedAt": "2025-05-17T15:39:50.141Z"
+    "updatedAt": "2025-06-26T01:49:28.207Z"
   },
   {
-    "id": "file_01JVE0H5DZSNTE0AW3YD08HP76",
+    "id": "file_01JYMYSWZC5WX2ES902G0V64N4",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079905,
@@ -328,10 +998,10 @@
     },
     "key": "deployments/1747448272262.json",
     "index": false,
-    "updatedAt": "2025-05-17T02:17:52.311Z"
+    "updatedAt": "2025-06-26T01:49:27.905Z"
   },
   {
-    "id": "file_01JVE00J4JAKK2RCTASZ372PF3",
+    "id": "file_01JYMYSWQQPNAT57AFKDBZDY9V",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079568,
@@ -344,10 +1014,10 @@
     },
     "key": "deployments/1747447728222.json",
     "index": false,
-    "updatedAt": "2025-05-17T02:08:48.269Z"
+    "updatedAt": "2025-06-26T01:49:27.666Z"
   },
   {
-    "id": "file_01JVDZ2PMG2NM4BS0Y54ZVF1NJ",
+    "id": "file_01JYMYSWGTMVSB1PPVQDZ6TVQ9",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079558,
@@ -360,10 +1030,10 @@
     },
     "key": "deployments/1747446749784.json",
     "index": false,
-    "updatedAt": "2025-05-17T01:52:29.832Z"
+    "updatedAt": "2025-06-26T01:49:27.441Z"
   },
   {
-    "id": "file_01JVDY364A6CCHT1XSMYAWZKX0",
+    "id": "file_01JYMYSWAZMTH21NM5MJQ6AVX7",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079211,
@@ -376,10 +1046,10 @@
     },
     "key": "deployments/1747445717076.json",
     "index": false,
-    "updatedAt": "2025-05-17T01:35:17.124Z"
+    "updatedAt": "2025-06-26T01:49:27.250Z"
   },
   {
-    "id": "file_01JVDVP736TBCSVRX9KZNKHXSD",
+    "id": "file_01JYMYSW3JP5Z8F7NTTXBKYWWN",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079175,
@@ -392,10 +1062,10 @@
     },
     "key": "deployments/1747443194923.json",
     "index": false,
-    "updatedAt": "2025-05-17T00:53:14.976Z"
+    "updatedAt": "2025-06-26T01:49:27.017Z"
   },
   {
-    "id": "file_01JVDVKGEENPE0S5WH8942J5BN",
+    "id": "file_01JYMYSVZ19XB74A4J603BFWJG",
     "accessPolicies": [],
     "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "size": 22120,
@@ -408,10 +1078,10 @@
     },
     "key": "kb-980112fbf0/Crédito Auteco Las Motos - Información Unificada.docx",
     "index": true,
-    "updatedAt": "2025-05-17T00:51:46.248Z"
+    "updatedAt": "2025-06-26T01:49:26.873Z"
   },
   {
-    "id": "file_01JVDSERP498WY8CAZPYG949JH",
+    "id": "file_01JYMYSVQFZEP9ZFNPZ6E93S3S",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079174,
@@ -424,10 +1094,10 @@
     },
     "key": "deployments/1747440853654.json",
     "index": false,
-    "updatedAt": "2025-05-17T00:14:13.694Z"
+    "updatedAt": "2025-06-26T01:49:26.631Z"
   },
   {
-    "id": "file_01JVBM96V0BQSV9AXQ406900FB",
+    "id": "file_01JYMYSVJK63CQTX4MA7PXHVB3",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 48962,
@@ -445,10 +1115,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_4.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:05:19.828Z"
+    "updatedAt": "2025-06-26T01:49:26.475Z"
   },
   {
-    "id": "file_01JVBM96SKEW3PCS5EDWJ2G4V9",
+    "id": "file_01JYMYSVE9FJ5KBDJ822GH14FK",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 42029,
@@ -466,10 +1136,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_2.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:05:19.783Z"
+    "updatedAt": "2025-06-26T01:49:26.335Z"
   },
   {
-    "id": "file_01JVBM96SJFCTT0KH2R8FY33ZH",
+    "id": "file_01JYMYSVA10VHJRN305HN2G8BK",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 50493,
@@ -487,10 +1157,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_5.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:05:19.785Z"
+    "updatedAt": "2025-06-26T01:49:26.197Z"
   },
   {
-    "id": "file_01JVBM96SHKQGXWQJ616WQFKFT",
+    "id": "file_01JYMYSV4VQ35YAXMDQPR3VQ7H",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 25432,
@@ -508,10 +1178,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:05:19.781Z"
+    "updatedAt": "2025-06-26T01:49:26.035Z"
   },
   {
-    "id": "file_01JVBM96SBQB3M80G6P0WSXXJR",
+    "id": "file_01JYMYSTYJN9WGXSCWX63Y4GGW",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 47406,
@@ -529,10 +1199,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM8F6MX25412QYPBS16S8G_3.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:05:19.776Z"
+    "updatedAt": "2025-06-26T01:49:25.834Z"
   },
   {
-    "id": "file_01JVBM2XB4YTXZ640YAWFT2EFD",
+    "id": "file_01JYMYSTSVGJRQ9ZZG6KZP9M48",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 41609,
@@ -550,10 +1220,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_2.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:01:53.491Z"
+    "updatedAt": "2025-06-26T01:49:25.683Z"
   },
   {
-    "id": "file_01JVBM2XAF7Z76XPYYYSFVCQMP",
+    "id": "file_01JYMYSTNNH0HPPFSAYKXD75X3",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 42985,
@@ -571,10 +1241,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_3.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:01:53.474Z"
+    "updatedAt": "2025-06-26T01:49:25.549Z"
   },
   {
-    "id": "file_01JVBM2XAEXE4B52G0W3AYG1MH",
+    "id": "file_01JYMYSTHNAAJW1WBTRTCMTKFT",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 25124,
@@ -592,10 +1262,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM2SKYYHPXBHX3Z4CNVVGV_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:01:53.475Z"
+    "updatedAt": "2025-06-26T01:49:25.421Z"
   },
   {
-    "id": "file_01JVBM147XHHE5JM3EYSQZS2VP",
+    "id": "file_01JYMYSTD1TJPFNHD01M47EN2A",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 42347,
@@ -613,10 +1283,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM0SYN6B3VBPXQQ71V17MM_3.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:00:54.987Z"
+    "updatedAt": "2025-06-26T01:49:25.274Z"
   },
   {
-    "id": "file_01JVBM147PBMXAXJE44TV5Q643",
+    "id": "file_01JYMYST826NZ3MQDNZPH671EB",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 25075,
@@ -634,10 +1304,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM0SYN6B3VBPXQQ71V17MM_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:00:55.012Z"
+    "updatedAt": "2025-06-26T01:49:25.114Z"
   },
   {
-    "id": "file_01JVBM146X3N7GF8PCBNQHJJPB",
+    "id": "file_01JYMYST48JZENXSF9ZYHYFZVJ",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 41383,
@@ -655,10 +1325,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBM0SYN6B3VBPXQQ71V17MM_2.json",
     "index": false,
-    "updatedAt": "2025-05-16T04:00:54.968Z"
+    "updatedAt": "2025-06-26T01:49:24.991Z"
   },
   {
-    "id": "file_01JVBKXZJ4W4F68BHKXD73RJWT",
+    "id": "file_01JYMYST0JNWWPYHF530Z7M35T",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 41609,
@@ -676,10 +1346,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_2.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:59:11.874Z"
+    "updatedAt": "2025-06-26T01:49:24.874Z"
   },
   {
-    "id": "file_01JVBKXZHCNKBM9WJWXHMHSMMH",
+    "id": "file_01JYMYSSTRAGBKQ5SG32FVN0K8",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 25124,
@@ -697,10 +1367,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:59:11.873Z"
+    "updatedAt": "2025-06-26T01:49:24.687Z"
   },
   {
-    "id": "file_01JVBKXZGF24RTV49HAW4J0ET1",
+    "id": "file_01JYMYSSNPYN1X4QNVMGXZPSJT",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 42985,
@@ -718,10 +1388,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKXJ4FQYYG0PJNCVBHKRNE_3.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:59:11.879Z"
+    "updatedAt": "2025-06-26T01:49:24.525Z"
   },
   {
-    "id": "file_01JVBKM4TMY7H338N1TVGBM5FH",
+    "id": "file_01JYMYSSGCXSWX38N9N70M62CN",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 44095,
@@ -739,10 +1409,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_5.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:53:49.640Z"
+    "updatedAt": "2025-06-26T01:49:24.356Z"
   },
   {
-    "id": "file_01JVBKM4TJVAG0H604ZS7QCMPK",
+    "id": "file_01JYMYSSBR55S0A63993FH0MRQ",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 42800,
@@ -760,10 +1430,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_3.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:53:49.641Z"
+    "updatedAt": "2025-06-26T01:49:24.206Z"
   },
   {
-    "id": "file_01JVBKM4TDX22RDEB34SS057PD",
+    "id": "file_01JYMYSS7TX5JQBWEB452S77GT",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 26113,
@@ -781,10 +1451,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:53:49.637Z"
+    "updatedAt": "2025-06-26T01:49:24.082Z"
   },
   {
-    "id": "file_01JVBKM4TCNVDHAQHQAP5VSN2Q",
+    "id": "file_01JYMYSS2ZH4NXA3HMPHR165F6",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 26481,
@@ -802,10 +1472,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_2.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:53:49.636Z"
+    "updatedAt": "2025-06-26T01:49:23.923Z"
   },
   {
-    "id": "file_01JVBKM4T53HTJ78M83FRRGKZ2",
+    "id": "file_01JYMYSRYW6EHQ91R4KRJPJER0",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 43192,
@@ -823,10 +1493,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKKQ8QCYVP2M2QVQ56Z8E8_4.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:53:49.629Z"
+    "updatedAt": "2025-06-26T01:49:23.794Z"
   },
   {
-    "id": "file_01JVBKG8A2DRC964C96R70MGPZ",
+    "id": "file_01JYMYSRTTQ6FHA934QCZN4K88",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 26077,
@@ -844,10 +1514,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBKG6KKN96ENNQNG0C0M89B_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:51:42.138Z"
+    "updatedAt": "2025-06-26T01:49:23.666Z"
   },
   {
-    "id": "file_01JVBJRT8TYAR1E6FF08CN2JSY",
+    "id": "file_01JYMYSRQ18KHBVZPJBF7EM2NX",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 26077,
@@ -865,10 +1535,10 @@
     },
     "key": "improvements/iterations/llmz_01JVBJRQ43MEHEJ9RFK6HYEFYE_1.json",
     "index": false,
-    "updatedAt": "2025-05-16T03:38:54.097Z"
+    "updatedAt": "2025-06-26T01:49:23.545Z"
   },
   {
-    "id": "file_01JV0X8NSRJMHA6SVMQH7Z0GXD",
+    "id": "file_01JYMYSRKER1YYGQZKKH38ZMZE",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 90323,
@@ -881,10 +1551,10 @@
     },
     "key": "kb-6692a2dcc2/Árbol de Decisión para Categorización de Mensajes v2_2.pdf",
     "index": true,
-    "updatedAt": "2025-05-12T00:10:40.815Z"
+    "updatedAt": "2025-06-26T01:49:23.430Z"
   },
   {
-    "id": "file_01JTXJZMJNNVW7JXSJ290G7BX8",
+    "id": "file_01JYMYSRDD3RX753F921D7DMSS",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 56337,
@@ -897,28 +1567,10 @@
     },
     "key": "kb-6692a2dcc2/Categorización de Mensajes de Usuario.pdf",
     "index": true,
-    "updatedAt": "2025-05-10T17:13:15.597Z"
+    "updatedAt": "2025-06-26T01:49:23.237Z"
   },
   {
-    "id": "file_01JSS7P9KN6NP7RBXH2G9MNA6P",
-    "accessPolicies": [],
-    "contentType": "text/markdown",
-    "size": 4107,
-    "status": "indexing_completed",
-    "tags": {
-      "dsId": "ds-68bdd7c616",
-      "kbId": "kb-8020182bea",
-      "source": "knowledge-base",
-      "favicon": "https://marxa-digital.atlassian.net/wiki/s/-1257954834/6452/60eab475accd858db5647b01e921079bdbc0d299/1/_/favicon-update.ico",
-      "pageUrl": "https://marxa-digital.atlassian.net/wiki/external/ZDcyM2NhMjQ3ZWRlNDZiZmFkZThiYjc5ZmUwYjc5MTY",
-      "lastCrawledAt": "2025-04-26T14:23:15.512+00:00"
-    },
-    "key": "zdcym2nhmjq3zwrlndzizmfkzthiyjc5zmuwyjc5mty.html",
-    "index": true,
-    "updatedAt": "2025-04-26T14:23:15.562Z"
-  },
-  {
-    "id": "file_01JSS7NSBV86QKFHMHXFX7Z02W",
+    "id": "file_01JYMYSR3XYD1RVB3NXFNRHCF4",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 192,
@@ -928,10 +1580,10 @@
     },
     "key": "indexing-task-ds-68bdd7c616-20250426-0822.json",
     "index": false,
-    "updatedAt": "2025-04-26T14:22:58.930Z"
+    "updatedAt": "2025-06-26T01:49:22.931Z"
   },
   {
-    "id": "file_01JSR06V36JXXE5ZK34D15E455",
+    "id": "file_01JYMYSR08E7VJJN4YC0F2A5M9",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 147,
@@ -941,10 +1593,10 @@
     },
     "key": "indexing-task-ds-b7c2a55af0-20250425-2053.json",
     "index": false,
-    "updatedAt": "2025-04-26T02:53:14.702Z"
+    "updatedAt": "2025-06-26T01:49:22.815Z"
   },
   {
-    "id": "file_01JSQY8MDAKZC177HF9WBQ5C02",
+    "id": "file_01JYMYSQVT5J352BXDA0C2WMW5",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 183,
@@ -954,10 +1606,10 @@
     },
     "key": "indexing-task-ds-956deca094-20250425-2019.json",
     "index": false,
-    "updatedAt": "2025-04-26T02:19:16.257Z"
+    "updatedAt": "2025-06-26T01:49:22.674Z"
   },
   {
-    "id": "file_01JRZA1TG4E25TBQ4VQWKBTHZ6",
+    "id": "file_01JYMYSQJCZ1FT705KS9FRTMQZ",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1060057,
@@ -970,10 +1622,10 @@
     },
     "key": "deployments/1744807453550.json",
     "index": false,
-    "updatedAt": "2025-04-16T12:44:14.578Z"
+    "updatedAt": "2025-06-26T01:49:22.372Z"
   },
   {
-    "id": "file_01JRYHM5R88XQT7ND299HGXV80",
+    "id": "file_01JYMYSQDH2XCYWJ5P8WFT2N0N",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1060625,
@@ -986,10 +1638,10 @@
     },
     "key": "deployments/1744781842113.json",
     "index": false,
-    "updatedAt": "2025-04-16T05:37:22.178Z"
+    "updatedAt": "2025-06-26T01:49:22.218Z"
   },
   {
-    "id": "file_01JRYESD1H4BRMH320497TF4S5",
+    "id": "file_01JYMYSQ7H0Z8QTDBSBTH15BN7",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 117547,
@@ -1002,10 +1654,10 @@
     },
     "key": "kb-06dfee802d/Conocimiento sobre sinónimos y formas comunes en que los clientes se refieren a las motos.pdf",
     "index": true,
-    "updatedAt": "2025-04-16T04:47:47.753Z"
+    "updatedAt": "2025-06-26T01:49:22.026Z"
   },
   {
-    "id": "file_01JRWT3PJ1SJF2EY17WPEFWKYN",
+    "id": "file_01JYMYSQ2SAJF980NK3035E6QS",
     "accessPolicies": [],
     "contentType": "text/plain; charset=utf-8",
     "size": 434,
@@ -1015,10 +1667,10 @@
     },
     "key": "table_01JHHBJCJ9C8T79QE7XT7TYRM720250415132710.log",
     "index": false,
-    "updatedAt": "2025-04-15T13:27:10.626Z"
+    "updatedAt": "2025-06-26T01:49:21.872Z"
   },
   {
-    "id": "file_01JRWT3MTDDEBZM8YJJ2FSHD2B",
+    "id": "file_01JYMYSPZ7BA9SQ5YNNG82VXSD",
     "accessPolicies": [],
     "contentType": "application/octet-stream",
     "size": 6922,
@@ -1026,10 +1678,10 @@
     "tags": {},
     "key": "my-file-1744723628568",
     "index": false,
-    "updatedAt": "2025-04-15T13:27:08.869Z"
+    "updatedAt": "2025-06-26T01:49:21.759Z"
   },
   {
-    "id": "file_01JRJD7ZR39KFKR1J38EVNX4YG",
+    "id": "file_01JYMYSPR4567BMB9XE5QPDT2M",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079235,
@@ -1042,10 +1694,10 @@
     },
     "key": "deployments/1744374595138.json",
     "index": false,
-    "updatedAt": "2025-04-11T12:29:55.284Z"
+    "updatedAt": "2025-06-26T01:49:21.530Z"
   },
   {
-    "id": "file_01JRD9QF2RHBDFDSK5JKM73Z68",
+    "id": "file_01JYMYSPHWW18EA2PJJ5HJZR74",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1079965,
@@ -1058,10 +1710,10 @@
     },
     "key": "deployments/1744203135977.json",
     "index": false,
-    "updatedAt": "2025-04-09T12:52:16.058Z"
+    "updatedAt": "2025-06-26T01:49:21.315Z"
   },
   {
-    "id": "file_01JRCFC30038Z13PMBCC6NNYV3",
+    "id": "file_01JYMYSPD3C44NA8HD5KPSNWCG",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 91529,
@@ -1074,10 +1726,10 @@
     },
     "key": "kb-aecc750e64/Explicación del Sistema de Categorización de Consultas (con Cupo Brilla).pdf",
     "index": true,
-    "updatedAt": "2025-04-09T05:11:40.251Z"
+    "updatedAt": "2025-06-26T01:49:21.174Z"
   },
   {
-    "id": "file_01JRCB180951CGMC04WJ4ZPCA1",
+    "id": "file_01JYMYSP8TG25W8G84SR1VRF8R",
     "accessPolicies": [],
     "contentType": "text/plain; charset=utf-8",
     "size": 434,
@@ -1087,10 +1739,10 @@
     },
     "key": "table_01JHHBJCJ9C8T79QE7XT7TYRM720250409035549.log",
     "index": false,
-    "updatedAt": "2025-04-09T03:55:50.242Z"
+    "updatedAt": "2025-06-26T01:49:21.038Z"
   },
   {
-    "id": "file_01JRCB12BDM0XKH2H8M6DAWKZT",
+    "id": "file_01JYMYSP4GMDT6DK3VTA2M414F",
     "accessPolicies": [],
     "contentType": "application/octet-stream",
     "size": 2275,
@@ -1098,10 +1750,10 @@
     "tags": {},
     "key": "my-file-1744170939794",
     "index": false,
-    "updatedAt": "2025-04-09T03:55:42.493Z"
+    "updatedAt": "2025-06-26T01:49:20.902Z"
   },
   {
-    "id": "file_01JR6ESCCHQYJN9NDH3T8YWAY7",
+    "id": "file_01JYMYSNYJ5SRN0ETZJBX358PP",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1073795,
@@ -1114,10 +1766,10 @@
     },
     "key": "deployments/1743973560644.json",
     "index": false,
-    "updatedAt": "2025-04-06T21:06:00.691Z"
+    "updatedAt": "2025-06-26T01:49:20.712Z"
   },
   {
-    "id": "file_01JR13A2BGR6Z5B6X8FZJ43S5E",
+    "id": "file_01JYMYSNRS1SYN59G9WW820GM9",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1066256,
@@ -1130,10 +1782,10 @@
     },
     "key": "deployments/1743793752379.json",
     "index": false,
-    "updatedAt": "2025-04-04T19:09:12.423Z"
+    "updatedAt": "2025-06-26T01:49:20.529Z"
   },
   {
-    "id": "file_01JQZKSR9V8WNE69QWBBZYDNPQ",
+    "id": "file_01JYMYSNMPS2CQ0EQCNAMQRZKA",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 3041,
@@ -1146,10 +1798,10 @@
     },
     "key": "kb-8020182bea/Reconocimiento_Numeros_Celulares_Colombia.pdf",
     "index": true,
-    "updatedAt": "2025-04-04T05:18:54.775Z"
+    "updatedAt": "2025-06-26T01:49:20.397Z"
   },
   {
-    "id": "file_01JQZGT6CMRJ51ERH4ACM2GSVS",
+    "id": "file_01JYMYSNGE9E7VNP2P22M9X7WZ",
     "accessPolicies": [],
     "contentType": "application/json; charset=utf-8",
     "size": 4445,
@@ -1160,10 +1812,10 @@
     },
     "key": "bot->e8a85cb7-0432-4b73-9d64-6d6b0135e108->models.config.json",
     "index": false,
-    "updatedAt": "2025-06-19T03:12:48.880Z"
+    "updatedAt": "2025-06-26T01:49:20.262Z"
   },
   {
-    "id": "file_01JQWHZR6G5XGA2CDS26J31Y4E",
+    "id": "file_01JYMYSNAXZZMG2JF02JRHG9Z2",
     "accessPolicies": [],
     "contentType": "application/json",
     "size": 1059789,
@@ -1176,10 +1828,10 @@
     },
     "key": "deployments/1743641370773.json",
     "index": false,
-    "updatedAt": "2025-04-03T00:49:30.823Z"
+    "updatedAt": "2025-06-26T01:49:20.085Z"
   },
   {
-    "id": "file_01JQH0KVCD213TGESX5Q4Q9AY4",
+    "id": "file_01JYMYSN6AS5P81YVTZE4JNH7E",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 69610,
@@ -1192,42 +1844,10 @@
     },
     "key": "kb-e12e5e9d75/Guía para Reconocer Números en Documentos de Facturación y Identificación en Colombia.pdf",
     "index": true,
-    "updatedAt": "2025-03-29T13:14:16.335Z"
+    "updatedAt": "2025-06-26T01:49:19.938Z"
   },
   {
-    "id": "file_01JQH0KV5NGNKE9WNJRB53K849",
-    "accessPolicies": [],
-    "contentType": "application/pdf",
-    "size": 4196,
-    "status": "indexing_completed",
-    "tags": {
-      "kbId": "kb-4e5d75775b",
-      "title": "Preferencia_Estudio_Credito.pdf",
-      "source": "knowledge-base",
-      "modalities": "[]"
-    },
-    "key": "kb-4e5d75775b/Preferencia_Estudio_Credito.pdf",
-    "index": true,
-    "updatedAt": "2025-03-29T13:14:16.117Z"
-  },
-  {
-    "id": "file_01JQH0KTQ3CZ593ZH4QYHKHBXT",
-    "accessPolicies": [],
-    "contentType": "application/pdf",
-    "size": 4196,
-    "status": "indexing_completed",
-    "tags": {
-      "kbId": "kb-e2cf85fe7d",
-      "title": "Preferencia_Estudio_Credito.pdf",
-      "source": "knowledge-base",
-      "modalities": "[]"
-    },
-    "key": "kb-e2cf85fe7d/Preferencia_Estudio_Credito.pdf",
-    "index": true,
-    "updatedAt": "2025-03-29T13:14:15.651Z"
-  },
-  {
-    "id": "file_01JJ60ZT98PF2YECVA2R6YKT54",
+    "id": "file_01JYMYSMPW92BK14C0MDTHC9V5",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 52774,
@@ -1239,25 +1859,10 @@
     },
     "key": "kb-fac3fb699b/Contratos de trabajo en Colombia.pdf",
     "index": true,
-    "updatedAt": "2025-01-22T03:30:40.543Z"
+    "updatedAt": "2025-06-26T01:49:19.437Z"
   },
   {
-    "id": "file_01JHQNA2EHHVHBQN2MH2462CKK",
-    "accessPolicies": [],
-    "contentType": "application/pdf",
-    "size": 38245,
-    "status": "indexing_completed",
-    "tags": {
-      "kbId": "kb-4e5d75775b",
-      "title": "Sedes de Atención de Auteco Las Motos.pdf",
-      "source": "knowledge-base"
-    },
-    "key": "kb-4e5d75775b/Sedes de Atención de Auteco Las Motos.pdf",
-    "index": true,
-    "updatedAt": "2025-01-16T13:37:11.626Z"
-  },
-  {
-    "id": "file_01JHQM5QKB7HSTV980DZD0QPY6",
+    "id": "file_01JYMYSMCT6HT082ARKQZW8T4V",
     "accessPolicies": [],
     "contentType": "application/pdf",
     "size": 33158,
@@ -1269,46 +1874,41 @@
     },
     "key": "kb-06dfee802d/Tipos de motos disponibles en Auteco.pdf",
     "index": true,
-    "updatedAt": "2025-01-16T13:17:20.863Z"
+    "updatedAt": "2025-06-26T01:49:19.116Z"
   },
   {
-    "id": "file_01JHHBM9CA49X1ZHYVMGZAJ6SF",
-    "accessPolicies": [
-      "public_content"
-    ],
+    "id": "file_01JYMYSKSVWQY6C19HS34PZG3S",
+    "accessPolicies": [],
+    "contentType": "application/pdf",
+    "size": 149633,
+    "status": "indexing_completed",
+    "tags": {
+      "kbId": "kb-e2cf85fe7d",
+      "title": "Frases de Confirmación en Colombia.pdf",
+      "source": "knowledge-base"
+    },
+    "key": "kb-e2cf85fe7d/Frases de Confirmación en Colombia.pdf",
+    "index": true,
+    "updatedAt": "2025-06-26T01:49:18.515Z"
+  },
+  {
+    "id": "file_01JYMYSKJV2TQKJJANFQTWKG8G",
+    "accessPolicies": [],
     "contentType": "application/json",
-    "size": 263,
+    "size": 1004898,
     "status": "upload_completed",
     "tags": {
-      "source": "integration",
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
       "system": "true",
-      "integrationName": "webchat",
-      "webchatConfigVersion": "1"
+      "purpose": "bot-content"
     },
-    "key": "webchatConfig.json",
+    "key": "deployments/1750472822454.json",
     "index": false,
-    "updatedAt": "2025-07-18T13:23:34.712Z"
+    "updatedAt": "2025-06-26T01:49:18.283Z"
   },
   {
-    "id": "file_01JHHBM98BJV4TPAYB127DSFZ4",
-    "accessPolicies": [
-      "public_content"
-    ],
-    "contentType": "application/javascript",
-    "size": 286,
-    "status": "upload_completed",
-    "tags": {
-      "source": "integration",
-      "system": "true",
-      "integrationName": "webchat",
-      "webchatInjectConfigVersion": "1"
-    },
-    "key": "webchatConfigInject.js",
-    "index": false,
-    "updatedAt": "2025-07-18T13:23:34.569Z"
-  },
-  {
-    "id": "file_01JHHBJB6BVCSTMEYG86NN40ZT",
+    "id": "file_01JYMYSKE2WK72R890T60X8JJN",
     "accessPolicies": [
       "public_content"
     ],
@@ -1322,10 +1922,10 @@
     },
     "key": "webchatConfigInject.js",
     "index": false,
-    "updatedAt": "2025-01-14T02:51:30.853Z"
+    "updatedAt": "2025-06-26T01:49:18.755Z"
   },
   {
-    "id": "file_01JHHBJB39S53B44DMAFWWHS83",
+    "id": "file_01JYMYSKA000QWXRVJS2CYKCX2",
     "accessPolicies": [
       "public_content"
     ],
@@ -1339,21 +1939,197 @@
     },
     "key": "webchatConfig.json",
     "index": false,
-    "updatedAt": "2025-01-14T02:51:30.966Z"
+    "updatedAt": "2025-06-26T01:49:18.969Z"
   },
   {
-    "id": "file_01JHHBJAWXWK40ZM36ZF41V3H4",
+    "id": "file_01JYMYSK6CH20NQVFWSWT8FS6A",
     "accessPolicies": [],
-    "contentType": "application/pdf",
-    "size": 149633,
+    "contentType": "application/json; charset=utf-8",
+    "size": 4833,
+    "status": "upload_completed",
+    "tags": {
+      "system": "true",
+      "purpose": "config"
+    },
+    "key": "bot->43c08936-da5c-4f16-b957-e4400c0f834f->models.config.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:17.891Z"
+  },
+  {
+    "id": "file_01JYMYSJZSAD6B724N20JY9PXE",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1005001,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750473686736.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:17.679Z"
+  },
+  {
+    "id": "file_01JYMYSJSXDEHE538CREC0QSNT",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1005004,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750474399838.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:17.491Z"
+  },
+  {
+    "id": "file_01JYMYSJJ05H9E22D6GNKP4ZZ6",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1013261,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750483747823.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:17.240Z"
+  },
+  {
+    "id": "file_01JYMYSJB4MAJ2TKD6YFAT3ZN6",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1027321,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750516315521.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:17.019Z"
+  },
+  {
+    "id": "file_01JYMYSJ5X8WHXZENZ1BRTZG0A",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1027397,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750516590172.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:16.853Z"
+  },
+  {
+    "id": "file_01JYMYSHX44QTQVDSBRRXA0DHF",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1027393,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750516971374.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:16.571Z"
+  },
+  {
+    "id": "file_01JYMYSHP4YBRVR1CX2QWM4YQS",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1027351,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750517095182.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:16.347Z"
+  },
+  {
+    "id": "file_01JYMYSHH1A37JFRDKBGWM92P7",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1027354,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750517479265.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:16.185Z"
+  },
+  {
+    "id": "file_01JYMYSH9P314TXXCF7WBM5ZRQ",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1027354,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "5b31b8aa13ba23651c2e988f232c0e017e94149077dbb91c1deddd7d88d83462",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1750525657365.json",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:15.950Z"
+  },
+  {
+    "id": "file_01JYMYSH4889M9Z3HMREH813SG",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/png",
+    "size": 190241,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "integration": "webchat"
+    },
+    "key": "bot-43c08936-da5c-4f16-b957-e4400c0f834f-avatar-1OT9gw",
+    "index": false,
+    "updatedAt": "2025-06-26T01:49:15.776Z"
+  },
+  {
+    "id": "file_01JYMYSH073PV0DC9D4XBKYZRQ",
+    "accessPolicies": [],
+    "contentType": "text/html; charset=utf-8",
+    "size": 2659,
     "status": "indexing_completed",
     "tags": {
-      "kbId": "kb-e2cf85fe7d",
-      "title": "Frases de Confirmación en Colombia.pdf",
-      "source": "knowledge-base"
+      "dsId": "ds-6df81fabe2",
+      "kbId": "kb-8de928102b",
+      "title": "ds-6df81fabe2.html",
+      "source": "knowledge-base",
+      "modalities": "[\"text\"]"
     },
-    "key": "kb-e2cf85fe7d/Frases de Confirmación en Colombia.pdf",
+    "key": "kb-8de928102b/ds-6df81fabe2.html",
     "index": true,
-    "updatedAt": "2025-01-14T02:51:30.072Z"
+    "updatedAt": "2025-07-25T04:57:46.416Z"
   }
 ]

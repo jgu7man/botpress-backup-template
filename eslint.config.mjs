@@ -11,21 +11,24 @@ export default defineConfig([
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    files: ["**/*.{ts,tsx}"], rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    }
+  },
+  {
     files: ["**/*.transition.*.{ts,tsx}"], rules: {
       "@typescript-eslint/no-unused-vars": "off",
     }
   },
   {
     files: ["**/*.state.{ts,tsx}"], rules: {
-      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/await-thenable": "off"
     }
   },
   {
     files: ["**/*.action.*.{ts,tsx}"], rules: {
-      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-      "no-restricted-globals": ["error", "fdescribe"]
+      "no-restricted-globals": ["error", "fdescribe"],
     }
   }
 ]);

@@ -10,12 +10,14 @@
     "compress:dev": "ENV=dev && npm run compress",
     "compress:stg": "ENV=stg && npm run compress",
     "compress:prod": "ENV=prod && npm run compress",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-signing-key": "ts-node ./utils/signing-key-generator/manually-signing.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/luxon": "^3.6.2",
     "@types/node": "^22.14.1",
     "eslint": "^9.25.0",
@@ -28,6 +30,9 @@
   },
   "dependencies": {
     "@botpress/client": "^1.6.0",
-    "luxon": "^3.6.1"
+    "axios": "^1.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "luxon": "^3.6.1",
+    "notion-types": "^7.4.3"
   }
 }

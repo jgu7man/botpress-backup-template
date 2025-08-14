@@ -22,7 +22,9 @@
       "@variables/*": ["bot/src/variables/*"],
       "@schemas/*": ["bot/src/schemas/*"],
       "@tables/*": ["bot/src/tables/*"],
-      "@core-types/*": ["utils/types/core/*"]
+      "@core-types/*": ["utils/types/core/*"],
+      "@types/*": ["types/*"],
+      "@globals/*": ["types/globals/*"]
     },
     "lib": ["es2019", "dom"],
     "target": "es2020",
@@ -35,5 +37,5 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false
   },
-  "include": ["**/*", "bot/src/globals.d.ts"]
+  "include": ["**/*", "types/globals/index.d.ts"]
 }

@@ -1,6 +1,6 @@
 // Variable workflow que faltaba - necesaria para nuestros bloques
 const workflow: {
-  [key: string]: unknown;
+  [key: string]: any;
   notionConfig?: {
     apiKey: string;
     databaseId: string;

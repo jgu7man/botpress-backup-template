@@ -1,8 +1,15 @@
+import { botVariables } from "./variables/botVariables";
+import { ConfigVariables } from "./variables/ConfigVariables";
+import { userVariables } from "./variables/userVariables";
 /**
  * Declaraciones globales para el bot
  * Generado automáticamente desde bot.json
  * Fecha de generación: 2025-07-19T01:06:42.834Z
  */
+
+import { BotpressEvent } from "@core-types/event.type";
+import { MainConversation } from "@core-types/MainConversation";
+import { Turn } from "@core-types/Turn";
 
 // Interfaz genérica para operaciones de tabla
 interface TableOperations<T = any> {
@@ -20,12 +27,12 @@ interface TableOperations<T = any> {
 // Declaraciones globales para el bot
 declare global {
   // Variables principales del bot
-  const bot: import("./variables/botVariables").botVariables;
-  const user: import("./variables/userVariables").userVariables;
-  const conversation: import("../utils/types/core/MainConversation").MainConversation;
-  const event: import("../utils/types/core/event.type").BotpressEvent;
-  const turn: import("../utils/types/core/Turn").Turn;
-  const env: import("./variables/ConfigVariables").ConfigVariables;
+  const bot: botVariables;
+  const user: userVariables;
+  const conversation: MainConversation;
+  const event: BotpressEvent;
+  const turn: Turn;
+  const env: ConfigVariables;
 
   // Tablas del bot
   const motosStockTable: TableOperations<

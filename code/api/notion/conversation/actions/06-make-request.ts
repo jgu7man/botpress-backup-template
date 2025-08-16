@@ -14,6 +14,11 @@ async function makeRequest() {
   try {
     console.log("📡 Making request to Notion API...");
 
+    // Validar que tenemos todos los datos necesarios
+    if (!method || !url) {
+      throw new Error("Method and URL are required");
+    }
+
     // Realiza la solicitud HTTP usando axios con el método, url, body y headers especificados
     const response = await axios[method](url, body, { headers });
     console.log("📝 Response:", JSON.stringify(response, null, 2));

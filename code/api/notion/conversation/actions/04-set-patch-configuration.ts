@@ -1,5 +1,3 @@
-import { ConversationProperties } from "drafts/notion/types/create-page.response";
-
 // Establece el método HTTP como "patch" para actualizar recursos existentes
 workflow.method = "patch";
 
@@ -11,7 +9,7 @@ workflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;
 // Define el cuerpo de la solicitud con las propiedades a actualizar
 workflow.body = {
   // Actualiza la propiedad "Ultima actualización"
-  properties: <Partial<ConversationProperties>>{
+  properties: {
     "Última actualización": {
       // Asigna la fecha actual en formato ISO
       date: {

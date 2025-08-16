@@ -11,33 +11,6 @@ declare global {
     WORKSPACE_ID?: string;
   };
 
-  // Axios ya disponible en Botpress
-  const axios: {
-    get: (
-      url: string,
-      config?: Record<string, unknown>
-    ) => Promise<{ data: unknown; status: number; response?: unknown }>;
-    post: (
-      url: string,
-      data?: Record<string, unknown>,
-      config?: Record<string, unknown>
-    ) => Promise<{ data: unknown; status: number; response?: unknown }>;
-    patch: (
-      url: string,
-      data?: Record<string, unknown>,
-      config?: Record<string, unknown>
-    ) => Promise<{ data: unknown; status: number; response?: unknown }>;
-    delete: (
-      url: string,
-      config?: Record<string, unknown>
-    ) => Promise<{ data: unknown; status: number; response?: unknown }>;
-    put: (
-      url: string,
-      data?: Record<string, unknown>,
-      config?: Record<string, unknown>
-    ) => Promise<{ data: unknown; status: number; response?: unknown }>;
-  };
-
   // Tables
   const HooksTable: TableOperations<HooksTableRecord> = {
     findRecords: async (query) => {

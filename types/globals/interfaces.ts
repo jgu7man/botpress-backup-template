@@ -8,13 +8,9 @@ export interface TableOperations<T = Record<string, unknown>> {
 // Tipo para registros de la tabla de hooks
 export interface HooksTableRecord {
   id?: string;
-  conversationId: string;
-  phone: string;
-  status: string;
-  channel: string;
-  notes: string;
-  hook: string;
-  source: string;
+  CONVERSATION_ID: string;
+  TELEFONO: string;
+  NOTION_PAGE_ID: string;
   createdAt?: string;
   updatedAt?: string;
 }

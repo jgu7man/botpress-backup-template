@@ -17,16 +17,15 @@
     "paths": {
       "@/*": ["."],
       "@test/*": ["./test/*"],
-      "@main": ["bot/main.ts"],
       "@workflows/*": ["bot/src/workflows/*"],
       "@variables/*": ["bot/src/variables/*"],
       "@schemas/*": ["bot/src/schemas/*"],
       "@tables/*": ["bot/src/tables/*"],
-      "@core-types/*": ["utils/types/core/*"],
-      "@types/*": ["types/*"],
-      "@globals/*": ["types/globals/*"]
+      "@core-types/*": ["code/utils/utils/types/core/*"],
+      "@types/*": ["code/types/*"],
+      "@globals/*": ["code/types/globals/*"]
     },
-    "lib": ["es2019", "dom"],
+    "lib": ["es2019"],
     "target": "es2020",
     "module": "esnext",
     "moduleResolution": "node",
@@ -37,5 +36,10 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false
   },
-  "include": ["**/*", "types/globals/index.d.ts"]
+  "include": [
+    "**/*",
+    "types/globals/index.d.ts",
+    "code/utils/utils/types/core/event.type.ts",
+    "bot/src/globals.d.ts"
+  ]
 }

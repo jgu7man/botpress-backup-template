@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export class BotpressEvent {
   preview: string = "";
   conversationId: string = "";

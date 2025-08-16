@@ -1,5 +1,3 @@
-import { ConversationProperties } from "drafts/notion/types/create-page.response";
-
 // Función para crear el título de la conversación usando el ID proporcionado o uno temporal
 const createConversationTitle = (conversationId?: string) => {
   // Si no se proporciona un ID de conversación, se genera uno temporal con la fecha actual
@@ -35,7 +33,7 @@ workflow.body = {
     database_id: env.NOTION_CONVERSATION_DB,
   },
   // Define las propiedades del documento: ID de conversación y momento de envío
-  properties: <Partial<ConversationProperties>>{
+  properties: {
     "ID de conversación": createConversationTitle(workflow.conversationId),
     "Momento de envío": createTimestamp(),
   },

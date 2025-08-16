@@ -13,7 +13,7 @@ const rowData = {
 };
 
 // Si ya existe un registro, lo actualizamos; si no, lo creamos
-if (workflow.hookRecord) {
+if (workflow.hookRecord?.id) {
   HooksTable.updateRecord(workflow.hookRecord.id, rowData);
 } else {
   HooksTable.createRecord(rowData);

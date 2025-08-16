@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const env = {
   NOTION_API_KEY: "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",
   NOTION_CONVERSATION_DB: "23c906ec20fa8027a95ac5f8416d597f",

@@ -1,5 +1,21 @@
 [
   {
+    "id": "file_01K2K7FQWQMNP3QPEWTN1RVBJ3",
+    "accessPolicies": [],
+    "contentType": "application/json",
+    "size": 1204370,
+    "status": "upload_completed",
+    "tags": {
+      "dm": "studio/dialog-manager",
+      "dmHash": "dc617ffc2aa97b66b7f851cda442a7ae13617e155e4242821ef3d5582d6b8e6b",
+      "system": "true",
+      "purpose": "bot-content"
+    },
+    "key": "deployments/1755139530585.json",
+    "index": false,
+    "updatedAt": "2025-08-14T02:45:30.636Z"
+  },
+  {
     "id": "file_01K2CVCA7C3TTKZZXT11DPSHP3",
     "accessPolicies": [],
     "contentType": "application/zip",
@@ -679,7 +695,7 @@
     },
     "key": "webchatConfig.json",
     "index": false,
-    "updatedAt": "2025-08-02T02:07:13.794Z"
+    "updatedAt": "2025-08-14T02:45:45.301Z"
   },
   {
     "id": "file_01JYVFJRW80G7GKV1RJP2BDK7G",
@@ -697,7 +713,7 @@
     },
     "key": "webchatConfigInject.js",
     "index": false,
-    "updatedAt": "2025-08-02T02:07:13.594Z"
+    "updatedAt": "2025-08-14T02:45:45.148Z"
   },
   {
     "id": "file_01JYVFJ993TGNG8G2H1PV3PP9W",

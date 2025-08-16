@@ -191,7 +191,10 @@
       "WAB_ALLOW_VARIABLES": "true",
       "WAB_SENDER_ID": "626547297219911",
       "WAB_CONTEXT": "'El usuario ha contestado a una pregunta realizada desde whatsapp sobre su interés en hacer uso de su crédito para adquirir una moto'",
-      "MOCK_HOOK": ""
+      "MOCK_HOOK": "true",
+      "NOTION_API_KEY": "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",
+      "NOTION_CONVERSATION_DB": "23c906ec20fa8027a95ac5f8416d597f",
+      "WORKSPACE_ID": "wkspace_01HSPPS83E6HWP6J1HWHC61CKH"
     },
     "cognitiveConfigs": {
       "openAi": {}
@@ -1612,7 +1615,23 @@
               "label": "StopPromotions",
               "transitions": [],
               "nodeId": "nd-a16d9bd09d",
-              "manualFields": []
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-5076c8d2bc",
+                  "name": "triggerKey",
+                  "description": "La frase configurada para detener promociones",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "Detener promociones",
+                    "staticValue": ""
+                  }
+                }
+              ]
             },
             {
               "id": "ins-306e9675cd",
@@ -9126,7 +9145,7 @@
           "type": "standard",
           "deletable": true,
           "x": 270,
-          "y": 840,
+          "y": 900,
           "instructions": [
             {
               "type": "log",
@@ -9192,6 +9211,75 @@
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow.ending = \"COMPLEXED\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
+            },
+            {
+              "id": "ins-6aa26f24cf",
+              "type": "skill",
+              "name": "🄽 NotionClient ",
+              "flowId": "wf-954134ebd5",
+              "exitNodes": [],
+              "label": "🄽 NotionClient ",
+              "transitions": [],
+              "nodeId": "nd-a1e8237457",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-05e83b4fd3",
+                  "name": "conversationId",
+                  "description": "The conversation id as title of the page",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{event.conversationId}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-51c61d04bb",
+                  "name": "phone",
+                  "description": "The user phone as identificator",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{ user.phone }}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-3be1d545d2",
+                  "name": "hookStatus",
+                  "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-fdd0f3baa1",
+                  "name": "conversationStatus",
+                  "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "Con bugs",
+                    "staticValue": ""
+                  }
+                }
+              ]
             }
           ],
           "defaultTransition": {
@@ -12158,7 +12246,7 @@
               "category": "Execute",
               "code": "workflow.userInput = user.lastQuestionMade || conversation.kbIntentInterpretation || event.preview\n\nif (!conversation.flow?.state) {\n  conversation.flow = {\n    ...conversation.flow,\n    state: 'WAITING'\n  }\n}\n\nconversation.kbIntentInterpretation = ''\nuser.lastQuestionMade = ''\n",
               "origin": "builtin",
-              "label": "\"Manage User Input and Conversation State Reset\"",
+              "label": "\"Manage User Input and Conversation State in Workflow\"",
               "nodeId": "nd-4d1eea3d93",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.userInput = user.lastQuestionMade || conversation.kbIntentInterpretation || event.preview;\n  if (!conversation.flow?.state) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: \"WAITING\"\n    };\n  }\n  conversation.kbIntentInterpretation = \"\";\n  user.lastQuestionMade = \"\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -18416,7 +18504,7 @@
               "type": "ai",
               "id": "ins-34c260abc5",
               "task": {
-                "instructions": "## Role Description*\nEres un asistente de ventas colombiano que responderá optimistamente, cordial y buscando siempre no desalentar al usuario.\n\n## Estrategia\n1. No saludes.\n2. Si conoces el nombre del usuario {{user.fullName}} inicia el mensaje con \"Señor {nombre masculino}.\" o \"Señora {nombre femenino}.\" según sea el caso, si no conoces el nombre, inicia el mensaje con \"Sr@.\"\n3. Genera un mensaje colombiano, cordial y cortés basado en {{workflow.kbAnswer}} con el fin de esclarecer la duda del usuario explicando el contenido de `@workflow.kbUnderstanding`\n4. El mensaje no debe ser resolutivo. Después de este mensaje la intención es cambiar contexto o continuar con una entrevista, ya que nuestra prioridad es realizar estudios de crédito en línea.\n5. No hagas preguntas ofreciendo más apoyo o información. Tu objetivo sólo es responder a la pregunta\n6. Procura proveer más información que hablar frases de relleno\n7. Da formato legible en un tono simple y fácil de entender. Crear viñetas o numeraciones con emojies como 1️⃣, 2️⃣, 3️⃣ cuando sea necesario y cuanto sea necesario.\n8. **IMPORTANTE:** Se breve.",
+                "instructions": "## Role Description*\nEres un asistente de ventas colombiano que responderá optimistamente, cordial y buscando siempre no desalentar al usuario.\n\n## Estrategia\n1. No saludes.\n2. Si conoces el nombre del usuario {{user.fullName}} inicia el mensaje con \"Señor {nombre masculino}.\" o \"Señora {nombre femenino}.\" según sea el caso, si no conoces el nombre, inicia el mensaje con \"Sr@.\"\n3. Genera un mensaje en tono colombiano, amable y cercano basado en \"{{workflow.kbAnswer}}\" con el fin de esclarecer la duda del usuario explicando el contenido de `@workflow.kbUnderstanding`\n4. El mensaje no debe ser resolutivo. Después de este mensaje la intención es cambiar contexto o continuar con una entrevista, ya que nuestra prioridad es realizar estudios de crédito en línea.\n5. No hagas preguntas ofreciendo más apoyo o información. Tu objetivo sólo es responder a la pregunta\n6. Provee más información en vez de usar frases de relleno\n7. Da formato legible en un tono simple y fácil de entender. Crear viñetas o numeraciones con emojies como 1️⃣, 2️⃣, 3️⃣ cuando sea necesario\n8. **IMPORTANTE:** Se breve.\n9. No aludes ni exageres emotividad",
                 "input": "Respuesta de la base de conocimiento: {{workflow.kbAnswer}}\nNombre del usuario: {{user.fullName}}",
                 "outputVariableIds": [
                   "var-0a2d46e6bb"
@@ -18428,7 +18516,7 @@
                     "output": {}
                   }
                 ],
-                "model": "openai__o4-mini-2025-04-16",
+                "model": "fast-model",
                 "temperature": 1,
                 "version": "1.0"
               },
@@ -18443,14 +18531,14 @@
                   },
                   {
                     "role": "user",
-                    "content": "I have a task for you to complete. Here are the instructions:\n## Role Description*\nEres un asistente de ventas colombiano que responderá optimistamente, cordial y buscando siempre no desalentar al usuario.\n\n## Estrategia\n1. No saludes.\n2. Si conoces el nombre del usuario {{user.fullName}} inicia el mensaje con \"Señor {nombre masculino}.\" o \"Señora {nombre femenino}.\" según sea el caso, si no conoces el nombre, inicia el mensaje con \"Sr@.\"\n3. Genera un mensaje colombiano, cordial y cortés basado en {{workflow.kbAnswer}} con el fin de esclarecer la duda del usuario explicando el contenido de `@workflow.kbUnderstanding`\n4. El mensaje no debe ser resolutivo. Después de este mensaje la intención es cambiar contexto o continuar con una entrevista, ya que nuestra prioridad es realizar estudios de crédito en línea.\n5. No hagas preguntas ofreciendo más apoyo o información. Tu objetivo sólo es responder a la pregunta\n6. Procura proveer más información que hablar frases de relleno\n7. Da formato legible en un tono simple y fácil de entender. Crear viñetas o numeraciones con emojies como 1️⃣, 2️⃣, 3️⃣ cuando sea necesario y cuanto sea necesario.\n8. **IMPORTANTE:** Se breve.\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"answerMessage\": string\n}"
+                    "content": "I have a task for you to complete. Here are the instructions:\n## Role Description*\nEres un asistente de ventas colombiano que responderá optimistamente, cordial y buscando siempre no desalentar al usuario.\n\n## Estrategia\n1. No saludes.\n2. Si conoces el nombre del usuario {{user.fullName}} inicia el mensaje con \"Señor {nombre masculino}.\" o \"Señora {nombre femenino}.\" según sea el caso, si no conoces el nombre, inicia el mensaje con \"Sr@.\"\n3. Genera un mensaje en tono colombiano, amable y cercano basado en \"{{workflow.kbAnswer}}\" con el fin de esclarecer la duda del usuario explicando el contenido de `@workflow.kbUnderstanding`\n4. El mensaje no debe ser resolutivo. Después de este mensaje la intención es cambiar contexto o continuar con una entrevista, ya que nuestra prioridad es realizar estudios de crédito en línea.\n5. No hagas preguntas ofreciendo más apoyo o información. Tu objetivo sólo es responder a la pregunta\n6. Provee más información en vez de usar frases de relleno\n7. Da formato legible en un tono simple y fácil de entender. Crear viñetas o numeraciones con emojies como 1️⃣, 2️⃣, 3️⃣ cuando sea necesario\n8. **IMPORTANTE:** Se breve.\n9. No aludes ni exageres emotividad\n--\nThe following is the typescript interface I need as output of the task:\n\n```typescript\ninterface Output = {\n  /**  */\n\"answerMessage\": string\n}"
                   },
                   {
                     "role": "user",
                     "content": "Now, here is the actual input to the task at hand you need to complete:\nInput:\n\"\"\"\n{{TASK_INPUT}}\n\"\"\"\nPlease follow my instructions as is and complete the task by filling the output JSON below with the correct values. Your answer must strictly respect the typescript typings.\nYou don't have to explain your answer and remember I need valid JSON as output.\n\nI need to generate the following output:\n\n```typescript\nconst output: Output = JSON.parse(<<json_output>>)\n```\n\nYour answer must strictly respect the typescript typings.\nHow would you write <<json_output>> ?\nAnswer with JSON and only JSON. Don't explain your answer, just JSON."
                   }
                 ],
-                "model": "openai__o4-mini-2025-04-16",
+                "model": "fast-model",
                 "temperature": 1
               }
             },
@@ -27739,9 +27827,9 @@
               "nodeId": "nd-4f5092aaef",
               "data": {
                 "query": {
-                  "valueType": "dynamic",
+                  "staticValue": "",
                   "dynamicValue": "Evalúa el último mensaje del usuario: \"{{event.preview}}\" y categoriza el mensaje del cliente\n\n- Apóyate en el resumen del conversación.\n- Asígnalo a la variable workflow.answerExplanation.",
-                  "staticValue": "Evalúa la consulta del usuario: {{bot.kbIntentInterpretation}} y categoriza qué tipo de pregunta es. Devuelve únicamente una palabra: `UBICACION`, `MOTO`, `CREDITO`, `CUPO_BRILLA`.  Y asígnalo a la variable {{workflow.kbContextInterpretation}}. No expliques"
+                  "valueType": "dynamic"
                 },
                 "kbs": {
                   "enabled": true,
@@ -32485,6 +32573,75 @@
               "transitions": []
             },
             {
+              "id": "ins-476cfa21e2",
+              "type": "skill",
+              "name": "🄽 NotionClient ",
+              "flowId": "wf-954134ebd5",
+              "exitNodes": [],
+              "label": "🄽 NotionClient ",
+              "transitions": [],
+              "nodeId": "nd-2955436ed9",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-05e83b4fd3",
+                  "name": "conversationId",
+                  "description": "The conversation id as title of the page",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{event.conversationId}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-51c61d04bb",
+                  "name": "phone",
+                  "description": "The user phone as identificator",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{user.phone}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-3be1d545d2",
+                  "name": "hookStatus",
+                  "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "Contestado",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-fdd0f3baa1",
+                  "name": "conversationStatus",
+                  "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "En progreso",
+                    "staticValue": ""
+                  }
+                }
+              ]
+            },
+            {
               "id": "ins-7a50ebe818",
               "type": "skill",
               "name": "GetConfirmation",
@@ -32929,12 +33086,12 @@
               "id": "ins-00a2e88f7c",
               "type": "action",
               "category": "Execute",
-              "code": "conversation.flow = {\n  ending: 'HOOKED',\n  topics: ['PRE_ENGAGEMENT'],\n  status: 'COLD_PROSPECT',\n  state: '',\n  context: 'PRE_ENGAGEMENT'\n}\n\nconst { name, phone } = event.payload.body\nuser.phone = phone\n\nif (name) {\n  user.fullName = name\n}\n\nworkflow.whValid = !!phone\nconsole.log('✅ workflow valid: ', workflow.whValid)\n\nworkflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : ''\nconsole.log('⭕️ workflow.whTemplateVariables:', workflow.whTemplateVariables)\nconsole.log(phone)\n\nif ( env.WAB_TEMPLATE == 'leads_cupo_brilla' ) {\n  user.creditProfile = 'CUPO_BRILLA'\n}",
+              "code": "conversation.flow = {\n  ending: 'HOOKED',\n  topics: ['PRE_ENGAGEMENT'],\n  status: 'COLD_PROSPECT',\n  state: '',\n  context: 'PRE_ENGAGEMENT'\n}\n\nconsole.log(event.payload.body)\nconst { name, phone } = event.payload.body\nuser.phone = phone\n\nif (name) {\n  user.fullName = name\n}\n\nworkflow.whValid = !!phone\nconsole.log('✅ workflow valid: ', workflow.whValid)\n\nworkflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : ''\nconsole.log('⭕️ workflow.whTemplateVariables:', workflow.whTemplateVariables)\nconsole.log(phone)\n\nif ( env.WAB_TEMPLATE == 'leads_cupo_brilla' ) {\n  user.creditProfile = 'CUPO_BRILLA'\n}",
               "origin": "builtin",
               "label": "\"User Data Processing for Pre-Engagement Workflow\"",
               "nodeId": "nd-852a227ee4",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow = {\n    ending: \"HOOKED\",\n    topics: [\"PRE_ENGAGEMENT\"],\n    status: \"COLD_PROSPECT\",\n    state: \"\",\n    context: \"PRE_ENGAGEMENT\"\n  };\n  const { name, phone } = event.payload.body;\n  user.phone = phone;\n  if (name) {\n    user.fullName = name;\n  }\n  workflow.whValid = !!phone;\n  console.log(\"\\u2705 workflow valid: \", workflow.whValid);\n  workflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : \"\";\n  console.log(\"\\u2B55\\uFE0F workflow.whTemplateVariables:\", workflow.whTemplateVariables);\n  console.log(phone);\n  if (env.WAB_TEMPLATE == \"leads_cupo_brilla\") {\n    user.creditProfile = \"CUPO_BRILLA\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow = {\n    ending: \"HOOKED\",\n    topics: [\"PRE_ENGAGEMENT\"],\n    status: \"COLD_PROSPECT\",\n    state: \"\",\n    context: \"PRE_ENGAGEMENT\"\n  };\n  console.log(event.payload.body);\n  const { name, phone } = event.payload.body;\n  user.phone = phone;\n  if (name) {\n    user.fullName = name;\n  }\n  workflow.whValid = !!phone;\n  console.log(\"\\u2705 workflow valid: \", workflow.whValid);\n  workflow.whTemplateVariables = env.WAB_ALLOW_VARIABLES ? JSON.stringify([name]) : \"\";\n  console.log(\"\\u2B55\\uFE0F workflow.whTemplateVariables:\", workflow.whTemplateVariables);\n  console.log(phone);\n  if (env.WAB_TEMPLATE == \"leads_cupo_brilla\") {\n    user.creditProfile = \"CUPO_BRILLA\";\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -33154,9 +33311,9 @@
             {
               "id": "ins-6dee91ec60",
               "type": "action",
-              "code": "event.conversationId = workflow.messageSentResult.conversationId",
+              "code": "event.conversationId = workflow.messageSentResult.conversationId\n",
               "origin": "builtin",
-              "label": "\"Assign Conversation ID from Workflow Message Result\"",
+              "label": "Assign Conversation ID from Workflow Message Sent Result",
               "nodeId": "nd-681c1c17e6",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  event.conversationId = workflow.messageSentResult.conversationId;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -33174,6 +33331,75 @@
               },
               "nodeId": "nd-681c1c17e6",
               "transitions": []
+            },
+            {
+              "id": "ins-4df3270779",
+              "type": "skill",
+              "name": "NotionClient",
+              "flowId": "wf-954134ebd5",
+              "exitNodes": [],
+              "label": "NotionClient",
+              "transitions": [],
+              "nodeId": "nd-681c1c17e6",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-05e83b4fd3",
+                  "name": "conversationId",
+                  "description": "The conversation id as title of the page",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{event.conversationId}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-51c61d04bb",
+                  "name": "phone",
+                  "description": "The user phone as identificator",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{ user.phone }}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-3be1d545d2",
+                  "name": "hookStatus",
+                  "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-fdd0f3baa1",
+                  "name": "conversationStatus",
+                  "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                }
+              ]
             },
             {
               "id": "ins-5167acd90f",
@@ -33251,12 +33477,12 @@
             {
               "id": "ins-5da98516cb",
               "type": "action",
-              "code": "workflow.messageSentResult = {\n    conversationId: ''\n}",
+              "code": "workflow.messageSentResult = {\n  conversationId: 'test-conversation-' + Date.now()\n}\n",
               "origin": "builtin",
-              "label": "\"Store Conversation ID for Message Sent Results\"",
+              "label": "Generate Unique Conversation ID for Message Sent Result",
               "nodeId": "nd-32f448c757",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.messageSentResult = {\n    conversationId: \"\"\n  };\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.messageSentResult = {\n    conversationId: \"test-conversation-\" + Date.now()\n  };\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -33325,7 +33551,8 @@
             }
           ],
           "id": "nd-108434326a",
-          "name": "Exception Handler1"
+          "name": "Exception Handler1",
+          "disabled": true
         },
         {
           "type": "standard",
@@ -33391,6 +33618,30 @@
           },
           "id": "nd-fc505eb567",
           "name": "HandleError_WAT"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 795,
+          "y": 780,
+          "instructions": [
+            {
+              "id": "ins-d960f8c448",
+              "type": "action",
+              "code": "try {\n  const conversationId = event.conversationId || 'prueba-botpress'\n\n  console.log('🚀 Starting Notion page creation...')\n  console.log(`📝 Conversation ID: ${conversationId}`)\n  console.log(`🗄️ Database ID: ${env.NOTION_CONVERSATION_DB}`)\n\n  const notionHeaders = {\n    Authorization: `Bearer ${env.NOTION_API_KEY}`,\n    'Content-Type': 'application/json',\n    'Notion-Version': '2022-06-28'\n  }\n  console.log('🤔', notionHeaders)\n\n  const requestBody = {\n    parent: { database_id: env.NOTION_CONVERSATION_DB },\n    properties: {\n      'ID de conversación': {\n        title: [\n          {\n            text: {\n              content: conversationId\n            }\n          }\n        ]\n      },\n      'Momento de envío': {\n        date: {\n          start: new Date().toISOString()\n        }\n      }\n    }\n  }\n  console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))\n\n  const requestConfig = {\n    headers: notionHeaders,\n    data: requestBody\n  }\n\n  console.log('📡 Making request to Notion API...')\n\n  const response = await axios.post('https://api.notion.com/v1/pages', requestBody, requestConfig)\n\n  console.log('✅ Response received!')\n  console.log('📊 Status:', response.status)\n  console.log('🆔 Page ID:', response.data.id)\n\n  const { id } = response.data\n  // conversation.notionRegistry.id = id;\n\n  console.log(`✨ Página creada en Notion con ID: ${id}`)\n  return { success: true, pageId: id }\n} catch (error: any) {\n  console.error('❌ Error creating page in Notion:', error)\n\n  if (error.response) {\n    console.error('📊 Status:', error.response.status)\n    console.error('📄 Status Text:', error.response.statusText)\n    console.error('📝 Response Data:', JSON.stringify(error.response.data, null, 2))\n    console.error('🔧 Request Headers:', JSON.stringify(error.config?.headers, null, 2))\n  } else if (error.request) {\n    console.error('🌐 Network Error - No response received')\n    console.error('📡 Request:', error.request)\n  } else {\n    console.error('⚙️ Setup Error:', error.message)\n  }\n\n  return { success: false, error: error.message }\n}\n",
+              "origin": "builtin",
+              "label": "\"Create Notion Page for Conversation with API Integration\"",
+              "nodeId": "nd-349fd4dc26",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  try {\n    const conversationId = event.conversationId || \"prueba-botpress\";\n    console.log(\"\\u{1F680} Starting Notion page creation...\");\n    console.log(`\\u{1F4DD} Conversation ID: ${conversationId}`);\n    console.log(`\\u{1F5C4}\\uFE0F Database ID: ${env.NOTION_CONVERSATION_DB}`);\n    const notionHeaders = {\n      Authorization: `Bearer ${env.NOTION_API_KEY}`,\n      \"Content-Type\": \"application/json\",\n      \"Notion-Version\": \"2022-06-28\"\n    };\n    console.log(\"\\u{1F914}\", notionHeaders);\n    const requestBody = {\n      parent: { database_id: env.NOTION_CONVERSATION_DB },\n      properties: {\n        \"ID de conversaci\\xF3n\": {\n          title: [\n            {\n              text: {\n                content: conversationId\n              }\n            }\n          ]\n        },\n        \"Momento de env\\xEDo\": {\n          date: {\n            start: new Date().toISOString()\n          }\n        }\n      }\n    };\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(requestBody, null, 2));\n    const requestConfig = {\n      headers: notionHeaders,\n      data: requestBody\n    };\n    console.log(\"\\u{1F4E1} Making request to Notion API...\");\n    const response = await axios.post(\"https://api.notion.com/v1/pages\", requestBody, requestConfig);\n    console.log(\"\\u2705 Response received!\");\n    console.log(\"\\u{1F4CA} Status:\", response.status);\n    console.log(\"\\u{1F194} Page ID:\", response.data.id);\n    const { id } = response.data;\n    console.log(`\\u2728 P\\xE1gina creada en Notion con ID: ${id}`);\n    return { success: true, pageId: id };\n  } catch (error) {\n    console.error(\"\\u274C Error creating page in Notion:\", error);\n    if (error.response) {\n      console.error(\"\\u{1F4CA} Status:\", error.response.status);\n      console.error(\"\\u{1F4C4} Status Text:\", error.response.statusText);\n      console.error(\"\\u{1F4DD} Response Data:\", JSON.stringify(error.response.data, null, 2));\n      console.error(\"\\u{1F527} Request Headers:\", JSON.stringify(error.config?.headers, null, 2));\n    } else if (error.request) {\n      console.error(\"\\u{1F310} Network Error - No response received\");\n      console.error(\"\\u{1F4E1} Request:\", error.request);\n    } else {\n      console.error(\"\\u2699\\uFE0F Setup Error:\", error.message);\n    }\n    return { success: false, error: error.message };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": [],
+              "isCustomLabel": false
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": null
+          },
+          "id": "nd-349fd4dc26",
+          "name": "SaveBackup"
         }
       ],
       "parentFolder": "dir-8e245963b2"
@@ -33770,6 +34021,15 @@
           "scope": "workflow",
           "defaultValue": false,
           "storeAsTag": false
+        },
+        {
+          "id": "var-5076c8d2bc",
+          "name": "triggerKey",
+          "description": "La frase configurada para detener promociones",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
         }
       ],
       "links": [],
@@ -33779,7 +34039,9 @@
           "name": "Entry",
           "type": "entry",
           "deletable": false,
-          "variables": [],
+          "variables": [
+            "var-5076c8d2bc"
+          ],
           "instructions": [
             {
               "type": "log",
@@ -33844,12 +34106,12 @@
             {
               "id": "ins-4ad9b05230",
               "type": "action",
-              "code": "const message = event.preview\n\nif (message.includes('Detener promociones')) {\n    workflow.stopPromotions = true\n}",
+              "code": "const message = event.preview\n\nif (message.includes(workflow.triggerKey)) {\n    workflow.stopPromotions = true\n}",
               "origin": "builtin",
               "label": "\"Stop Promotions Based on Event Message Content\"",
               "nodeId": "nd-d7992b76dd",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const message = event.preview;\n  if (message.includes(\"Detener promociones\")) {\n    workflow.stopPromotions = true;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const message = event.preview;\n  if (message.includes(workflow.triggerKey)) {\n    workflow.stopPromotions = true;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -33889,6 +34151,20 @@
           "y": 0,
           "instructions": [
             {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-39e39dacf7",
+              "label": "Log",
+              "level": "warning",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Detener promociones seleccionado",
+                "staticValue": ""
+              },
+              "nodeId": "nd-02a9e5b207",
+              "transitions": []
+            },
+            {
               "id": "ins-a83a686041",
               "type": "action",
               "code": "conversation.SummaryAgent.summary = 'El cliente ha sido contactado previamente por ha decidido ya no querer recibir más mensajes de promociones. Sin embargo, se le ha ofrecido estar pendiente de alguna nueva necesidad que pueda tener'",
@@ -33898,6 +34174,75 @@
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.SummaryAgent.summary = \"El cliente ha sido contactado previamente por ha decidido ya no querer recibir m\\xE1s mensajes de promociones. Sin embargo, se le ha ofrecido estar pendiente de alguna nueva necesidad que pueda tener\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
+            },
+            {
+              "id": "ins-9e09a48641",
+              "type": "skill",
+              "name": "🄽 NotionClient ",
+              "flowId": "wf-954134ebd5",
+              "exitNodes": [],
+              "label": "🄽 NotionClient ",
+              "transitions": [],
+              "nodeId": "nd-02a9e5b207",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-05e83b4fd3",
+                  "name": "conversationId",
+                  "description": "The conversation id as title of the page",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{event.conversationId}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-51c61d04bb",
+                  "name": "phone",
+                  "description": "The user phone as identificator",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{user.phone}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-3be1d545d2",
+                  "name": "hookStatus",
+                  "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "Detener promociones",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-fdd0f3baa1",
+                  "name": "conversationStatus",
+                  "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "Exitosa",
+                    "staticValue": ""
+                  }
+                }
+              ]
             },
             {
               "id": "ins-7775ff5733",
@@ -33943,6 +34288,764 @@
         }
       ],
       "parentFolder": "dir-8e245963b2"
+    },
+    {
+      "id": "wf-954134ebd5",
+      "name": "🄽 NotionClient ",
+      "startNode": "nd-f13b17f53b",
+      "variables": [
+        {
+          "id": "var-24e781b834",
+          "name": "headers",
+          "description": "The headers of notion client api",
+          "type": "object",
+          "scope": "workflow",
+          "defaultValue": {},
+          "storeAsTag": false
+        },
+        {
+          "id": "var-aa2b2a9bd1",
+          "name": "body",
+          "description": "The body to send to notion api",
+          "type": "object",
+          "scope": "workflow",
+          "defaultValue": {},
+          "storeAsTag": false
+        },
+        {
+          "id": "var-05e83b4fd3",
+          "name": "conversationId",
+          "description": "The conversation id as title of the page",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-00d177878e",
+          "name": "pageId",
+          "description": "Notion Page id ",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-a78962a99b",
+          "name": "method",
+          "description": "",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-6ff9c54f47",
+          "name": "ACTION",
+          "description": "",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-51c61d04bb",
+          "name": "phone",
+          "description": "The user phone as identificator",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-9de2013098",
+          "name": "hookRecord",
+          "description": "",
+          "type": "schema",
+          "scope": "workflow",
+          "storeAsTag": false,
+          "schemaId": "schema-86686693ad"
+        },
+        {
+          "id": "var-f813d3b7fd",
+          "name": "url",
+          "description": "Complete URL to fetch ",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-3be1d545d2",
+          "name": "hookStatus",
+          "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        },
+        {
+          "id": "var-fdd0f3baa1",
+          "name": "conversationStatus",
+          "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+          "type": "string",
+          "scope": "workflow",
+          "defaultValue": "",
+          "storeAsTag": false
+        }
+      ],
+      "links": [],
+      "nodes": [
+        {
+          "id": "nd-f13b17f53b",
+          "name": "Entry",
+          "type": "entry",
+          "deletable": false,
+          "variables": [
+            "var-05e83b4fd3",
+            "var-51c61d04bb",
+            "var-3be1d545d2",
+            "var-fdd0f3baa1"
+          ],
+          "instructions": [
+            {
+              "id": "ins-5e13d401cb",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "!workflow.conversationId && !workflow.phone"
+              },
+              "label": "conversationId and phone missing",
+              "generative": {
+                "label": "conversationId and phone missing",
+                "suggestion": {
+                  "condition": "!event.conversationId && !user.phone"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-f13b17f53b",
+              "description": "",
+              "destination": {
+                "node": "nd-94aa013375"
+              },
+              "transitions": []
+            },
+            {
+              "id": "trs-fa07777c99",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "nd-702a5cb58b"
+              },
+              "transitions": [],
+              "nodeId": "nd-f13b17f53b",
+              "generative": {
+                "properties": {
+                  "condition": true
+                },
+                "suggestion": {},
+                "label": ""
+              },
+              "label": "",
+              "description": ""
+            }
+          ],
+          "x": 105,
+          "y": -480
+        },
+        {
+          "id": "nd-94aa013375",
+          "name": "Exit",
+          "type": "exit",
+          "variables": [
+            "var-00d177878e"
+          ],
+          "deletable": false,
+          "instructions": [
+            {
+              "id": "trs-92d24d10d2",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "true"
+              },
+              "destination": {
+                "node": "#"
+              },
+              "transitions": [],
+              "nodeId": "nd-94aa013375"
+            }
+          ],
+          "x": 2235,
+          "y": -405
+        },
+        {
+          "id": "nd-702a5cb58b",
+          "name": "SET_HEADERS",
+          "type": "standard",
+          "deletable": true,
+          "instructions": [
+            {
+              "id": "ins-18aa2c39cb",
+              "type": "action",
+              "category": "Execute",
+              "code": "workflow.headers = {\n  Authorization: `Bearer ${env.NOTION_API_KEY}`,\n  'Content-Type': 'application/json',\n  'Notion-Version': '2022-06-28'\n}",
+              "origin": "builtin",
+              "label": "\"Set Up Notion API Request Headers for Authentication\"",
+              "nodeId": "nd-702a5cb58b",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.headers = {\n    Authorization: `Bearer ${env.NOTION_API_KEY}`,\n    \"Content-Type\": \"application/json\",\n    \"Notion-Version\": \"2022-06-28\"\n  };\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-5bbd35e82c",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Headers set: {{workflow.headers}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-702a5cb58b",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-5741e4113c"
+          },
+          "x": 90,
+          "y": -30
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 915,
+          "y": 150,
+          "instructions": [
+            {
+              "id": "ins-d94523e4c2",
+              "type": "action",
+              "category": "Execute",
+              "code": "// Función para crear el título de la conversación usando el ID proporcionado o uno temporal\nconst createConversationTitle = (conversationId?: string) => {\n  // Si no se proporciona un ID de conversación, se genera uno temporal con la fecha actual\n  if (!conversationId) {\n    conversationId = \"temp-conversation-\" + Date.now();\n  }\n  // Retorna el objeto con el título formateado para Notion\n  return {\n    title: [\n      {\n        text: {\n          content: conversationId,\n        },\n      },\n    ],\n  };\n};\n\n// Función para crear una marca de tiempo con la fecha y hora actual en formato ISO\nconst createTimestamp = () => ({\n  date: {\n    start: new Date().toISOString(),\n  },\n});\n\nconsole.log(\"🚀 Creating base conversation document...\");\nconsole.log(`📝 Conversation ID: ${workflow.conversationId}`);\n\n// Define el cuerpo de la solicitud para crear la conversación en Notion\nworkflow.body = {\n  // Especifica el ID de la base de datos de Notion donde se guardará la conversación\n  parent: {\n    database_id: env.NOTION_CONVERSATION_DB,\n  },\n  // Define las propiedades del documento: ID de conversación y momento de envío\n  properties: {\n    \"ID de conversación\": createConversationTitle(workflow.conversationId),\n    \"Momento de envío\": createTimestamp(),\n  },\n};\n\n// Define el método HTTP como POST para la solicitud\nworkflow.method = \"post\";\n// URL de la API de Notion para crear una nueva página\nworkflow.url = \"https://api.notion.com/v1/pages\";",
+              "origin": "builtin",
+              "label": "\"Generate and Format Conversation Title for Notion Integration\"",
+              "nodeId": "nd-dd1b54487f",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createConversationTitle = /* @__PURE__ */ __name((conversationId) => {\n    if (!conversationId) {\n      conversationId = \"temp-conversation-\" + Date.now();\n    }\n    return {\n      title: [\n        {\n          text: {\n            content: conversationId\n          }\n        }\n      ]\n    };\n  }, \"createConversationTitle\");\n  const createTimestamp = /* @__PURE__ */ __name(() => ({\n    date: {\n      start: new Date().toISOString()\n    }\n  }), \"createTimestamp\");\n  console.log(\"\\u{1F680} Creating base conversation document...\");\n  console.log(`\\u{1F4DD} Conversation ID: ${workflow.conversationId}`);\n  workflow.body = {\n    // Especifica el ID de la base de datos de Notion donde se guardará la conversación\n    parent: {\n      database_id: env.NOTION_CONVERSATION_DB\n    },\n    // Define las propiedades del documento: ID de conversación y momento de envío\n    properties: {\n      \"ID de conversaci\\xF3n\": createConversationTitle(workflow.conversationId),\n      \"Momento de env\\xEDo\": createTimestamp()\n    }\n  };\n  workflow.method = \"post\";\n  workflow.url = \"https://api.notion.com/v1/pages\";\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-f716d1c1f4",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Method set: {{workflow.method}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-dd1b54487f",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-9dbdbfb41f",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "URL set: {{workflow.url}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-dd1b54487f",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-101b3c038d"
+          },
+          "id": "nd-dd1b54487f",
+          "name": "CREATE_BASE_CONVERSATION"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1800,
+          "y": -150,
+          "instructions": [
+            {
+              "type": "log",
+              "category": "Utilities",
+              "id": "ins-000d13ff1c",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Body: {{workflow.body}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-e8cb392c10",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-a02bb90cbd",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "📡 Making request",
+                "staticValue": ""
+              },
+              "nodeId": "nd-e8cb392c10",
+              "transitions": []
+            },
+            {
+              "id": "ins-a8ce6713fb",
+              "type": "action",
+              "category": "Execute",
+              "code": "// Extrae body, headers, method y url del objeto workflow\nconst { body, headers, method, url } = workflow\n\n// Muestra el método y la URL de la solicitud en consola\nconsole.log(`📡 ${method} request to: ${url}`)\n\n// Si existe un cuerpo en la solicitud, lo muestra en consola\nif (body) {\n  console.log('📤 Request body:', JSON.stringify(body, null, 2))\n}\n\ntry {\n  console.log('📡 Making request to Notion API...')\n\n  // Realiza la solicitud HTTP usando axios con el método, url, body y headers especificados\n  const response = await axios[method](url, body, { headers })\n  console.log('📝 Response:', JSON.stringify(response, null, 2))\n\n  // Si la respuesta contiene un id, lo asigna a workflow.pageId\n  if (response.data.id) {\n    console.log('🆔 Page ID:', response.data.id)\n    workflow.pageId = response.data.id\n  }\n} catch (error) {\n  console.error('❌', error)\n}\n",
+              "origin": "builtin",
+              "label": "\"Logging and Handling API Requests to Notion Service\"",
+              "nodeId": "nd-e8cb392c10",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { body, headers, method, url } = workflow;\n  console.log(`\\u{1F4E1} ${method} request to: ${url}`);\n  if (body) {\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(body, null, 2));\n  }\n  try {\n    console.log(\"\\u{1F4E1} Making request to Notion API...\");\n    const response = await axios[method](url, body, { headers });\n    console.log(\"\\u{1F4DD} Response:\", JSON.stringify(response, null, 2));\n    if (response.data.id) {\n      console.log(\"\\u{1F194} Page ID:\", response.data.id);\n      workflow.pageId = response.data.id;\n    }\n  } catch (error) {\n    console.error(\"\\u274C\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-8526bfc313",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "✅ Success: Request made",
+                "staticValue": ""
+              },
+              "nodeId": "nd-e8cb392c10",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-759e69dfd4"
+          },
+          "id": "nd-e8cb392c10",
+          "name": "MAKE_REQUEST"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 510,
+          "y": -180,
+          "instructions": [
+            {
+              "id": "ins-281091011d",
+              "type": "action",
+              "category": "Execute",
+              "code": "const phone = workflow.phone\nconst conversationId = workflow.conversationId\n\ntry {\n  if (!phone || !conversationId) {\n    console.error('⚠️ No phone or conversation ID provided. Cannot find record.')\n    return null\n  }\n\n  let filter: any = {}\n  if (phone) {\n    const lastTenDigitsOfPhone = phone.slice(-10)\n    console.log('🔎 lastTenDigitsOfPhone', lastTenDigitsOfPhone)\n    filter = {\n      $or: [{ TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } }]\n    }\n  } else if (conversationId) {\n    console.log('🔎 Searching for record by conversation ID:', conversationId)\n    filter = { CONVERSATION_ID: conversationId }\n  } else {\n    console.warn('❗️ No phone or conversation ID provided to search for record.')\n    return null\n  }\n\n  const recordResults = await HooksTable.findRecords({ filter })\n  console.log('📊 Records found:', recordResults.length)\n\n  if (recordResults.length > 0) {\n    // ✅ Obtener el último elemento\n    const lastRecord = recordResults[recordResults.length - 1]\n    console.log(`✅ Record found: ${lastRecord.id}`)\n    workflow.hookRecord = lastRecord\n  } else {\n    console.warn('❗️ No record found with the provided identifier.')\n    return null\n  }\n} catch (error) {\n  console.error('❌ Error finding record:', error)\n  return null\n}\n",
+              "origin": "builtin",
+              "label": "\"Retrieve Records by Phone Number or Conversation ID\"",
+              "nodeId": "nd-38163bccc5",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const phone = workflow.phone;\n  const conversationId = workflow.conversationId;\n  try {\n    if (!phone || !conversationId) {\n      console.error(\"\\u26A0\\uFE0F No phone or conversation ID provided. Cannot find record.\");\n      return null;\n    }\n    let filter = {};\n    if (phone) {\n      const lastTenDigitsOfPhone = phone.slice(-10);\n      console.log(\"\\u{1F50E} lastTenDigitsOfPhone\", lastTenDigitsOfPhone);\n      filter = {\n        $or: [{ TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } }]\n      };\n    } else if (conversationId) {\n      console.log(\"\\u{1F50E} Searching for record by conversation ID:\", conversationId);\n      filter = { CONVERSATION_ID: conversationId };\n    } else {\n      console.warn(\"\\u2757\\uFE0F No phone or conversation ID provided to search for record.\");\n      return null;\n    }\n    const recordResults = await HooksTable.findRecords({ filter });\n    console.log(\"\\u{1F4CA} Records found:\", recordResults.length);\n    if (recordResults.length > 0) {\n      const lastRecord = recordResults[recordResults.length - 1];\n      console.log(`\\u2705 Record found: ${lastRecord.id}`);\n      workflow.hookRecord = lastRecord;\n    } else {\n      console.warn(\"\\u2757\\uFE0F No record found with the provided identifier.\");\n      return null;\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error finding record:\", error);\n    return null;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "id": "ins-e2175b826e",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{ !workflow.hookRecord.NOTION_PAGE_ID }}"
+              },
+              "label": "No record found",
+              "generative": {
+                "label": "No record found",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-38163bccc5",
+              "description": "",
+              "destination": {
+                "node": "nd-dd1b54487f"
+              },
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-07084197b2",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Hook Record: {{workflow.hookRecord}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-38163bccc5",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-3ab76a3955"
+          },
+          "id": "nd-38163bccc5",
+          "name": "RETRIEVE_RECORD"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1830,
+          "y": 135,
+          "instructions": [
+            {
+              "id": "ins-44a7fe31bc",
+              "type": "action",
+              "category": "Execute",
+              "code": "// Definición de valores por defecto\nconst {\n  TELEFONO = workflow.phone ?? \"\", // Obtener el teléfono del record encontrado, si no asignar el del workflow o vacío si no existe\n  CONVERSATION_ID = workflow.conversationId ?? \"\", // Obtener el ID de conversación del record encontrado, si no asignar el del workflow o vacío si no existe\n  NOTION_PAGE_ID = \"\", // Obtener el ID de página de Notion del record encontrado o asignar vacío si no existe\n} = workflow.hookRecord || {};\n\n// Actualizar o crear el registro en HooksTable\nconst rowData = {\n  CONVERSATION_ID,\n  TELEFONO,\n  NOTION_PAGE_ID: workflow.pageId ?? NOTION_PAGE_ID,\n};\n\n// Si ya existe un registro, lo actualizamos; si no, lo creamos\nif (workflow.hookRecord) {\n  HooksTable.updateRecord(workflow.hookRecord.id, rowData);\n} else {\n  HooksTable.createRecord(rowData);\n}\n",
+              "origin": "builtin",
+              "label": "\"Update or Create Record in HooksTable Based on Workflow\"",
+              "nodeId": "nd-759e69dfd4",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const {\n    TELEFONO = workflow.phone ?? \"\",\n    // Obtener el teléfono del record encontrado, si no asignar el del workflow o vacío si no existe\n    CONVERSATION_ID = workflow.conversationId ?? \"\",\n    // Obtener el ID de conversación del record encontrado, si no asignar el del workflow o vacío si no existe\n    NOTION_PAGE_ID = \"\"\n    // Obtener el ID de página de Notion del record encontrado o asignar vacío si no existe\n  } = workflow.hookRecord || {};\n  const rowData = {\n    CONVERSATION_ID,\n    TELEFONO,\n    NOTION_PAGE_ID: workflow.pageId ?? NOTION_PAGE_ID\n  };\n  if (workflow.hookRecord) {\n    HooksTable.updateRecord(workflow.hookRecord.id, rowData);\n  } else {\n    HooksTable.createRecord(rowData);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-00cd9c2ece",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "✅ Success: Record saved",
+                "staticValue": ""
+              },
+              "nodeId": "nd-759e69dfd4",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-94aa013375"
+          },
+          "id": "nd-759e69dfd4",
+          "name": "SAVE_HOOK_RECORD"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1350,
+          "y": -150,
+          "instructions": [
+            {
+              "id": "ins-bbaaa8a3cc",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!workflow.phone}}"
+              },
+              "label": "Not phone",
+              "generative": {
+                "label": "Not phone",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-101b3c038d",
+              "description": "",
+              "destination": {
+                "node": "nd-073f0dda7d"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-64452fdfd0",
+              "type": "action",
+              "code": "// Función que crea un objeto con la propiedad phone_number usando el teléfono proporcionado\nconst createPhoneProperty = (phone: string) => ({\n  phone_number: phone\n})\n\n// Obtiene el número de teléfono del objeto workflow\nconst phone = workflow.phone\n\n// Si existe un número de teléfono\nif (phone) {\n  console.log(`📞 Updating phone number: ${phone}`)\n  // Actualiza la propiedad \"Phone\" dentro de workflow.body[\"properties\"] con el nuevo número de teléfono\n  workflow.body['properties'] = {\n    ...workflow.body['properties'],\n    ['Teléfono']: createPhoneProperty(phone)\n  }\n}\n\n\n",
+              "origin": "builtin",
+              "label": "\"Update Workflow with New Phone Number Property\"",
+              "nodeId": "nd-101b3c038d",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createPhoneProperty = /* @__PURE__ */ __name((phone2) => ({\n    phone_number: phone2\n  }), \"createPhoneProperty\");\n  const phone = workflow.phone;\n  if (phone) {\n    console.log(`\\u{1F4DE} Updating phone number: ${phone}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Tel\\xE9fono\"]: createPhoneProperty(phone)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-073f0dda7d"
+          },
+          "id": "nd-101b3c038d",
+          "name": "UPDATE_PHONE"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 885,
+          "y": 540,
+          "instructions": [
+            {
+              "id": "ins-6a76930006",
+              "type": "action",
+              "category": "Execute",
+              "code": "// Establece el método HTTP como \"patch\" para actualizar recursos exis\nworkflow.method = \"patch\";\n\nconsole.log(`📝 Setting up patch for page ID: ${workflow.pageId}...`);\n\n// Construye la URL de la API de Notion usando el ID de la página\nworkflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;\n\n// Define el cuerpo de la solicitud con las propiedades a actualizar\nworkflow.body = {\n  // Actualiza la propiedad \"Ultima actualización\"\n  properties: {\n    \"Última actualización\": {\n      // Asigna la fecha actual en formato ISO\n      date: {\n        start: new Date().toISOString(),\n      },\n    },\n  },\n};\n",
+              "origin": "builtin",
+              "label": "\"Update Notion Page with Current Date Using PATCH Method\"",
+              "nodeId": "nd-3ab76a3955",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.method = \"patch\";\n  console.log(`\\u{1F4DD} Setting up patch for page ID: ${workflow.pageId}...`);\n  workflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;\n  workflow.body = {\n    // Actualiza la propiedad \"Ultima actualización\"\n    properties: {\n      \"\\xDAltima actualizaci\\xF3n\": {\n        // Asigna la fecha actual en formato ISO\n        date: {\n          start: new Date().toISOString()\n        }\n      }\n    }\n  };\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "isCustomLabel": false,
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-ebcc12975d",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Creation body set: {{workflow.body}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-3ab76a3955",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-274648d097",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Method set: {{workflow.method}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-3ab76a3955",
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-d3b91b7906",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "URL set: {{workflow.url}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-3ab76a3955",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-101b3c038d"
+          },
+          "id": "nd-3ab76a3955",
+          "name": "CREATE_PATCH"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 210,
+          "y": 270,
+          "instructions": [
+            {
+              "id": "ins-548496af09",
+              "type": "action",
+              "code": "try {\n  const { NOTION_API_KEY, NOTION_CONVERSATION_DB } = env\n\n  if (!NOTION_API_KEY || !NOTION_CONVERSATION_DB) {\n    throw new Error('Missing Notion API key or database ID')\n  }\n\n  const headers = {\n    Authorization: `Bearer ${NOTION_API_KEY}`,\n    'Content-Type': 'application/json',\n    'Notion-Version': '2022-06-28'\n  }\n\n  const filters: any[] = []\n  if (workflow.conversationId) {\n    filters.push({\n      property: 'ID de conversación',\n      rich_text: {\n        equals: workflow.conversationId\n      }\n    })\n  }\n  if (workflow.phone) {\n    const lastTenDigitsOfPhone = workflow.phone.slice(-10)\n    filters.push({\n      property: 'Teléfono',\n      rich_text: {\n        ends_with: lastTenDigitsOfPhone\n      }\n    })\n  }\n\n  const requestBody = {\n    filter: filters.length === 1 ? filters[0] : { or: filters }\n  }\n\n  console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))\n  console.log('📡 Making request to Notion API...')\n  const response = await axios.post(\n    `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,\n    requestBody,\n    { headers }\n  )\n\n  console.log('✅ Response received!')\n  console.log('📊 Status:', response.status)\n  const results = response.data.results\n  console.log('📄 Results found:', results.length)\n\n  if (results.length > 0) {\n    const pageId = results[0].id\n    console.log('🆔 Page found:', pageId)\n    workflow.pageId = pageId\n    return pageId\n  } else {\n    console.warn('❗️ No page found for the given conversation ID.')\n    return null\n  }\n} catch (error) {\n  console.error('❌ Error searching for page:', error)\n  return null\n}\n",
+              "origin": "builtin",
+              "label": "\"Query Notion Database for Conversation by ID or Phone\"",
+              "nodeId": "nd-5741e4113c",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  try {\n    const { NOTION_API_KEY, NOTION_CONVERSATION_DB } = env;\n    if (!NOTION_API_KEY || !NOTION_CONVERSATION_DB) {\n      throw new Error(\"Missing Notion API key or database ID\");\n    }\n    const headers = {\n      Authorization: `Bearer ${NOTION_API_KEY}`,\n      \"Content-Type\": \"application/json\",\n      \"Notion-Version\": \"2022-06-28\"\n    };\n    const filters = [];\n    if (workflow.conversationId) {\n      filters.push({\n        property: \"ID de conversaci\\xF3n\",\n        rich_text: {\n          equals: workflow.conversationId\n        }\n      });\n    }\n    if (workflow.phone) {\n      const lastTenDigitsOfPhone = workflow.phone.slice(-10);\n      filters.push({\n        property: \"Tel\\xE9fono\",\n        rich_text: {\n          ends_with: lastTenDigitsOfPhone\n        }\n      });\n    }\n    const requestBody = {\n      filter: filters.length === 1 ? filters[0] : { or: filters }\n    };\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(requestBody, null, 2));\n    console.log(\"\\u{1F4E1} Making request to Notion API...\");\n    const response = await axios.post(\n      `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,\n      requestBody,\n      { headers }\n    );\n    console.log(\"\\u2705 Response received!\");\n    console.log(\"\\u{1F4CA} Status:\", response.status);\n    const results = response.data.results;\n    console.log(\"\\u{1F4C4} Results found:\", results.length);\n    if (results.length > 0) {\n      const pageId = results[0].id;\n      console.log(\"\\u{1F194} Page found:\", pageId);\n      workflow.pageId = pageId;\n      return pageId;\n    } else {\n      console.warn(\"\\u2757\\uFE0F No page found for the given conversation ID.\");\n      return null;\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error searching for page:\", error);\n    return null;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            },
+            {
+              "id": "ins-ebd77de767",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{ !workflow.pageId }}"
+              },
+              "label": "No page found",
+              "generative": {
+                "label": "No page found",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-5741e4113c",
+              "description": "",
+              "destination": {
+                "node": "nd-dd1b54487f"
+              },
+              "transitions": []
+            },
+            {
+              "type": "log",
+              "id": "ins-cd191f0e58",
+              "label": "Log",
+              "level": "debug",
+              "message": {
+                "valueType": "dynamic",
+                "dynamicValue": "Page found: {{workflow.pageId}}",
+                "staticValue": ""
+              },
+              "nodeId": "nd-5741e4113c",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-3ab76a3955"
+          },
+          "id": "nd-5741e4113c",
+          "name": "RETRIVE_PAGE"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1350,
+          "y": 75,
+          "instructions": [
+            {
+              "id": "ins-2249fa584c",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!workflow.hookStatus}}"
+              },
+              "label": "Not hook",
+              "generative": {
+                "label": "Not hook",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-073f0dda7d",
+              "description": "",
+              "destination": {
+                "node": "nd-db7142bba6"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-df5e14aef9",
+              "type": "action",
+              "code": "/** \n * @description Actualiza el estado del gancho de la conversación en Notion.\n * Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\", \"Contestado\"\n */\nconst createHookStatusProperty = (status) => ({\n  status: {\n    name: status,\n  },\n});\n\n// Obtiene el estado del gancho del objeto workflow\nconst hookStatus = workflow.hookStatus;\n\n// Si existe un estado de gancho\nif (hookStatus) {\n  console.log(`🔄 Actualizando el estado del anzuelo: ${hookStatus}`);\n  // Actualiza la propiedad \"Anzuelo\" dentro de workflow.body[\"properties\"] con el nuevo estado de gancho\n  workflow.body[\"properties\"] = {\n    ...workflow.body[\"properties\"],\n    [\"Anzuelo\"]: createHookStatusProperty(hookStatus),\n  };\n}\n",
+              "origin": "builtin",
+              "label": "\"Update Conversation Hook Status in Notion Workflow\"",
+              "nodeId": "nd-073f0dda7d",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createHookStatusProperty = /* @__PURE__ */ __name((status) => ({\n    status: {\n      name: status\n    }\n  }), \"createHookStatusProperty\");\n  const hookStatus = workflow.hookStatus;\n  if (hookStatus) {\n    console.log(`\\u{1F504} Actualizando el estado del anzuelo: ${hookStatus}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Anzuelo\"]: createHookStatusProperty(hookStatus)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-db7142bba6"
+          },
+          "id": "nd-073f0dda7d",
+          "name": "UPDATE_HOOK_STATUS"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1350,
+          "y": 315,
+          "instructions": [
+            {
+              "id": "ins-14301fd00c",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!workflow.conversationStatus}}"
+              },
+              "label": "Not conversation status",
+              "generative": {
+                "label": "Not conversation status",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-db7142bba6",
+              "description": "",
+              "destination": {
+                "node": "nd-232ad886c1"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-8d434746bc",
+              "type": "action",
+              "code": "  /** Función que crea un objeto con la propiedad anzuelo usando el estado proporcionado\n * @description Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"\n */\nconst createConversationStatusProperty = (status: string) => ({\n  status: {\n    name: status,\n  },\n});\n\n// Obtiene el estado de la conversación del objeto workflow\nconst conversationStatus = workflow.conversationStatus;\n\n// Si existe un estado de conversación\nif (conversationStatus) {\n  console.log(`🔄 Actualizando el estado de la conversación: ${conversationStatus}`);\n  // Actualiza la propiedad \"Anzuelo\" dentro de workflow.body[\"properties\"] con el nuevo estado de conversación\n  workflow.body[\"properties\"] = {\n    ...workflow.body[\"properties\"],\n    [\"Conversation\"]: createConversationStatusProperty(conversationStatus),\n  };\n}\n",
+              "origin": "builtin",
+              "label": "\"Update Workflow with Current Conversation Status Property\"",
+              "nodeId": "nd-db7142bba6",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createConversationStatusProperty = /* @__PURE__ */ __name((status) => ({\n    status: {\n      name: status\n    }\n  }), \"createConversationStatusProperty\");\n  const conversationStatus = workflow.conversationStatus;\n  if (conversationStatus) {\n    console.log(`\\u{1F504} Actualizando el estado de la conversaci\\xF3n: ${conversationStatus}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Conversation\"]: createConversationStatusProperty(conversationStatus)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-232ad886c1"
+          },
+          "id": "nd-db7142bba6",
+          "name": "UPDATE_CONV_STATUS"
+        },
+        {
+          "type": "standard",
+          "deletable": true,
+          "x": 1335,
+          "y": 555,
+          "instructions": [
+            {
+              "id": "ins-6841b37eb4",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
+                "payload": "{{!workflow.conversationId}}"
+              },
+              "label": "Not conversation ID",
+              "generative": {
+                "label": "Not conversation ID",
+                "suggestion": {},
+                "properties": {
+                  "condition": false
+                }
+              },
+              "nodeId": "nd-232ad886c1",
+              "description": "",
+              "destination": {
+                "node": "nd-e8cb392c10"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-db5d91b4c9",
+              "type": "action",
+              "code": "// Función que crea un objeto con la propiedad url usando la URL proporcionada\nconst createUrlProperty = (url: string) => ({\n  url: url\n})\n\n// Obtiene la URL del objeto workflow\nconst botId = event.botId ?? '' // Ajusta esto según tu estructura real\nconst botBaseUrl = `https://app.botpress.cloud/workspaces/${env.WORKSPACE_ID}/bots/${botId}`\nconst conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`\n\n// Si existe una URL\nif (conversationUrl) {\n  console.log(`🔗 Updating URL: ${conversationUrl}`)\n  // Actualiza la propiedad \"URL\" dentro de workflow.body[\"properties\"] con la nueva URL\n  workflow.body['properties'] = {\n    ...workflow.body['properties'],\n    ['url']: createUrlProperty(conversationUrl)\n  }\n}\n",
+              "origin": "builtin",
+              "label": "Update Workflow with Conversation URL Property Functionality",
+              "nodeId": "nd-232ad886c1",
+              "isCustomLabel": false,
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createUrlProperty = /* @__PURE__ */ __name((url) => ({\n    url\n  }), \"createUrlProperty\");\n  const botId = event.botId ?? \"\";\n  const botBaseUrl = `https://app.botpress.cloud/workspaces/${env.WORKSPACE_ID}/bots/${botId}`;\n  const conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`;\n  if (conversationUrl) {\n    console.log(`\\u{1F517} Updating URL: ${conversationUrl}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"url\"]: createUrlProperty(conversationUrl)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transitions": []
+            }
+          ],
+          "defaultTransition": {
+            "targetNodeId": "nd-e8cb392c10"
+          },
+          "id": "nd-232ad886c1",
+          "name": "UPDATE_URL"
+        }
+      ],
+      "parentFolder": "dir-b60bed861d"
     }
   ],
   "intents": [
@@ -33993,7 +35096,20 @@
   ],
   "list_entities": [],
   "pattern_entities": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "code",
+      "id": "act-3d077a219a",
+      "description": "",
+      "name": "create-notion-page",
+      "raw_code": "  try {\n    const conversationId = event.conversationId || 'prueba-botpress'\n\n    console.log('🚀 Starting Notion page creation...')\n    console.log(`📝 Conversation ID: ${conversationId}`)\n    console.log(`🗄️ Database ID: ${env.NOTION_CONVERSATION_DB}`)\n\n    const headers = {\n      Authorization: `Bearer ${env.NOTION_API_KEY}`,\n      'Content-Type': 'application/json',\n      'Notion-Version': '2022-06-28'\n    }\n\n    const requestBody = {\n      parent: { database_id: env.NOTION_CONVERSATION_DB },\n      properties: {\n        'ID de conversación': {\n          title: [\n            {\n              text: {\n                content: conversationId\n              }\n            }\n          ]\n        },\n        'Momento de envío': {\n          date: {\n            start: new Date().toISOString()\n          }\n        }\n      }\n    }\n    console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))\n\n    const requestConfig = {\n      headers,\n      data: requestBody\n    }\n\n    console.log('📡 Making request to Notion API...')\n\n    const response = await axios.post('https://api.notion.com/v1/pages', requestBody, requestConfig)\n\n    console.log('✅ Response received!')\n    console.log('📊 Status:', response.status)\n    console.log('🆔 Page ID:', response.data.id)\n\n    const { id } = response.data\n    // conversation.notionRegistry.id = id;\n\n    console.log(`✨ Página creada en Notion con ID: ${id}`)\n    event.tags.conversation['notion:pageId'] = id\n    return {\n      pageId: id\n    }\n  } catch (error: any) {\n    console.error('❌ Error creating page in Notion:', error)\n\n    if (error.response) {\n      console.error('📊 Status:', error.response.status)\n      console.error('📄 Status Text:', error.response.statusText)\n      console.error('📝 Response Data:', JSON.stringify(error.response.data, null, 2))\n      console.error('🔧 Request Headers:', JSON.stringify(error.config?.headers, null, 2))\n    } else if (error.request) {\n      console.error('🌐 Network Error - No response received')\n      console.error('📡 Request:', error.request)\n    } else {\n      console.error('⚙️ Setup Error:', error.message)\n    }\n\n    throw { success: false, error: error.message }\n  }",
+      "transpiled_code": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  try {\n    const conversationId = event.conversationId || \"prueba-botpress\";\n    console.log(\"\\u{1F680} Starting Notion page creation...\");\n    console.log(`\\u{1F4DD} Conversation ID: ${conversationId}`);\n    console.log(`\\u{1F5C4}\\uFE0F Database ID: ${env.NOTION_CONVERSATION_DB}`);\n    const headers = {\n      Authorization: `Bearer ${env.NOTION_API_KEY}`,\n      \"Content-Type\": \"application/json\",\n      \"Notion-Version\": \"2022-06-28\"\n    };\n    const requestBody = {\n      parent: { database_id: env.NOTION_CONVERSATION_DB },\n      properties: {\n        \"ID de conversaci\\xF3n\": {\n          title: [\n            {\n              text: {\n                content: conversationId\n              }\n            }\n          ]\n        },\n        \"Momento de env\\xEDo\": {\n          date: {\n            start: new Date().toISOString()\n          }\n        }\n      }\n    };\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(requestBody, null, 2));\n    const requestConfig = {\n      headers,\n      data: requestBody\n    };\n    console.log(\"\\u{1F4E1} Making request to Notion API...\");\n    const response = await axios.post(\"https://api.notion.com/v1/pages\", requestBody, requestConfig);\n    console.log(\"\\u2705 Response received!\");\n    console.log(\"\\u{1F4CA} Status:\", response.status);\n    console.log(\"\\u{1F194} Page ID:\", response.data.id);\n    const { id } = response.data;\n    console.log(`\\u2728 P\\xE1gina creada en Notion con ID: ${id}`);\n    event.tags.conversation[\"notion:pageId\"] = id;\n    return {\n      pageId: id\n    };\n  } catch (error) {\n    console.error(\"\\u274C Error creating page in Notion:\", error);\n    if (error.response) {\n      console.error(\"\\u{1F4CA} Status:\", error.response.status);\n      console.error(\"\\u{1F4C4} Status Text:\", error.response.statusText);\n      console.error(\"\\u{1F4DD} Response Data:\", JSON.stringify(error.response.data, null, 2));\n      console.error(\"\\u{1F527} Request Headers:\", JSON.stringify(error.config?.headers, null, 2));\n    } else if (error.request) {\n      console.error(\"\\u{1F310} Network Error - No response received\");\n      console.error(\"\\u{1F4E1} Request:\", error.request);\n    } else {\n      console.error(\"\\u2699\\uFE0F Setup Error:\", error.message);\n    }\n    throw { success: false, error: error.message };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+      "output_schema": {
+        "type": "schema",
+        "schemaId": "schema-d5333f632f"
+      }
+    }
+  ],
   "hooks": [
     {
       "id": "hk-b4e6be1486",
@@ -34478,6 +35594,11 @@
       "id": "dir-8e245963b2",
       "label": "WhatsappFlow",
       "parentFolder": "root"
+    },
+    {
+      "id": "dir-b60bed861d",
+      "label": "Notion",
+      "parentFolder": "dir-6400c2779c"
     }
   ],
   "agents": {
@@ -35033,7 +36154,7 @@
           },
           {
             "index": 10,
-            "width": 140,
+            "width": 208,
             "hidden": false
           },
           {
@@ -35073,7 +36194,7 @@
           },
           {
             "index": 15,
-            "width": 140,
+            "width": 224,
             "hidden": false
           },
           {
@@ -35088,7 +36209,7 @@
           },
           {
             "index": 18,
-            "width": 163,
+            "width": 219,
             "hidden": false
           },
           {
@@ -35479,6 +36600,51 @@
           }
         ]
       }
+    },
+    "table_01K2K7DK1878VYNXM5J8MDSEH2": {
+      "id": "table_01K2K7DK1878VYNXM5J8MDSEH2",
+      "name": "HooksTable",
+      "factor": 1,
+      "frozen": false,
+      "tags": {},
+      "createdAt": "2025-08-14T02:44:20.137Z",
+      "updatedAt": "2025-08-14T02:44:20.137Z",
+      "createdBy": "user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7",
+      "updatedBy": null,
+      "isComputeEnabled": false,
+      "schema": {
+        "type": "object",
+        "x-zui": {},
+        "required": [
+          "NOTION_PAGE_ID"
+        ],
+        "properties": {
+          "TELEFONO": {
+            "type": "string",
+            "x-zui": {
+              "index": 0,
+              "searchable": true
+            }
+          },
+          "NOTION_PAGE_ID": {
+            "type": "string",
+            "x-zui": {
+              "index": 1,
+              "searchable": true
+            }
+          },
+          "CONVERSATION_ID": {
+            "type": "string",
+            "x-zui": {
+              "index": 2,
+              "searchable": true
+            }
+          }
+        },
+        "additionalProperties": true
+      },
+      "parentFolder": "root",
+      "selectors": []
     }
   },
   "schemas": [
@@ -35614,197 +36780,6 @@
       "code": "z.object({\n\tstreet: z.string(),\n\tnumber: z.string(),\n\tneighborhood: z.string(),\n\tcity: z.string(),\n\tstate: z.string(),\n\tcountry: z.string(),\n});",
       "typings": "",
       "id": "schema-07b526210b"
-    },
-    {
-      "name": "UserLocation",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "neighborhood": {
-            "type": "string",
-            "x-zui": {}
-          },
-          "city": {
-            "type": "string",
-            "x-zui": {}
-          },
-          "serviceLocation": {
-            "type": "string",
-            "x-zui": {}
-          },
-          "outOfServiceRange": {
-            "type": "boolean",
-            "x-zui": {}
-          },
-          "address": {
-            "type": "object",
-            "properties": {
-              "street": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "number": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "neighborhood": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "city": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "state": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "country": {
-                "type": "string",
-                "x-zui": {}
-              }
-            },
-            "required": [
-              "street",
-              "number",
-              "neighborhood",
-              "city",
-              "state",
-              "country"
-            ],
-            "additionalProperties": false,
-            "x-zui": {}
-          }
-        },
-        "required": [
-          "neighborhood",
-          "city",
-          "serviceLocation",
-          "outOfServiceRange",
-          "address"
-        ],
-        "additionalProperties": false,
-        "x-zui": {}
-      },
-      "code": "z.object({\n\tneighborhood: z.string(),\n\tcity: z.string(),\n\tserviceLocation: z.string(),\n\toutOfServiceRange: z.boolean(),\n\taddress: z.object({\n    street: z.string(),\n    number: z.string(),\n    neighborhood: z.string(),\n    city: z.string(),\n    state: z.string(),\n    country: z.string(),\n  })\n});",
-      "typings": "",
-      "id": "schema-ced60ec354"
-    },
-    {
-      "name": "CreditUserInfo",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "creditProfile": {
-            "type": "string",
-            "enum": [
-              "NO_INTERESTED",
-              "CREDIORBE",
-              "BANCO_DE_BOGOTA",
-              "CUPO_BRILLA"
-            ],
-            "x-zui": {}
-          },
-          "jobContract": {
-            "type": "string",
-            "enum": [
-              "INFORMAL",
-              "FORMAL"
-            ],
-            "x-zui": {}
-          },
-          "negativeCreditReport": {
-            "type": "boolean",
-            "x-zui": {}
-          },
-          "assistancePreference": {
-            "type": "string",
-            "enum": [
-              "IN_STORE",
-              "ONLINE"
-            ],
-            "x-zui": {}
-          },
-          "purchaseType": {
-            "type": "string",
-            "enum": [
-              "CASH",
-              "CREDIT"
-            ],
-            "x-zui": {}
-          }
-        },
-        "required": [
-          "creditProfile",
-          "jobContract",
-          "negativeCreditReport",
-          "assistancePreference",
-          "purchaseType"
-        ],
-        "additionalProperties": false,
-        "x-zui": {}
-      },
-      "code": "z.object({\n\t\tcreditProfile: z.enum([\n\t\t\"NO_INTERESTED\",\n\t\t\"CREDIORBE\",\n\t\t\"BANCO_DE_BOGOTA\",\n\t\t\"CUPO_BRILLA\",\n\t] ),\n\tjobContract: z.enum([\"INFORMAL\", \"FORMAL\"]),\n\tnegativeCreditReport: z.boolean(),\n\tassistancePreference: z.enum( [ \"IN_STORE\", \"ONLINE\" ] ),\n\tpurchaseType: z.enum([\"CASH\", \"CREDIT\"]),\n});",
-      "typings": "",
-      "id": "schema-d63524e0dd"
-    },
-    {
-      "id": "schema-a21894b420",
-      "name": "CreditProfileType",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "x-zui": {}
-          },
-          "age": {
-            "type": "number",
-            "x-zui": {}
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "x-zui": {}
-          },
-          "address": {
-            "type": "object",
-            "properties": {
-              "street": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "city": {
-                "type": "string",
-                "x-zui": {}
-              },
-              "zip": {
-                "type": "string",
-                "minLength": 5,
-                "maxLength": 5,
-                "x-zui": {}
-              }
-            },
-            "required": [
-              "street",
-              "city",
-              "zip"
-            ],
-            "additionalProperties": false,
-            "x-zui": {}
-          }
-        },
-        "required": [
-          "name",
-          "age",
-          "email",
-          "address"
-        ],
-        "additionalProperties": false,
-        "x-zui": {}
-      },
-      "code": "z.object({\n  name: z.string(),\n  age: z.number(),\n  email: z.string().email(),\n  address: z.object({\n    street: z.string(),\n    city: z.string(),\n    zip: z.string().length(5),\n  })\n})",
-      "typings": ""
     },
     {
       "name": "ProductInfoSchema",
@@ -36272,41 +37247,157 @@
       "code": "z.object({\n  ending: z\n    .enum(['COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED', ''])\n    .describe(\n      \"La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED'\"\n    ),\n\n  topics: z.array(z.string()).describe('Temas que se han manejado en la conversación'),\n\n  status: z\n    .enum([\n      'STARTED',\n      'BOT_ATTENTION',\n      'CREDIT_INTERESTED',\n      'STORE_ATTENTION',\n      'CREDIORBE_ATTENTION',\n      'BANCO_BOGOTA_ATTENTION',\n      'ATTENTION_REJECTED',\n      'PRE_EVALUATION_STARTED',\n      'PENDING_CALL',\n      'COLD_PROSPECT',\n      ''\n    ])\n    .describe('Variable que controla el nivel de calidad de la conversación'),\n\n  context: z\n    .enum(['ABOUT_LOCATION_INFO', 'ABOUT_MOTO_INFO', 'ABOUT_CREDIT_INFO', 'ABOUT_CUPO_BRILLA_INFO',\n    'PRE_ENGAGEMENT', ''])\n    .describe('El contexto del cual se habla en la conversación'),\n\n  state: z\n    .enum(['', 'COMPLEXED', 'SERVED', 'WAITING', 'CONFUSED', 'ATTENTION_REQUESTED', 'FINISHED', 'TIMEOUT'])\n    .describe('State of bot when get a answer from user')\n})\n",
       "typings": "",
       "id": "schema-25651dffcc"
+    },
+    {
+      "name": "NotionRegist",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "pageId": {
+            "type": "string",
+            "x-zui": {}
+          }
+        },
+        "required": [
+          "pageId"
+        ],
+        "additionalProperties": false,
+        "x-zui": {}
+      },
+      "code": "z.object({\n pageId: z.string() \n})",
+      "typings": "",
+      "id": "schema-d5333f632f"
+    },
+    {
+      "name": "HookRecord",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "NOTION_PAGE_ID": {
+            "type": "string",
+            "x-zui": {}
+          },
+          "CONVERSATION_ID": {
+            "type": "string",
+            "x-zui": {}
+          },
+          "TELEFONO": {
+            "type": "string",
+            "x-zui": {}
+          },
+          "id": {
+            "type": "number",
+            "x-zui": {}
+          }
+        },
+        "required": [
+          "NOTION_PAGE_ID",
+          "CONVERSATION_ID",
+          "TELEFONO",
+          "id"
+        ],
+        "additionalProperties": false,
+        "x-zui": {}
+      },
+      "code": "z.object({\n  NOTION_PAGE_ID: z.string(),\n  CONVERSATION_ID: z.string(),\n  TELEFONO: z.string(),\n  id: z.number()\n})",
+      "typings": "",
+      "id": "schema-86686693ad"
+    },
+    {
+      "name": "CreditUserInfo",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "creditProfile": {
+            "type": "string",
+            "enum": [
+              "NO_INTERESTED",
+              "CREDIORBE",
+              "BANCO_DE_BOGOTA",
+              "CUPO_BRILLA"
+            ],
+            "x-zui": {}
+          },
+          "jobContract": {
+            "type": "string",
+            "enum": [
+              "INFORMAL",
+              "FORMAL"
+            ],
+            "x-zui": {}
+          },
+          "negativeCreditReport": {
+            "type": "boolean",
+            "x-zui": {}
+          },
+          "assistancePreference": {
+            "type": "string",
+            "enum": [
+              "IN_STORE",
+              "ONLINE"
+            ],
+            "x-zui": {}
+          },
+          "purchaseType": {
+            "type": "string",
+            "enum": [
+              "CASH",
+              "CREDIT"
+            ],
+            "x-zui": {}
+          }
+        },
+        "required": [
+          "creditProfile",
+          "jobContract",
+          "negativeCreditReport",
+          "assistancePreference",
+          "purchaseType"
+        ],
+        "additionalProperties": false,
+        "x-zui": {}
+      },
+      "code": "z.object({\n\tcreditProfile: z.enum([\n\t\t\"NO_INTERESTED\",\n\t\t\"CREDIORBE\",\n\t\t\"BANCO_DE_BOGOTA\",\n\t\t\"CUPO_BRILLA\",\n\t] ),\n\tjobContract: z.enum([\n\t\t\"INFORMAL\",\n\t\t\"FORMAL\"\n\t]),\n\tnegativeCreditReport: z.boolean(),\n\tassistancePreference: z.enum( [ \n\t\t\"IN_STORE\",\n\t\t\"ONLINE\" \n\t] ),\n\tpurchaseType: z.enum([\n\t\t\"CASH\",\n\t\t\"CREDIT\"\n\t]),\n});",
+      "typings": "",
+      "id": "schema-d63524e0dd"
     }
   ],
   "versions": [
     {
-      "name": "01 Aug 25 08:07",
-      "id": "version_01K1M8H1QKJ0Y5K4V2HK7D4ZFQ"
+      "name": "13 Aug 25 08:45",
+      "id": "version_01K2K7G733BAFNSNXMPHW9FBEM"
+    },
+    {
+      "name": "13 Aug 25 08:33",
+      "id": "version_01K2K6SW65A5EAD5ER6YMW5E0S"
     },
     {
       "name": "01 Aug 25 08:05",
       "id": "version_01K1M8DAN8ZDFKN502XPMNV2XP"
-    },
-    {
-      "name": "26 Jul 25 08:15",
-      "id": "version_01K13HE8V34Z5H4P5TB74YRQ67"
     }
   ],
-  "revision": 57990,
+  "revision": 58724,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-08-11T15:50:27.814Z",
+    "lastRevisionCheckAt": "2025-08-15T21:37:55.170Z",
     "lastRevisionId": -1,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-08-11T15:50:29.665Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-08-11T15:50:30.805Z: Connection State: initialized -> connecting (ok)",
-      "2025-08-11T15:50:31.802Z (IM0L-J5NI9): Connection State: connecting -> connected (ok)",
-      "2025-08-11T15:50:31.989Z (IM0L-J5NI9): Multiplayer session initialized!",
-      "2025-08-11T15:50:32.069Z (IM0L-J5NI9): Player entered channel - {\"sessionId\":\"sess_01K2CX6W63CJPXV2Y4959V6VM9\",\"connectionId\":\"IM0L-J5NI9\",\"joinedAt\":\"2025-08-11T15:50:31.989Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Mon, 11 Aug 2025 15:50:31 GMT\",\"connectedAt\":\"Mon, 11 Aug 2025 15:50:31 GMT\",\"sections\":[]}",
-      "2025-08-11T15:50:32.069Z (IM0L-J5NI9): jguzman@marxadigital.com was elected as master - \"sess_01K2CX6W63CJPXV2Y4959V6VM9\""
+      "2025-08-15T21:37:58.045Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-08-15T21:37:58.046Z: Connection State: initialized -> connecting (ok)",
+      "2025-08-15T21:37:58.298Z (1QK4osCm2n): Connection State: connecting -> connected (ok)",
+      "2025-08-15T21:37:58.425Z (1QK4osCm2n): Multiplayer session initialized!",
+      "2025-08-15T21:37:58.437Z (1QK4osCm2n): tobiasgaitan@gmail.com was elected as master - \"sess_01K2QJ0QP814NNC3TRAC2MZAQX\"",
+      "2025-08-15T21:38:01.472Z (1QK4osCm2n): Player entered channel - {\"sessionId\":\"sess_01K2QTNYY0XZESYTCRGBB0190N\",\"connectionId\":\"1QK4osCm2n\",\"joinedAt\":\"2025-08-15T21:38:01.393Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 15 Aug 2025 21:37:58 GMT\",\"connectedAt\":\"Fri, 15 Aug 2025 21:37:58 GMT\",\"sections\":[]}",
+      "2025-08-15T21:38:01.472Z (1QK4osCm2n): jguzman@marxadigital.com was elected as master - \"sess_01K2QTNYY0XZESYTCRGBB0190N\"",
+      "2025-08-15T21:38:01.648Z (1QK4osCm2n): Player left channel - {\"sessionId\":\"sess_01K2QJ0QP814NNC3TRAC2MZAQX\",\"connectionId\":\"9a10CanVZp\",\"joinedAt\":\"2025-08-15T21:06:28.181Z\",\"email\":\"tobiasgaitan@gmail.com\",\"displayName\":\"Tobias Gaitan\",\"color\":\"var(--pink-8)\",\"workspaceUserId\":\"241cd1a5-7deb-4c72-a7a7-997cd0dd721d\",\"lastActiveAt\":\"2025-08-15T21:37:34.979Z\",\"connectedAt\":\"Fri, 15 Aug 2025 20:24:57 GMT\",\"sections\":[]}",
+      "2025-08-15T21:38:01.660Z (1QK4osCm2n): Player left channel"
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K2CX6W63CJPXV2Y4959V6VM9 / Mon, 11 Aug 2025 15:50:31 GMT /  Mon, 11 Aug 2025 15:50:31 GMT"
+      "jguzman@marxadigital.com / sess_01K2QTNYY0XZESYTCRGBB0190N / Fri, 15 Aug 2025 21:37:58 GMT /  Fri, 15 Aug 2025 21:37:58 GMT"
     ],
-    "savedAt": "2025-08-11T15:50:34.549Z",
+    "savedAt": "2025-08-15T21:38:05.024Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K2CX6W63CJPXV2Y4959V6VM9"
+    "sessionId": "sess_01K2QTNYY0XZESYTCRGBB0190N"
   },
   "identity": {
     "name": "asistente-lasmotos-general",

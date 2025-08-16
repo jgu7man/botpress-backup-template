@@ -1,0 +1,11 @@
+{
+  "botJsonPath": "./bot/unzipped/bot.json",
+  "outputDirectory": "./bot/transitions",
+  "options": {
+    "generateDirectories": true,
+    "generateTransitions": false,
+    "generateTypeScript": true,
+    "showStats": true,
+    "cleanOutputDirectory": true
+  }
+}

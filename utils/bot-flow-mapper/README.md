@@ -1,13 +1,151 @@
 # Bot Flow Mapper
 
-Una utilidad para extraer y mapear las transiciones/conexiones entre nodos en workflows de Botpress, proporcionando visibilidad del flujo lógico y detectando posibles problemas en la estructura del bot.
+Un sistema configurable para mapear y generar flujos de bots desde archivos JSON de Botpress.
 
 ## Características
 
+- **Entrypoint configurable**: Usa archivos de configuración o presets predefinidos
+- **Múltiples modos de generación**: Directorios, transiciones simples, y archivos TypeScript
+- **Presets predefinidos**: Configuraciones comunes listas para usar
+- **Configuración flexible**: Personaliza todos los aspectos del proceso
 - 🔍 **Análisis completo de transiciones** - Mapea todas las conexiones entre nodos
 - 📊 **Reportes detallados** - Genera reportes en múltiples formatos (TXT, Markdown, JSON)
 - 🎨 **Diagramas visuales** - Crea diagramas Mermaid para visualización
 - ⚠️ **Detección de problemas** - Identifica nodos huérfanos y dead-ends
+
+## Uso Rápido
+
+### Scripts NPM disponibles:
+
+```bash
+# Usar configuración por defecto (directorios + TypeScript)
+npm run map-bot-flows
+
+# Generar todo: directorios, transiciones y TypeScript
+npm run map-bot-flows:full
+
+# Solo generar directorios completos
+npm run map-bot-flows:dirs
+
+# Solo generar archivos de transiciones simples
+npm run map-bot-flows:transitions
+
+# Solo generar archivos TypeScript
+npm run map-bot-flows:typescript
+
+# Mostrar configuración actual
+npm run map-bot-flows:show-config
+```
+
+### Uso con presets:
+
+```bash
+# Usar un preset específico
+npm run map-bot-flows -- --preset full
+npm run map-bot-flows -- --preset directoriesOnly
+npm run map-bot-flows -- --preset transitionsOnly
+npm run map-bot-flows -- --preset typeScriptOnly
+```
+
+### Uso con archivo de configuración:
+
+```bash
+# Crear tu propio archivo de configuración basado en el ejemplo
+cp utils/bot-flow-mapper/config.example.json my-config.json
+
+# Usar el archivo de configuración personalizado
+npm run map-bot-flows -- --config my-config.json
+
+# O usar la configuración por defecto (se carga automáticamente)
+npm run map-bot-flows
+```
+
+## Configuración
+
+El sistema incluye los siguientes archivos de configuración:
+
+- **`config.default.json`**: Configuración por defecto que se usa automáticamente
+- **`config.example.json`**: Archivo de ejemplo para crear configuraciones personalizadas
+- **`config.ts`**: Definiciones TypeScript y presets predefinidos
+
+### Archivo de configuración (JSON)
+
+```json
+{
+  "botJsonPath": "./bot/unzipped/bot.json",
+  "outputDirectory": "./bot/transitions",
+  "options": {
+    "generateDirectories": true,
+    "generateTransitions": false,
+    "generateTypeScript": true,
+    "showStats": true,
+    "cleanOutputDirectory": true
+  }
+}
+```
+
+### Opciones disponibles:
+
+- **`botJsonPath`**: Ruta al archivo bot.json
+- **`outputDirectory`**: Directorio donde se generarán los archivos
+- **`options.generateDirectories`**: Generar directorios completos por workflow
+- **`options.generateTransitions`**: Generar archivos de transiciones simples
+- **`options.generateTypeScript`**: Generar archivos TypeScript con lógica condicional
+- **`options.showStats`**: Mostrar estadísticas del bot al procesar
+- **`options.cleanOutputDirectory`**: Limpiar directorio de salida antes de generar (recomendado: true)
+
+## Presets Predefinidos
+
+### `default`
+- Genera directorios y archivos TypeScript
+- Configuración recomendada para desarrollo
+
+### `full`
+- Genera directorios, transiciones simples y archivos TypeScript
+- Útil para análisis completo del bot
+
+### `directoriesOnly`
+- Solo genera directorios completos por workflow
+- Ideal para explorar la estructura del bot
+
+### `transitionsOnly`
+- Solo genera archivos de transiciones simples
+- Útil para documentación básica
+
+### `typeScriptOnly`
+- Solo genera archivos TypeScript con lógica condicional
+- Para integración con código TypeScript
+
+## Uso Programático
+
+```typescript
+import BotFlowMapperEntrypoint from './utils/bot-flow-mapper/main';
+
+// Usar configuración por defecto
+const mapper = new BotFlowMapperEntrypoint();
+await mapper.run();
+
+// Usar configuración personalizada
+const mapper = new BotFlowMapperEntrypoint({
+  botJsonPath: './my-bot.json',
+  outputDirectory: './my-output',
+  options: {
+    generateDirectories: true,
+    generateTransitions: true,
+    generateTypeScript: false,
+    showStats: false
+  }
+});
+await mapper.run();
+
+// Usar preset
+const mapper = BotFlowMapperEntrypoint.fromPreset('full');
+await mapper.run();
+
+// Usar archivo de configuración
+const mapper = BotFlowMapperEntrypoint.fromConfigFile('./my-config.json');
+await mapper.run();
+```
 - 🎯 **Análisis específico** - Analiza flujos individuales
 - 📈 **Estadísticas detalladas** - Métricas por flujo y globales
 

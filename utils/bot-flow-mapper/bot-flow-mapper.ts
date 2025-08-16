@@ -3,8 +3,8 @@
 import fs from "fs";
 import path from "path";
 import { TransitionFileGenerator } from "./TransitionFileGenerator";
-import { WorkflowDirectoryGenerator } from "./WorkflowDirectoryGenerator";
 import { TypeScriptFlowGenerator } from "./TypeScriptFlowGenerator";
+import { WorkflowDirectoryGenerator } from "./WorkflowDirectoryGenerator";
 import { BotData } from "./types";
 
 export class BotFlowAnalyzer {
@@ -74,9 +74,14 @@ export class BotFlowAnalyzer {
   ): Promise<void> {
     console.log(`🚀 Generating TypeScript flow files in: ${outputDir}`);
 
-    this.typeScriptGenerator.generateTypeScriptFlows(this.botData.flows, outputDir);
+    this.typeScriptGenerator.generateTypeScriptFlows(
+      this.botData.flows,
+      outputDir
+    );
 
-    console.log(`✅ TypeScript flow files generated successfully in: ${outputDir}`);
+    console.log(
+      `✅ TypeScript flow files generated successfully in: ${outputDir}`
+    );
   }
 
   /**
@@ -175,4 +180,6 @@ Directorio de salida por defecto: ./bot/transitions
 }
 
 // Execute main if this file is run directly
-main().catch(console.error);
+if (require.main === module) {
+  main().catch(console.error);
+}

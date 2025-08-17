@@ -1,4 +1,4 @@
-import { Instruction, Node } from "utils/types/bot/Workflow";
+import { Instruction, Node } from "./../../types/bot/Workflow";
 
 export function generateImportStatements(
   code: string,

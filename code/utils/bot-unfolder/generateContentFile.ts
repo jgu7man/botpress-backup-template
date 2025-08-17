@@ -1,7 +1,11 @@
 import fs from "fs";
 import path from "path";
+import {
+  CardContent,
+  ContentInstruction,
+  Node,
+} from "../../types/bot/Workflow";
 import { generateImportStatements, toBackticksValues } from "../helpers";
-import { CardContent, ContentInstruction, Node } from "../types/bot/Workflow";
 
 export function generateContentFile(
   targetDir: string,

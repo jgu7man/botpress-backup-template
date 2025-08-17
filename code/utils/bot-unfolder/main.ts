@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { BotExport } from "../types/bot/BotExport";
+import { BotExport } from "../../types/bot/BotExport";
 import { generateVariablesClasses } from "./extractVariables";
 import { ensureDir } from "./fileUtils";
 import { generateFlowPath } from "./generateFlowPath";

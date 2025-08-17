@@ -21,7 +21,7 @@
       "@variables/*": ["bot/src/variables/*"],
       "@schemas/*": ["bot/src/schemas/*"],
       "@tables/*": ["bot/src/tables/*"],
-      "@core-types/*": ["code/utils/utils/types/core/*"],
+      "@core-types/*": ["code/types/core/*"],
       "@types/*": ["code/types/*"],
       "@globals/*": ["code/types/globals/*"]
     },
@@ -36,10 +36,5 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false
   },
-  "include": [
-    "**/*",
-    "types/globals/index.d.ts",
-    "code/utils/utils/types/core/event.type.ts",
-    "bot/src/globals.d.ts"
-  ]
+  "include": ["**/*", "**/*.d.ts"]
 }

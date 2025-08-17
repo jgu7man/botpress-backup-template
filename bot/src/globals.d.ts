@@ -1,3 +1,4 @@
+import { TableOperations } from "../../code/types/core/TableOperations";
 import { botVariables } from "./variables/botVariables";
 import { ConfigVariables } from "./variables/ConfigVariables";
 import { userVariables } from "./variables/userVariables";
@@ -7,22 +8,7 @@ import { userVariables } from "./variables/userVariables";
  * Fecha de generación: 2025-07-19T01:06:42.834Z
  */
 
-import { BotpressEvent } from "@core-types/event.type";
-import { MainConversation } from "@core-types/MainConversation";
-import { Turn } from "@core-types/Turn";
-
-// Interfaz genérica para operaciones de tabla
-interface TableOperations<T = any> {
-  findRecords(params?: {
-    filter?: any;
-    sort?: any;
-    maxRecords?: number;
-  }): Promise<T[]>;
-  createRecord(data: Partial<T>): Promise<T>;
-  updateRecord(id: string, data: Partial<T>): Promise<T>;
-  deleteRecord(id: string): Promise<void>;
-  findFirst(params?: { filter?: any; sort?: any }): Promise<T | null>;
-}
+import { MainConversation } from "@types/core/MainConversation";
 
 // Declaraciones globales para el bot
 declare global {
@@ -30,8 +16,6 @@ declare global {
   const bot: botVariables;
   const user: userVariables;
   const conversation: MainConversation;
-  const event: BotpressEvent;
-  const turn: Turn;
   const env: ConfigVariables;
 
   // Tablas del bot

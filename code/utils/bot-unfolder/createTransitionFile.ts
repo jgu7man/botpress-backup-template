@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { generateImportStatements, replaceKeysExpressions } from "../helpers/";
-import { Node, TransitionInstruction } from "../types/bot/Workflow";
+import { Node, TransitionInstruction } from "../../types/bot/Workflow";
+import { generateImportStatements, replaceKeysExpressions } from "../helpers";
 
 export function createTransitionFile(
   instruction: TransitionInstruction,

@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Workflow } from "utils/types/bot/Workflow";
+import { Workflow } from "./../../types/bot/Workflow";
 import { sanitizeName } from "./folderUtils";
 
 export function generateStateFile(flow: Workflow, baseDir: string): void {

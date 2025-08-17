@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { Workflow } from "utils/types/bot/Workflow";
+import { Workflow } from "./../../types/bot/Workflow";
+
 import { buildFolderMap, sanitizeName } from "./folderUtils";
 import { bot, workflowsBase } from "./main";
 

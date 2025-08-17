@@ -1,4 +1,4 @@
-import { Node, NodeType } from "../types/bot/Workflow";
+import { Node, NodeType } from "../../types/bot/Workflow";
 import { createTransitionFile } from "./createTransitionFile";
 import { sanitizeName } from "./folderUtils";
 import { generateActionFile } from "./generateActionFile";

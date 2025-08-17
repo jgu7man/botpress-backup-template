@@ -1,7 +1,7 @@
 import fs from "fs";
-import { BotExport } from "utils/types/bot/BotExport";
-import { BotSchemas } from "utils/types/bot/BotSchema";
-import { BotSettings, ScopeVariables } from "utils/types/bot/Settings";
+import { BotExport } from "./../../types/bot/BotExport";
+import { BotSchemas } from "./../../types/bot/BotSchema";
+import { BotSettings, ScopeVariables } from "./../../types/bot/Settings";
 
 const filesMap: Record<string, string> = {};
 const scopeVariableLines: string[] = [];

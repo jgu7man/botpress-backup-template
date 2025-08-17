@@ -2,7 +2,7 @@ import {
   CodeBlock,
   CodeBlockCheckResult,
   UnclosedBlock,
-} from "utils/bot-unfolder/types/CodeBlockCheckResult";
+} from "./types/CodeBlockCheckResult";
 
 /**
  * Checks for unclosed code blocks in a string

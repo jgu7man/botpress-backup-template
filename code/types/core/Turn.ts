@@ -13,3 +13,7 @@ export class Turn {
     content: string;
   };
 }
+
+declare global {
+  const turn: Turn;
+}

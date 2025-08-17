@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Table } from "./../../types/bot/Table";
+
 import fs from "fs";
 import path from "path";
-import { Table } from "utils/types/bot/Table";
-import { BotExport } from "../types/bot/BotExport";
+import { BotExport } from "../../types/bot/BotExport";
 
 /**
  * Genera interfaces TypeScript para cada tabla en bot.json

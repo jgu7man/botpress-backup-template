@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { Workflow } from "./../../types/bot/Workflow";
-import { sanitizeName } from "./folderUtils";
+import { Workflow } from "../../../types/bot/Workflow";
+import { sanitizeName } from "../utils/folderUtils";
 
 export function generateStateFile(flow: Workflow, baseDir: string): void {
   const className = `${capitalize(sanitizeName(flow.name))}State`;

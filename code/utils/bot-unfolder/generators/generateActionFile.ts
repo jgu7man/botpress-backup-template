@@ -6,8 +6,8 @@ import {
   EntryNode,
   StandardNode,
   StartNode,
-} from "../../types/bot/Workflow";
-import { generateImportStatements } from "../helpers";
+} from "../../../types/bot/Workflow";
+import { generateImportStatements } from "../utils/helpers";
 
 export function generateActionFile(
   instruction: ActionInstruction,

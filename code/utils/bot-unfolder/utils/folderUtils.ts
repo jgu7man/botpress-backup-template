@@ -1,4 +1,4 @@
-import { Folders } from "./../../types/bot/Folders";
+import { Folders } from "../../../types/bot/Folders";
 
 export interface FolderMap {
   [id: string]: { label: string; parent: string };

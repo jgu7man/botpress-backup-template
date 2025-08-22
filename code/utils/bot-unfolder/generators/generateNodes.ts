@@ -1,6 +1,6 @@
-import { Node, NodeType } from "../../types/bot/Workflow";
-import { createTransitionFile } from "./createTransitionFile";
-import { sanitizeName } from "./folderUtils";
+import { Node, NodeType } from "../../../types/bot/Workflow";
+import { createTransitionFile } from "../utils/createTransitionFile";
+import { sanitizeName } from "../utils/folderUtils";
 import { generateActionFile } from "./generateActionFile";
 import { generateAiPromptFile } from "./generateAiPromptFile";
 import { generateContentFile } from "./generateContentFile";

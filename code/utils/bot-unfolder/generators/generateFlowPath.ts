@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { Workflow } from "./../../types/bot/Workflow";
+import { Workflow } from "../../../types/bot/Workflow";
+import { BotExport } from "../../../types/bot/BotExport";
 
-import { buildFolderMap, sanitizeName } from "./folderUtils";
-import { bot, workflowsBase } from "./main";
+import { buildFolderMap, sanitizeName } from "../utils/folderUtils";
 
-export function generateFlowPath(flow: Workflow) {
+export function generateFlowPath(flow: Workflow, bot: BotExport, workflowsBase: string) {
   const folderMap = buildFolderMap(bot.folders);
   const flowDirName = sanitizeName(flow.name);
   const parentId = flow.parentFolder as string | undefined;

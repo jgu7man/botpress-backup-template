@@ -4,8 +4,8 @@ import {
   CardContent,
   ContentInstruction,
   Node,
-} from "../../types/bot/Workflow";
-import { generateImportStatements, toBackticksValues } from "../helpers";
+} from "../../../types/bot/Workflow";
+import { generateImportStatements, toBackticksValues } from "../utils/helpers";
 
 export function generateContentFile(
   targetDir: string,

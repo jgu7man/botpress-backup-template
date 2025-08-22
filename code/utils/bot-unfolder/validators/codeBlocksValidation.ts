@@ -2,7 +2,7 @@ import {
   CodeBlock,
   CodeBlockCheckResult,
   UnclosedBlock,
-} from "./types/CodeBlockCheckResult";
+} from "../types/CodeBlockCheckResult";
 
 /**
  * Checks for unclosed code blocks in a string

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { AiInstruction, BaseNode } from "../../types/bot/Workflow";
-import { closeUnclosedCodeBlocks } from "./codeBlocksValidation";
+import { AiInstruction, BaseNode } from "../../../types/bot/Workflow";
+import { closeUnclosedCodeBlocks } from "../validators/codeBlocksValidation";
 
 export function generateAiPromptFile(
   instruction: AiInstruction,

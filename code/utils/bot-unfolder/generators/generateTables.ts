@@ -1,8 +1,8 @@
-import { Table } from "./../../types/bot/Table";
+import { Table } from "../../../types/bot/Table";
 
 import fs from "fs";
 import path from "path";
-import { BotExport } from "../../types/bot/BotExport";
+import { BotExport } from "../../../types/bot/BotExport";
 
 /**
  * Genera interfaces TypeScript para cada tabla en bot.json

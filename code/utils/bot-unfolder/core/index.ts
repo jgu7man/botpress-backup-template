@@ -1,2 +1,2 @@
 // Core functionality
-export * from './main';
+export * from "./main";

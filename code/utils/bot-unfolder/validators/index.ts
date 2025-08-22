@@ -1,2 +1,2 @@
 // Validation functions
-export * from './codeBlocksValidation';
+export * from "./codeBlocksValidation";

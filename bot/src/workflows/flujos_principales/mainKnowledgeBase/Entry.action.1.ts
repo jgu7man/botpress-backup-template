@@ -1,6 +1,6 @@
 import { workflow } from "./workflow.state";
 // Node: Entry - nd-4d1eea3d93
-// "Manage User Input and Conversation State Reset" - ins-e7f31ac27c
+// "Manage User Input and Conversation State in Workflow" - ins-e7f31ac27c
 
 export {};
 

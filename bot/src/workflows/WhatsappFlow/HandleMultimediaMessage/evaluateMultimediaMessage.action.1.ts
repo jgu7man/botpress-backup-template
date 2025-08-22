@@ -35,12 +35,13 @@ const advicesMap = {
 // Enviar mensaje de advertencia
 if (startMessageType !== "TEXT") {
   if (startMessageType !== "TEXT") {
+    // @ts-ignore - Sabemos que startMessageType es una clave válida
     workflow.excusingMessage = advicesMap[startMessageType] || "";
   }
 }
 
 function extractMessageType(): string {
-  return Object.entries(mediaTypes).find(([key, value]: [string, string]) =>
+  return Object.entries(mediaTypes).find(([key, value]) =>
     event.preview.includes(value)
   )?.[0] as string;
 }

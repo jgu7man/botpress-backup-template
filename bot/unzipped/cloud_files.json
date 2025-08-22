@@ -1,5 +1,41 @@
 [
   {
+    "id": "file_01K36PEKA325K2D939A9CQ05SJ",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 35201,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1196526072519807"
+    },
+    "key": "whatsapp-media_1196526072519807",
+    "index": false,
+    "updatedAt": "2025-08-21T16:12:36.028Z"
+  },
+  {
+    "id": "file_01K343B3G576VS3AN1M6VZHKFW",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 106496,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1518259502947511"
+    },
+    "key": "whatsapp-media_1518259502947511",
+    "index": false,
+    "updatedAt": "2025-08-20T16:00:09.727Z"
+  },
+  {
     "id": "file_01K2K7FQWQMNP3QPEWTN1RVBJ3",
     "accessPolicies": [],
     "contentType": "application/json",
@@ -173,22 +209,6 @@
     "updatedAt": "2025-07-31T14:43:07.384Z"
   },
   {
-    "id": "file_01K1GEZN97NTZJBWY1PNKENTBR",
-    "accessPolicies": [],
-    "contentType": "application/pdf",
-    "size": 4196,
-    "status": "indexing_completed",
-    "tags": {
-      "kbId": "kb-4e5d75775b",
-      "title": "Preferencia_Estudio_Credito.pdf",
-      "source": "knowledge-base",
-      "modalities": "[]"
-    },
-    "key": "kb-4e5d75775b/Preferencia_Estudio_Credito.pdf",
-    "index": true,
-    "updatedAt": "2025-07-31T14:43:07.175Z"
-  },
-  {
     "id": "file_01K1GEZN4JG3RKXY7WE2RVHX25",
     "accessPolicies": [],
     "contentType": "application/pdf",
@@ -305,22 +325,6 @@
     "key": "deployments/1753319104969.json",
     "index": false,
     "updatedAt": "2025-07-24T01:05:05.030Z"
-  },
-  {
-    "id": "file_01K0WZBWXNZPMA25948EVKMRHB",
-    "accessPolicies": [],
-    "contentType": "application/pdf",
-    "size": 51432,
-    "status": "indexing_completed",
-    "tags": {
-      "kbId": "kb-4e5d75775b",
-      "title": "Sedes de Atención de Auteco Las Motos.pdf",
-      "source": "knowledge-base",
-      "modalities": "[]"
-    },
-    "key": "kb-4e5d75775b/Sedes de Atención de Auteco Las Motos (1).pdf",
-    "index": true,
-    "updatedAt": "2025-07-24T01:05:00.953Z"
   },
   {
     "id": "file_01K0WP3RR8XSX7G6NRFH3ZTS6P",

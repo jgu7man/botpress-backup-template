@@ -4,6 +4,8 @@ class HandleWaResponseState {
   confirmationResult: string;
   /** El mensaje de respuesta a la confirmación que el cliente haya emitido */
   responseConfirmation: string;
+  /** 🄽 NotionClient  */
+  '🄽 NotionClient ': any;
   /** GetConfirmation */
   GetConfirmation: any;
   /** 👤 questionWithUserName */

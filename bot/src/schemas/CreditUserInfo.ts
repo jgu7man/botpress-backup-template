@@ -15,14 +15,23 @@ export interface CreditUserInfo {
 }
 
 export const CreditUserInfoSchema = z.object({
-		creditProfile: z.enum([
+	creditProfile: z.enum([
 		"NO_INTERESTED",
 		"CREDIORBE",
 		"BANCO_DE_BOGOTA",
 		"CUPO_BRILLA",
 	] ),
-	jobContract: z.enum(["INFORMAL", "FORMAL"]),
+	jobContract: z.enum([
+		"INFORMAL",
+		"FORMAL"
+	]),
 	negativeCreditReport: z.boolean(),
-	assistancePreference: z.enum( [ "IN_STORE", "ONLINE" ] ),
-	purchaseType: z.enum(["CASH", "CREDIT"]),
+	assistancePreference: z.enum( [ 
+		"IN_STORE",
+		"ONLINE" 
+	] ),
+	purchaseType: z.enum([
+		"CASH",
+		"CREDIT"
+	]),
 });

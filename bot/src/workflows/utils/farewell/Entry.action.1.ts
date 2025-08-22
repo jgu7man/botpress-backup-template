@@ -32,7 +32,6 @@ if (botState) {
   conversation.flow = {
     ...conversation.flow,
     state: botState,
-    status: 'COLD_PROSPECT'
   }
 }
 
@@ -47,7 +46,3 @@ if (!conversation.flow?.state) {
 }
 
 console.log(`🤖 3 conversation.state:`, conversation.flow?.state)
-conversation.flow = {
-  ...conversation.flow,
-  status: 'COLD_PROSPECT'
-}

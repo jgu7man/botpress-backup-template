@@ -8,6 +8,8 @@ class FarewellState {
   farewellMessage: string;
   /** El template de mensaje de despedida seleccionado desde la BDC */
   farewellTemplate: string;
+  /** 🄽 NotionClient  */
+  '🄽 NotionClient ': any;
   /** helpQuestion1 */
   helpQuestion1: any;
 }

@@ -20,12 +20,14 @@ class MainState {
   '💾 saveUserData': any;
   /** StartWaConversation1 */
   StartWaConversation1: any;
-  /** SyncUserData */
-  SyncUserData: any;
+  /** StopPromotions */
+  StopPromotions: any;
   /** HandleWaResponse1 */
   HandleWaResponse1: any;
   /** Get_InterestedProduct */
   Get_InterestedProduct: any;
+  /** SyncUserData */
+  SyncUserData: any;
 }
 
 export const workflow = new MainState();

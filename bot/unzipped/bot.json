@@ -37376,28 +37376,29 @@
       "id": "version_01K1M8DAN8ZDFKN502XPMNV2XP"
     }
   ],
-  "revision": 58724,
+  "revision": 58728,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-08-15T21:37:55.170Z",
-    "lastRevisionId": -1,
+    "lastRevisionCheckAt": "2025-08-22T22:47:05.498Z",
+    "lastRevisionId": 58775,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-08-15T21:37:58.045Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-08-15T21:37:58.046Z: Connection State: initialized -> connecting (ok)",
-      "2025-08-15T21:37:58.298Z (1QK4osCm2n): Connection State: connecting -> connected (ok)",
-      "2025-08-15T21:37:58.425Z (1QK4osCm2n): Multiplayer session initialized!",
-      "2025-08-15T21:37:58.437Z (1QK4osCm2n): tobiasgaitan@gmail.com was elected as master - \"sess_01K2QJ0QP814NNC3TRAC2MZAQX\"",
-      "2025-08-15T21:38:01.472Z (1QK4osCm2n): Player entered channel - {\"sessionId\":\"sess_01K2QTNYY0XZESYTCRGBB0190N\",\"connectionId\":\"1QK4osCm2n\",\"joinedAt\":\"2025-08-15T21:38:01.393Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 15 Aug 2025 21:37:58 GMT\",\"connectedAt\":\"Fri, 15 Aug 2025 21:37:58 GMT\",\"sections\":[]}",
-      "2025-08-15T21:38:01.472Z (1QK4osCm2n): jguzman@marxadigital.com was elected as master - \"sess_01K2QTNYY0XZESYTCRGBB0190N\"",
-      "2025-08-15T21:38:01.648Z (1QK4osCm2n): Player left channel - {\"sessionId\":\"sess_01K2QJ0QP814NNC3TRAC2MZAQX\",\"connectionId\":\"9a10CanVZp\",\"joinedAt\":\"2025-08-15T21:06:28.181Z\",\"email\":\"tobiasgaitan@gmail.com\",\"displayName\":\"Tobias Gaitan\",\"color\":\"var(--pink-8)\",\"workspaceUserId\":\"241cd1a5-7deb-4c72-a7a7-997cd0dd721d\",\"lastActiveAt\":\"2025-08-15T21:37:34.979Z\",\"connectedAt\":\"Fri, 15 Aug 2025 20:24:57 GMT\",\"sections\":[]}",
-      "2025-08-15T21:38:01.660Z (1QK4osCm2n): Player left channel"
+      "2025-08-22T22:46:17.456Z (i3QrZ17k8i): Player entered channel - {\"sessionId\":\"sess_01K39Z73M6SDJ6P102MGXE19EC\",\"connectionId\":\"i3QrZ17k8i\",\"joinedAt\":\"2025-08-22T22:46:17.384Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 22 Aug 2025 22:46:17 GMT\",\"connectedAt\":\"Fri, 22 Aug 2025 22:46:17 GMT\",\"sections\":[]}",
+      "2025-08-22T22:46:17.457Z (i3QrZ17k8i): jguzman@marxadigital.com was elected as master - \"sess_01K39Z73M6SDJ6P102MGXE19EC\"",
+      "2025-08-22T22:47:00.604Z (i3QrZ17k8i): Disconnecting multiplayer session...",
+      "2025-08-22T22:47:00.729Z: Multiplayer session disconnected!",
+      "2025-08-22T22:47:00.752Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-08-22T22:47:00.757Z: Connection State: initialized -> connecting (ok)",
+      "2025-08-22T22:47:01.635Z (kzm_8GBh44): Connection State: connecting -> connected (ok)",
+      "2025-08-22T22:47:01.816Z (kzm_8GBh44): Multiplayer session initialized!",
+      "2025-08-22T22:47:02.080Z (kzm_8GBh44): Player entered channel - {\"sessionId\":\"sess_01K39Z73M6SDJ6P102MGXE19EC\",\"connectionId\":\"kzm_8GBh44\",\"joinedAt\":\"2025-08-22T22:47:02.010Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 22 Aug 2025 22:47:02 GMT\",\"connectedAt\":\"Fri, 22 Aug 2025 22:47:02 GMT\",\"sections\":[]}",
+      "2025-08-22T22:47:02.080Z (kzm_8GBh44): jguzman@marxadigital.com was elected as master - \"sess_01K39Z73M6SDJ6P102MGXE19EC\""
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K2QTNYY0XZESYTCRGBB0190N / Fri, 15 Aug 2025 21:37:58 GMT /  Fri, 15 Aug 2025 21:37:58 GMT"
+      "jguzman@marxadigital.com / sess_01K39Z73M6SDJ6P102MGXE19EC / Fri, 22 Aug 2025 22:47:02 GMT /  Fri, 22 Aug 2025 22:47:02 GMT"
     ],
-    "savedAt": "2025-08-15T21:38:05.024Z",
+    "savedAt": "2025-08-22T22:47:05.498Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K2QTNYY0XZESYTCRGBB0190N"
+    "sessionId": "sess_01K39Z73M6SDJ6P102MGXE19EC"
   },
   "identity": {
     "name": "asistente-lasmotos-general",

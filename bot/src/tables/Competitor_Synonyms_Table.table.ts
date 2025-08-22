@@ -1,6 +1,6 @@
 /**
-  Competitor_Synonyms_Table.table.ts - table_01JHHBJDSR50YXR62ZJC51AN2K
-  Created: 2025-01-14T02:51:33.045Z
+  Competitor_Synonyms_Table.table.ts - table_01JYMYT0X9NV6G3B137EJQX3B1
+  Created: 2025-06-26T01:49:31.947Z
   Created by: user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7
   Tags: {}
   Factor: 1
@@ -8,7 +8,7 @@
   Parent folder: root
   Selectors: []
   Is compute enabled: false
-  Updated: 2025-04-15T13:18:41.965Z
+  Updated: 2025-06-26T01:49:31.947Z
 */
 export interface Competitor_Synonyms_Table {
   /** Record ID */

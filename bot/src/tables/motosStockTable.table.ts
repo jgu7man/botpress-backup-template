@@ -1,6 +1,6 @@
 /**
-  motosStockTable.table.ts - table_01JHHBJCJ9C8T79QE7XT7TYRM7
-  Created: 2025-01-14T02:51:31.784Z
+  motosStockTable.table.ts - table_01JYMYT046PVRBZ7FA7CFX3S7J
+  Created: 2025-06-26T01:49:31.145Z
   Created by: user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7
   Tags: {}
   Factor: 1
@@ -8,7 +8,7 @@
   Parent folder: root
   Selectors: []
   Is compute enabled: false
-  Updated: 2025-04-15T13:27:08.537Z
+  Updated: 2025-06-26T01:49:31.145Z
 */
 export interface motosStockTable {
   /** Record ID */

@@ -1,6 +1,6 @@
 /**
-  leadClientsTable.table.ts - table_01JHHBJCQV4EEVEWE96NPC0BSV
-  Created: 2025-01-14T02:51:31.961Z
+  leadClientsTable.table.ts - table_01JYMYT08T0J6FJPBR6FBHP6D7
+  Created: 2025-06-26T01:49:31.294Z
   Created by: user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7
   Tags: {}
   Factor: 1
@@ -8,7 +8,7 @@
   Parent folder: root
   Selectors: []
   Is compute enabled: false
-  Updated: 2025-05-29T15:30:22.311Z
+  Updated: 2025-06-26T01:49:31.294Z
 */
 export interface leadClientsTable {
   /** Record ID */
@@ -53,6 +53,4 @@ export interface leadClientsTable {
   UBICACION_DEL_USUARIO: string | null;
   /** Sin descripción */
   UBICACION_DE_SERVICIO: string | null;
-  /** Sin descripción */
-  NOTION_PAGE_ID: string | null;
 }

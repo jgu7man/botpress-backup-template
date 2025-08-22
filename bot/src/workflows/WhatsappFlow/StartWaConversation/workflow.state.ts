@@ -1,4 +1,4 @@
-// Workflow: StartWaConversation - wf-3b416ba254
+// Workflow: 🟢 StartWaConversation - wf-3b416ba254
 class StartWaConversationState {
   /** Sin descripción */
   messageSentResult: Record<string, unknown>;
@@ -10,8 +10,10 @@ class StartWaConversationState {
   whPhone: string;
   /** Sin descripción */
   whTemplateVariables: string;
-  /** 💾 saveUserData */
-  '💾 saveUserData': any;
+  /** NotionClient */
+  NotionClient: any;
+  /** 💾 saveHookedUserData */
+  '💾 saveHookedUserData': any;
 }
 
 export const workflow = new StartWaConversationState();

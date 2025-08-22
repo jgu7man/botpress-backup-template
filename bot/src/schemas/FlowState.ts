@@ -16,9 +16,9 @@ export interface FlowState {
 
 export const FlowStateSchema = z.object({
   ending: z
-    .enum(['COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', ''])
+    .enum(['COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED', ''])
     .describe(
-      "La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT'"
+      "La categorización de la finalización de la conversación. Puede ser: 'COMPLEXED', 'WRONG', 'SERVED', 'TIMEDOUT', 'HOOKED'"
     ),
 
   topics: z.array(z.string()).describe('Temas que se han manejado en la conversación'),

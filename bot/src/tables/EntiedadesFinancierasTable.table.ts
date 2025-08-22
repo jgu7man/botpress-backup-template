@@ -1,6 +1,6 @@
 /**
-  EntiedadesFinancierasTable.table.ts - table_01K0B5FQXJ2YFBV74Y6YTK5C9A
-  Created: 2025-07-17T03:05:14.419Z
+  EntiedadesFinancierasTable.table.ts - table_01K0B78E2N9NHJA8KS9CHB8FBV
+  Created: 2025-07-17T03:36:12.118Z
   Created by: user:84f09a9e-33a3-4c6c-9e59-fdcfc95423b7
   Tags: {}
   Factor: 1
@@ -8,7 +8,7 @@
   Parent folder: root
   Selectors: []
   Is compute enabled: false
-  Updated: 2025-07-17T03:08:25.142Z
+  Updated: 2025-07-18T13:04:39.187Z
 */
 export interface EntiedadesFinancierasTable {
   /** Record ID */

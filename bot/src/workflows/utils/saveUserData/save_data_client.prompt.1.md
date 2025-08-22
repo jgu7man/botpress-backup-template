@@ -4,7 +4,7 @@
 
 Input:
 ```
-sumary:{{conversation.SummaryAgent.summary}}
+summary: {{conversation.SummaryAgent.summary}}
 ```
 
 <!-- user -->

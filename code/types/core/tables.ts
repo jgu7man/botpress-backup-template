@@ -1,5 +1,5 @@
 // This file is part of Botpress.
-export class BotpressDefaults<TableRecord> {
+export class BotpressTableDefaults<TableRecord> {
   ["#"]: string;
   ["CREATED_AT"]: Date;
   ["UPDATED_AT"]: Date;

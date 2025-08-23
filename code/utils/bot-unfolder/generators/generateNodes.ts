@@ -1,8 +1,10 @@
 import { Node, NodeType } from "../../../types/bot/Workflow";
+import { VariableMap } from "../core/variableMapper";
 import { createTransitionFile } from "../utils/createTransitionFile";
 import { sanitizeName } from "../utils/folderUtils";
 import { generateActionFile } from "./generateActionFile";
 import { generateAiPromptFile } from "./generateAiPromptFile";
+import { generateAiPromptTypeScriptFile } from "./generateAiPromptTypeScriptFile";
 import { generateContentFile } from "./generateContentFile";
 
 type InstructionType =
@@ -17,7 +19,9 @@ type InstructionType =
 export function generateNodeFiles(
   nodes: Node[],
   targetDir: string,
-  skip: Array<InstructionType> = []
+  skip: Array<InstructionType> = [],
+  workflowName?: string,
+  variableMap?: VariableMap
 ): void {
   nodes
     .filter((node) => node.type !== NodeType.COMMENT)
@@ -32,8 +36,18 @@ export function generateNodeFiles(
             generateActionFile(instruction, node, targetDir, safeName, idx);
           }
           // AI Prompt
-          if (instruction.type === "ai" && instruction.prompt) {
+          if (instruction.type === "ai" && instruction.task) {
+            // Generate both MD and TS files
             generateAiPromptFile(instruction, targetDir, safeName, idx, node);
+            generateAiPromptTypeScriptFile(
+              instruction,
+              targetDir,
+              safeName,
+              idx,
+              node,
+              workflowName,
+              variableMap
+            );
           }
           // Content
           if (instruction.type === "content" && instruction.content) {

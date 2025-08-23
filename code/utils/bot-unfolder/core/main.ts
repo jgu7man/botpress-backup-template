@@ -1,6 +1,6 @@
 import fs from "fs";
-import path from "path";
 import inquirer from "inquirer";
+import path from "path";
 import { BotExport } from "../../../types/bot/BotExport";
 import { generateFlowPath } from "../generators/generateFlowPath";
 import { generateNodeFiles } from "../generators/generateNodes";
@@ -11,6 +11,7 @@ import {
 } from "../generators/generateTables";
 import { generateVariablesClasses } from "../utils/extractVariables";
 import { ensureDir } from "../utils/fileUtils";
+import { createVariableMap } from "./variableMapper";
 
 /**
  * Removes a directory and all its contents recursively
@@ -25,12 +26,16 @@ function removeDir(dirPath: string): void {
  * Reads the exported bot from a specific path
  */
 function readExportedBot(containerDir: string = "bot"): BotExport {
-  const exportPath = path.join(process.cwd(), containerDir, "unzipped/bot.json");
-  
+  const exportPath = path.join(
+    process.cwd(),
+    containerDir,
+    "unzipped/bot.json"
+  );
+
   if (!fs.existsSync(exportPath)) {
     throw new Error(`Bot JSON not found at: ${exportPath}`);
   }
-  
+
   const raw = fs.readFileSync(exportPath, "utf8");
   return JSON.parse(raw) as BotExport;
 }
@@ -38,27 +43,27 @@ function readExportedBot(containerDir: string = "bot"): BotExport {
 /**
  * Busca bots disponibles en el directorio bots/
  */
-function findAvailableBots(): Array<{name: string, path: string}> {
-  const botsDir = path.resolve('./bots');
-  
+function findAvailableBots(): Array<{ name: string; path: string }> {
+  const botsDir = path.resolve("./bots");
+
   if (!fs.existsSync(botsDir)) {
     return [];
   }
 
   const entries = fs.readdirSync(botsDir, { withFileTypes: true });
-  const bots: Array<{name: string, path: string}> = [];
+  const bots: Array<{ name: string; path: string }> = [];
 
   for (const entry of entries) {
     if (entry.isDirectory()) {
       const botPath = path.join(botsDir, entry.name);
-      const unzippedPath = path.join(botPath, 'unzipped');
-      const botJsonPath = path.join(unzippedPath, 'bot.json');
-      
+      const unzippedPath = path.join(botPath, "unzipped");
+      const botJsonPath = path.join(unzippedPath, "bot.json");
+
       // Verificar que existe la estructura esperada
       if (fs.existsSync(botJsonPath)) {
         bots.push({
           name: entry.name,
-          path: entry.name // Solo el nombre relativo para pasar a unfoldBot
+          path: entry.name, // Solo el nombre relativo para pasar a unfoldBot
         });
       }
     }
@@ -74,24 +79,26 @@ async function selectBotInteractively(): Promise<string> {
   const availableBots = findAvailableBots();
 
   if (availableBots.length === 0) {
-    console.log('❌ No se encontraron bots en ./bots/');
-    console.log('💡 Usa "npm run smart-extract <archivo.bpz>" para extraer un bot primero.');
+    console.log("❌ No se encontraron bots en ./bots/");
+    console.log(
+      '💡 Usa "npm run smart-extract <archivo.bpz>" para extraer un bot primero.'
+    );
     process.exit(1);
   }
 
-  console.log('🤖 Bot Unfolder - Selector Interactivo\n');
+  console.log("🤖 Bot Unfolder - Selector Interactivo\n");
 
   const { selectedBot } = await inquirer.prompt([
     {
-      type: 'list',
-      name: 'selectedBot',
-      message: '¿Qué bot quieres desplegar (unfold)?',
-      choices: availableBots.map(bot => ({
+      type: "list",
+      name: "selectedBot",
+      message: "¿Qué bot quieres desplegar (unfold)?",
+      choices: availableBots.map((bot) => ({
         name: `📁 ${bot.name}`,
-        value: `bots/${bot.path}`
+        value: `bots/${bot.path}`,
       })),
-      pageSize: 10
-    }
+      pageSize: 10,
+    },
   ]);
 
   return selectedBot;
@@ -130,6 +137,9 @@ function unfoldBot(containerDir: string = "bot"): void {
   console.log("📖 Leyendo bot exportado...");
   const bot = readExportedBot(containerDir);
 
+  // Create global variable map
+  const variableMap = createVariableMap(bot);
+
   console.log(`📊 Procesando ${bot.flows.length} workflows...`);
   // Export workflows
   bot.flows.forEach((flow, index) => {
@@ -139,13 +149,13 @@ function unfoldBot(containerDir: string = "bot"): void {
     ensureDir(flowTargetDir);
     generateStateFile(flow, flowTargetDir);
 
-    generateNodeFiles(flow.nodes, flowTargetDir, [
-      "transition",
-      "content",
-      "log",
-      "skill",
-      "aiclassify",
-    ]);
+    generateNodeFiles(
+      flow.nodes,
+      flowTargetDir,
+      ["transition", "content", "log", "skill", "aiclassify"],
+      flow.name,
+      variableMap
+    );
     console.log(`✅ Workflow ${index + 1}/${bot.flows.length}: ${flow.name}`);
   });
 
@@ -202,20 +212,22 @@ El script:
 
   let containerDir: string;
 
-  if (args.length > 0 && !args[0].startsWith('--')) {
+  if (args.length > 0 && !args[0].startsWith("--")) {
     // Modo directo con directorio específico
     containerDir = args[0];
     console.log(`🎯 Procesando bot en directorio: ${containerDir}`);
   } else {
     // Modo interactivo
-    console.log('🔍 No se proporcionó directorio, iniciando selector interactivo...\n');
+    console.log(
+      "🔍 No se proporcionó directorio, iniciando selector interactivo...\n"
+    );
     containerDir = await selectBotInteractively();
   }
 
   try {
     unfoldBot(containerDir);
   } catch (error) {
-    console.error('❌ Error durante el unfold:', error);
+    console.error("❌ Error durante el unfold:", error);
     process.exit(1);
   }
 }

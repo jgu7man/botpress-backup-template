@@ -90,7 +90,6 @@ export function generateGlobalTableDeclarations(
     `  const user: import('./variables/userVariables').userVariables;`,
     `  const conversation: import('../utils/types/core/MainConversation').MainConversation;`,
     `  const event: import('../utils/types/core/event.type').BotpressEvent;`,
-    `  const turn: import('../utils/types/core/Turn').Turn;`,
     `  const env: import('./variables/ConfigVariables').ConfigVariables;`,
     ``,
     `  // Tablas del bot`,

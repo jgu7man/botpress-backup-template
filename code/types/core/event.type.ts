@@ -17,7 +17,7 @@ export class BotpressEvent {
     ms: 0,
     top_facts: [],
   };
-  payload: EventPayload = {};
+  payload: Record<string, any> = {};
   tags: Tags = { conversation: {}, user: {}, bot: {} };
   type: string = "";
 }
@@ -41,20 +41,6 @@ export interface Tags {
   user: UserTags;
   bot: BotTags;
 }
-
-export type EventPayload = Record<string, any> & {
-  // Payload común
-  text?: string;
-  phone?: string;
-
-  // Payload específico del webhook leads_cupo_brilla
-  body?: {
-    phone?: string;
-    name?: string;
-    templateId?: string;
-    message?: string;
-  };
-};
 
 export type ConversationTags = Record<string, any>;
 export type UserTags = Record<string, any>;

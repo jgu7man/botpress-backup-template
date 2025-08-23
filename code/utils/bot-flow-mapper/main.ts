@@ -2,6 +2,7 @@
 
 import fs from "fs";
 import path from "path";
+import inquirer from "inquirer";
 import { BotFlowAnalyzer } from "./bot-flow-mapper";
 import { BotFlowMapperConfig, defaultConfig, presets } from "./config";
 
@@ -129,6 +130,13 @@ export class BotFlowMapperEntrypoint {
   }
 
   /**
+   * Obtiene la configuración actual
+   */
+  public getConfig(): BotFlowMapperConfig {
+    return this.config;
+  }
+
+  /**
    * Muestra solo la configuración sin validar archivos
    */
   public showConfigOnly(): void {
@@ -187,6 +195,68 @@ export class BotFlowMapperEntrypoint {
 }
 
 /**
+ * Busca bots disponibles en el directorio bots/
+ */
+function findAvailableBots(): Array<{name: string, path: string}> {
+  const botsDir = path.resolve('./bots');
+  
+  if (!fs.existsSync(botsDir)) {
+    return [];
+  }
+
+  const entries = fs.readdirSync(botsDir, { withFileTypes: true });
+  const bots: Array<{name: string, path: string}> = [];
+
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const botPath = path.join(botsDir, entry.name);
+      const unzippedPath = path.join(botPath, 'unzipped');
+      const botJsonPath = path.join(unzippedPath, 'bot.json');
+      
+      // Verificar que existe la estructura esperada
+      if (fs.existsSync(botJsonPath)) {
+        bots.push({
+          name: entry.name,
+          path: botPath
+        });
+      }
+    }
+  }
+
+  return bots;
+}
+
+/**
+ * Muestra un selector interactivo de bots
+ */
+async function selectBotInteractively(): Promise<string> {
+  const availableBots = findAvailableBots();
+
+  if (availableBots.length === 0) {
+    console.log('❌ No se encontraron bots en ./bots/');
+    console.log('💡 Usa "npm run smart-extract <archivo.bpz>" para extraer un bot primero.');
+    process.exit(1);
+  }
+
+  console.log('🤖 Bot Flow Mapper - Selector Interactivo\n');
+
+  const { selectedBot } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selectedBot',
+      message: '¿Qué bot quieres procesar?',
+      choices: availableBots.map(bot => ({
+        name: `📁 ${bot.name}`,
+        value: bot.path
+      })),
+      pageSize: 10
+    }
+  ]);
+
+  return selectedBot;
+}
+
+/**
  * Función principal para usar desde la línea de comandos
  */
 async function main(): Promise<void> {
@@ -196,7 +266,11 @@ async function main(): Promise<void> {
     console.log(`
 🤖 Bot Flow Mapper - Entrypoint Configurable
 
-Uso: npm run map-bot-flows [opciones]
+Uso: npm run map-bot-flows [path] [opciones]
+
+Argumentos:
+  path                     (Opcional) Ruta base donde buscar <path>/unzipped/bot.json y generar output en <path>/src/transitions/
+                          Si no se proporciona, se mostrará un selector interactivo de bots disponibles
 
 Opciones:
   --config <path>           Usar archivo de configuración JSON
@@ -212,8 +286,9 @@ Presets disponibles:
   full                     Genera todo: directorios, transiciones y TypeScript
 
 Ejemplos:
-  npm run map-bot-flows                        # Usar configuración por defecto
-  npm run map-bot-flows -- --preset full          # Generar todo
+  npm run map-bot-flows                            # Selector interactivo de bots disponibles
+  npm run map-bot-flows ./bot                      # Procesar ./bot/unzipped/bot.json y output en ./bot/src/transitions/
+  npm run map-bot-flows ./bot -- --preset full    # Generar todo en ./bot
   npm run map-bot-flows -- --config ./config.json # Usar archivo de configuración
   npm run map-bot-flows -- --show-config          # Ver configuración actual
 
@@ -233,19 +308,33 @@ Archivo de configuración ejemplo (config.json):
     return;
   }
 
+  // Extraer el path como primer argumento si no es una opción
+  let basePath: string | null = null;
+  let optionArgs = args;
+
+  if (args.length > 0 && !args[0].startsWith("--")) {
+    basePath = args[0];
+    optionArgs = args.slice(1);
+  } else {
+    // Si no se proporciona path, usar selector interactivo
+    console.log('🔍 No se proporcionó un path, iniciando selector interactivo...\n');
+    basePath = await selectBotInteractively();
+    optionArgs = args; // todos los args son opciones en este caso
+  }
+
   let entrypoint: BotFlowMapperEntrypoint;
 
-  if (args.includes("--config")) {
-    const configIndex = args.indexOf("--config");
-    const configPath = args[configIndex + 1];
+  if (optionArgs.includes("--config")) {
+    const configIndex = optionArgs.indexOf("--config");
+    const configPath = optionArgs[configIndex + 1];
     if (!configPath) {
       console.error("❌ --config requires a path argument");
       process.exit(1);
     }
     entrypoint = BotFlowMapperEntrypoint.fromConfigFile(configPath);
-  } else if (args.includes("--preset")) {
-    const presetIndex = args.indexOf("--preset");
-    const presetName = args[presetIndex + 1] as keyof typeof presets;
+  } else if (optionArgs.includes("--preset")) {
+    const presetIndex = optionArgs.indexOf("--preset");
+    const presetName = optionArgs[presetIndex + 1] as keyof typeof presets;
     if (!presetName) {
       console.error("❌ --preset requires a preset name");
       console.log(`Available presets: ${Object.keys(presets).join(", ")}`);
@@ -257,7 +346,25 @@ Archivo de configuración ejemplo (config.json):
     entrypoint = BotFlowMapperEntrypoint.fromDefaultConfigFile();
   }
 
-  if (args.includes("--show-config")) {
+  // Si se proporcionó un basePath, override las rutas
+  if (basePath) {
+    const resolvedBasePath = path.resolve(basePath);
+    const botJsonPath = path.join(resolvedBasePath, "unzipped", "bot.json");
+    const outputDirectory = path.join(resolvedBasePath, "src", "transitions");
+
+    console.log(`🎯 Using custom path: ${resolvedBasePath}`);
+    console.log(`🔍 Looking for bot.json at: ${botJsonPath}`);
+    console.log(`📤 Output will be generated at: ${outputDirectory}`);
+
+    // Crear una nueva instancia con las rutas personalizadas
+    entrypoint = new BotFlowMapperEntrypoint({
+      botJsonPath,
+      outputDirectory,
+      options: entrypoint.getConfig().options, // Mantener las opciones existentes
+    });
+  }
+
+  if (optionArgs.includes("--show-config")) {
     entrypoint.showConfigOnly();
     return;
   }

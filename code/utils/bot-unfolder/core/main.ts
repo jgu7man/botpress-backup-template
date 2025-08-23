@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import inquirer from "inquirer";
 import { BotExport } from "../../../types/bot/BotExport";
 import { generateFlowPath } from "../generators/generateFlowPath";
 import { generateNodeFiles } from "../generators/generateNodes";
@@ -21,12 +22,79 @@ function removeDir(dirPath: string): void {
 }
 
 /**
- * Reads the exported bot from the unzipped bot.json file
+ * Reads the exported bot from a specific path
  */
-function readExportedBot(): BotExport {
-  const exportPath = path.join(process.cwd(), "bot/unzipped/bot.json");
+function readExportedBot(containerDir: string = "bot"): BotExport {
+  const exportPath = path.join(process.cwd(), containerDir, "unzipped/bot.json");
+  
+  if (!fs.existsSync(exportPath)) {
+    throw new Error(`Bot JSON not found at: ${exportPath}`);
+  }
+  
   const raw = fs.readFileSync(exportPath, "utf8");
   return JSON.parse(raw) as BotExport;
+}
+
+/**
+ * Busca bots disponibles en el directorio bots/
+ */
+function findAvailableBots(): Array<{name: string, path: string}> {
+  const botsDir = path.resolve('./bots');
+  
+  if (!fs.existsSync(botsDir)) {
+    return [];
+  }
+
+  const entries = fs.readdirSync(botsDir, { withFileTypes: true });
+  const bots: Array<{name: string, path: string}> = [];
+
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      const botPath = path.join(botsDir, entry.name);
+      const unzippedPath = path.join(botPath, 'unzipped');
+      const botJsonPath = path.join(unzippedPath, 'bot.json');
+      
+      // Verificar que existe la estructura esperada
+      if (fs.existsSync(botJsonPath)) {
+        bots.push({
+          name: entry.name,
+          path: entry.name // Solo el nombre relativo para pasar a unfoldBot
+        });
+      }
+    }
+  }
+
+  return bots;
+}
+
+/**
+ * Muestra un selector interactivo de bots
+ */
+async function selectBotInteractively(): Promise<string> {
+  const availableBots = findAvailableBots();
+
+  if (availableBots.length === 0) {
+    console.log('❌ No se encontraron bots en ./bots/');
+    console.log('💡 Usa "npm run smart-extract <archivo.bpz>" para extraer un bot primero.');
+    process.exit(1);
+  }
+
+  console.log('🤖 Bot Unfolder - Selector Interactivo\n');
+
+  const { selectedBot } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selectedBot',
+      message: '¿Qué bot quieres desplegar (unfold)?',
+      choices: availableBots.map(bot => ({
+        name: `📁 ${bot.name}`,
+        value: `bots/${bot.path}`
+      })),
+      pageSize: 10
+    }
+  ]);
+
+  return selectedBot;
 }
 
 /**
@@ -60,7 +128,7 @@ function unfoldBot(containerDir: string = "bot"): void {
   ensureDir(schemasBase);
 
   console.log("📖 Leyendo bot exportado...");
-  const bot = readExportedBot();
+  const bot = readExportedBot(containerDir);
 
   console.log(`📊 Procesando ${bot.flows.length} workflows...`);
   // Export workflows
@@ -98,8 +166,61 @@ function unfoldBot(containerDir: string = "bot"): void {
   console.log("🎉 Unfold completo - Bot generado exitosamente!");
 }
 
-// Get container directory from command line arguments
-const containerDir = process.argv[2] || "bot";
+/**
+ * Función principal para el modo interactivo
+ */
+async function main(): Promise<void> {
+  const args = process.argv.slice(2);
 
-// Execute the unfold process
-unfoldBot(containerDir);
+  if (args.includes("--help") || args.includes("-h")) {
+    console.log(`
+🤖 Bot Unfolder - Generador de Código TypeScript
+
+Convierte el bot.json exportado de Botpress en código TypeScript estructurado.
+
+Uso: npm run unfold-bot [directorio] [opciones]
+
+Argumentos:
+  directorio              (Opcional) Directorio del bot a procesar (ej: bots/mi-bot)
+                         Si no se proporciona, se mostrará un selector interactivo
+
+Opciones:
+  --help, -h             Mostrar esta ayuda
+
+Ejemplos:
+  npm run unfold-bot                        # Selector interactivo de bots disponibles
+  npm run unfold-bot bots/asistente-general # Procesar bot específico
+  npm run unfold-bot bot                    # Procesar directorio bot (comportamiento clásico)
+
+El script:
+1. Lee el bot.json desde <directorio>/unzipped/bot.json
+2. Genera código TypeScript en <directorio>/src/
+3. Crea workflows, tablas, variables y esquemas TypeScript
+    `);
+    return;
+  }
+
+  let containerDir: string;
+
+  if (args.length > 0 && !args[0].startsWith('--')) {
+    // Modo directo con directorio específico
+    containerDir = args[0];
+    console.log(`🎯 Procesando bot en directorio: ${containerDir}`);
+  } else {
+    // Modo interactivo
+    console.log('🔍 No se proporcionó directorio, iniciando selector interactivo...\n');
+    containerDir = await selectBotInteractively();
+  }
+
+  try {
+    unfoldBot(containerDir);
+  } catch (error) {
+    console.error('❌ Error durante el unfold:', error);
+    process.exit(1);
+  }
+}
+
+// Ejecutar main si este archivo se ejecuta directamente
+if (require.main === module) {
+  main().catch(console.error);
+}

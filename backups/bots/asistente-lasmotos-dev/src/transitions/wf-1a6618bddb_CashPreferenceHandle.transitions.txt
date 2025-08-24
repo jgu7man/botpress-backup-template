@@ -1,0 +1,19 @@
+# Transitions for Workflow: CashPreferenceHandle (wf-1a6618bddb)
+
+Start Node: nd-beebe18821
+Total Nodes: 14
+Total Transitions: 11
+
+================================================================================
+
+Entry -> direct -> ProvideCashPrice
+Exit -> direct -> #
+Agreement_Message -> default -> Exit
+ProvideCashPrice -> default -> InformaPreioContado
+ProvideCashPrice -> direct -> NoCashPrice
+NoCashPrice -> {{lastNode=nd-029e738c1a}} -> PendingAttention [skill] "UserHasConfirmed"
+NoCashPrice -> {{lastNode=nd-44f981d7c0}} -> RejectedAttention [skill] "UserHasRejected"
+NoCashPrice -> {{lastNode=nd-d9bd76f4f9}} -> Exit [skill] "Questio_Answered"
+PendingAttention -> default -> Agreement_Message
+RejectedAttention -> default -> Agreement_Message
+InformaPreioContado -> default -> Exit

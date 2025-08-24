@@ -1,0 +1,11 @@
+# Transitions for Workflow: printMotoCard (wf-b69d17ce48)
+
+Start Node: nd-8f7f7ba662
+Total Nodes: 4
+Total Transitions: 3
+
+================================================================================
+
+Entry -> direct -> PrintCard
+Exit -> direct -> #
+PrintCard -> default -> Exit

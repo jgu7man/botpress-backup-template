@@ -1,0 +1,25 @@
+# Transitions for Workflow: locationKnowledgeBase (wf-5e90071533)
+
+Start Node: nd-e6f6d5a549
+Total Nodes: 12
+Total Transitions: 17
+
+================================================================================
+
+Entry -> direct -> ValidateUserLocation
+Success -> direct -> #
+SearchForBranchLocationInfo -> default -> Answer
+Answer -> default -> Success
+Answer -> direct -> QuestionRecognized
+QuestionRecognized -> default -> QuestionMade
+QuestionMade -> direct -> #
+FindLocation -> {{lastNode=nd-85e1c89135}} -> SearchForBranchLocationInfo [skill] "Success"
+FindLocation -> {{lastNode=nd-730085d222}} -> Answer [skill] "Out_of_service"
+RetrieveUserLocation -> {{lastNode=nd-b25a76b149}} -> FindLocation [skill] "Success"
+RetrieveUserLocation -> {{lastNode=nd-581876045a}} -> FindLocation [skill] "LocationAndQuestionMade"
+RetrieveUserLocation -> {{lastNode=nd-48fcecf100}} -> QuestionRecognized [skill] "QuestionMade"
+ValidateUserLocation -> default -> AnalyzeLocationUserInput
+ValidateUserLocation -> direct -> SearchForBranchLocationInfo
+AnalyzeLocationUserInput -> {{lastNode=nd-a416080a8b}} -> RetrieveUserLocation [skill] "NoLocationFound"
+AnalyzeLocationUserInput -> {{lastNode=nd-19cdc1bee6}} -> SearchForBranchLocationInfo [skill] "ServiceLocationFound"
+AnalyzeLocationUserInput -> {{lastNode=nd-5645949c44}} -> FindLocation [skill] "Success"

@@ -1,0 +1,28 @@
+# Transitions for Workflow: retrieveUserLocation (wf-a8d94616a2)
+
+Start Node: nd-9615f13d7f
+Total Nodes: 14
+Total Transitions: 20
+
+================================================================================
+
+Entry -> direct -> RetrieveUserLocation
+Success -> direct -> #
+RetrieveUserLocation -> default -> ManageAnswer
+RetrieveUserLocation -> {{failed}} -> ManageAnswer [capture] "On Failure"
+ManageAnswer -> default -> Router
+Router -> default -> UnderstandUserInput
+Router -> direct -> SuccessLog
+Router -> direct -> LocationAndQuestionLog
+Router -> direct -> QuestionedLog
+Router -> direct -> SuccessLog
+SuccessLog -> default -> Success
+LocationAndQuestionLog -> default -> LocationAndQuestionMade
+LocationAndQuestionMade -> direct -> #
+QuestionedLog -> default -> QuestionMade
+QuestionMade -> direct -> #
+UnderstandUserInput -> direct -> End1
+UnderstandUserInput -> {{lastNode=nd-fb7e06f31a}} -> ParaphraseInput [skill] "SameContext"
+UnderstandUserInput -> {{lastNode=nd-ed7af360bf}} -> End1 [skill] "ChangeContext"
+End1 -> direct -> END
+ParaphraseInput -> default -> ManageAnswer

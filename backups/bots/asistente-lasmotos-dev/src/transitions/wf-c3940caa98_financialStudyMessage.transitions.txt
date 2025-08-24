@@ -1,0 +1,11 @@
+# Transitions for Workflow: financialStudyMessage (wf-c3940caa98)
+
+Start Node: nd-999a90f8f6
+Total Nodes: 4
+Total Transitions: 3
+
+================================================================================
+
+Entry -> direct -> financiera_message
+Exit -> direct -> #
+financiera_message -> default -> Exit

@@ -1,0 +1,28 @@
+# Transitions for Workflow: askForAssistanceChannel (wf-9e68cef991)
+
+Start Node: nd-c1883840a5
+Total Nodes: 14
+Total Transitions: 20
+
+================================================================================
+
+Entry -> direct -> EvaluateAttempts
+Exit -> direct -> #
+EvaluateAttempts -> default -> AssitancePreferenceQuestion
+EvaluateAttempts -> direct -> Exit
+AssitancePreferenceQuestion -> default -> CatchAssistancePreferenceAnswer
+CatchAssistancePreferenceAnswer -> default -> UnderstandUserInput
+CatchAssistancePreferenceAnswer -> direct -> OnStore
+CatchAssistancePreferenceAnswer -> direct -> OnLine
+CatchAssistancePreferenceAnswer -> direct -> Negative
+CatchAssistancePreferenceAnswer -> direct -> UnderstandUserInput
+UnderstandUserInput -> default -> CatchAssistancePreferenceAnswer
+UnderstandUserInput -> direct -> Set_Complexed
+UnderstandUserInput -> {{lastNode=nd-ed7af360bf}} -> AssitancePreferenceQuestion [skill] "ChangeContext"
+UnderstandUserInput -> {{lastNode=nd-fb7e06f31a}} -> ParaphraseToRetry [skill] "SameContext"
+OnStore -> default -> Confirmacion
+OnLine -> default -> Confirmacion
+Negative -> default -> farewell
+ParaphraseToRetry -> default -> CatchAssistancePreferenceAnswer
+Set_Complexed -> default -> farewell
+Confirmacion -> default -> Exit

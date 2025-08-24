@@ -1,0 +1,25 @@
+# Transitions for Workflow: ❔mainKnowledgeBase (wf-8a77b12b87)
+
+Start Node: nd-4d1eea3d93
+Total Nodes: 17
+Total Transitions: 17
+
+================================================================================
+
+Entry -> direct -> getLasMessage
+Continue -> direct -> #
+Credit_KnowledgeBase -> {{lastNode=nd-3fbd74f280}} -> Continue [skill] "CreditKnowledge_Success"
+Location_KnowledgeBase -> {{lastNode=nd-a4d5d7f472}} -> Continue [skill] "Success"
+Motos_KnowledgeBase -> default -> Continue
+Motos_KnowledgeBase -> {{lastNode=nd-2aabd9948e}} -> askPaymentMethod [skill] "Success"
+End1 -> direct -> END
+askPaymentMethod -> {{lastNode=nd-36d6158290}} -> Continue [skill] "Continue"
+setContext -> default -> UnderstandUserInput
+setContext -> direct -> Credit_KnowledgeBase
+setContext -> direct -> Location_KnowledgeBase
+setContext -> direct -> Motos_KnowledgeBase
+UnderstandUserInput -> direct -> End1
+UnderstandUserInput -> {{lastNode=nd-fb7e06f31a}} -> Retry [skill] "SameContext"
+UnderstandUserInput -> {{lastNode=nd-ed7af360bf}} -> Retry [skill] "ChangeContext"
+Retry -> default -> setContext
+getLasMessage -> default -> setContext

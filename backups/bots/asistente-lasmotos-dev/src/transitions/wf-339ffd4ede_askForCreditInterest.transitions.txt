@@ -1,0 +1,21 @@
+# Transitions for Workflow: askForCreditInterest (wf-339ffd4ede)
+
+Start Node: nd-7c0b129c2d
+Total Nodes: 14
+Total Transitions: 13
+
+================================================================================
+
+Entry -> direct -> Skip
+Entry -> direct -> CreditInterestingQuestion
+Exit -> direct -> #
+AnswerCreditOptions -> default -> Exit
+negative_Answer -> default -> farewell
+AlternativeCreditInterestingQuestion -> default -> HandleUnknownInterestingAnswer
+CreditInterestingQuestion -> default -> HandleUnknownInterestingAnswer
+HandleUnknownInterestingAnswer -> direct -> AttemptsOverLog
+HandleUnknownInterestingAnswer -> {{lastNode=nd-029e738c1a}} -> AnswerCreditOptions [skill] "UserHasConfirmed"
+HandleUnknownInterestingAnswer -> {{lastNode=nd-44f981d7c0}} -> negative_Answer [skill] "UserHasRejected"
+HandleUnknownInterestingAnswer -> {{lastNode=nd-d9bd76f4f9}} -> CreditInterestingQuestion [skill] "Questio_Answered"
+AttemptsOverLog -> default -> farewell
+Skip -> default -> Exit

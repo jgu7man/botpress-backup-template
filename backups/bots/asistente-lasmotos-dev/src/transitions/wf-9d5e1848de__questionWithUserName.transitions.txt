@@ -1,0 +1,13 @@
+# Transitions for Workflow: 👤 questionWithUserName (wf-9d5e1848de)
+
+Start Node: nd-8bab47aa23
+Total Nodes: 5
+Total Transitions: 5
+
+================================================================================
+
+Entry -> direct -> BuildMessage
+Success -> direct -> #
+BuildMessage -> default -> Success
+BuildMessage -> direct -> WaitForUserInput
+WaitForUserInput -> default -> Success

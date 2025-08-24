@@ -1,0 +1,14 @@
+# Transitions for Workflow: creditProposal (wf-998c649e12)
+
+Start Node: nd-5d4c109772
+Total Nodes: 6
+Total Transitions: 6
+
+================================================================================
+
+Entry -> direct -> LogCreditContext
+Entry -> direct -> AskForCreditInterest
+Exit -> direct -> #
+LogCreditContext -> default -> AskForAssistanceMode
+AskForAssistanceMode -> {{lastNode=nd-066484b43e}} -> Exit [skill] "Exit"
+AskForCreditInterest -> {{lastNode=nd-06268df276}} -> AskForAssistanceMode [skill] "Exit"

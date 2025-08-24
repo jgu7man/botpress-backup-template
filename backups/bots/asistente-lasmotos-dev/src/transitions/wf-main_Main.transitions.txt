@@ -1,0 +1,20 @@
+# Transitions for Workflow: Main (wf-main)
+
+Start Node: nd-2bb9db230d
+Total Nodes: 15
+Total Transitions: 12
+
+================================================================================
+
+Start -> direct -> Welcome
+End -> direct -> END
+CreditAssessmentNode -> {{lastNode=nd-ceaae6d4a0}} -> Despedida [skill] "Exit"
+GetUserDataForm -> {{lastNode=nd-1b5f64341e}} -> CreditProposalNode [skill] "Exit"
+GetUserDataForm -> {{lastNode=nd-8745dd86d3}} -> CreditAssessmentNode [skill] "cupo_brilla"
+KnowledgeNode -> {{lastNode=nd-54302a2e21}} -> GetUserDataForm [skill] "Continue"
+CreditProposalNode -> {{lastNode=nd-4514cad427}} -> CreditAssessmentNode [skill] "Exit"
+CupoBrilla_Start -> direct -> SendCupoBrilla_Promo
+Welcome -> {{lastNode=nd-34a5ae8619}} -> GetUserDataForm [skill] "Saludo"
+Welcome -> {{lastNode=nd-2581524d76}} -> KnowledgeNode [skill] "Consulta"
+Welcome -> {{lastNode=nd-1888a2c0bd}} -> Despedida [skill] "Exit"
+Despedida -> {{lastNode=nd-9cd1505c0d}} -> End [skill] "Exit"

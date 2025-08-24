@@ -1,0 +1,20 @@
+# Transitions for Workflow: askForNationalId (wf-ebd6a89332)
+
+Start Node: nd-2f65dbf333
+Total Nodes: 9
+Total Transitions: 12
+
+================================================================================
+
+Entry -> direct -> Skipped
+Entry -> direct -> MadeQuestion
+Exit -> direct -> #
+Acknowledgements -> default -> Exit
+Reassurance -> default -> Exit
+MainKnowledgeBase -> {{lastNode=nd-54302a2e21}} -> Exit [skill] "Continue"
+AskForDocument -> {{lastNode=nd-3622891b2e}} -> Skipped [skill] "Skipped"
+AskForDocument -> {{lastNode=nd-03c6775596}} -> Acknowledgements [skill] "Success"
+AskForDocument -> {{lastNode=nd-4bf2d508cd}} -> Reassurance [skill] "Failed"
+AskForDocument -> {{lastNode=nd-d678baf7dd}} -> MainKnowledgeBase [skill] "ChangedContext"
+Skipped -> default -> Exit
+MadeQuestion -> {{lastNode=nd-09447a4e34}} -> AskForDocument [skill] "Success"

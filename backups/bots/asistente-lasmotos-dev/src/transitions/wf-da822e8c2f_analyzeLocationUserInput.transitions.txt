@@ -1,0 +1,19 @@
+# Transitions for Workflow: analyzeLocationUserInput (wf-da822e8c2f)
+
+Start Node: nd-920df8d949
+Total Nodes: 10
+Total Transitions: 11
+
+================================================================================
+
+Entry -> direct -> AnalyzeUserInput
+ServiceLocationFound -> direct -> #
+AnalysisLogs -> default -> UserLocationInput
+AnalysisLogs -> direct -> ServiceLocationFound
+AnalysisLogs -> direct -> NoLocationFoundLog
+NoLocationFound -> direct -> #
+NoLocationFoundLog -> default -> NoLocationFound
+ServiceLocationFound -> default -> ServiceLocationFound
+UserLocationInput -> default -> Success
+Success -> direct -> #
+AnalyzeUserInput -> default -> AnalysisLogs

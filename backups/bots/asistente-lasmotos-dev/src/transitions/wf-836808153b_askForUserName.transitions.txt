@@ -1,0 +1,21 @@
+# Transitions for Workflow: askForUserName (wf-836808153b)
+
+Start Node: nd-717959226c
+Total Nodes: 12
+Total Transitions: 13
+
+================================================================================
+
+ExistsValidation -> direct -> SkipingFlow
+ExistsValidation -> direct -> ListenTheName
+Success -> direct -> #
+ListenTheName -> default -> GetAnswerContext_Node
+ListenTheName -> {{failed}} -> GetAnswerContext_Node [capture] "On Failure"
+GetAnswerContext_Node -> default -> Success
+GetAnswerContext_Node -> direct -> NamePleasantries
+GetAnswerContext_Node -> direct -> NamePleasantries
+GetAnswerContext_Node -> direct -> SendToKnowledge
+SendToKnowledge -> default -> Success
+NamePleasantries -> default -> Success
+NamePleasantries -> direct -> SendToKnowledge
+SkipingFlow -> default -> Success

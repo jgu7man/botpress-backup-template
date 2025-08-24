@@ -1,0 +1,11 @@
+# Transitions for Workflow: setConversationContext (wf-11e89ef0f3)
+
+Start Node: nd-df3b4698f5
+Total Nodes: 3
+Total Transitions: 3
+
+================================================================================
+
+SetConversationContext -> direct -> SetConversationContext
+Return -> direct -> #
+SetConversationContext -> default -> Return

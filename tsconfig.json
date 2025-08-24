@@ -16,9 +16,9 @@
       "@variables/*": ["bot/src/variables/*"],
       "@schemas/*": ["bot/src/schemas/*"],
       "@tables/*": ["bot/src/tables/*"],
-      "@core-types/*": ["code/types/core/*"],
-      "@types/*": ["code/types/*"],
-      "@globals/*": ["code/types/globals/*"]
+      "@core-types/*": ["types/core/*"],
+      "@types/*": ["types/*"],
+      "@globals/*": ["types/globals/*"]
     },
     "lib": ["es2019"],
     "target": "es2020",

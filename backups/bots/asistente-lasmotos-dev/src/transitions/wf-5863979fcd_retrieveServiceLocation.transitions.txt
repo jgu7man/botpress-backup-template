@@ -1,0 +1,18 @@
+# Transitions for Workflow: retrieveServiceLocation (wf-5863979fcd)
+
+Start Node: nd-db273dc219
+Total Nodes: 9
+Total Transitions: 10
+
+================================================================================
+
+Entry -> direct -> SetInput
+Success -> direct -> #
+OutOfServiceMessage -> default -> Out_of_service
+NoInput -> direct -> #
+SearchThroughIA -> default -> Success
+SearchThroughIA -> direct -> OutOfServiceMessage
+Out_of_service -> direct -> #
+NoInputLocation -> default -> NoInput
+SetInput -> default -> SearchThroughIA
+SetInput -> direct -> NoInputLocation

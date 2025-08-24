@@ -1,0 +1,27 @@
+# Transitions for Workflow: ⭐️ welcome (wf-1f28b00f81)
+
+Start Node: nd-b6a7151a19
+Total Nodes: 13
+Total Transitions: 19
+
+================================================================================
+
+Entry -> direct -> InitialContext
+Entry -> direct -> Summary
+Exit -> direct -> #
+MockInfo -> default -> Summary
+Summary -> default -> MessageTypEvaluation
+MessageTypEvaluation -> default -> DefineTransitions
+MessageTypEvaluation -> direct -> WelcomeMessage
+WelcomeMessage -> default -> DefineTransitions
+WelcomeMessage -> direct -> AdviseMessage
+DefineTransitions -> default -> Consulta
+DefineTransitions -> direct -> Saludo
+DefineTransitions -> direct -> setServed
+DefineTransitions -> direct -> Consulta
+DefineTransitions -> direct -> Consulta
+AdviseMessage -> default -> DefineTransitions
+Saludo -> direct -> #
+Consulta -> direct -> #
+InitialContext -> default -> Summary
+setServed -> default -> Exit

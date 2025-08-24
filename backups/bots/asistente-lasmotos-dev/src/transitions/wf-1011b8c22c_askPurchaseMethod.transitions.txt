@@ -1,0 +1,25 @@
+# Transitions for Workflow: askPurchaseMethod (wf-1011b8c22c)
+
+Start Node: nd-484d56fc1a
+Total Nodes: 12
+Total Transitions: 17
+
+================================================================================
+
+Entry -> direct -> AskForPurchaseMethod
+Exit -> direct -> #
+AskForPurchaseMethod -> default -> EvaluateConfirmation
+AskForPurchaseMethod -> {{lastNode=nd-09447a4e34}} -> EvaluateConfirmation [skill] "Success"
+EvaluateConfirmation -> direct -> Exit
+EvaluateConfirmation -> {{lastNode=nd-ed7af360bf}} -> Re-SetValue [skill] "ChangeContext"
+EvaluateConfirmation -> {{lastNode=nd-fb7e06f31a}} -> AskAgain [skill] "SameContext"
+A_Credito -> direct -> #
+De_Contado -> direct -> #
+CupoBrilla -> direct -> #
+AskAgain -> default -> EvaluateConfirmation
+EvaluateConfirmation -> default -> EvaluateConfirmation
+EvaluateConfirmation -> direct -> De_Contado
+EvaluateConfirmation -> direct -> A_Credito
+EvaluateConfirmation -> direct -> setCupoBrillaProfile
+Re-SetValue -> default -> AskForPurchaseMethod
+setCupoBrillaProfile -> {{lastNode=nd-b28e6179e2}} -> CupoBrilla [skill] "Exit"

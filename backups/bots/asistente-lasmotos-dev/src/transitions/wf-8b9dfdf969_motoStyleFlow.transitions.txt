@@ -1,0 +1,38 @@
+# Transitions for Workflow: motoStyleFlow (wf-8b9dfdf969)
+
+Start Node: nd-ea73a522ba
+Total Nodes: 22
+Total Transitions: 30
+
+================================================================================
+
+Entry -> direct -> StyleMenuOffer
+Entry -> direct -> SearchForStyle
+Choice_Made -> direct -> #
+SearchForStyle -> default -> EvaluateResultCount
+SearchForStyle -> direct -> StyleMenuOffer
+StyleMenuOffer -> default -> SearchForStyle
+StyleMenuOffer -> {{__CHOICE=@workflow.styleOptionList}} -> SearchForStyle [capture] "@workflow.styleOptionList"
+Empty_Results -> default -> SearchForStyle
+Empty_Results -> {{__CHOICE=@workflow.styleOptionList}} -> SearchForStyle [capture] "@workflow.styleOptionList"
+EvaluateResultCount -> default -> PrintMotoList
+EvaluateResultCount -> direct -> Empty_Results
+EvaluateResultCount -> direct -> ProvideUniqOption
+ProvideOptions -> default -> ValidateExistence
+ProvideOptions -> {{failed}} -> HandleUnknownOption [capture] "On Failure"
+HandleUnknownOption -> default -> ValidateExistence
+HandleUnknownOption -> direct -> No_Choice
+ValidateExistence -> default -> AskClarification
+ValidateExistence -> direct -> Choice_Made
+PrintMotoList -> {{lastNode=nd-81f521bc08}} -> ProvideOptions [skill] "Success"
+PrintMotoList -> {{lastNode=nd-0e88d6d788}} -> Empty_Results [skill] "Unsuccess"
+No_Choice -> direct -> #
+Unique_Result -> direct -> #
+ProvideUniqOption -> default -> HandleUnknownOption
+ProvideUniqOption -> {{lastNode=nd-44f981d7c0}} -> RejectedChoice [skill] "UserHasRejected"
+ProvideUniqOption -> {{lastNode=nd-029e738c1a}} -> AcceptedChoice [skill] "UserHasAccepted"
+AcceptedChoice -> default -> Unique_Result
+RejectedChoice -> default -> No_Choice
+AskClarification -> default -> ValidateExistence
+AskClarification -> direct -> farewell
+AskClarification -> {{failed}} -> farewell [capture] "On Failure"

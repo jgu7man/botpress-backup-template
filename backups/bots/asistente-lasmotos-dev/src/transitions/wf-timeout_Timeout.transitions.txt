@@ -1,0 +1,11 @@
+# Transitions for Workflow: Timeout (wf-timeout)
+
+Start Node: nd-9f7f3268ac
+Total Nodes: 3
+Total Transitions: 3
+
+================================================================================
+
+On_Timeout -> direct -> SetTimeoutMessage
+End -> direct -> END
+SetTimeoutMessage -> default -> End

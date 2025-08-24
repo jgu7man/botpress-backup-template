@@ -4,10 +4,10 @@
   "description": "Botpress coder workspace to manage bot programming",
   "main": "index.js",
   "scripts": {
-    "unfold-bot": "tsx ./code/utils/bot-unfolder/core/main.ts",
-    "export-tables": "tsx ./code/utils/bot-table-exporter/run.ts",
+    "unfold-bot": "tsx ./tools/bot-unfolder/core/main.ts",
+    "export-tables": "tsx ./tools/bot-table-exporter/run.ts",
     "extract": "rm -rf ./bot/unzipped && 7z x -o./bot/unzipped/ ",
-    "smart-extract": "tsx ./code/utils/smart-extractor/main.ts",
+    "smart-extract": "tsx ./tools/smart-extractor/main.ts",
     "compress": "rm -rf ./exports/$ENV/assistant-$ENV.bpz && 7z a -tzip -mx=9 ./exports/$ENV/assistant-$ENV.bpz ./bots/$ENV/*",
     "compress:dev": "ENV=dev && npm run compress",
     "compress:stg": "ENV=stg && npm run compress",

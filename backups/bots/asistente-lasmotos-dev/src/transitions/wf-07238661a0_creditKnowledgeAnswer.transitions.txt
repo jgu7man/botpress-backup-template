@@ -1,0 +1,18 @@
+# Transitions for Workflow: creditKnowledgeAnswer (wf-07238661a0)
+
+Start Node: nd-e6e68f4ba5
+Total Nodes: 8
+Total Transitions: 10
+
+================================================================================
+
+ContextClasification_Node -> direct -> ClassifyCreditQuestion
+CreditKnowledge_Success -> direct -> #
+CreditKnowledgeAnswer_Node -> default -> CreditKnowledge_Success
+CreditKnowledgeAnswer_Node -> direct -> CreditKnowledge_Unsuccess
+CupoBrillaContext_Node -> default -> CreditKnowledgeAnswer_Node
+InfoCreditContext_Node -> default -> CreditKnowledgeAnswer_Node
+CreditKnowledge_Unsuccess -> direct -> #
+ClassifyCreditQuestion -> default -> CreditKnowledgeAnswer_Node
+ClassifyCreditQuestion -> direct -> CupoBrillaContext_Node
+ClassifyCreditQuestion -> direct -> InfoCreditContext_Node

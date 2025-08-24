@@ -1,0 +1,19 @@
+# Transitions for Workflow: askIfUserHasCupoBrilla (wf-d1c4555027)
+
+Start Node: nd-1f3088f8e6
+Total Nodes: 8
+Total Transitions: 11
+
+================================================================================
+
+Entry -> direct -> Skip
+Entry -> direct -> MadeQuestion
+UserHasCupoBrilla -> direct -> #
+MadeQuestion -> default -> evaluateConfirmation
+evaluateConfirmation -> direct -> UserHas_Not_CupoBrilla
+evaluateConfirmation -> {{lastNode=nd-029e738c1a}} -> SetProfile [skill] "UserHasConfirmed"
+evaluateConfirmation -> {{lastNode=nd-44f981d7c0}} -> UserHas_Not_CupoBrilla [skill] "UserHasRejected"
+evaluateConfirmation -> {{lastNode=nd-d9bd76f4f9}} -> MadeQuestion [skill] "Questio_Answered"
+SetProfile -> default -> UserHasCupoBrilla
+UserHas_Not_CupoBrilla -> direct -> #
+Skip -> default -> UserHasCupoBrilla

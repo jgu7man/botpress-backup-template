@@ -1,0 +1,28 @@
+# Transitions for Workflow: ❓ evaluateConfirmation (wf-f44160aa45)
+
+Start Node: nd-d5dd8c0161
+Total Nodes: 19
+Total Transitions: 20
+
+================================================================================
+
+Entry -> default -> EvaluateUserAnswer
+Entry -> direct -> despedida
+UserHasAccepted -> direct -> #
+Accepted -> default -> UserHasAccepted
+Rejected -> default -> UserHasRejected
+UserHasRejected -> direct -> #
+Questio_Answered -> direct -> #
+EvaluateUserAnswer -> default -> ParaphraseUserInput
+EvaluateUserAnswer -> direct -> AskToKnowledgeBase
+EvaluateUserAnswer -> direct -> QuestionAndConfirmed
+AskToKnowledgeBase -> {{lastNode=nd-8c3aab2e25}} -> QuestionAndConfirmed [skill] "Success"
+AskToKnowledgeBase -> {{lastNode=nd-35ea0d8403}} -> QuestionAndConfirmed [skill] "CupoBrilla"
+AskToKnowledgeBase -> {{lastNode=nd-30f649eb25}} -> ParaphraseUserInput [skill] "Unsuccess"
+ParaphraseUserInput -> direct -> Misunderstood_Farewell
+ParaphraseUserInput -> {{lastNode=nd-fb7e06f31a}} -> SetParaphrased [skill] "SameContext"
+ParaphraseUserInput -> {{lastNode=nd-ed7af360bf}} -> AskToKnowledgeBase [skill] "ChangeContext"
+SetParaphrased -> default -> EvaluateUserAnswer
+QuestionAndConfirmed -> default -> Questio_Answered
+QuestionAndConfirmed -> direct -> Accepted
+QuestionAndConfirmed -> direct -> Rejected

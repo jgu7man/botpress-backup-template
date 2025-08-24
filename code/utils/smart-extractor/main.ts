@@ -152,7 +152,7 @@ class SmartBotExtractor {
   /**
    * Método principal para extraer inteligentemente
    */
-  public async smartExtract(zipPath: string, outputDir: string = './bots'): Promise<void> {
+  public async smartExtract(zipPath: string, outputDir: string = './backups/bots'): Promise<void> {
     if (!fs.existsSync(zipPath)) {
       throw new Error(`Archive not found: ${zipPath}`);
     }
@@ -214,16 +214,16 @@ Uso: npm run smart-extract <archivo.bpz> [directorio-salida]
 
 Argumentos:
   archivo.bpz              Archivo .bpz a extraer
-  directorio-salida        Directorio donde crear la carpeta del bot (opcional, default: ./bots)
+  directorio-salida        Directorio donde crear la carpeta del bot (opcional, default: ./backups/bots)
 
 Ejemplos:
-  npm run smart-extract ./zips/mi-bot.bpz                    # Extrae a ./bots/[nombre-del-bot]/unzipped/
-  npm run smart-extract ./zips/mi-bot.bpz ./extracted        # Extrae a ./extracted/[nombre-del-bot]/unzipped/
+  npm run smart-extract ./backups/zips/mi-bot.bpz                    # Extrae a ./backups/bots/[nombre-del-bot]/unzipped/
+  npm run smart-extract ./backups/zips/mi-bot.bpz ./extracted        # Extrae a ./extracted/[nombre-del-bot]/unzipped/
 
 El script:
 1. Extrae el nombre del bot del nombre del archivo .bpz (ej: "asistente-lasmotos-general - 2025 Aug 15.bpz" → "asistente-lasmotos-general")
-2. Crea una carpeta con ese nombre y una subcarpeta "unzipped"
-3. Extrae todos los archivos en <nombre-bot>/unzipped/ (compatible con map-bot-flows)
+2. Crea una carpeta con ese nombre y una subcarpeta "unzipped" en ./backups/bots/
+3. Extrae todos los archivos en ./backups/bots/<nombre-bot>/unzipped/ (compatible con unfold-bot)
     `);
     return;
   }
@@ -236,7 +236,7 @@ El script:
   }
 
   const zipPath = args[0];
-  const outputDir = args[1] || './bots';
+  const outputDir = args[1] || './backups/bots';
 
   const extractor = new SmartBotExtractor();
   await extractor.smartExtract(zipPath, outputDir);

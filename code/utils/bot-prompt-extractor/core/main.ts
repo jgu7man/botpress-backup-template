@@ -63,21 +63,21 @@ function readExportedBot(containerDir: string = "bot"): BotExport {
 }
 
 /**
- * Busca bots disponibles en el directorio bots/
+ * Busca bots disponibles en el directorio backups/bots/
  */
 function findAvailableBots(): Array<{ name: string; path: string }> {
-  const botsDir = path.resolve("./bots");
+  const backupsBotsDir = path.resolve("./backups/bots");
 
-  if (!fs.existsSync(botsDir)) {
+  if (!fs.existsSync(backupsBotsDir)) {
     return [];
   }
 
-  const entries = fs.readdirSync(botsDir, { withFileTypes: true });
+  const entries = fs.readdirSync(backupsBotsDir, { withFileTypes: true });
   const bots: Array<{ name: string; path: string }> = [];
 
   for (const entry of entries) {
     if (entry.isDirectory()) {
-      const botPath = path.join(botsDir, entry.name);
+      const botPath = path.join(backupsBotsDir, entry.name);
       const unzippedPath = path.join(botPath, "unzipped");
       const botJsonPath = path.join(unzippedPath, "bot.json");
 
@@ -85,7 +85,7 @@ function findAvailableBots(): Array<{ name: string; path: string }> {
       if (fs.existsSync(botJsonPath)) {
         bots.push({
           name: entry.name,
-          path: entry.name, // Solo el nombre relativo para pasar a extractPrompts
+          path: `backups/bots/${entry.name}`, // Ruta relativa completa para pasar a extractPrompts
         });
       }
     }
@@ -101,7 +101,7 @@ async function selectBotInteractively(): Promise<string> {
   const availableBots = findAvailableBots();
 
   if (availableBots.length === 0) {
-    console.log("❌ No se encontraron bots en ./bots/");
+    console.log("❌ No se encontraron bots en ./backups/bots/");
     console.log(
       '💡 Usa "npm run smart-extract <archivo.bpz>" para extraer un bot primero.'
     );
@@ -117,7 +117,7 @@ async function selectBotInteractively(): Promise<string> {
       message: "¿De qué bot quieres extraer los prompts?",
       choices: availableBots.map((bot) => ({
         name: `📁 ${bot.name}`,
-        value: `bots/${bot.path}`,
+        value: bot.path,
       })),
       pageSize: 10,
     },

@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "unfold-bot": "tsx ./code/utils/bot-unfolder/core/main.ts",
-    "map-bot-flows": "tsx ./code/utils/bot-flow-mapper/main.ts",
     "export-tables": "tsx ./code/utils/bot-table-exporter/run.ts",
     "extract": "rm -rf ./bot/unzipped && 7z x -o./bot/unzipped/ ",
     "smart-extract": "tsx ./code/utils/smart-extractor/main.ts",

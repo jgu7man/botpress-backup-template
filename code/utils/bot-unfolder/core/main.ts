@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { BotExport } from "../../../types/bot/BotExport";
 import { extractPrompts } from "../../bot-prompt-extractor/core/main";
+import { BotFlowAnalyzer } from "../../bot-flow-mapper/bot-flow-mapper";
 import { generateFlowPath } from "../generators/generateFlowPath";
 import { generateNodeFiles } from "../generators/generateNodes";
 import { generateStateFile } from "../generators/generateState";
@@ -128,6 +129,49 @@ function unfoldBot(containerDir: string = "bot"): void {
 }
 
 /**
+ * Extract bot transitions using the BotFlowAnalyzer
+ * Generates transition files in src/transitions directory
+ * @param containerDir - Optional container directory name (defaults to "bot")
+ */
+function extractTransitions(containerDir: string = "bot"): void {
+  console.log("🔄 Iniciando extracción de transiciones del bot...");
+
+  // Define container and transitions directories using project root
+  const containerPath = path.join(process.cwd(), containerDir);
+  const botJsonPath = path.join(containerPath, "unzipped", "bot.json");
+  const transitionsDir = path.join(containerPath, "src", "transitions");
+  
+  console.log(`📁 Directorio de transiciones: ${containerDir}/src/transitions`);
+
+  if (!fs.existsSync(botJsonPath)) {
+    throw new Error(`Bot JSON not found at: ${botJsonPath}`);
+  }
+
+  console.log("🗑️  Limpiando directorio de transiciones...");
+  // Ensure container directory exists
+  ensureDir(containerPath);
+  // Remove the transitions directory
+  removeDir(transitionsDir);
+  
+  console.log("📂 Creando directorio base de transiciones...");
+  ensureDir(transitionsDir);
+
+  console.log("📖 Leyendo bot exportado...");
+  
+  try {
+    const analyzer = new BotFlowAnalyzer(botJsonPath);
+    
+    console.log("🔄 Generando archivos de transiciones...");
+    analyzer.generateTransitionFiles(transitionsDir);
+    
+    console.log("🎉 Extracción de transiciones completa!");
+  } catch (error) {
+    console.error("❌ Error durante la extracción de transiciones:", error);
+    throw error;
+  }
+}
+
+/**
  * Función principal para el modo interactivo
  */
 async function main(): Promise<void> {
@@ -143,23 +187,26 @@ o extrae los prompts como archivos Markdown.
 Uso: npm run unfold-bot [directorio] [-- opciones]
 
 Argumentos:
-  directorio              (Opcional) Directorio del bot a procesar (ej: bots/mi-bot)
+  directorio              (Opcional) Directorio del bot a procesar (ej: backups/bots/mi-bot)
                          Si no se proporciona, se procesará el directorio "bot"
 
 Opciones:
   --help, -h             Mostrar esta ayuda
   --prompts              Extraer solo prompts (Markdown) en lugar de unfold completo
+  --extract-transitions  Extraer solo transiciones en lugar de unfold completo
 
 Ejemplos:
-  npm run unfold-bot                        # Unfold completo del directorio bot
-  npm run unfold-bot bots/asistente-general # Unfold completo de bot específico
-  npm run unfold-bot -- --prompts          # Extraer prompts del directorio bot
-  npm run unfold-bot bot -- --prompts      # Extraer prompts de directorio bot
-  npm run unfold-bot bots/mi-bot -- --prompts # Extraer prompts de bot específico
+  npm run unfold-bot                                    # Unfold completo del directorio bot
+  npm run unfold-bot backups/bots/asistente-general     # Unfold completo de bot específico
+  npm run unfold-bot -- --prompts                      # Extraer prompts del directorio bot
+  npm run unfold-bot -- --extract-transitions          # Extraer transiciones del directorio bot
+  npm run unfold-bot bot -- --prompts                  # Extraer prompts de directorio bot
+  npm run unfold-bot backups/bots/mi-bot -- --extract-transitions # Extraer transiciones de bot específico
 
 Operaciones disponibles:
 1. Unfold completo (default): Genera código TypeScript, tablas, variables y esquemas
 2. Extraer prompts (--prompts): Genera solo archivos Markdown de prompts en src/prompts/
+3. Extraer transiciones (--extract-transitions): Genera solo archivos de transiciones en src/transitions/
     `);
     return;
   }
@@ -167,11 +214,16 @@ Operaciones disponibles:
   let containerDir: string = "bot"; // default directory
   let operation: string = "unfold"; // default operation
 
-  // Check for prompts flag
+  // Check for operation flags
   if (args.includes("--prompts")) {
     operation = "extract-prompts";
     // Remove the flag from args
     const flagIndex = args.indexOf("--prompts");
+    args.splice(flagIndex, 1);
+  } else if (args.includes("--extract-transitions")) {
+    operation = "extract-transitions";
+    // Remove the flag from args
+    const flagIndex = args.indexOf("--extract-transitions");
     args.splice(flagIndex, 1);
   }
 
@@ -183,13 +235,17 @@ Operaciones disponibles:
   console.log(`🎯 Procesando bot en directorio: ${containerDir}`);
   if (operation === "extract-prompts") {
     console.log("📝 Modo: Extracción de prompts únicamente");
+  } else if (operation === "extract-transitions") {
+    console.log("� Modo: Extracción de transiciones únicamente");
   } else {
-    console.log("🚀 Modo: Unfold completo");
+    console.log("�🚀 Modo: Unfold completo");
   }
 
   try {
     if (operation === "extract-prompts") {
       extractPrompts(containerDir);
+    } else if (operation === "extract-transitions") {
+      extractTransitions(containerDir);
     } else {
       unfoldBot(containerDir);
     }

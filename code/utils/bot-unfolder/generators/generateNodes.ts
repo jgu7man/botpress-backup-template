@@ -3,7 +3,6 @@ import { VariableMap } from "../core/variableMapper";
 import { createTransitionFile } from "../utils/createTransitionFile";
 import { sanitizeName } from "../utils/folderUtils";
 import { generateActionFile } from "./generateActionFile";
-import { generateAiPromptFile } from "./generateAiPromptFile";
 import { generateAiPromptTypeScriptFile } from "./generateAiPromptTypeScriptFile";
 import { generateContentFile } from "./generateContentFile";
 
@@ -37,8 +36,7 @@ export function generateNodeFiles(
           }
           // AI Prompt
           if (instruction.type === "ai" && instruction.task) {
-            // Generate both MD and TS files
-            generateAiPromptFile(instruction, targetDir, safeName, idx, node);
+            // Generate only TS file (MD generation moved to extract-prompts script)
             generateAiPromptTypeScriptFile(
               instruction,
               targetDir,

@@ -81,6 +81,7 @@ declare global {
 
   // Nota: 'env' se usa de la declaración global del bot que incluye todas las variables
   // Las propiedades NOTION_API_KEY y NOTION_CONVERSATION_DB deben estar en ConfigVariables
+  const env: ConfigVariables;
 }
 
 export {};

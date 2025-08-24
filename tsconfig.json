@@ -12,14 +12,12 @@
     "paths": {
       "@/*": ["."],
       "@test/*": ["./test/*"],
-      "@workflows/*": ["bot/src/workflows/*"],
-      "@variables/*": ["bot/src/variables/*"],
-      "@schemas/*": ["bot/src/schemas/*"],
-      "@tables/*": ["bot/src/tables/*"],
       "@core-types/*": ["types/core/*"],
       "@types/*": ["types/*"],
       "@globals/*": ["types/globals/*"]
     },
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./types", "./backups/**/*.d.ts"],
     "lib": ["es2019"],
     "target": "es2020",
     "module": "esnext",
@@ -31,5 +29,5 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false
   },
-  "include": ["**/*", "**/*.d.ts"]
+  "include": ["**/*", "**/*.d.ts", "backups/**/*.d.ts"]
 }

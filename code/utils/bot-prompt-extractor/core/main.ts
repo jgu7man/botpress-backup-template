@@ -2,14 +2,38 @@ import fs from "fs";
 import inquirer from "inquirer";
 import path from "path";
 import { BotExport } from "../../../types/bot/BotExport";
-import { generateFlowPath } from "../../bot-unfolder/generators/generateFlowPath";
+import { Workflow } from "../../../types/bot/Workflow";
 import { ensureDir } from "../../bot-unfolder/utils/fileUtils";
+import {
+  buildFolderMap,
+  sanitizeName,
+} from "../../bot-unfolder/utils/folderUtils";
 import {
   ExtractionSummary,
   generateIndexFile,
   WorkflowSummary,
 } from "../generators/generateIndexFile";
 import { generatePromptFiles } from "../generators/generatePromptFiles";
+
+/**
+ * Generate flow path for prompts without creating directories
+ */
+function generateFlowPathForPrompts(
+  flow: Workflow,
+  bot: BotExport,
+  promptsBase: string
+): string {
+  const folderMap = buildFolderMap(bot.folders);
+  const flowDirName = sanitizeName(flow.name);
+  const parentId = flow.parentFolder as string | undefined;
+
+  const targetDir =
+    parentId && folderMap[parentId]
+      ? path.join(promptsBase, folderMap[parentId].label, flowDirName)
+      : path.join(promptsBase, flowDirName);
+
+  return targetDir;
+}
 
 /**
  * Removes a directory and all its contents recursively
@@ -143,9 +167,9 @@ function extractPrompts(containerDir: string = "bot"): void {
   // Process each workflow to extract prompts
   bot.flows.forEach((flow, index) => {
     // Determine target folder path for prompts following the same structure as workflows
-    const flowPath = generateFlowPath(flow, bot, "");
-    const relativePath = flowPath.replace(/^.*workflows[/\\]/, "");
-    const promptTargetDir = path.join(promptsDir, relativePath);
+    const flowPath = generateFlowPathForPrompts(flow, bot, promptsDir);
+    const relativePath = path.relative(promptsDir, flowPath);
+    const promptTargetDir = flowPath;
 
     // Generate prompt files for this flow (only creates dir if prompts exist)
     const nodePrompts = generatePromptFiles(flow.nodes, promptTargetDir);

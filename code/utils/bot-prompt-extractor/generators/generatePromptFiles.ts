@@ -32,7 +32,9 @@ export function generatePromptFiles(
         // AI Prompt - only generate MD file
         if (instruction.type === "ai" && instruction.task) {
           // Only create directory if we have prompts to generate
-          ensureDir(targetDir);
+          if (nodePrompts.length === 0) {
+            ensureDir(targetDir);
+          }
 
           generateAiPromptFile(instruction, targetDir, safeName, idx, node);
 

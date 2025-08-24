@@ -1,7 +1,7 @@
 import fs from "fs";
-import inquirer from "inquirer";
 import path from "path";
 import { BotExport } from "../../../types/bot/BotExport";
+import { extractPrompts } from "../../bot-prompt-extractor/core/main";
 import { generateFlowPath } from "../generators/generateFlowPath";
 import { generateNodeFiles } from "../generators/generateNodes";
 import { generateStateFile } from "../generators/generateState";
@@ -41,68 +41,7 @@ function readExportedBot(containerDir: string = "bot"): BotExport {
 }
 
 /**
- * Busca bots disponibles en el directorio bots/
- */
-function findAvailableBots(): Array<{ name: string; path: string }> {
-  const botsDir = path.resolve("./bots");
-
-  if (!fs.existsSync(botsDir)) {
-    return [];
-  }
-
-  const entries = fs.readdirSync(botsDir, { withFileTypes: true });
-  const bots: Array<{ name: string; path: string }> = [];
-
-  for (const entry of entries) {
-    if (entry.isDirectory()) {
-      const botPath = path.join(botsDir, entry.name);
-      const unzippedPath = path.join(botPath, "unzipped");
-      const botJsonPath = path.join(unzippedPath, "bot.json");
-
-      // Verificar que existe la estructura esperada
-      if (fs.existsSync(botJsonPath)) {
-        bots.push({
-          name: entry.name,
-          path: entry.name, // Solo el nombre relativo para pasar a unfoldBot
-        });
-      }
-    }
-  }
-
-  return bots;
-}
-
-/**
- * Muestra un selector interactivo de bots
- */
-async function selectBotInteractively(): Promise<string> {
-  const availableBots = findAvailableBots();
-
-  if (availableBots.length === 0) {
-    console.log("❌ No se encontraron bots en ./bots/");
-    console.log(
-      '💡 Usa "npm run smart-extract <archivo.bpz>" para extraer un bot primero.'
-    );
-    process.exit(1);
-  }
-
-  console.log("🤖 Bot Unfolder - Selector Interactivo\n");
-
-  const { selectedBot } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "selectedBot",
-      message: "¿Qué bot quieres desplegar (unfold)?",
-      choices: availableBots.map((bot) => ({
-        name: `📁 ${bot.name}`,
-        value: `bots/${bot.path}`,
-      })),
-      pageSize: 10,
-    },
-  ]);
-
-  return selectedBot;
-}
+ * Main function to unfold the bot
 
 /**
  * Main function to unfold the bot
@@ -117,17 +56,29 @@ function unfoldBot(containerDir: string = "bot"): void {
   const targetDir = path.join(containerPath, "src");
   console.log(`📁 Directorio contenedor: ${containerDir}/src`);
 
-  console.log("🗑️  Limpiando directorio de salida...");
+  console.log("🗑️  Limpiando directorios específicos del unfold...");
   // Ensure container directory exists
   ensureDir(containerPath);
-  // Remove only the src directory inside the container
-  removeDir(targetDir);
+  ensureDir(targetDir);
 
-  console.log("📂 Creando estructura de directorios...");
+  // Remove only specific unfold directories, preserve prompts and other content
   const workflowsBase = path.join(targetDir, "workflows");
   const tablesBase = path.join(targetDir, "tables");
   const variablesBase = path.join(targetDir, "variables");
   const schemasBase = path.join(targetDir, "schemas");
+  const globalsFile = path.join(targetDir, "globals.d.ts");
+
+  removeDir(workflowsBase);
+  removeDir(tablesBase);
+  removeDir(variablesBase);
+  removeDir(schemasBase);
+
+  // Remove globals.d.ts if it exists (will be regenerated)
+  if (fs.existsSync(globalsFile)) {
+    fs.unlinkSync(globalsFile);
+  }
+
+  console.log("📂 Creando estructura de directorios...");
 
   ensureDir(workflowsBase);
   ensureDir(tablesBase);
@@ -184,50 +135,66 @@ async function main(): Promise<void> {
 
   if (args.includes("--help") || args.includes("-h")) {
     console.log(`
-🤖 Bot Unfolder - Generador de Código TypeScript
+🤖 Bot Unfolder - Generador de Código TypeScript y Extractor de Prompts
 
-Convierte el bot.json exportado de Botpress en código TypeScript estructurado.
+Convierte el bot.json exportado de Botpress en código TypeScript estructurado 
+o extrae los prompts como archivos Markdown.
 
-Uso: npm run unfold-bot [directorio] [opciones]
+Uso: npm run unfold-bot [directorio] [-- opciones]
 
 Argumentos:
   directorio              (Opcional) Directorio del bot a procesar (ej: bots/mi-bot)
-                         Si no se proporciona, se mostrará un selector interactivo
+                         Si no se proporciona, se procesará el directorio "bot"
 
 Opciones:
   --help, -h             Mostrar esta ayuda
+  --prompts              Extraer solo prompts (Markdown) en lugar de unfold completo
 
 Ejemplos:
-  npm run unfold-bot                        # Selector interactivo de bots disponibles
-  npm run unfold-bot bots/asistente-general # Procesar bot específico
-  npm run unfold-bot bot                    # Procesar directorio bot (comportamiento clásico)
+  npm run unfold-bot                        # Unfold completo del directorio bot
+  npm run unfold-bot bots/asistente-general # Unfold completo de bot específico
+  npm run unfold-bot -- --prompts          # Extraer prompts del directorio bot
+  npm run unfold-bot bot -- --prompts      # Extraer prompts de directorio bot
+  npm run unfold-bot bots/mi-bot -- --prompts # Extraer prompts de bot específico
 
-El script:
-1. Lee el bot.json desde <directorio>/unzipped/bot.json
-2. Genera código TypeScript en <directorio>/src/
-3. Crea workflows, tablas, variables y esquemas TypeScript
+Operaciones disponibles:
+1. Unfold completo (default): Genera código TypeScript, tablas, variables y esquemas
+2. Extraer prompts (--prompts): Genera solo archivos Markdown de prompts en src/prompts/
     `);
     return;
   }
 
-  let containerDir: string;
+  let containerDir: string = "bot"; // default directory
+  let operation: string = "unfold"; // default operation
 
+  // Check for prompts flag
+  if (args.includes("--prompts")) {
+    operation = "extract-prompts";
+    // Remove the flag from args
+    const flagIndex = args.indexOf("--prompts");
+    args.splice(flagIndex, 1);
+  }
+
+  // If there's a directory argument, use it
   if (args.length > 0 && !args[0].startsWith("--")) {
-    // Modo directo con directorio específico
     containerDir = args[0];
-    console.log(`🎯 Procesando bot en directorio: ${containerDir}`);
+  }
+
+  console.log(`🎯 Procesando bot en directorio: ${containerDir}`);
+  if (operation === "extract-prompts") {
+    console.log("📝 Modo: Extracción de prompts únicamente");
   } else {
-    // Modo interactivo
-    console.log(
-      "🔍 No se proporcionó directorio, iniciando selector interactivo...\n"
-    );
-    containerDir = await selectBotInteractively();
+    console.log("🚀 Modo: Unfold completo");
   }
 
   try {
-    unfoldBot(containerDir);
+    if (operation === "extract-prompts") {
+      extractPrompts(containerDir);
+    } else {
+      unfoldBot(containerDir);
+    }
   } catch (error) {
-    console.error("❌ Error durante el unfold:", error);
+    console.error("❌ Error durante la operación:", error);
     process.exit(1);
   }
 }

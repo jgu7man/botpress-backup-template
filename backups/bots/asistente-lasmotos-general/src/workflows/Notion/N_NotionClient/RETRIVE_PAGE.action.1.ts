@@ -42,22 +42,22 @@ try {
     filter: filters.length === 1 ? filters[0] : { or: filters }
   }
 
-  console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))
-  console.log('📡 Making request to Notion API...')
+  // console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))
+  // console.log('📡 Making request to Notion API...')
   const response = await axios.post(
     `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,
     requestBody,
     { headers }
   )
 
-  console.log('✅ Response received!')
-  console.log('📊 Status:', response.status)
+  // console.log('✅ Response received!')
+  // console.log('📊 Status:', response.status)
   const results = response.data.results
-  console.log('📄 Results found:', results.length)
+  // console.log('📄 Results found:', results.length)
 
   if (results.length > 0) {
     const pageId = results[0].id
-    console.log('🆔 Page found:', pageId)
+    // console.log('🆔 Page found:', pageId)
     workflow.pageId = pageId
     return pageId
   } else {

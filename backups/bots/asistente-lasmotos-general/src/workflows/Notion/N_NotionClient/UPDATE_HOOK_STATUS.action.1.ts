@@ -21,7 +21,7 @@ const hookStatus = workflow.hookStatus;
 
 // Si existe un estado de gancho
 if (hookStatus) {
-  console.log(`🔄 Actualizando el estado del anzuelo: ${hookStatus}`);
+  // console.log(`🔄 Actualizando el estado del anzuelo: ${hookStatus}`);
   // Actualiza la propiedad "Anzuelo" dentro de workflow.body["properties"] con el nuevo estado de gancho
   workflow.body["properties"] = {
     ...workflow.body["properties"],

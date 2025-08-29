@@ -1358,7 +1358,7 @@
                     "payload": "lastNode=nd-1888a2c0bd"
                   },
                   "destination": {
-                    "node": "nd-e1289efd7f"
+                    "node": "nd-078aef70bd"
                   },
                   "generative": {
                     "label": "Exit",
@@ -8943,7 +8943,7 @@
               "code": "const { DateTime } = luxon\r\nconst CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)\r\n\r\nbot.colombiaTime = CurrentTime\r\n\r\n// -----\r\n\r\ntype ConversationState =\r\n  | ''\r\n  | 'COMPLEXED'\r\n  | 'SERVED'\r\n  | 'WAITING'\r\n  | 'CONFUSED'\r\n  | 'ATTENTION_REQUESTED'\r\n  | 'FINISHED'\r\n  | 'TIMEOUT'\r\n\r\nconst botState: ConversationState = workflow.botState as ConversationState\r\nconsole.log(`🤖 botState:`, botState)\r\nconsole.log(`🤖 1 conversation.state:`, conversation.flow?.state)\r\n\r\nif (botState) {\r\n  conversation.flow = {\r\n    ...conversation.flow,\r\n    state: botState,\r\n  }\r\n}\r\n\r\nconsole.log(`🤖 2 conversation.state:`, conversation.flow?.state)\r\n\r\n// Si no existe estado, significa que debemos ofrecer ayuda\r\nif (!conversation.flow?.state) {\r\n  conversation.flow = {\r\n    ...conversation.flow,\r\n    state: 'WAITING'\r\n  }\r\n}\r\n\r\nconsole.log(`🤖 3 conversation.state:`, conversation.flow?.state)",
               "origin": "builtin",
               "nodeId": "nd-96a14bb62e",
-              "label": "\"Manage Bot Conversation States and Current Time Display\"",
+              "label": "\"Bot State Management with Current Time in Colombia\"",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { DateTime } = luxon;\n  const CurrentTime = DateTime.now().setZone(\"America/Bogota\").toLocaleString(DateTime.TIME_SIMPLE);\n  bot.colombiaTime = CurrentTime;\n  const botState = workflow.botState;\n  console.log(`\\u{1F916} botState:`, botState);\n  console.log(`\\u{1F916} 1 conversation.state:`, conversation.flow?.state);\n  if (botState) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: botState\n    };\n  }\n  console.log(`\\u{1F916} 2 conversation.state:`, conversation.flow?.state);\n  if (!conversation.flow?.state) {\n    conversation.flow = {\n      ...conversation.flow,\n      state: \"WAITING\"\n    };\n  }\n  console.log(`\\u{1F916} 3 conversation.state:`, conversation.flow?.state);\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
@@ -9275,7 +9275,7 @@
                   "storeAsTag": false,
                   "value": {
                     "valueType": "dynamic",
-                    "dynamicValue": "Con bugs",
+                    "dynamicValue": "Con issues",
                     "staticValue": ""
                   }
                 }
@@ -9641,8 +9641,8 @@
         {
           "type": "standard",
           "deletable": true,
-          "x": 585,
-          "y": 120,
+          "x": 600,
+          "y": 60,
           "instructions": [
             {
               "type": "log",
@@ -9665,10 +9665,79 @@
               "code": "conversation.flow.state = 'CONFUSED'\nconversation.flow.ending = 'WRONG'",
               "origin": "builtin",
               "nodeId": "nd-d5eedd5f2c",
-              "label": "\"Manage Conversation Flow State and Ending Conditions\"",
+              "label": "\"Manage Conversation Flow States and Endings\"",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  conversation.flow.state = \"CONFUSED\";\n  conversation.flow.ending = \"WRONG\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
+            },
+            {
+              "id": "ins-832bed645e",
+              "type": "skill",
+              "name": "🄽 NotionClient ",
+              "flowId": "wf-954134ebd5",
+              "exitNodes": [],
+              "label": "🄽 NotionClient ",
+              "transitions": [],
+              "nodeId": "nd-d5eedd5f2c",
+              "manualFields": [],
+              "variables": [
+                {
+                  "id": "var-05e83b4fd3",
+                  "name": "conversationId",
+                  "description": "The conversation id as title of the page",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{event.conversationId}}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-51c61d04bb",
+                  "name": "phone",
+                  "description": "The user phone as identificator",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "{{ user.phone }}",
+                    "staticValue": ""
+                  }
+                },
+                {
+                  "id": "var-3be1d545d2",
+                  "name": "hookStatus",
+                  "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "staticValue": "",
+                    "valueType": "static",
+                    "dynamicValue": ""
+                  }
+                },
+                {
+                  "id": "var-fdd0f3baa1",
+                  "name": "conversationStatus",
+                  "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+                  "type": "string",
+                  "scope": "workflow",
+                  "defaultValue": "",
+                  "storeAsTag": false,
+                  "value": {
+                    "valueType": "dynamic",
+                    "dynamicValue": "Con bugs",
+                    "staticValue": ""
+                  }
+                }
+              ]
             },
             {
               "id": "ins-3fb748fe04",
@@ -22493,6 +22562,31 @@
               "type": "transition",
               "condition": {
                 "type": "expression",
+                "payload": "{{!conversation.flow.ending == 'TIMEDOUT'}}"
+              },
+              "label": "🔄 Reinicio de conversación",
+              "generative": {
+                "label": "🔄 Reinicio de conversación",
+                "suggestion": {
+                  "condition": "true"
+                },
+                "properties": {
+                  "condition": false
+                }
+              },
+              "category": "Flow Logic",
+              "nodeId": "nd-b2cf6450f5",
+              "description": "",
+              "destination": {
+                "node": "nd-766ed57e70"
+              },
+              "transitions": []
+            },
+            {
+              "id": "ins-6bfe2f0133",
+              "type": "transition",
+              "condition": {
+                "type": "expression",
                 "payload": "{{!conversation.SummaryAgent.summary}}"
               },
               "label": "Conversación nueva",
@@ -33145,7 +33239,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-c56069ae10"
+            "targetNodeId": "nd-32f448c757"
           },
           "id": "nd-852a227ee4",
           "name": "SendMessage"
@@ -33754,7 +33848,7 @@
               "type": "action",
               "code": "  console.log('⭕️ Start turn', event.conversationId)\n  const phoneNumber = event.tags?.user?.['whatsapp:userId'] || ''\n  console.log('👉🏼', phoneNumber)\n\n  if (!user.phone && phoneNumber) {\n    user.phone = phoneNumber\n  }",
               "origin": "builtin",
-              "label": "\"Assign WhatsApp Number to User if Not Present\"",
+              "label": "\"Assign WhatsApp Number to User if Not Already Set\"",
               "nodeId": "nd-b2aae07e53",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  console.log(\"\\u2B55\\uFE0F Start turn\", event.conversationId);\n  const phoneNumber = event.tags?.user?.[\"whatsapp:userId\"] || \"\";\n  console.log(\"\\u{1F449}\\u{1F3FC}\", phoneNumber);\n  if (!user.phone && phoneNumber) {\n    user.phone = phoneNumber;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -33764,12 +33858,12 @@
               "id": "ins-5d95da0fa3",
               "type": "action",
               "category": "Execute",
-              "code": "const { phone } = user\nconsole.log('🤖 Buscando cliente con el teléfono:', phone)\n\nlet topics: string[] = [] // Explicitly type topics as a string array\n\nif (env.WAB_TEMPLATE === 'leads_cupo_brilla') {\n  user.creditProfile = 'CUPO_BRILLA'\n  user.purchasePreference = 'CUPO_BRILLA'\n  topics.push('CUPO_BRILLA')\n}\n\nif (phone) {\n  try {\n    const lastTenDigitsOfPhone = phone.slice(-10)\n    const recordResults = await leadClientsTable.findRecords({\n      filter: {\n        // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'\n        // El `$` al final de la expresión regular significa 'termina con'\n        TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n      }\n    })\n    console.log('❕ recordResults:', recordResults)\n    const record = recordResults.length ? recordResults[0] : undefined\n\n    if (record) {\n      console.log(`✅ Record found: ${record.id}`)\n\n      // Map Airtable field names to user object keys for cleaner assignment\n      updateUserFromRecord(record)\n      user.authorizedPop = {\n        answer: 'ACCEPTED',\n        askedBefore: true\n      }\n\n      updateUserEngagement(record)\n      // Ensure TEMAS is always an array\n    } else {\n      console.error(`❌ Record not found 🥹`)\n      conversation.flow = {\n        ending: '',\n        state: '',\n        topics: ['PRE_ENGAGEMENT'],\n        status: 'COLD_PROSPECT',\n        context: 'PRE_ENGAGEMENT'\n      }\n    }\n\n  } catch (error) {\n    console.error('❌ Error getting data:', error)\n    // Consider re-throwing or handling the error more gracefully depending on your application's needs\n    throw error\n  }\n}\n\nfunction updateUserFromRecord(record: leadClientsTableRecord) {\n  const fieldMap = {\n    NOMBRE: 'fullName',\n    UBICACION_DEL_USUARIO: 'location',\n    UBICACION_DE_SERVICIO: 'serviceLocation',\n    CEDULA: 'nationalID',\n    NUMERO_DE_FACTURA: 'brillaBillNumber',\n    REPORTADO: 'negativeCreditReport'\n  }\n\n  for (const airtableField in fieldMap) {\n    const userField = fieldMap[airtableField as keyof typeof fieldMap] // Type assertion for correct key access\n    const airtableValue = record[airtableField as keyof typeof record] // Type assertion for correct key access\n\n    // Assign only if the user's field is not already set and Airtable has a value\n    if (!user[userField as keyof typeof user] && airtableValue) {\n      user[userField] = airtableValue\n    }\n  }\n}\n\ntype Conclusion = 'COMPLEXED' | 'WRONG' | 'SERVED' | 'TIMEDOUT' | 'HOOKED' | ''\n\nfunction updateUserEngagement(record: leadClientsTableRecord) {\n  const ending = record.CONCLUSION as Conclusion\n  const { flow } = conversation || {}\n\n  conversation.flow = {\n    ending: ending || flow?.ending || '',\n    state: flow?.state || '',\n    topics: [...topics, 'PRE_ENGAGEMENT'],\n    status: 'COLD_PROSPECT',\n    context: 'PRE_ENGAGEMENT'\n  }\n\n  topics = Array.isArray(record.TEMAS) ? record.TEMAS : []\n  conversation.SummaryAgent.summary = env.WAB_CONTEXT\n}\n",
+              "code": "// Tipos y constantes para mejor legibilidad y mantenimiento\ntype Conclusion = 'COMPLEXED' | 'WRONG' | 'SERVED' | 'TIMEDOUT' | 'HOOKED' | ''\n\nconst CREDIT_PROFILES = {\n  CUPO_BRILLA: 'CUPO_BRILLA'\n}\n\n// Mapa de campos para conversión de datos\nconst AIRTABLE_TO_USER_FIELD_MAP = {\n  NOMBRE: 'fullName',\n  UBICACION_DEL_USUARIO: 'location',\n  UBICACION_DE_SERVICIO: 'serviceLocation',\n  CEDULA: 'nationalID',\n  NUMERO_DE_FACTURA: 'brillaBillNumber',\n  REPORTADO: 'negativeCreditReport'\n}\n\n/**\n * Servicio principal para manejar la recuperación y actualización de datos de usuario\n * Aplica el patrón Strategy para diferentes formas de procesar los datos\n */\nclass UserRetrievalService {\n  private topics: string[] = []\n\n  /**\n   * Punto de entrada principal - orquesta todo el proceso\n   */\n  async processUserRetrieval(): Promise<void> {\n    const { phone } = user\n    console.log('🤖 Buscando cliente con el teléfono:', phone)\n\n    this.initializeCreditProfileIfNeeded()\n\n    if (!phone) {\n      console.log('📞 No hay teléfono disponible para buscar')\n      return\n    }\n\n    await this.searchAndUpdateUserRecord(phone)\n  }\n\n  /**\n   * Configura el perfil de crédito inicial basado en el template\n   */\n  private initializeCreditProfileIfNeeded(): void {\n    if (env.WAB_TEMPLATE === 'leads_cupo_brilla') {\n      user.creditProfile = CREDIT_PROFILES.CUPO_BRILLA\n      user.purchasePreference = CREDIT_PROFILES.CUPO_BRILLA\n      this.topics.push(CREDIT_PROFILES.CUPO_BRILLA)\n    }\n  }\n\n  /**\n   * Busca el registro del usuario y actualiza los datos\n   */\n  private async searchAndUpdateUserRecord(phone: string): Promise<void> {\n    try {\n      const record = await this.findUserRecord(phone)\n\n      if (record) {\n        await this.processFoundRecord(record)\n      } else {\n        this.handleRecordNotFound()\n      }\n    } catch (error) {\n      this.handleSearchError(error)\n    }\n  }\n\n  /**\n   * Busca el registro en la base de datos usando los últimos 10 dígitos del teléfono\n   */\n  private async findUserRecord(phone: string): Promise<leadClientsTableRecord | null> {\n    const lastTenDigitsOfPhone = phone.slice(-10)\n    const recordResults = await leadClientsTable.findRecords({\n      filter: {\n        TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n      }\n    })\n\n    console.log('❕ recordResults:', recordResults)\n    return recordResults.length > 0 ? recordResults[0] : null\n  }\n\n  /**\n   * Procesa un registro encontrado - actualiza user y conversation\n   */\n  private async processFoundRecord(record: leadClientsTableRecord): Promise<void> {\n    console.log(`✅ Record found`)\n\n    this.updateUserFromRecord(record)\n    this.setUserAuthorization()\n    this.updateConversationFlow(record)\n  }\n\n  /**\n   * Actualiza los datos del usuario basado en el registro encontrado\n   * Aplica el patrón Strategy para mapeo de campos\n   */\n  private updateUserFromRecord(record: leadClientsTableRecord): void {\n    Object.entries(AIRTABLE_TO_USER_FIELD_MAP).forEach(([airtableField, userField]) => {\n      const airtableValue = record[airtableField as keyof leadClientsTableRecord]\n\n      // Solo actualiza si el campo del usuario no está establecido y hay valor en Airtable\n      if (!user[userField as keyof typeof user] && airtableValue) {\n        ;(user as any)[userField] = airtableValue\n      }\n    })\n  }\n\n  /**\n   * Establece la autorización del usuario\n   */\n  private setUserAuthorization(): void {\n    user.authorizedPop = {\n      answer: 'ACCEPTED',\n      askedBefore: true\n    }\n  }\n\n  /**\n   * Actualiza el flujo de conversación basado en el registro\n   */\n  private updateConversationFlow(record: leadClientsTableRecord): void {\n    const ending = record.CONCLUSION as Conclusion\n    const { flow } = conversation || {}\n\n    conversation.flow = {\n      ending: ending || flow?.ending || '',\n      state: flow?.state || '',\n      topics: [...this.topics, 'PRE_ENGAGEMENT'],\n      status: 'COLD_PROSPECT',\n      context: 'PRE_ENGAGEMENT'\n    }\n\n    // Asegura que TEMAS sea siempre un array\n    this.topics = Array.isArray(record.TEMAS) ? record.TEMAS : []\n    conversation.SummaryAgent.summary = env.WAB_CONTEXT\n  }\n\n  /**\n   * Maneja el caso cuando no se encuentra registro\n   */\n  private handleRecordNotFound(): void {\n    console.error(`❌ Record not found 🥹`)\n    conversation.flow = {\n      ending: '',\n      state: '',\n      topics: ['PRE_ENGAGEMENT'],\n      status: 'COLD_PROSPECT',\n      context: 'PRE_ENGAGEMENT'\n    }\n  }\n\n  /**\n   * Maneja errores durante la búsqueda\n   */\n  private handleSearchError(error: unknown): void {\n    console.error('❌ Error getting data:', error)\n    throw error // Re-lanza el error para manejo en nivel superior\n  }\n}\n\n// Ejecución del servicio - Patrón Facade para simplificar la interfaz\nconst userRetrievalService = new UserRetrievalService()\nawait userRetrievalService.processUserRetrieval()\n",
               "origin": "builtin",
-              "label": "\"Retrieve and Update User Data Based on Phone Number\"",
+              "label": "\"User Data Retrieval and Update Service Implementation\"",
               "nodeId": "nd-b2aae07e53",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { phone } = user;\n  console.log(\"\\u{1F916} Buscando cliente con el tel\\xE9fono:\", phone);\n  let topics = [];\n  if (env.WAB_TEMPLATE === \"leads_cupo_brilla\") {\n    user.creditProfile = \"CUPO_BRILLA\";\n    user.purchasePreference = \"CUPO_BRILLA\";\n    topics.push(\"CUPO_BRILLA\");\n  }\n  if (phone) {\n    try {\n      const lastTenDigitsOfPhone = phone.slice(-10);\n      const recordResults = await leadClientsTable.findRecords({\n        filter: {\n          // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'\n          // El `$` al final de la expresión regular significa 'termina con'\n          TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n        }\n      });\n      console.log(\"\\u2755 recordResults:\", recordResults);\n      const record = recordResults.length ? recordResults[0] : void 0;\n      if (record) {\n        console.log(`\\u2705 Record found: ${record.id}`);\n        updateUserFromRecord(record);\n        user.authorizedPop = {\n          answer: \"ACCEPTED\",\n          askedBefore: true\n        };\n        updateUserEngagement(record);\n      } else {\n        console.error(`\\u274C Record not found \\u{1F979}`);\n        conversation.flow = {\n          ending: \"\",\n          state: \"\",\n          topics: [\"PRE_ENGAGEMENT\"],\n          status: \"COLD_PROSPECT\",\n          context: \"PRE_ENGAGEMENT\"\n        };\n      }\n    } catch (error) {\n      console.error(\"\\u274C Error getting data:\", error);\n      throw error;\n    }\n  }\n  function updateUserFromRecord(record) {\n    const fieldMap = {\n      NOMBRE: \"fullName\",\n      UBICACION_DEL_USUARIO: \"location\",\n      UBICACION_DE_SERVICIO: \"serviceLocation\",\n      CEDULA: \"nationalID\",\n      NUMERO_DE_FACTURA: \"brillaBillNumber\",\n      REPORTADO: \"negativeCreditReport\"\n    };\n    for (const airtableField in fieldMap) {\n      const userField = fieldMap[airtableField];\n      const airtableValue = record[airtableField];\n      if (!user[userField] && airtableValue) {\n        user[userField] = airtableValue;\n      }\n    }\n  }\n  __name(updateUserFromRecord, \"updateUserFromRecord\");\n  function updateUserEngagement(record) {\n    const ending = record.CONCLUSION;\n    const { flow } = conversation || {};\n    conversation.flow = {\n      ending: ending || flow?.ending || \"\",\n      state: flow?.state || \"\",\n      topics: [...topics, \"PRE_ENGAGEMENT\"],\n      status: \"COLD_PROSPECT\",\n      context: \"PRE_ENGAGEMENT\"\n    };\n    topics = Array.isArray(record.TEMAS) ? record.TEMAS : [];\n    conversation.SummaryAgent.summary = env.WAB_CONTEXT;\n  }\n  __name(updateUserEngagement, \"updateUserEngagement\");\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const CREDIT_PROFILES = {\n    CUPO_BRILLA: \"CUPO_BRILLA\"\n  };\n  const AIRTABLE_TO_USER_FIELD_MAP = {\n    NOMBRE: \"fullName\",\n    UBICACION_DEL_USUARIO: \"location\",\n    UBICACION_DE_SERVICIO: \"serviceLocation\",\n    CEDULA: \"nationalID\",\n    NUMERO_DE_FACTURA: \"brillaBillNumber\",\n    REPORTADO: \"negativeCreditReport\"\n  };\n  class UserRetrievalService {\n    constructor() {\n      this.topics = [];\n    }\n    /**\n     * Punto de entrada principal - orquesta todo el proceso\n     */\n    async processUserRetrieval() {\n      const { phone } = user;\n      console.log(\"\\u{1F916} Buscando cliente con el tel\\xE9fono:\", phone);\n      this.initializeCreditProfileIfNeeded();\n      if (!phone) {\n        console.log(\"\\u{1F4DE} No hay tel\\xE9fono disponible para buscar\");\n        return;\n      }\n      await this.searchAndUpdateUserRecord(phone);\n    }\n    /**\n     * Configura el perfil de crédito inicial basado en el template\n     */\n    initializeCreditProfileIfNeeded() {\n      if (env.WAB_TEMPLATE === \"leads_cupo_brilla\") {\n        user.creditProfile = CREDIT_PROFILES.CUPO_BRILLA;\n        user.purchasePreference = CREDIT_PROFILES.CUPO_BRILLA;\n        this.topics.push(CREDIT_PROFILES.CUPO_BRILLA);\n      }\n    }\n    /**\n     * Busca el registro del usuario y actualiza los datos\n     */\n    async searchAndUpdateUserRecord(phone) {\n      try {\n        const record = await this.findUserRecord(phone);\n        if (record) {\n          await this.processFoundRecord(record);\n        } else {\n          this.handleRecordNotFound();\n        }\n      } catch (error) {\n        this.handleSearchError(error);\n      }\n    }\n    /**\n     * Busca el registro en la base de datos usando los últimos 10 dígitos del teléfono\n     */\n    async findUserRecord(phone) {\n      const lastTenDigitsOfPhone = phone.slice(-10);\n      const recordResults = await leadClientsTable.findRecords({\n        filter: {\n          TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }\n        }\n      });\n      console.log(\"\\u2755 recordResults:\", recordResults);\n      return recordResults.length > 0 ? recordResults[0] : null;\n    }\n    /**\n     * Procesa un registro encontrado - actualiza user y conversation\n     */\n    async processFoundRecord(record) {\n      console.log(`\\u2705 Record found`);\n      this.updateUserFromRecord(record);\n      this.setUserAuthorization();\n      this.updateConversationFlow(record);\n    }\n    /**\n     * Actualiza los datos del usuario basado en el registro encontrado\n     * Aplica el patrón Strategy para mapeo de campos\n     */\n    updateUserFromRecord(record) {\n      Object.entries(AIRTABLE_TO_USER_FIELD_MAP).forEach(([airtableField, userField]) => {\n        const airtableValue = record[airtableField];\n        if (!user[userField] && airtableValue) {\n          ;\n          user[userField] = airtableValue;\n        }\n      });\n    }\n    /**\n     * Establece la autorización del usuario\n     */\n    setUserAuthorization() {\n      user.authorizedPop = {\n        answer: \"ACCEPTED\",\n        askedBefore: true\n      };\n    }\n    /**\n     * Actualiza el flujo de conversación basado en el registro\n     */\n    updateConversationFlow(record) {\n      const ending = record.CONCLUSION;\n      const { flow } = conversation || {};\n      conversation.flow = {\n        ending: ending || flow?.ending || \"\",\n        state: flow?.state || \"\",\n        topics: [...this.topics, \"PRE_ENGAGEMENT\"],\n        status: \"COLD_PROSPECT\",\n        context: \"PRE_ENGAGEMENT\"\n      };\n      this.topics = Array.isArray(record.TEMAS) ? record.TEMAS : [];\n      conversation.SummaryAgent.summary = env.WAB_CONTEXT;\n    }\n    /**\n     * Maneja el caso cuando no se encuentra registro\n     */\n    handleRecordNotFound() {\n      console.error(`\\u274C Record not found \\u{1F979}`);\n      conversation.flow = {\n        ending: \"\",\n        state: \"\",\n        topics: [\"PRE_ENGAGEMENT\"],\n        status: \"COLD_PROSPECT\",\n        context: \"PRE_ENGAGEMENT\"\n      };\n    }\n    /**\n     * Maneja errores durante la búsqueda\n     */\n    handleSearchError(error) {\n      console.error(\"\\u274C Error getting data:\", error);\n      throw error;\n    }\n  }\n  __name(UserRetrievalService, \"UserRetrievalService\");\n  const userRetrievalService = new UserRetrievalService();\n  await userRetrievalService.processUserRetrieval();\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -34376,18 +34470,18 @@
           "storeAsTag": false
         },
         {
-          "id": "var-3be1d545d2",
-          "name": "hookStatus",
-          "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\"",
+          "id": "var-fdd0f3baa1",
+          "name": "conversationStatus",
+          "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
           "type": "string",
           "scope": "workflow",
           "defaultValue": "",
           "storeAsTag": false
         },
         {
-          "id": "var-fdd0f3baa1",
-          "name": "conversationStatus",
-          "description": "Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"",
+          "id": "var-3be1d545d2",
+          "name": "hookStatus",
+          "description": "Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\", \"Contestado\"",
           "type": "string",
           "scope": "workflow",
           "defaultValue": "",
@@ -34497,7 +34591,7 @@
               "category": "Execute",
               "code": "workflow.headers = {\n  Authorization: `Bearer ${env.NOTION_API_KEY}`,\n  'Content-Type': 'application/json',\n  'Notion-Version': '2022-06-28'\n}",
               "origin": "builtin",
-              "label": "\"Set Up Notion API Request Headers for Authentication\"",
+              "label": "\"Set Up Notion API Request Headers with Authorization\"",
               "nodeId": "nd-702a5cb58b",
               "isCustomLabel": false,
               "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.headers = {\n    Authorization: `Bearer ${env.NOTION_API_KEY}`,\n    \"Content-Type\": \"application/json\",\n    \"Notion-Version\": \"2022-06-28\"\n  };\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
@@ -34533,12 +34627,12 @@
               "id": "ins-d94523e4c2",
               "type": "action",
               "category": "Execute",
-              "code": "// Función para crear el título de la conversación usando el ID proporcionado o uno temporal\nconst createConversationTitle = (conversationId?: string) => {\n  // Si no se proporciona un ID de conversación, se genera uno temporal con la fecha actual\n  if (!conversationId) {\n    conversationId = \"temp-conversation-\" + Date.now();\n  }\n  // Retorna el objeto con el título formateado para Notion\n  return {\n    title: [\n      {\n        text: {\n          content: conversationId,\n        },\n      },\n    ],\n  };\n};\n\n// Función para crear una marca de tiempo con la fecha y hora actual en formato ISO\nconst createTimestamp = () => ({\n  date: {\n    start: new Date().toISOString(),\n  },\n});\n\nconsole.log(\"🚀 Creating base conversation document...\");\nconsole.log(`📝 Conversation ID: ${workflow.conversationId}`);\n\n// Define el cuerpo de la solicitud para crear la conversación en Notion\nworkflow.body = {\n  // Especifica el ID de la base de datos de Notion donde se guardará la conversación\n  parent: {\n    database_id: env.NOTION_CONVERSATION_DB,\n  },\n  // Define las propiedades del documento: ID de conversación y momento de envío\n  properties: {\n    \"ID de conversación\": createConversationTitle(workflow.conversationId),\n    \"Momento de envío\": createTimestamp(),\n  },\n};\n\n// Define el método HTTP como POST para la solicitud\nworkflow.method = \"post\";\n// URL de la API de Notion para crear una nueva página\nworkflow.url = \"https://api.notion.com/v1/pages\";",
+              "code": "// Función para crear el título de la conversación usando el ID proporcionado o uno temporal\nconst createConversationTitle = (conversationId?: string) => {\n  // Si no se proporciona un ID de conversación, se genera uno temporal con la fecha actual\n  if (!conversationId) {\n    conversationId = 'temp-conversation-' + Date.now()\n  }\n  // Retorna el objeto con el título formateado para Notion\n  return {\n    title: [\n      {\n        text: {\n          content: conversationId\n        }\n      }\n    ]\n  }\n}\n\n// Función para crear una marca de tiempo con la fecha y hora actual en formato ISO\nconst createTimestamp = () => ({\n  date: {\n    start: new Date().toISOString()\n  }\n})\n\n// console.log(\"🚀 Creating base conversation document...\");\n// console.log(`📝 Conversation ID: ${workflow.conversationId}`);\n\n// Define el cuerpo de la solicitud para crear la conversación en Notion\nworkflow.body = {\n  // Especifica el ID de la base de datos de Notion donde se guardará la conversación\n  parent: {\n    database_id: env.NOTION_CONVERSATION_DB\n  },\n  // Define las propiedades del documento: ID de conversación y momento de envío\n  properties: {\n    'ID de conversación': createConversationTitle(workflow.conversationId),\n    'Momento de envío': createTimestamp(),\n    'Última actualización': createTimestamp()\n  }\n}\n\n// Define el método HTTP como POST para la solicitud\nworkflow.method = 'post'\n// URL de la API de Notion para crear una nueva página\nworkflow.url = 'https://api.notion.com/v1/pages'\n",
               "origin": "builtin",
               "label": "\"Generate and Format Conversation Title for Notion Integration\"",
               "nodeId": "nd-dd1b54487f",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createConversationTitle = /* @__PURE__ */ __name((conversationId) => {\n    if (!conversationId) {\n      conversationId = \"temp-conversation-\" + Date.now();\n    }\n    return {\n      title: [\n        {\n          text: {\n            content: conversationId\n          }\n        }\n      ]\n    };\n  }, \"createConversationTitle\");\n  const createTimestamp = /* @__PURE__ */ __name(() => ({\n    date: {\n      start: new Date().toISOString()\n    }\n  }), \"createTimestamp\");\n  console.log(\"\\u{1F680} Creating base conversation document...\");\n  console.log(`\\u{1F4DD} Conversation ID: ${workflow.conversationId}`);\n  workflow.body = {\n    // Especifica el ID de la base de datos de Notion donde se guardará la conversación\n    parent: {\n      database_id: env.NOTION_CONVERSATION_DB\n    },\n    // Define las propiedades del documento: ID de conversación y momento de envío\n    properties: {\n      \"ID de conversaci\\xF3n\": createConversationTitle(workflow.conversationId),\n      \"Momento de env\\xEDo\": createTimestamp()\n    }\n  };\n  workflow.method = \"post\";\n  workflow.url = \"https://api.notion.com/v1/pages\";\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createConversationTitle = /* @__PURE__ */ __name((conversationId) => {\n    if (!conversationId) {\n      conversationId = \"temp-conversation-\" + Date.now();\n    }\n    return {\n      title: [\n        {\n          text: {\n            content: conversationId\n          }\n        }\n      ]\n    };\n  }, \"createConversationTitle\");\n  const createTimestamp = /* @__PURE__ */ __name(() => ({\n    date: {\n      start: new Date().toISOString()\n    }\n  }), \"createTimestamp\");\n  workflow.body = {\n    // Especifica el ID de la base de datos de Notion donde se guardará la conversación\n    parent: {\n      database_id: env.NOTION_CONVERSATION_DB\n    },\n    // Define las propiedades del documento: ID de conversación y momento de envío\n    properties: {\n      \"ID de conversaci\\xF3n\": createConversationTitle(workflow.conversationId),\n      \"Momento de env\\xEDo\": createTimestamp(),\n      \"\\xDAltima actualizaci\\xF3n\": createTimestamp()\n    }\n  };\n  workflow.method = \"post\";\n  workflow.url = \"https://api.notion.com/v1/pages\";\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -34582,20 +34676,6 @@
           "instructions": [
             {
               "type": "log",
-              "category": "Utilities",
-              "id": "ins-000d13ff1c",
-              "label": "Log",
-              "level": "debug",
-              "message": {
-                "valueType": "dynamic",
-                "dynamicValue": "Body: {{workflow.body}}",
-                "staticValue": ""
-              },
-              "nodeId": "nd-e8cb392c10",
-              "transitions": []
-            },
-            {
-              "type": "log",
               "id": "ins-a02bb90cbd",
               "label": "Log",
               "level": "debug",
@@ -34611,12 +34691,12 @@
               "id": "ins-a8ce6713fb",
               "type": "action",
               "category": "Execute",
-              "code": "// Extrae body, headers, method y url del objeto workflow\nconst { body, headers, method, url } = workflow\n\n// Muestra el método y la URL de la solicitud en consola\nconsole.log(`📡 ${method} request to: ${url}`)\n\n// Si existe un cuerpo en la solicitud, lo muestra en consola\nif (body) {\n  console.log('📤 Request body:', JSON.stringify(body, null, 2))\n}\n\ntry {\n  console.log('📡 Making request to Notion API...')\n\n  // Realiza la solicitud HTTP usando axios con el método, url, body y headers especificados\n  const response = await axios[method](url, body, { headers })\n  console.log('📝 Response:', JSON.stringify(response, null, 2))\n\n  // Si la respuesta contiene un id, lo asigna a workflow.pageId\n  if (response.data.id) {\n    console.log('🆔 Page ID:', response.data.id)\n    workflow.pageId = response.data.id\n  }\n} catch (error) {\n  console.error('❌', error)\n}\n",
+              "code": "// Extrae body, headers, method y url del objeto workflow\nconst { body, headers, method, url } = workflow\n\n// Muestra el método y la URL de la solicitud en consola\nconsole.log(`📡 ${method} request to: ${url}`)\n\n// Si existe un cuerpo en la solicitud, lo muestra en consola\nif (body) {\n  console.log('📤 Request body:', JSON.stringify(body))\n}\n\ntry {\n    // Realiza la solicitud HTTP usando axios con el método, url, body y headers especificados\n  const response = await axios[method](url, body, { headers })\n  console.log('📝 Response:', JSON.stringify(response))\n\n  // Si la respuesta contiene un id, lo asigna a workflow.pageId\n  if (response.data.id) {\n    console.log('🆔 Page ID:', response.data.id)\n    workflow.pageId = response.data.id\n  }\n} catch (error) {\n  console.error('❌', error)\n}\n",
               "origin": "builtin",
-              "label": "\"Logging and Handling API Requests to Notion Service\"",
+              "label": "\"Log HTTP Request Details and Handle Response with Axios\"",
               "nodeId": "nd-e8cb392c10",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { body, headers, method, url } = workflow;\n  console.log(`\\u{1F4E1} ${method} request to: ${url}`);\n  if (body) {\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(body, null, 2));\n  }\n  try {\n    console.log(\"\\u{1F4E1} Making request to Notion API...\");\n    const response = await axios[method](url, body, { headers });\n    console.log(\"\\u{1F4DD} Response:\", JSON.stringify(response, null, 2));\n    if (response.data.id) {\n      console.log(\"\\u{1F194} Page ID:\", response.data.id);\n      workflow.pageId = response.data.id;\n    }\n  } catch (error) {\n    console.error(\"\\u274C\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const { body, headers, method, url } = workflow;\n  console.log(`\\u{1F4E1} ${method} request to: ${url}`);\n  if (body) {\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(body));\n  }\n  try {\n    const response = await axios[method](url, body, { headers });\n    console.log(\"\\u{1F4DD} Response:\", JSON.stringify(response));\n    if (response.data.id) {\n      console.log(\"\\u{1F194} Page ID:\", response.data.id);\n      workflow.pageId = response.data.id;\n    }\n  } catch (error) {\n    console.error(\"\\u274C\", error);\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -34768,12 +34848,12 @@
             {
               "id": "ins-64452fdfd0",
               "type": "action",
-              "code": "// Función que crea un objeto con la propiedad phone_number usando el teléfono proporcionado\nconst createPhoneProperty = (phone: string) => ({\n  phone_number: phone\n})\n\n// Obtiene el número de teléfono del objeto workflow\nconst phone = workflow.phone\n\n// Si existe un número de teléfono\nif (phone) {\n  console.log(`📞 Updating phone number: ${phone}`)\n  // Actualiza la propiedad \"Phone\" dentro de workflow.body[\"properties\"] con el nuevo número de teléfono\n  workflow.body['properties'] = {\n    ...workflow.body['properties'],\n    ['Teléfono']: createPhoneProperty(phone)\n  }\n}\n\n\n",
+              "code": "// Función que crea un objeto con la propiedad phone_number usando el teléfono proporcionado\nconst createPhoneProperty = (phone: string) => ({\n  phone_number: phone\n})\n\n// Obtiene el número de teléfono del objeto workflow\nconst phone = workflow.phone\n\n// Si existe un número de teléfono\nif (phone) {\n  // console.log(`📞 Updating phone number: ${phone}`)\n  // Actualiza la propiedad \"Phone\" dentro de workflow.body[\"properties\"] con el nuevo número de teléfono\n  workflow.body['properties'] = {\n    ...workflow.body['properties'],\n    ['Teléfono']: createPhoneProperty(phone)\n  }\n}\n\n\n",
               "origin": "builtin",
               "label": "\"Update Workflow with New Phone Number Property\"",
               "nodeId": "nd-101b3c038d",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createPhoneProperty = /* @__PURE__ */ __name((phone2) => ({\n    phone_number: phone2\n  }), \"createPhoneProperty\");\n  const phone = workflow.phone;\n  if (phone) {\n    console.log(`\\u{1F4DE} Updating phone number: ${phone}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Tel\\xE9fono\"]: createPhoneProperty(phone)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createPhoneProperty = /* @__PURE__ */ __name((phone2) => ({\n    phone_number: phone2\n  }), \"createPhoneProperty\");\n  const phone = workflow.phone;\n  if (phone) {\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Tel\\xE9fono\"]: createPhoneProperty(phone)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -34793,11 +34873,11 @@
               "id": "ins-6a76930006",
               "type": "action",
               "category": "Execute",
-              "code": "// Establece el método HTTP como \"patch\" para actualizar recursos exis\nworkflow.method = \"patch\";\n\nconsole.log(`📝 Setting up patch for page ID: ${workflow.pageId}...`);\n\n// Construye la URL de la API de Notion usando el ID de la página\nworkflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;\n\n// Define el cuerpo de la solicitud con las propiedades a actualizar\nworkflow.body = {\n  // Actualiza la propiedad \"Ultima actualización\"\n  properties: {\n    \"Última actualización\": {\n      // Asigna la fecha actual en formato ISO\n      date: {\n        start: new Date().toISOString(),\n      },\n    },\n  },\n};\n",
+              "code": "// Establece el método HTTP como \"patch\" para actualizar recursos exis\nworkflow.method = \"patch\";\n\n// console.log(`📝 Setting up patch for page ID: ${workflow.pageId}...`);\n\n// Construye la URL de la API de Notion usando el ID de la página\nworkflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;\n\n// Define el cuerpo de la solicitud con las propiedades a actualizar\nworkflow.body = {\n  // Actualiza la propiedad \"Ultima actualización\"\n  properties: {\n    \"Última actualización\": {\n      // Asigna la fecha actual en formato ISO\n      date: {\n        start: new Date().toISOString(),\n      },\n    },\n  },\n};\n",
               "origin": "builtin",
-              "label": "\"Update Notion Page with Current Date Using PATCH Method\"",
+              "label": "\"Update Notion Page with Current Date via API\"",
               "nodeId": "nd-3ab76a3955",
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.method = \"patch\";\n  console.log(`\\u{1F4DD} Setting up patch for page ID: ${workflow.pageId}...`);\n  workflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;\n  workflow.body = {\n    // Actualiza la propiedad \"Ultima actualización\"\n    properties: {\n      \"\\xDAltima actualizaci\\xF3n\": {\n        // Asigna la fecha actual en formato ISO\n        date: {\n          start: new Date().toISOString()\n        }\n      }\n    }\n  };\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  workflow.method = \"patch\";\n  workflow.url = `https://api.notion.com/v1/pages/${workflow.pageId}`;\n  workflow.body = {\n    // Actualiza la propiedad \"Ultima actualización\"\n    properties: {\n      \"\\xDAltima actualizaci\\xF3n\": {\n        // Asigna la fecha actual en formato ISO\n        date: {\n          start: new Date().toISOString()\n        }\n      }\n    }\n  };\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "isCustomLabel": false,
               "transitions": []
             },
@@ -34856,12 +34936,12 @@
             {
               "id": "ins-548496af09",
               "type": "action",
-              "code": "try {\n  const { NOTION_API_KEY, NOTION_CONVERSATION_DB } = env\n\n  if (!NOTION_API_KEY || !NOTION_CONVERSATION_DB) {\n    throw new Error('Missing Notion API key or database ID')\n  }\n\n  const headers = {\n    Authorization: `Bearer ${NOTION_API_KEY}`,\n    'Content-Type': 'application/json',\n    'Notion-Version': '2022-06-28'\n  }\n\n  const filters: any[] = []\n  if (workflow.conversationId) {\n    filters.push({\n      property: 'ID de conversación',\n      rich_text: {\n        equals: workflow.conversationId\n      }\n    })\n  }\n  if (workflow.phone) {\n    const lastTenDigitsOfPhone = workflow.phone.slice(-10)\n    filters.push({\n      property: 'Teléfono',\n      rich_text: {\n        ends_with: lastTenDigitsOfPhone\n      }\n    })\n  }\n\n  const requestBody = {\n    filter: filters.length === 1 ? filters[0] : { or: filters }\n  }\n\n  console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))\n  console.log('📡 Making request to Notion API...')\n  const response = await axios.post(\n    `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,\n    requestBody,\n    { headers }\n  )\n\n  console.log('✅ Response received!')\n  console.log('📊 Status:', response.status)\n  const results = response.data.results\n  console.log('📄 Results found:', results.length)\n\n  if (results.length > 0) {\n    const pageId = results[0].id\n    console.log('🆔 Page found:', pageId)\n    workflow.pageId = pageId\n    return pageId\n  } else {\n    console.warn('❗️ No page found for the given conversation ID.')\n    return null\n  }\n} catch (error) {\n  console.error('❌ Error searching for page:', error)\n  return null\n}\n",
+              "code": "try {\n  const { NOTION_API_KEY, NOTION_CONVERSATION_DB } = env\n\n  if (!NOTION_API_KEY || !NOTION_CONVERSATION_DB) {\n    throw new Error('Missing Notion API key or database ID')\n  }\n\n  const headers = {\n    Authorization: `Bearer ${NOTION_API_KEY}`,\n    'Content-Type': 'application/json',\n    'Notion-Version': '2022-06-28'\n  }\n\n  const filters: any[] = []\n  if (workflow.conversationId) {\n    filters.push({\n      property: 'ID de conversación',\n      rich_text: {\n        equals: workflow.conversationId\n      }\n    })\n  }\n  if (workflow.phone) {\n    const lastTenDigitsOfPhone = workflow.phone.slice(-10)\n    filters.push({\n      property: 'Teléfono',\n      rich_text: {\n        ends_with: lastTenDigitsOfPhone\n      }\n    })\n  }\n\n  const requestBody = {\n    filter: filters.length === 1 ? filters[0] : { or: filters }\n  }\n\n  // console.log('📤 Request body:', JSON.stringify(requestBody, null, 2))\n  // console.log('📡 Making request to Notion API...')\n  const response = await axios.post(\n    `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,\n    requestBody,\n    { headers }\n  )\n\n  // console.log('✅ Response received!')\n  // console.log('📊 Status:', response.status)\n  const results = response.data.results\n  // console.log('📄 Results found:', results.length)\n\n  if (results.length > 0) {\n    const pageId = results[0].id\n    // console.log('🆔 Page found:', pageId)\n    workflow.pageId = pageId\n    return pageId\n  } else {\n    console.warn('❗️ No page found for the given conversation ID.')\n    return null\n  }\n} catch (error) {\n  console.error('❌ Error searching for page:', error)\n  return null\n}\n",
               "origin": "builtin",
               "label": "\"Query Notion Database for Conversation by ID or Phone\"",
               "nodeId": "nd-5741e4113c",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  try {\n    const { NOTION_API_KEY, NOTION_CONVERSATION_DB } = env;\n    if (!NOTION_API_KEY || !NOTION_CONVERSATION_DB) {\n      throw new Error(\"Missing Notion API key or database ID\");\n    }\n    const headers = {\n      Authorization: `Bearer ${NOTION_API_KEY}`,\n      \"Content-Type\": \"application/json\",\n      \"Notion-Version\": \"2022-06-28\"\n    };\n    const filters = [];\n    if (workflow.conversationId) {\n      filters.push({\n        property: \"ID de conversaci\\xF3n\",\n        rich_text: {\n          equals: workflow.conversationId\n        }\n      });\n    }\n    if (workflow.phone) {\n      const lastTenDigitsOfPhone = workflow.phone.slice(-10);\n      filters.push({\n        property: \"Tel\\xE9fono\",\n        rich_text: {\n          ends_with: lastTenDigitsOfPhone\n        }\n      });\n    }\n    const requestBody = {\n      filter: filters.length === 1 ? filters[0] : { or: filters }\n    };\n    console.log(\"\\u{1F4E4} Request body:\", JSON.stringify(requestBody, null, 2));\n    console.log(\"\\u{1F4E1} Making request to Notion API...\");\n    const response = await axios.post(\n      `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,\n      requestBody,\n      { headers }\n    );\n    console.log(\"\\u2705 Response received!\");\n    console.log(\"\\u{1F4CA} Status:\", response.status);\n    const results = response.data.results;\n    console.log(\"\\u{1F4C4} Results found:\", results.length);\n    if (results.length > 0) {\n      const pageId = results[0].id;\n      console.log(\"\\u{1F194} Page found:\", pageId);\n      workflow.pageId = pageId;\n      return pageId;\n    } else {\n      console.warn(\"\\u2757\\uFE0F No page found for the given conversation ID.\");\n      return null;\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error searching for page:\", error);\n    return null;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  try {\n    const { NOTION_API_KEY, NOTION_CONVERSATION_DB } = env;\n    if (!NOTION_API_KEY || !NOTION_CONVERSATION_DB) {\n      throw new Error(\"Missing Notion API key or database ID\");\n    }\n    const headers = {\n      Authorization: `Bearer ${NOTION_API_KEY}`,\n      \"Content-Type\": \"application/json\",\n      \"Notion-Version\": \"2022-06-28\"\n    };\n    const filters = [];\n    if (workflow.conversationId) {\n      filters.push({\n        property: \"ID de conversaci\\xF3n\",\n        rich_text: {\n          equals: workflow.conversationId\n        }\n      });\n    }\n    if (workflow.phone) {\n      const lastTenDigitsOfPhone = workflow.phone.slice(-10);\n      filters.push({\n        property: \"Tel\\xE9fono\",\n        rich_text: {\n          ends_with: lastTenDigitsOfPhone\n        }\n      });\n    }\n    const requestBody = {\n      filter: filters.length === 1 ? filters[0] : { or: filters }\n    };\n    const response = await axios.post(\n      `https://api.notion.com/v1/databases/${NOTION_CONVERSATION_DB}/query`,\n      requestBody,\n      { headers }\n    );\n    const results = response.data.results;\n    if (results.length > 0) {\n      const pageId = results[0].id;\n      workflow.pageId = pageId;\n      return pageId;\n    } else {\n      console.warn(\"\\u2757\\uFE0F No page found for the given conversation ID.\");\n      return null;\n    }\n  } catch (error) {\n    console.error(\"\\u274C Error searching for page:\", error);\n    return null;\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             },
             {
@@ -34937,12 +35017,12 @@
             {
               "id": "ins-df5e14aef9",
               "type": "action",
-              "code": "/** \n * @description Actualiza el estado del gancho de la conversación en Notion.\n * Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\", \"Contestado\"\n */\nconst createHookStatusProperty = (status) => ({\n  status: {\n    name: status,\n  },\n});\n\n// Obtiene el estado del gancho del objeto workflow\nconst hookStatus = workflow.hookStatus;\n\n// Si existe un estado de gancho\nif (hookStatus) {\n  console.log(`🔄 Actualizando el estado del anzuelo: ${hookStatus}`);\n  // Actualiza la propiedad \"Anzuelo\" dentro de workflow.body[\"properties\"] con el nuevo estado de gancho\n  workflow.body[\"properties\"] = {\n    ...workflow.body[\"properties\"],\n    [\"Anzuelo\"]: createHookStatusProperty(hookStatus),\n  };\n}\n",
+              "code": "/** \n * @description Actualiza el estado del gancho de la conversación en Notion.\n * Estatus permitidos: \"No enviado\", \"Enviado\", \"Entregado\", \"Leído\", \"Detener promociones\", \"Contestado\"\n */\nconst createHookStatusProperty = (status) => ({\n  status: {\n    name: status,\n  },\n});\n\n// Obtiene el estado del gancho del objeto workflow\nconst hookStatus = workflow.hookStatus;\n\n// Si existe un estado de gancho\nif (hookStatus) {\n  // console.log(`🔄 Actualizando el estado del anzuelo: ${hookStatus}`);\n  // Actualiza la propiedad \"Anzuelo\" dentro de workflow.body[\"properties\"] con el nuevo estado de gancho\n  workflow.body[\"properties\"] = {\n    ...workflow.body[\"properties\"],\n    [\"Anzuelo\"]: createHookStatusProperty(hookStatus),\n  };\n}\n",
               "origin": "builtin",
               "label": "\"Update Conversation Hook Status in Notion Workflow\"",
               "nodeId": "nd-073f0dda7d",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createHookStatusProperty = /* @__PURE__ */ __name((status) => ({\n    status: {\n      name: status\n    }\n  }), \"createHookStatusProperty\");\n  const hookStatus = workflow.hookStatus;\n  if (hookStatus) {\n    console.log(`\\u{1F504} Actualizando el estado del anzuelo: ${hookStatus}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Anzuelo\"]: createHookStatusProperty(hookStatus)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createHookStatusProperty = /* @__PURE__ */ __name((status) => ({\n    status: {\n      name: status\n    }\n  }), \"createHookStatusProperty\");\n  const hookStatus = workflow.hookStatus;\n  if (hookStatus) {\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Anzuelo\"]: createHookStatusProperty(hookStatus)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -34983,12 +35063,12 @@
             {
               "id": "ins-8d434746bc",
               "type": "action",
-              "code": "  /** Función que crea un objeto con la propiedad anzuelo usando el estado proporcionado\n * @description Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"\n */\nconst createConversationStatusProperty = (status: string) => ({\n  status: {\n    name: status,\n  },\n});\n\n// Obtiene el estado de la conversación del objeto workflow\nconst conversationStatus = workflow.conversationStatus;\n\n// Si existe un estado de conversación\nif (conversationStatus) {\n  console.log(`🔄 Actualizando el estado de la conversación: ${conversationStatus}`);\n  // Actualiza la propiedad \"Anzuelo\" dentro de workflow.body[\"properties\"] con el nuevo estado de conversación\n  workflow.body[\"properties\"] = {\n    ...workflow.body[\"properties\"],\n    [\"Conversation\"]: createConversationStatusProperty(conversationStatus),\n  };\n}\n",
+              "code": "  /** Función que crea un objeto con la propiedad anzuelo usando el estado proporcionado\n * @description Status de la conversación: \"No iniciada\", \"En progreso\", \"Con Issues\", \"Con bugs\", \"Exitosa\"\n */\nconst createConversationStatusProperty = (status: string) => ({\n  status: {\n    name: status,\n  },\n});\n\n// Obtiene el estado de la conversación del objeto workflow\nconst conversationStatus = workflow.conversationStatus;\n\n// Si existe un estado de conversación\nif (conversationStatus) {\n  // console.log(`🔄 Actualizando el estado de la conversación: ${conversationStatus}`);\n  // Actualiza la propiedad \"Anzuelo\" dentro de workflow.body[\"properties\"] con el nuevo estado de conversación\n  workflow.body[\"properties\"] = {\n    ...workflow.body[\"properties\"],\n    [\"Conversation\"]: createConversationStatusProperty(conversationStatus),\n  };\n}\n",
               "origin": "builtin",
-              "label": "\"Update Workflow with Current Conversation Status Property\"",
+              "label": "Update Workflow with Current Conversation Status Property",
               "nodeId": "nd-db7142bba6",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createConversationStatusProperty = /* @__PURE__ */ __name((status) => ({\n    status: {\n      name: status\n    }\n  }), \"createConversationStatusProperty\");\n  const conversationStatus = workflow.conversationStatus;\n  if (conversationStatus) {\n    console.log(`\\u{1F504} Actualizando el estado de la conversaci\\xF3n: ${conversationStatus}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Conversation\"]: createConversationStatusProperty(conversationStatus)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createConversationStatusProperty = /* @__PURE__ */ __name((status) => ({\n    status: {\n      name: status\n    }\n  }), \"createConversationStatusProperty\");\n  const conversationStatus = workflow.conversationStatus;\n  if (conversationStatus) {\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"Conversation\"]: createConversationStatusProperty(conversationStatus)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -35029,12 +35109,12 @@
             {
               "id": "ins-db5d91b4c9",
               "type": "action",
-              "code": "// Función que crea un objeto con la propiedad url usando la URL proporcionada\nconst createUrlProperty = (url: string) => ({\n  url: url\n})\n\n// Obtiene la URL del objeto workflow\nconst botId = event.botId ?? '' // Ajusta esto según tu estructura real\nconst botBaseUrl = `https://app.botpress.cloud/workspaces/${env.WORKSPACE_ID}/bots/${botId}`\nconst conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`\n\n// Si existe una URL\nif (conversationUrl) {\n  console.log(`🔗 Updating URL: ${conversationUrl}`)\n  // Actualiza la propiedad \"URL\" dentro de workflow.body[\"properties\"] con la nueva URL\n  workflow.body['properties'] = {\n    ...workflow.body['properties'],\n    ['url']: createUrlProperty(conversationUrl)\n  }\n}\n",
+              "code": "// Función que crea un objeto con la propiedad url usando la URL proporcionada\nconst createUrlProperty = (url: string) => ({\n  url: url\n})\n\n// Obtiene la URL del objeto workflow\nconst botId = event.botId ?? '' // Ajusta esto según tu estructura real\nconst botBaseUrl = `https://app.botpress.cloud/workspaces/${env.WORKSPACE_ID}/bots/${botId}`\nconst conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`\n\n// Si existe una URL\nif (conversationUrl) {\n  // console.log(`🔗 Updating URL: ${conversationUrl}`)\n  // Actualiza la propiedad \"URL\" dentro de workflow.body[\"properties\"] con la nueva URL\n  workflow.body['properties'] = {\n    ...workflow.body['properties'],\n    ['url']: createUrlProperty(conversationUrl)\n  }\n}\n",
               "origin": "builtin",
               "label": "Update Workflow with Conversation URL Property Functionality",
               "nodeId": "nd-232ad886c1",
               "isCustomLabel": false,
-              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createUrlProperty = /* @__PURE__ */ __name((url) => ({\n    url\n  }), \"createUrlProperty\");\n  const botId = event.botId ?? \"\";\n  const botBaseUrl = `https://app.botpress.cloud/workspaces/${env.WORKSPACE_ID}/bots/${botId}`;\n  const conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`;\n  if (conversationUrl) {\n    console.log(`\\u{1F517} Updating URL: ${conversationUrl}`);\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"url\"]: createUrlProperty(conversationUrl)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
+              "transpiledCode": "var __defProp = Object.defineProperty;\nvar __name = (target, value) => __defProp(target, \"name\", { value, configurable: true });\nasync function __ROOT__() {\n  const createUrlProperty = /* @__PURE__ */ __name((url) => ({\n    url\n  }), \"createUrlProperty\");\n  const botId = event.botId ?? \"\";\n  const botBaseUrl = `https://app.botpress.cloud/workspaces/${env.WORKSPACE_ID}/bots/${botId}`;\n  const conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`;\n  if (conversationUrl) {\n    workflow.body[\"properties\"] = {\n      ...workflow.body[\"properties\"],\n      [\"url\"]: createUrlProperty(conversationUrl)\n    };\n  }\n  ;\n}\n__name(__ROOT__, \"__ROOT__\");\n; return await __ROOT__();",
               "transitions": []
             }
           ],
@@ -37364,41 +37444,41 @@
   ],
   "versions": [
     {
-      "name": "13 Aug 25 08:45",
-      "id": "version_01K2K7G733BAFNSNXMPHW9FBEM"
-    },
-    {
       "name": "13 Aug 25 08:33",
       "id": "version_01K2K6SW65A5EAD5ER6YMW5E0S"
     },
     {
       "name": "01 Aug 25 08:05",
       "id": "version_01K1M8DAN8ZDFKN502XPMNV2XP"
+    },
+    {
+      "name": "26 Jul 25 08:15",
+      "id": "version_01K13HE8V34Z5H4P5TB74YRQ67"
     }
   ],
-  "revision": 58728,
+  "revision": 58788,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-08-22T22:47:05.498Z",
-    "lastRevisionId": 58775,
+    "lastRevisionCheckAt": "2025-08-29T21:47:44.068Z",
+    "lastRevisionId": 59108,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-08-22T22:46:17.456Z (i3QrZ17k8i): Player entered channel - {\"sessionId\":\"sess_01K39Z73M6SDJ6P102MGXE19EC\",\"connectionId\":\"i3QrZ17k8i\",\"joinedAt\":\"2025-08-22T22:46:17.384Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 22 Aug 2025 22:46:17 GMT\",\"connectedAt\":\"Fri, 22 Aug 2025 22:46:17 GMT\",\"sections\":[]}",
-      "2025-08-22T22:46:17.457Z (i3QrZ17k8i): jguzman@marxadigital.com was elected as master - \"sess_01K39Z73M6SDJ6P102MGXE19EC\"",
-      "2025-08-22T22:47:00.604Z (i3QrZ17k8i): Disconnecting multiplayer session...",
-      "2025-08-22T22:47:00.729Z: Multiplayer session disconnected!",
-      "2025-08-22T22:47:00.752Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-08-22T22:47:00.757Z: Connection State: initialized -> connecting (ok)",
-      "2025-08-22T22:47:01.635Z (kzm_8GBh44): Connection State: connecting -> connected (ok)",
-      "2025-08-22T22:47:01.816Z (kzm_8GBh44): Multiplayer session initialized!",
-      "2025-08-22T22:47:02.080Z (kzm_8GBh44): Player entered channel - {\"sessionId\":\"sess_01K39Z73M6SDJ6P102MGXE19EC\",\"connectionId\":\"kzm_8GBh44\",\"joinedAt\":\"2025-08-22T22:47:02.010Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 22 Aug 2025 22:47:02 GMT\",\"connectedAt\":\"Fri, 22 Aug 2025 22:47:02 GMT\",\"sections\":[]}",
-      "2025-08-22T22:47:02.080Z (kzm_8GBh44): jguzman@marxadigital.com was elected as master - \"sess_01K39Z73M6SDJ6P102MGXE19EC\""
+      "2025-08-29T21:47:36.082Z (IAJv3SJjtz): Disconnecting multiplayer session...",
+      "2025-08-29T21:47:36.163Z: Multiplayer session disconnected!",
+      "2025-08-29T21:47:36.199Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-08-29T21:47:36.217Z: Connection State: initialized -> connecting (ok)",
+      "2025-08-29T21:47:37.163Z (-OrxmhGU_5): Connection State: connecting -> connected (ok)",
+      "2025-08-29T21:47:37.286Z (-OrxmhGU_5): Multiplayer session initialized!",
+      "2025-08-29T21:47:40.962Z (-OrxmhGU_5): Player entered channel - {\"sessionId\":\"sess_01K3VW4VY8CHRMVTFP7XZD2YVV\",\"connectionId\":\"-OrxmhGU_5\",\"joinedAt\":\"2025-08-29T21:47:40.887Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 29 Aug 2025 21:47:37 GMT\",\"connectedAt\":\"Fri, 29 Aug 2025 21:47:37 GMT\",\"sections\":[]}",
+      "2025-08-29T21:47:40.963Z (-OrxmhGU_5): jguzman@marxadigital.com was elected as master - \"sess_01K3VW4VY8CHRMVTFP7XZD2YVV\"",
+      "2025-08-29T21:47:41.082Z (-OrxmhGU_5): Player left channel - {\"sessionId\":\"sess_01K3STVWN6J2NJ8GQE79AP8BM6\",\"connectionId\":\"6h3OBTB-ls\",\"joinedAt\":\"2025-08-29T02:35:23.185Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"2025-08-29T21:46:57.187Z\",\"connectedAt\":\"Fri, 29 Aug 2025 02:35:23 GMT\",\"sections\":[]}",
+      "2025-08-29T21:47:41.082Z (-OrxmhGU_5): Player left channel"
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K39Z73M6SDJ6P102MGXE19EC / Fri, 22 Aug 2025 22:47:02 GMT /  Fri, 22 Aug 2025 22:47:02 GMT"
+      "jguzman@marxadigital.com / sess_01K3VW4VY8CHRMVTFP7XZD2YVV / Fri, 29 Aug 2025 21:47:37 GMT /  Fri, 29 Aug 2025 21:47:37 GMT"
     ],
-    "savedAt": "2025-08-22T22:47:05.498Z",
+    "savedAt": "2025-08-29T21:47:44.069Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K39Z73M6SDJ6P102MGXE19EC"
+    "sessionId": "sess_01K3VW4VY8CHRMVTFP7XZD2YVV"
   },
   "identity": {
     "name": "asistente-lasmotos-general",

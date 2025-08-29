@@ -18,10 +18,10 @@ class N_NotionClientState {
   hookRecord: unknown;
   /** Complete URL to fetch  */
   url: string;
-  /** Estatus permitidos: "No enviado", "Enviado", "Entregado", "Leído", "Detener promociones" */
-  hookStatus: string;
   /** Status de la conversación: "No iniciada", "En progreso", "Con Issues", "Con bugs", "Exitosa" */
   conversationStatus: string;
+  /** Estatus permitidos: "No enviado", "Enviado", "Entregado", "Leído", "Detener promociones", "Contestado" */
+  hookStatus: string;
 }
 
 export const workflow = new N_NotionClientState();

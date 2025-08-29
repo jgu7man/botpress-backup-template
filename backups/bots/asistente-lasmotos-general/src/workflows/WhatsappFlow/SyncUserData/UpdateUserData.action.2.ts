@@ -1,99 +1,173 @@
 // Node: UpdateUserData - nd-b2aae07e53
-// "Retrieve and Update User Data Based on Phone Number" - ins-5d95da0fa3
+// "User Data Retrieval and Update Service Implementation" - ins-5d95da0fa3
 
 export {};
 
 // ------------------ EXECUTE CODE -------------------------
 
-const { phone } = user
-console.log('🤖 Buscando cliente con el teléfono:', phone)
+// Tipos y constantes para mejor legibilidad y mantenimiento
+type Conclusion = 'COMPLEXED' | 'WRONG' | 'SERVED' | 'TIMEDOUT' | 'HOOKED' | ''
 
-let topics: string[] = [] // Explicitly type topics as a string array
-
-if (env.WAB_TEMPLATE === 'leads_cupo_brilla') {
-  user.creditProfile = 'CUPO_BRILLA'
-  user.purchasePreference = 'CUPO_BRILLA'
-  topics.push('CUPO_BRILLA')
+const CREDIT_PROFILES = {
+  CUPO_BRILLA: 'CUPO_BRILLA'
 }
 
-if (phone) {
-  try {
+// Mapa de campos para conversión de datos
+const AIRTABLE_TO_USER_FIELD_MAP = {
+  NOMBRE: 'fullName',
+  UBICACION_DEL_USUARIO: 'location',
+  UBICACION_DE_SERVICIO: 'serviceLocation',
+  CEDULA: 'nationalID',
+  NUMERO_DE_FACTURA: 'brillaBillNumber',
+  REPORTADO: 'negativeCreditReport'
+}
+
+/**
+ * Servicio principal para manejar la recuperación y actualización de datos de usuario
+ * Aplica el patrón Strategy para diferentes formas de procesar los datos
+ */
+class UserRetrievalService {
+  private topics: string[] = []
+
+  /**
+   * Punto de entrada principal - orquesta todo el proceso
+   */
+  async processUserRetrieval(): Promise<void> {
+    const { phone } = user
+    console.log('🤖 Buscando cliente con el teléfono:', phone)
+
+    this.initializeCreditProfileIfNeeded()
+
+    if (!phone) {
+      console.log('📞 No hay teléfono disponible para buscar')
+      return
+    }
+
+    await this.searchAndUpdateUserRecord(phone)
+  }
+
+  /**
+   * Configura el perfil de crédito inicial basado en el template
+   */
+  private initializeCreditProfileIfNeeded(): void {
+    if (env.WAB_TEMPLATE === 'leads_cupo_brilla') {
+      user.creditProfile = CREDIT_PROFILES.CUPO_BRILLA
+      user.purchasePreference = CREDIT_PROFILES.CUPO_BRILLA
+      this.topics.push(CREDIT_PROFILES.CUPO_BRILLA)
+    }
+  }
+
+  /**
+   * Busca el registro del usuario y actualiza los datos
+   */
+  private async searchAndUpdateUserRecord(phone: string): Promise<void> {
+    try {
+      const record = await this.findUserRecord(phone)
+
+      if (record) {
+        await this.processFoundRecord(record)
+      } else {
+        this.handleRecordNotFound()
+      }
+    } catch (error) {
+      this.handleSearchError(error)
+    }
+  }
+
+  /**
+   * Busca el registro en la base de datos usando los últimos 10 dígitos del teléfono
+   */
+  private async findUserRecord(phone: string): Promise<leadClientsTableRecord | null> {
     const lastTenDigitsOfPhone = phone.slice(-10)
     const recordResults = await leadClientsTable.findRecords({
       filter: {
-        // Usa $regex para buscar el patrón 'termina con los últimos 10 dígitos'
-        // El `$` al final de la expresión regular significa 'termina con'
         TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` }
       }
     })
+
     console.log('❕ recordResults:', recordResults)
-    const record = recordResults.length ? recordResults[0] : undefined
+    return recordResults.length > 0 ? recordResults[0] : null
+  }
 
-    if (record) {
-      console.log(`✅ Record found: ${record.id}`)
+  /**
+   * Procesa un registro encontrado - actualiza user y conversation
+   */
+  private async processFoundRecord(record: leadClientsTableRecord): Promise<void> {
+    console.log(`✅ Record found`)
 
-      // Map Airtable field names to user object keys for cleaner assignment
-      updateUserFromRecord(record)
-      user.authorizedPop = {
-        answer: 'ACCEPTED',
-        askedBefore: true
+    this.updateUserFromRecord(record)
+    this.setUserAuthorization()
+    this.updateConversationFlow(record)
+  }
+
+  /**
+   * Actualiza los datos del usuario basado en el registro encontrado
+   * Aplica el patrón Strategy para mapeo de campos
+   */
+  private updateUserFromRecord(record: leadClientsTableRecord): void {
+    Object.entries(AIRTABLE_TO_USER_FIELD_MAP).forEach(([airtableField, userField]) => {
+      const airtableValue = record[airtableField as keyof leadClientsTableRecord]
+
+      // Solo actualiza si el campo del usuario no está establecido y hay valor en Airtable
+      if (!user[userField as keyof typeof user] && airtableValue) {
+        ;(user as any)[userField] = airtableValue
       }
+    })
+  }
 
-      updateUserEngagement(record)
-      // Ensure TEMAS is always an array
-    } else {
-      console.error(`❌ Record not found 🥹`)
-      conversation.flow = {
-        ending: '',
-        state: '',
-        topics: ['PRE_ENGAGEMENT'],
-        status: 'COLD_PROSPECT',
-        context: 'PRE_ENGAGEMENT'
-      }
+  /**
+   * Establece la autorización del usuario
+   */
+  private setUserAuthorization(): void {
+    user.authorizedPop = {
+      answer: 'ACCEPTED',
+      askedBefore: true
+    }
+  }
+
+  /**
+   * Actualiza el flujo de conversación basado en el registro
+   */
+  private updateConversationFlow(record: leadClientsTableRecord): void {
+    const ending = record.CONCLUSION as Conclusion
+    const { flow } = conversation || {}
+
+    conversation.flow = {
+      ending: ending || flow?.ending || '',
+      state: flow?.state || '',
+      topics: [...this.topics, 'PRE_ENGAGEMENT'],
+      status: 'COLD_PROSPECT',
+      context: 'PRE_ENGAGEMENT'
     }
 
-  } catch (error) {
+    // Asegura que TEMAS sea siempre un array
+    this.topics = Array.isArray(record.TEMAS) ? record.TEMAS : []
+    conversation.SummaryAgent.summary = env.WAB_CONTEXT
+  }
+
+  /**
+   * Maneja el caso cuando no se encuentra registro
+   */
+  private handleRecordNotFound(): void {
+    console.error(`❌ Record not found 🥹`)
+    conversation.flow = {
+      ending: '',
+      state: '',
+      topics: ['PRE_ENGAGEMENT'],
+      status: 'COLD_PROSPECT',
+      context: 'PRE_ENGAGEMENT'
+    }
+  }
+
+  /**
+   * Maneja errores durante la búsqueda
+   */
+  private handleSearchError(error: unknown): void {
     console.error('❌ Error getting data:', error)
-    // Consider re-throwing or handling the error more gracefully depending on your application's needs
-    throw error
+    throw error // Re-lanza el error para manejo en nivel superior
   }
 }
 
-function updateUserFromRecord(record: leadClientsTableRecord) {
-  const fieldMap = {
-    NOMBRE: 'fullName',
-    UBICACION_DEL_USUARIO: 'location',
-    UBICACION_DE_SERVICIO: 'serviceLocation',
-    CEDULA: 'nationalID',
-    NUMERO_DE_FACTURA: 'brillaBillNumber',
-    REPORTADO: 'negativeCreditReport'
-  }
-
-  for (const airtableField in fieldMap) {
-    const userField = fieldMap[airtableField as keyof typeof fieldMap] // Type assertion for correct key access
-    const airtableValue = record[airtableField as keyof typeof record] // Type assertion for correct key access
-
-    // Assign only if the user's field is not already set and Airtable has a value
-    if (!user[userField as keyof typeof user] && airtableValue) {
-      user[userField] = airtableValue
-    }
-  }
-}
-
-type Conclusion = 'COMPLEXED' | 'WRONG' | 'SERVED' | 'TIMEDOUT' | 'HOOKED' | ''
-
-function updateUserEngagement(record: leadClientsTableRecord) {
-  const ending = record.CONCLUSION as Conclusion
-  const { flow } = conversation || {}
-
-  conversation.flow = {
-    ending: ending || flow?.ending || '',
-    state: flow?.state || '',
-    topics: [...topics, 'PRE_ENGAGEMENT'],
-    status: 'COLD_PROSPECT',
-    context: 'PRE_ENGAGEMENT'
-  }
-
-  topics = Array.isArray(record.TEMAS) ? record.TEMAS : []
-  conversation.SummaryAgent.summary = env.WAB_CONTEXT
-}
+// Ejecución del servicio - Patrón Facade para simplificar la interfaz
+const userRetrievalService = new UserRetrievalService()
+await userRetrievalService.processUserRetrieval()

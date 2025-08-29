@@ -1,6 +1,6 @@
 import { workflow } from "./workflow.state";
 // Node: UPDATE_CONV_STATUS - nd-db7142bba6
-// "Update Workflow with Current Conversation Status Property" - ins-8d434746bc
+// Update Workflow with Current Conversation Status Property - ins-8d434746bc
 
 export {};
 
@@ -20,7 +20,7 @@ const conversationStatus = workflow.conversationStatus;
 
 // Si existe un estado de conversación
 if (conversationStatus) {
-  console.log(`🔄 Actualizando el estado de la conversación: ${conversationStatus}`);
+  // console.log(`🔄 Actualizando el estado de la conversación: ${conversationStatus}`);
   // Actualiza la propiedad "Anzuelo" dentro de workflow.body["properties"] con el nuevo estado de conversación
   workflow.body["properties"] = {
     ...workflow.body["properties"],

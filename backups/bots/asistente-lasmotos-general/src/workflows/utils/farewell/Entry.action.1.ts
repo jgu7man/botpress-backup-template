@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
 // Node: Entry - nd-96a14bb62e
-// "Manage Bot Conversation States and Current Time Display" - ins-7816ee7c57
+// "Bot State Management with Current Time in Colombia" - ins-7816ee7c57
 
 export {};
 

@@ -18,7 +18,7 @@ const conversationUrl = `${botBaseUrl}/conversations/${workflow.conversationId}`
 
 // Si existe una URL
 if (conversationUrl) {
-  console.log(`🔗 Updating URL: ${conversationUrl}`)
+  // console.log(`🔗 Updating URL: ${conversationUrl}`)
   // Actualiza la propiedad "URL" dentro de workflow.body["properties"] con la nueva URL
   workflow.body['properties'] = {
     ...workflow.body['properties'],

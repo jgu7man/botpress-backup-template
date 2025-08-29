@@ -16,7 +16,7 @@ const phone = workflow.phone
 
 // Si existe un número de teléfono
 if (phone) {
-  console.log(`📞 Updating phone number: ${phone}`)
+  // console.log(`📞 Updating phone number: ${phone}`)
   // Actualiza la propiedad "Phone" dentro de workflow.body["properties"] con el nuevo número de teléfono
   workflow.body['properties'] = {
     ...workflow.body['properties'],

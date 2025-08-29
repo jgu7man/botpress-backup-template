@@ -1,0 +1,41 @@
+window.botpress.init({
+  "botId": "43c08936-da5c-4f16-b957-e4400c0f834f",
+  "configuration": {
+    "version": "v1",
+    "composerPlaceholder": "Pregúntame sobre motos, crédito o nuestras sedes",
+    "botName": "Auteco Las Motos + Cupo Brilla",
+    "botAvatar": "https://files.bpcontent.cloud/2025/07/04/20/20250704201541-61KPOLGG.jpeg",
+    "botDescription": "Bot de atención para clientes de Cupo Brilla",
+    "fabImage": "https://files.bpcontent.cloud/2025/07/04/20/20250704202107-8YPFUMP0.png",
+    "website": {
+      "title": "",
+      "link": ""
+    },
+    "email": {
+      "title": "",
+      "link": ""
+    },
+    "phone": {
+      "title": "57 300 2467249",
+      "link": "57 300 2467249"
+    },
+    "termsOfService": {
+      "title": "",
+      "link": ""
+    },
+    "privacyPolicy": {
+      "title": "",
+      "link": ""
+    },
+    "color": "#005daa",
+    "variant": "solid",
+    "headerVariant": "glass",
+    "themeMode": "light",
+    "fontFamily": "rubik",
+    "radius": 2,
+    "feedbackEnabled": false,
+    "showPoweredBy": true,
+    "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)"
+  },
+  "clientId": "32ef4635-a5c9-4d4d-b8dc-62209fc31c54"
+});

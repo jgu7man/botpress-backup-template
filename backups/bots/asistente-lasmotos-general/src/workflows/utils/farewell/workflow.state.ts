@@ -12,6 +12,8 @@ class FarewellState {
   '🄽 NotionClient ': any;
   /** helpQuestion1 */
   helpQuestion1: any;
+  /** 🄽 NotionClient  */
+  '🄽 NotionClient ': any;
 }
 
 export const workflow = new FarewellState();

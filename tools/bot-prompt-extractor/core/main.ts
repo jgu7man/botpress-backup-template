@@ -139,14 +139,11 @@ function extractPrompts(containerDir: string = "bot"): void {
   const promptsDir = path.join(containerPath, "src", "prompts");
   console.log(`📁 Directorio de prompts: ${containerDir}/src/prompts`);
 
-  console.log("🗑️  Limpiando directorio de prompts...");
   // Ensure container directory exists
   ensureDir(containerPath);
-  // Remove only the prompts directory
-  removeDir(promptsDir);
-
-  console.log("📂 Creando directorio base de prompts...");
   ensureDir(promptsDir);
+
+  console.log("�️  Preparando directorio de prompts (preservando otros contenidos)...");
 
   console.log("📖 Leyendo bot exportado...");
   const bot = readExportedBot(containerDir);

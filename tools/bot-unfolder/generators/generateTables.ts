@@ -71,28 +71,15 @@ export function generateGlobalTableDeclarations(
     `/**`,
     ` * Declaraciones globales para el bot`,
     ` * Generado automáticamente desde bot.json`,
-    ` * Fecha de generación: ${new Date().toISOString()}`,
     ` */`,
-    ``,
-    `// Interfaz genérica para operaciones de tabla`,
-    `interface TableOperations<T> {`,
-    `  findRecords(params?: { filter?: any; sort?: any; maxRecords?: number }): Promise<T[]>;`,
-    `  createRecord(data: Partial<T>): Promise<T>;`,
-    `  updateRecord(id: string, data: Partial<T>): Promise<T>;`,
-    `  deleteRecord(id: string): Promise<void>;`,
-    `  findFirst(params?: { filter?: any; sort?: any }): Promise<T | null>;`,
-    `}`,
     ``,
     `// Declaraciones globales para el bot`,
     `declare global {`,
     `  // Variables principales del bot`,
     `  const bot: import('./variables/botVariables').botVariables;`,
     `  const user: import('./variables/userVariables').userVariables;`,
-    `  const conversation: import('./variables/conversationVariables').conversationVariables & {`,
-    `    // Agentes de Botpress (incluidos automáticamente)`,
-    generateAgentDeclarations(botExport),
-    `  };`,
-    `  // event ya está definido globalmente en types/core/event-override.d.ts`,
+    `  const conversation: import('./variables/conversationVariables').conversationVariables &  &`,
+    `    ConversationAgents;`,
     `  const env: import('./variables/ConfigVariables').ConfigVariables;`,
     ``,
     `  // Tablas del bot`,
@@ -131,52 +118,4 @@ function mapJsonType(t: string, fieldName?: string): string {
     default:
       return "any";
   }
-}
-
-/**
- * Genera las declaraciones de agentes basadas en los agentes habilitados en el bot
- */
-function generateAgentDeclarations(botExport: BotExport): string {
-  const agents = botExport.agents;
-  if (!agents) return "";
-
-  const lines: string[] = [];
-  
-  // Generar declaración para cada agente habilitado
-  Object.entries(agents).forEach(([agentName, agentConfig]) => {
-    // Solo incluir agentes que están habilitados explícitamente o que no tienen la propiedad enabled (defaultean a true)
-    if (agentConfig.enabled !== false) {
-      switch (agentName) {
-        case "SummaryAgent":
-          lines.push(`    ${agentName}: {`);
-          lines.push(`      summary: string;`);
-          lines.push(`      transcript: string;`);
-          lines.push(`    };`);
-          break;
-        case "TranslatorAgent":
-          lines.push(`    ${agentName}: {`);
-          lines.push(`      translation: string;`);
-          lines.push(`      detectedLanguage: string;`);
-          lines.push(`    };`);
-          break;
-        case "KnowledgeAgent":
-          lines.push(`    ${agentName}: {`);
-          lines.push(`      answer: string;`);
-          lines.push(`      sources: any[];`);
-          lines.push(`    };`);
-          break;
-        case "PersonalityAgent":
-          lines.push(`    ${agentName}: {`);
-          lines.push(`      response: string;`);
-          lines.push(`    };`);
-          break;
-        default:
-          // Para agentes desconocidos, usar una estructura genérica
-          lines.push(`    ${agentName}: Record<string, any>;`);
-          break;
-      }
-    }
-  });
-
-  return lines.join("\n");
 }

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import fs from "fs";
-import path from "path";
 import { execSync } from "child_process";
+import fs from "fs";
 import inquirer from "inquirer";
+import path from "path";
 
 interface BotInfo {
   name: string;
@@ -13,24 +13,24 @@ interface BotInfo {
 
 class SmartBotExtractor {
   private tempDir: string;
-  
+
   constructor() {
-    this.tempDir = path.join(process.cwd(), 'temp_extraction');
+    this.tempDir = path.join(process.cwd(), "temp_extraction");
   }
 
   /**
    * Extrae el nombre del bot del nombre del archivo .bpz
    */
   private extractBotNameFromFileName(zipPath: string): string {
-    const fileName = path.basename(zipPath, '.bpz');
-    
+    const fileName = path.basename(zipPath, ".bpz");
+
     // Buscar el patrón "nombre - fecha" y extraer solo el nombre
     const match = fileName.match(/^(.+?)\s*-\s*\d{4}/);
-    
+
     if (match) {
       return match[1].trim();
     }
-    
+
     // Si no encuentra el patrón, usar todo el nombre del archivo sin extensión
     return fileName;
   }
@@ -38,7 +38,9 @@ class SmartBotExtractor {
   /**
    * Extrae información adicional del bot.json (opcional)
    */
-  private async extractAdditionalBotInfo(zipPath: string): Promise<Partial<BotInfo>> {
+  private async extractAdditionalBotInfo(
+    zipPath: string
+  ): Promise<Partial<BotInfo>> {
     // Crear directorio temporal
     if (fs.existsSync(this.tempDir)) {
       fs.rmSync(this.tempDir, { recursive: true, force: true });
@@ -47,22 +49,26 @@ class SmartBotExtractor {
 
     try {
       // Extraer solo el bot.json al directorio temporal
-      console.log(`📦 Reading additional bot info from ${path.basename(zipPath)}...`);
-      execSync(`7z e "${zipPath}" bot.json -o"${this.tempDir}"`, { stdio: 'pipe' });
-      
-      const botJsonPath = path.join(this.tempDir, 'bot.json');
-      
+      console.log(
+        `📦 Reading additional bot info from ${path.basename(zipPath)}...`
+      );
+      execSync(`7z e "${zipPath}" bot.json -o"${this.tempDir}"`, {
+        stdio: "pipe",
+      });
+
+      const botJsonPath = path.join(this.tempDir, "bot.json");
+
       if (!fs.existsSync(botJsonPath)) {
         return {};
       }
 
       // Leer y parsear el bot.json
-      const botJsonContent = fs.readFileSync(botJsonPath, 'utf8');
+      const botJsonContent = fs.readFileSync(botJsonPath, "utf8");
       const botData = JSON.parse(botJsonContent);
-      
+
       return {
         id: botData.id,
-        integrationId: botData.integrationId
+        integrationId: botData.integrationId,
       };
     } catch (error) {
       console.log(`⚠️  Could not read additional bot info: ${error}`);
@@ -78,22 +84,31 @@ class SmartBotExtractor {
   /**
    * Extrae todo el contenido del bot a una carpeta con el nombre del bot
    */
-  private async extractFullBot(zipPath: string, botName: string, outputDir: string): Promise<void> {
+  private async extractFullBot(
+    zipPath: string,
+    botName: string,
+    outputDir: string
+  ): Promise<void> {
     const botFolder = path.join(outputDir, botName);
-    const unzippedFolder = path.join(botFolder, 'unzipped');
-    
-    // Crear la carpeta del bot y la subcarpeta unzipped
-    if (fs.existsSync(botFolder)) {
-      console.log(`🧹 Cleaning existing folder: ${botFolder}`);
-      fs.rmSync(botFolder, { recursive: true, force: true });
+    const unzippedFolder = path.join(botFolder, "unzipped");
+
+    // Crear la carpeta del bot si no existe
+    if (!fs.existsSync(botFolder)) {
+      fs.mkdirSync(botFolder, { recursive: true });
     }
-    
+
+    // Solo limpiar la subcarpeta unzipped si existe, preservando el resto de la carpeta del bot
+    if (fs.existsSync(unzippedFolder)) {
+      console.log(`🧹 Cleaning existing unzipped folder: ${unzippedFolder}`);
+      fs.rmSync(unzippedFolder, { recursive: true, force: true });
+    }
+
     fs.mkdirSync(unzippedFolder, { recursive: true });
-    
+
     // Extraer todo el contenido en la subcarpeta unzipped
     console.log(`📂 Extracting all files to: ${unzippedFolder}`);
-    execSync(`7z x "${zipPath}" -o"${unzippedFolder}"`, { stdio: 'inherit' });
-    
+    execSync(`7z x "${zipPath}" -o"${unzippedFolder}"`, { stdio: "inherit" });
+
     console.log(`✅ Bot extracted successfully to: ${botFolder}`);
     console.log(`📁 Bot files located in: ${unzippedFolder}`);
   }
@@ -103,47 +118,47 @@ class SmartBotExtractor {
    */
   private async confirmFolderName(extractedName: string): Promise<string> {
     console.log(`📝 Nombre extraído del archivo: "${extractedName}"`);
-    console.log('');
+    console.log("");
 
     const { action } = await inquirer.prompt([
       {
-        type: 'list',
-        name: 'action',
-        message: '¿Qué nombre quieres usar para la carpeta del bot?',
+        type: "list",
+        name: "action",
+        message: "¿Qué nombre quieres usar para la carpeta del bot?",
         choices: [
           {
             name: `✅ Usar "${extractedName}" (recomendado)`,
-            value: 'use_extracted'
+            value: "use_extracted",
           },
           {
-            name: '✏️  Escribir un nombre personalizado',
-            value: 'custom'
-          }
-        ]
-      }
+            name: "✏️  Escribir un nombre personalizado",
+            value: "custom",
+          },
+        ],
+      },
     ]);
 
-    if (action === 'use_extracted') {
+    if (action === "use_extracted") {
       return extractedName;
     }
 
     const { customName } = await inquirer.prompt([
       {
-        type: 'input',
-        name: 'customName',
-        message: 'Escribe el nombre personalizado para la carpeta:',
+        type: "input",
+        name: "customName",
+        message: "Escribe el nombre personalizado para la carpeta:",
         validate: (input: string) => {
           if (!input.trim()) {
-            return 'El nombre no puede estar vacío';
+            return "El nombre no puede estar vacío";
           }
           // Validar que sea un nombre válido para carpeta
           if (!/^[a-zA-Z0-9_-]+$/.test(input.trim())) {
-            return 'El nombre solo puede contener letras, números, guiones y guiones bajos';
+            return "El nombre solo puede contener letras, números, guiones y guiones bajos";
           }
           return true;
         },
-        filter: (input: string) => input.trim()
-      }
+        filter: (input: string) => input.trim(),
+      },
     ]);
 
     return customName;
@@ -152,7 +167,10 @@ class SmartBotExtractor {
   /**
    * Método principal para extraer inteligentemente
    */
-  public async smartExtract(zipPath: string, outputDir: string = './backups/bots'): Promise<void> {
+  public async smartExtract(
+    zipPath: string,
+    outputDir: string = "./backups/bots"
+  ): Promise<void> {
     if (!fs.existsSync(zipPath)) {
       throw new Error(`Archive not found: ${zipPath}`);
     }
@@ -160,24 +178,25 @@ class SmartBotExtractor {
     console.log(`🤖 Smart Bot Extractor`);
     console.log(`📁 Archive: ${zipPath}`);
     console.log(`📤 Output directory: ${outputDir}`);
-    console.log('');
+    console.log("");
 
     try {
       // Paso 1: Extraer el nombre del bot del nombre del archivo
       const extractedBotName = this.extractBotNameFromFileName(zipPath);
-      
+
       // Paso 2: Confirmar o personalizar el nombre de la carpeta
       const finalBotName = await this.confirmFolderName(extractedBotName);
-      
+
       console.log(`🏷️  Nombre final de la carpeta: ${finalBotName}`);
-      console.log('');
-      
+      console.log("");
+
       // Paso 3: Obtener información adicional del bot.json (opcional)
       const additionalInfo = await this.extractAdditionalBotInfo(zipPath);
-      
+
       if (additionalInfo.id) console.log(`🆔 Bot ID: ${additionalInfo.id}`);
-      if (additionalInfo.integrationId) console.log(`🔗 Integration ID: ${additionalInfo.integrationId}`);
-      console.log('');
+      if (additionalInfo.integrationId)
+        console.log(`🔗 Integration ID: ${additionalInfo.integrationId}`);
+      console.log("");
 
       // Crear directorio de salida si no existe
       if (!fs.existsSync(outputDir)) {
@@ -187,12 +206,11 @@ class SmartBotExtractor {
       // Paso 4: Extraer todo el bot a la carpeta con su nombre
       await this.extractFullBot(zipPath, finalBotName, outputDir);
 
-      console.log('');
+      console.log("");
       console.log(`🎉 Smart extraction completed!`);
       console.log(`📍 Bot location: ${path.join(outputDir, finalBotName)}`);
-      
     } catch (error) {
-      console.error('❌ Extraction failed:', error);
+      console.error("❌ Extraction failed:", error);
       process.exit(1);
     }
   }
@@ -229,14 +247,14 @@ El script:
   }
 
   if (args.length === 0) {
-    console.error('❌ Error: Debes proporcionar el archivo .bpz a extraer');
-    console.log('Uso: npm run smart-extract <archivo.bpz> [directorio-salida]');
-    console.log('Usa --help para más información');
+    console.error("❌ Error: Debes proporcionar el archivo .bpz a extraer");
+    console.log("Uso: npm run smart-extract <archivo.bpz> [directorio-salida]");
+    console.log("Usa --help para más información");
     process.exit(1);
   }
 
   const zipPath = args[0];
-  const outputDir = args[1] || './backups/bots';
+  const outputDir = args[1] || "./backups/bots";
 
   const extractor = new SmartBotExtractor();
   await extractor.smartExtract(zipPath, outputDir);

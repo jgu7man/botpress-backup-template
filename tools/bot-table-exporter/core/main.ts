@@ -22,8 +22,12 @@ import {
 /**
  * Main function for the bot table exporter utility
  * @param projectPath - Path to the project directory
+ * @param botName - Name of the bot (optional, extracted from path if not provided)
  */
-export async function main(projectPath: string): Promise<void> {
+export async function main(
+  projectPath: string,
+  botName?: string
+): Promise<void> {
   try {
     console.log("🚀 Bot Table Exporter");
     console.log("====================");
@@ -39,7 +43,13 @@ export async function main(projectPath: string): Promise<void> {
 
     const botDisplayName =
       botDirectory === "." ? "current directory" : botDirectory;
-    console.log(`🤖 Bot directory: ${botDisplayName}\n`);
+
+    // Show bot information
+    if (botName) {
+      console.log(`🤖 Bot: ${botName} (${botDisplayName})\n`);
+    } else {
+      console.log(`🤖 Bot directory: ${botDisplayName}\n`);
+    }
 
     // Get all tables from bot.json
     console.log("📋 Cargando tablas desde bot.json...");
@@ -119,7 +129,7 @@ export async function main(projectPath: string): Promise<void> {
     const tableData = getTableData(selectedTableId, projectPath);
     console.log(`✅ Se cargaron ${tableData.length} registros\n`);
 
-    // Generate output filename
+    // Generate output filename with bot name
     const timestamp = new Date()
       .toISOString()
       .replace(/[:.]/g, "-")
@@ -127,7 +137,10 @@ export async function main(projectPath: string): Promise<void> {
     const extension = getFileExtension(format);
     // Use project path for exports directory
     const outputDir = path.join(projectPath, "exports");
-    const outputFilename = `${selectedTable.name}_${timestamp}${extension}`;
+
+    // Include bot name in filename if available
+    const filenamePrefix = botName ? botName : "";
+    const outputFilename = `${filenamePrefix} - ${selectedTable.name} - ${timestamp}${extension}`;
     const outputPath = path.join(outputDir, outputFilename);
 
     // Confirm export

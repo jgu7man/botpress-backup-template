@@ -18,7 +18,7 @@ export class SetContextPrompt {
   public userPrompt = `
 # Main Knowledge
 
-Evalúa evalúa el contenido de workflow.kbContextInterpretation. Devuelve únicamente una palabra: \`ubicacion\`, \`moto\` o \`credito\`.  Y asígnalo a la variable \`workflow.typeContext\`
+Evalúa evalúa el contenido de workflow.kbContextInterpretation. Devuelve únicamente una palabra: \`ubicacion\`, \`moto\`, \`cupo_brilla\` o \`credito\`.  Y asígnalo a la variable \`workflow.typeContext\`
 
 ## Criterios:  
 
@@ -38,12 +38,15 @@ Evalúa evalúa el contenido de workflow.kbContextInterpretation. Devuelve únic
   - Información del catálogo  
   - Información sobre motos  
 
+- \`cupo_brilla\`:  
+  Preguntas que mencionen explícitamente el “Cupo Brilla”  
+  (p. ej. “¿Cómo accedo al Cupo Brilla?”, “Requisitos para el Cupo Brilla”, etc.)
+
 - \`credito\`:  
   Preguntas relacionadas con:  
   - No tener historial crediticio.
   - Trabajar como independiente.
   - Estar reportado en Datacrédito.
-  - Acceder a créditos preaprobados (como el "Cupo Brilla").
   - Requisitos para estudios de crédito
   - Duración del estudio de crédito
   - Costo del estudio de crédito

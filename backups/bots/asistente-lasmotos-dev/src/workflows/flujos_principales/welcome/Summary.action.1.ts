@@ -9,8 +9,9 @@ export {};
 workflow.startedSummary = conversation.SummaryAgent.summary
 
 if (!workflow.startedSummary) {
-  console.log('❗️ Borrado de contexto: ', bot.conversationContext)
-  bot.conversationContext = ''
+  console.log('❗️ Borrado de contexto: ', conversation.flow.context)
+  conversation.flow.context = ''
+  conversation.flow.status = 'STARTED'
 } else {
   console.warn('Hubo contexto previo pero había resumen')
 }

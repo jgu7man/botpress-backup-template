@@ -33239,7 +33239,7 @@
             }
           ],
           "defaultTransition": {
-            "targetNodeId": "nd-32f448c757"
+            "targetNodeId": "nd-c56069ae10"
           },
           "id": "nd-852a227ee4",
           "name": "SendMessage"
@@ -37456,27 +37456,29 @@
       "id": "version_01K13HE8V34Z5H4P5TB74YRQ67"
     }
   ],
-  "revision": 58781,
+  "revision": 58784,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-08-29T23:02:24.455Z",
+    "lastRevisionCheckAt": "2025-09-01T22:28:14.362Z",
     "lastRevisionId": -1,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-08-29T23:02:26.846Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-08-29T23:02:26.850Z: Connection State: initialized -> connecting (ok)",
-      "2025-08-29T23:02:27.219Z (Q7rzT6Abym): Connection State: connecting -> connected (ok)",
-      "2025-08-29T23:02:27.367Z (Q7rzT6Abym): Multiplayer session initialized!",
-      "2025-08-29T23:02:34.658Z (Q7rzT6Abym): Player entered channel - {\"sessionId\":\"sess_01K3W12QCN6G68P04NP6F36ST5\",\"connectionId\":\"Q7rzT6Abym\",\"joinedAt\":\"2025-08-29T23:02:34.588Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 29 Aug 2025 23:02:27 GMT\",\"connectedAt\":\"Fri, 29 Aug 2025 23:02:27 GMT\",\"sections\":[]}",
-      "2025-08-29T23:02:34.658Z (Q7rzT6Abym): jguzman@marxadigital.com was elected as master - \"sess_01K3W12QCN6G68P04NP6F36ST5\"",
-      "2025-08-29T23:02:34.924Z (Q7rzT6Abym): Player left channel - {\"sessionId\":\"sess_01K3PGHV6G9HEWSFD7B082HCMC\",\"connectionId\":\"88GxVMDTNH\",\"joinedAt\":\"2025-08-29T18:57:19.215Z\",\"email\":\"tobiasgaitan@gmail.com\",\"displayName\":\"Tobias Gaitan\",\"color\":\"var(--pink-8)\",\"workspaceUserId\":\"241cd1a5-7deb-4c72-a7a7-997cd0dd721d\",\"lastActiveAt\":\"2025-08-29T23:01:53.449Z\",\"connectedAt\":\"Fri, 29 Aug 2025 14:48:58 GMT\",\"sections\":[]}",
-      "2025-08-29T23:02:34.924Z (Q7rzT6Abym): Player left channel"
+      "2025-09-01T22:27:45.347Z: Connection State: disconnected -> connecting (ok)",
+      "2025-09-01T22:27:45.348Z: Connection State: connecting -> suspended (Connection to server unavailable)",
+      "2025-09-01T22:27:45.367Z: Disconnecting multiplayer session...",
+      "2025-09-01T22:27:45.368Z: Multiplayer session disconnected!",
+      "2025-09-01T22:27:45.370Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-09-01T22:27:45.381Z: Connection State: initialized -> connecting (ok)",
+      "2025-09-01T22:27:46.675Z (lJLdVfmaUO): Connection State: connecting -> connected (ok)",
+      "2025-09-01T22:27:46.960Z (lJLdVfmaUO): Multiplayer session initialized!",
+      "2025-09-01T22:28:10.544Z (lJLdVfmaUO): Player entered channel - {\"sessionId\":\"sess_01K43N05TYJ7D7DYCYJPB7VWTY\",\"connectionId\":\"lJLdVfmaUO\",\"joinedAt\":\"2025-09-01T22:28:10.371Z\",\"email\":\"tobiasgaitan@gmail.com\",\"displayName\":\"Tobias Gaitan\",\"color\":\"var(--pink-8)\",\"workspaceUserId\":\"241cd1a5-7deb-4c72-a7a7-997cd0dd721d\",\"lastActiveAt\":\"Mon, 01 Sep 2025 22:27:50 GMT\",\"connectedAt\":\"Mon, 01 Sep 2025 22:27:50 GMT\",\"sections\":[]}",
+      "2025-09-01T22:28:10.544Z (lJLdVfmaUO): tobiasgaitan@gmail.com was elected as master - \"sess_01K43N05TYJ7D7DYCYJPB7VWTY\""
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K3W12QCN6G68P04NP6F36ST5 / Fri, 29 Aug 2025 23:02:27 GMT /  2025-08-29T23:02:37.221Z"
+      "tobiasgaitan@gmail.com / sess_01K43N05TYJ7D7DYCYJPB7VWTY / Mon, 01 Sep 2025 22:27:50 GMT /  Mon, 01 Sep 2025 22:27:50 GMT"
     ],
-    "savedAt": "2025-08-29T23:02:37.977Z",
-    "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K3W12QCN6G68P04NP6F36ST5"
+    "savedAt": "2025-09-01T22:28:14.362Z",
+    "savedBy": "tobiasgaitan@gmail.com",
+    "sessionId": "sess_01K43N05TYJ7D7DYCYJPB7VWTY"
   },
   "identity": {
     "name": "asistente-lasmotos-cupobrilla",

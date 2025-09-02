@@ -10,12 +10,10 @@ class User_Info_FormState {
   getPopAuthorization: any;
   /** getUserLocation */
   getUserLocation: any;
-  /** askForNationalId */
-  askForNationalId: any;
-  /** askForBillNumber */
-  askForBillNumber: any;
   /** 👋 farewell */
   '👋 farewell': any;
+  /** CupoBrillaProfile1 */
+  CupoBrillaProfile1: any;
 }
 
 export const workflow = new User_Info_FormState();

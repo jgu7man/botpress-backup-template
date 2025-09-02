@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 
 // # Apologies
-// Instruction: messageResult
+// Instruction: untitled
 export class ApologiesPrompt {
   static readonly Model = "fast-model";
   static readonly Temperature = 0;

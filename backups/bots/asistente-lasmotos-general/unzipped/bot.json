@@ -37456,29 +37456,25 @@
       "id": "version_01K13HE8V34Z5H4P5TB74YRQ67"
     }
   ],
-  "revision": 58788,
+  "revision": 58790,
   "revisionMetadata": {
-    "lastRevisionCheckAt": "2025-08-29T21:47:44.068Z",
-    "lastRevisionId": 59108,
+    "lastRevisionCheckAt": "2025-08-29T23:25:38.944Z",
+    "lastRevisionId": -1,
     "multiplayerStatus": "connected",
     "multiplayerTraces": [
-      "2025-08-29T21:47:36.082Z (IAJv3SJjtz): Disconnecting multiplayer session...",
-      "2025-08-29T21:47:36.163Z: Multiplayer session disconnected!",
-      "2025-08-29T21:47:36.199Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
-      "2025-08-29T21:47:36.217Z: Connection State: initialized -> connecting (ok)",
-      "2025-08-29T21:47:37.163Z (-OrxmhGU_5): Connection State: connecting -> connected (ok)",
-      "2025-08-29T21:47:37.286Z (-OrxmhGU_5): Multiplayer session initialized!",
-      "2025-08-29T21:47:40.962Z (-OrxmhGU_5): Player entered channel - {\"sessionId\":\"sess_01K3VW4VY8CHRMVTFP7XZD2YVV\",\"connectionId\":\"-OrxmhGU_5\",\"joinedAt\":\"2025-08-29T21:47:40.887Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 29 Aug 2025 21:47:37 GMT\",\"connectedAt\":\"Fri, 29 Aug 2025 21:47:37 GMT\",\"sections\":[]}",
-      "2025-08-29T21:47:40.963Z (-OrxmhGU_5): jguzman@marxadigital.com was elected as master - \"sess_01K3VW4VY8CHRMVTFP7XZD2YVV\"",
-      "2025-08-29T21:47:41.082Z (-OrxmhGU_5): Player left channel - {\"sessionId\":\"sess_01K3STVWN6J2NJ8GQE79AP8BM6\",\"connectionId\":\"6h3OBTB-ls\",\"joinedAt\":\"2025-08-29T02:35:23.185Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"2025-08-29T21:46:57.187Z\",\"connectedAt\":\"Fri, 29 Aug 2025 02:35:23 GMT\",\"sections\":[]}",
-      "2025-08-29T21:47:41.082Z (-OrxmhGU_5): Player left channel"
+      "2025-08-29T23:25:40.927Z: Initializing Client... - {\"initializing\":false,\"initialized\":false}",
+      "2025-08-29T23:25:40.932Z: Connection State: initialized -> connecting (ok)",
+      "2025-08-29T23:25:41.272Z (a8D6ru8d8-): Connection State: connecting -> connected (ok)",
+      "2025-08-29T23:25:41.552Z (a8D6ru8d8-): Multiplayer session initialized!",
+      "2025-08-29T23:25:41.787Z (a8D6ru8d8-): Player entered channel - {\"sessionId\":\"sess_01K3W2D96Y30DK0AJBCSE4E8N6\",\"connectionId\":\"a8D6ru8d8-\",\"joinedAt\":\"2025-08-29T23:25:41.723Z\",\"email\":\"jguzman@marxadigital.com\",\"displayName\":\"Jorge Humberto Guzmán Fuentes\",\"color\":\"var(--blue-8)\",\"workspaceUserId\":\"84f09a9e-33a3-4c6c-9e59-fdcfc95423b7\",\"lastActiveAt\":\"Fri, 29 Aug 2025 23:25:41 GMT\",\"connectedAt\":\"Fri, 29 Aug 2025 23:25:41 GMT\",\"sections\":[]}",
+      "2025-08-29T23:25:41.787Z (a8D6ru8d8-): jguzman@marxadigital.com was elected as master - \"sess_01K3W2D96Y30DK0AJBCSE4E8N6\""
     ],
     "players": [
-      "jguzman@marxadigital.com / sess_01K3VW4VY8CHRMVTFP7XZD2YVV / Fri, 29 Aug 2025 21:47:37 GMT /  Fri, 29 Aug 2025 21:47:37 GMT"
+      "jguzman@marxadigital.com / sess_01K3W2D96Y30DK0AJBCSE4E8N6 / Fri, 29 Aug 2025 23:25:41 GMT /  Fri, 29 Aug 2025 23:25:41 GMT"
     ],
-    "savedAt": "2025-08-29T21:47:44.069Z",
+    "savedAt": "2025-08-29T23:25:44.304Z",
     "savedBy": "jguzman@marxadigital.com",
-    "sessionId": "sess_01K3VW4VY8CHRMVTFP7XZD2YVV"
+    "sessionId": "sess_01K3W2D96Y30DK0AJBCSE4E8N6"
   },
   "identity": {
     "name": "asistente-lasmotos-general",

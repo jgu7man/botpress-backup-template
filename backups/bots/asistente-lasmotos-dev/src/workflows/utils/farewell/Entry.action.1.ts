@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 import * as luxon from "luxon";
 // Node: Entry - nd-96a14bb62e
-// "Manage Bot State and Current Time in Colombia" - ins-7816ee7c57
+// "Bot State Management with Current Time in Colombia" - ins-7816ee7c57
 
 export {};
 
@@ -10,22 +10,39 @@ export {};
 const { DateTime } = luxon
 const CurrentTime = DateTime.now().setZone('America/Bogota').toLocaleString(DateTime.TIME_SIMPLE)
 
-workflow.colombiaTime = CurrentTime
+bot.colombiaTime = CurrentTime
 
-const { botState } = workflow;
-console.log(`🤖 botState:`, botState);
-console.log(`🤖 1 irregularState:`, bot.irregularState);
+// -----
 
-if (bot.irregularState === "ATTENDED") {
-  bot.irregularState = "SERVED";
-} else if (botState) {
-  bot.irregularState = botState;
+type ConversationState =
+  | ''
+  | 'COMPLEXED'
+  | 'SERVED'
+  | 'WAITING'
+  | 'CONFUSED'
+  | 'ATTENTION_REQUESTED'
+  | 'FINISHED'
+  | 'TIMEOUT'
+
+const botState: ConversationState = workflow.botState as ConversationState
+console.log(`🤖 botState:`, botState)
+console.log(`🤖 1 conversation.state:`, conversation.flow?.state)
+
+if (botState) {
+  conversation.flow = {
+    ...conversation.flow,
+    state: botState,
+  }
 }
 
-console.log(`🤖 2 irregularState:`, bot.irregularState);
+console.log(`🤖 2 conversation.state:`, conversation.flow?.state)
 
-if (!bot.irregularState) {
-  bot.irregularState = "ATTENDED";
+// Si no existe estado, significa que debemos ofrecer ayuda
+if (!conversation.flow?.state) {
+  conversation.flow = {
+    ...conversation.flow,
+    state: 'WAITING'
+  }
 }
 
-console.log(`🤖 3 irregularState:`, bot.irregularState);
+console.log(`🤖 3 conversation.state:`, conversation.flow?.state)

@@ -12,18 +12,24 @@ class AskForUserLocationState {
   skipFlowReason: string;
   /** Sin descripción */
   retryAttemps: number;
-  /** mainKnowledgeBase1 */
-  mainKnowledgeBase1: any;
   /** QuestionWithUserName */
   QuestionWithUserName: any;
-  /** saveDataUser */
-  saveDataUser: any;
   /** analyzeLocationUserInput1 */
   analyzeLocationUserInput1: any;
-  /** retrieveServiceLocation1 */
-  retrieveServiceLocation1: any;
-  /** UnderstandUserInput1 */
-  UnderstandUserInput1: any;
+  /** saveDataUser */
+  saveDataUser: any;
+  /** AnswerType1 */
+  AnswerType1: any;
+  /** analyzeLocationUserInput1 */
+  analyzeLocationUserInput1: any;
+  /** saveDataUser */
+  saveDataUser: any;
+  /** AnswerType2 */
+  AnswerType2: any;
+  /** analyzeLocationUserInput1 */
+  analyzeLocationUserInput1: any;
+  /** saveDataUser */
+  saveDataUser: any;
 }
 
 export const workflow = new AskForUserLocationState();

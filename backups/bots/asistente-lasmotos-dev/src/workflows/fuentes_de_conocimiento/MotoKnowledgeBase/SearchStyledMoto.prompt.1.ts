@@ -3,8 +3,8 @@ import { workflow } from "./workflow.state";
 // # SearchStyledMoto
 // Instruction: interpretedStyle
 export class SearchStyledMotoPrompt {
-  static readonly Model = "fast-model";
-  static readonly Temperature = 0;
+  static readonly Model = "google-ai__models/gemini-2.0-flash";
+  static readonly Temperature = 0.25;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;

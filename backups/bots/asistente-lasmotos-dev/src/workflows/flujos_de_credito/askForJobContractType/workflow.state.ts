@@ -6,12 +6,12 @@ class AskForJobContractTypeState {
   answerUnderstanding: string;
   /** Sin descripción */
   understandingAttempts: number;
+  /** 👤 questionWithUserName */
+  '👤 questionWithUserName': any;
   /** 💾 saveUserData */
   '💾 saveUserData': any;
-  /** UnderstandUserInput */
-  UnderstandUserInput: any;
-  /** farewell1 */
-  farewell1: any;
+  /** AnswerType1 */
+  AnswerType1: any;
 }
 
 export const workflow = new AskForJobContractTypeState();

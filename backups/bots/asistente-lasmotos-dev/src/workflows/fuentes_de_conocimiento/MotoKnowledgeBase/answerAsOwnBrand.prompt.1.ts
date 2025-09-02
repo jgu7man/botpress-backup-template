@@ -3,8 +3,8 @@ import { workflow } from "./workflow.state";
 // # answerAsOwnBrand
 // Instruction: foundMessage
 export class AnswerAsOwnBrandPrompt {
-  static readonly Model = "fast-model";
-  static readonly Temperature = 0.6;
+  static readonly Model = "openai__o4-mini-2025-04-16";
+  static readonly Temperature = 1;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;

@@ -1,15 +1,21 @@
 import { workflow } from "./workflow.state";
-import * as luxon from "luxon";
 // Node: financiera_message - nd-45f911b1da
-// Set Current Time in Colombia Using Luxon Library - ins-eb7966928a
+// "Fetch Financial Entity Link Based on Identifier" - ins-2c8ee12e0a
 
 export {};
 
 // ------------------ EXECUTE CODE -------------------------
 
-const { DateTime } = luxon
-const currentTime = DateTime.now()
-    .setZone('America/Bogota')
-    .toLocaleString(DateTime.TIME_SIMPLE)
+console.log('⭕️', workflow.financialEntity)
 
-workflow.colombiaTime = currentTime
+const searchResult = await EntiedadesFinancierasTable.findRecords({
+  filter: { Identificador: workflow.financialEntity }
+})
+
+console.log('⭕️', searchResult)
+
+if (searchResult.length) {
+  workflow.financialLink = searchResult[0].Enlace
+} else {
+  workflow.financialLink = 'https://slm.bancodebogota.com/mctn45s5'
+}

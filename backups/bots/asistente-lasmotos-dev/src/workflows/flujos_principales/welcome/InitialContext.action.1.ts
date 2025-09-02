@@ -5,40 +5,40 @@ export {};
 
 // ------------------ EXECUTE CODE -------------------------
 
-const userFullName = user.fullName;
-const userPhone = user.phone;
-const { conversationId } = event;
+const userFullName = user.fullName
+const userPhone = user.phone
+const conversationId = event.conversationId
 
 // Check if conversationId exists in leadClientsTable
 const leadRecords = await leadClientsTable.findRecords({
-  filter: { CONVERSATION_ID: conversationId },
-});
+  filter: { CONVERSATION_ID: conversationId }
+})
 
 // Log user information if available
 if (userFullName && userPhone) {
-  console.log(`⭕️ User Full Name: ${userFullName}, User Phone: ${userPhone}`);
+  console.log(`👀 User Full Name: ${userFullName}, User Phone: ${userPhone}`)
 }
 
 // Clear bot data if user information is incomplete
 if (!userFullName || !userPhone) {
   console.log(
     `⚠️ Clearing bot data: Missing user information. Name: ${
-      userFullName ? "present" : "missing"
-    }, Phone: ${userPhone ? "present" : "missing"}`
-  );
-  resetBotData();
+      userFullName ? 'present' : 'missing'
+    }, Phone: ${userPhone ? 'present' : 'missing'}`
+  )
+  resetBotData()
 }
 // Clear bot data if this conversation already exists in records
-else if (leadRecords.length > 0) {
-  console.log(
-    `⚠️ Clearing bot data: Conversation ID ${conversationId} already exists in records`
-  );
-  resetBotData();
-}
+// else if (leadRecords.length > 0) {
+//   console.log(`⚠️ Clearing bot data: Conversation ID ${conversationId} already exists in records`)
+//   resetBotData()
+// }
 
 // Helper function to reset bot data
+
 function resetBotData() {
-  bot.conversationContext = "";
-  bot.conversationActions = [];
-  bot.irregularState = "";
+  conversation.flow['context'] = ''
+  conversation.flow['state'] = ''
+  conversation.flow['topics'] = conversation.flow?.topics ?? []
+  conversation.flow['status'] = conversation.flow?.status ?? ''
 }

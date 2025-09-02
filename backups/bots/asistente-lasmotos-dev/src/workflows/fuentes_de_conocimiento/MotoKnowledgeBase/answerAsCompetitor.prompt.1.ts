@@ -3,7 +3,7 @@ import { workflow } from "./workflow.state";
 // # answerAsCompetitor
 // Instruction: foundMessage
 export class AnswerAsCompetitorPrompt {
-  static readonly Model = "openai__gpt-4o-2024-11-20";
+  static readonly Model = "openai__o4-mini-2025-04-16";
   static readonly Temperature = 0.7;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;

@@ -10,14 +10,18 @@ class ProductDetailsFollowUpState {
   purchaseMethodInfo: string;
   /** Sin descripción */
   purchaseMethodInfoMessage: string;
-  /** getContact1 */
-  getContact1: any;
   /** askPurchaseMethod1 */
   askPurchaseMethod1: any;
   /** CashPreferenceHandle1 */
   CashPreferenceHandle1: any;
-  /** farewell1 */
-  farewell1: any;
+  /** OfferCashToCredit */
+  OfferCashToCredit: any;
+  /** EvaluateAskingUserData1 */
+  EvaluateAskingUserData1: any;
+  /** User Info Form */
+  'User Info Form': any;
+  /** CreditPreferenceHandle1 */
+  CreditPreferenceHandle1: any;
 }
 
 export const workflow = new ProductDetailsFollowUpState();

@@ -1,10 +1,10 @@
 import { workflow } from "./workflow.state";
 
 // # financiera_message
-// Instruction: untitled
+// Instruction: assessmentInvitationMsg
 export class Financiera_messagePrompt {
   static readonly Model = "fast-model";
-  static readonly Temperature = 0;
+  static readonly Temperature = 0.2;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;
@@ -12,7 +12,7 @@ export class Financiera_messagePrompt {
   constructor(
     public input = {
       fullname: user.fullName,
-      Colombia_time: workflow.colombiaTime,
+      Colombia_time: bot.colombiaTime,
       FINANCIAL_LINK: workflow.financialLink,
     }
   ) {}

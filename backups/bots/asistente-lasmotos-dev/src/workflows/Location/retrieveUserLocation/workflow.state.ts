@@ -10,8 +10,12 @@ class RetrieveUserLocationState {
   greetingMessage: string;
   /** Sin descripción */
   understandingAttempts: number;
-  /** UnderstandUserInput1 */
-  UnderstandUserInput1: any;
+  /** 👤 questionWithUserName */
+  '👤 questionWithUserName': any;
+  /** analyzeLocationUserInput */
+  analyzeLocationUserInput: any;
+  /** AnswerType1 */
+  AnswerType1: any;
 }
 
 export const workflow = new RetrieveUserLocationState();

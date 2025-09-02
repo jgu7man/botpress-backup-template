@@ -3,8 +3,8 @@ import { workflow } from "./workflow.state";
 // # searchingFor
 // Instruction: interestedProduct
 export class SearchingForPrompt {
-  static readonly Model = "openai__o1-mini-2024-09-12";
-  static readonly Temperature = 0.2;
+  static readonly Model = "fast-model";
+  static readonly Temperature = 0.5;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;
@@ -16,16 +16,53 @@ export class SearchingForPrompt {
   ) {}
 
   public userPrompt = `
-## ROLE:
-Eres un asistente experto en motocicletas. Analiza el recurso de la respuesta del la búsqueda para llenar el objeto user.interestedProduct con las siguientes propiedades:
-- reference: El nombre de la moto
-- price: El precio de la moto
-- image: Url de la imagen
-- link: Url de la refderencia 
-- brillaPrice: El precio de cupo brilla
-- cashPrice: El precio de contado (si no existe, déjalo undefined)
+## **ROL: Asistente experto en motocicletas**
 
-IMPORTANT: Si no se encuentran los datos de precio o imagen o todas esas son vacías, designa el user.interestedProduct como vacío o undefined o null, de manera que nos indique que fue un error`;
+Tu tarea es analizar cuidadosamente el contenido de la respuesta obtenida en una búsqueda relacionada con motocicletas, y llenar el objeto \`user.interestedProduct\` con las siguientes propiedades:
+
+\`\`\`ts
+user.interestedProduct = {
+  reference: string       // Nombre de la moto
+  price: number           // Precio principal mostrado
+  image: string           // URL de la imagen de la moto
+  link: string            // URL del recurso o referencia
+  brillaPrice: number     // Precio con cupo Brilla
+  cashPrice: number       // Precio de contado
+}
+\`\`\`
+
+---
+
+### 📌 **Instrucciones estrictas:**
+
+1. **Extrae los datos exactamente como aparecen** en el recurso (texto o HTML). No los modifiques, corrijas ni infieras.
+
+2. Si **no encuentras alguno de los siguientes campos** (\`price\`, \`image\`, \`link\`), o todos están vacíos, entonces **asigna \`user.interestedProduct\` como \`null\`, \`undefined\` o un objeto vacío \`{}\`** para indicar un error de extracción.
+
+3. **Lógica para precios**:
+
+   * \`price\`: Corresponde al precio principal mencionado.
+   * \`brillaPrice\`: Solo asígnalo si claramente se indica que es el precio con cupo Brilla. Si no es explícito, déjalo \`undefined\`.
+   * \`cashPrice\`: Solo asígnalo si se menciona específicamente como "precio de contado" o similar. Si no lo ves claramente, déjalo \`undefined\`.
+   * **Importante**: \`brillaPrice\` y \`cashPrice\` deben ser **diferentes** a \`price\`. Si alguno es igual a \`price\`, invalídalo y déjalo como \`undefined\`.
+
+4. **Las URLs (\`image\` y \`link\`) deben copiarse tal cual**. No las edites, acortes ni les quites parámetros.
+
+---
+
+### ✅ Ejemplo válido:
+
+\`\`\`json
+{
+  "reference": "AKT NKD 125",
+  "price": 5400000,
+  "image": "https://ejemplo.com/img/akt-nkd.png",
+  "link": "https://ejemplo.com/motos/akt-nkd",
+  "brillaPrice": 5800000,
+  "cashPrice": 5200000
+}
+\`\`\`
+`;
 
   output(
     interestedProduct: any

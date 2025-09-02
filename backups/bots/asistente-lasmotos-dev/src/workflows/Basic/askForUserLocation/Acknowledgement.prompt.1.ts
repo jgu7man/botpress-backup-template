@@ -12,13 +12,13 @@ export class AcknowledgementPrompt {
   constructor(
     public input = {
       User_name: user.fullName,
+      Location: user.location,
     }
   ) {}
 
   public userPrompt = `
 ## **Comportamiento**
-- Usa el siguiente template para armar un mensaje:
-"Muchas gracias, {Sr. o Sra. según sea el caso si no hay nombre entonces usar Sr@.} user.fullName,
+- Genera un mensaje parafraseado de una o 2 líneas basado en el siguiente template: "Gracias, bonito lugar LOCATION"
 
 ## **Consideraciones:**
 - Usa el primer nombre si tiene mas de uno

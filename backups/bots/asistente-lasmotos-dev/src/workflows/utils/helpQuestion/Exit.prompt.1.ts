@@ -1,7 +1,6 @@
-import { workflow } from "./workflow.state";
 
 // # Exit
-// Instruction: message
+// Instruction: untitled
 export class ExitPrompt {
   static readonly Model = "fast-model";
   static readonly Temperature = 0;
@@ -11,7 +10,7 @@ export class ExitPrompt {
 
   constructor(
     public input = {
-      time: workflow.colombiaTime,
+      time: bot.colombiaTime,
     }
   ) {}
 

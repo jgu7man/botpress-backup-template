@@ -1,17 +1,9 @@
-// Workflow: locationKnowledgeBase - wf-5e90071533
+// Workflow: LocationKnowledgeBase - wf-e709ff07ef
 class LocationKnowledgeBaseState {
-  /** Sin descripción */
-  serviceLocationInfo: string;
-  /** Sin descripción */
-  serviceLocationAbout: string;
-  /** Sin descripción */
-  skipFlow: boolean;
-  /** FindLocation */
-  FindLocation: any;
-  /** retrieveUserLocation */
-  retrieveUserLocation: any;
   /** analyzeLocationUserInput */
   analyzeLocationUserInput: any;
+  /** retrieveUserLocation */
+  retrieveUserLocation: any;
 }
 
 export const workflow = new LocationKnowledgeBaseState();

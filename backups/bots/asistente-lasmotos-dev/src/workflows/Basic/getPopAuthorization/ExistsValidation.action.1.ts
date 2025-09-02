@@ -6,6 +6,6 @@ export {};
 
 // ------------------ EXECUTE CODE -------------------------
 
-if ( user.askedBefore ) {
+if ( user.authorizedPop?.askedBefore ) {
   workflow.skipFlowReason = `User has been asked before`;
 }

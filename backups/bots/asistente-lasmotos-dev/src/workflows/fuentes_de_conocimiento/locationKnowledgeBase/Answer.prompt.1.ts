@@ -57,9 +57,4 @@ userLocation:  user.serviceLocation || user.location || '' `
 - Procura no sonar desalentador si no entendimos su ubicación.
 `;
 
-  output(
-    serviceLocationInfo: string
-  ) {
-    workflow.serviceLocationInfo = serviceLocationInfo;
-  }
 }

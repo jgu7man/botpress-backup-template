@@ -8,14 +8,12 @@ class AskPurchaseMethodState {
   clarificationAttempts: number;
   /** questionWithUserName */
   questionWithUserName: any;
-  /** UnderstandUserInput */
-  UnderstandUserInput: any;
   /** 💾 saveUserData */
   '💾 saveUserData': any;
-  /** CreditPreferenceHandle */
-  CreditPreferenceHandle: any;
   /** setCupoBrillaProfile1 */
   setCupoBrillaProfile1: any;
+  /** AnswerType1 */
+  AnswerType1: any;
 }
 
 export const workflow = new AskPurchaseMethodState();

@@ -3,13 +3,13 @@ class AskToKnowledgeBaseState {
   /** Sin descripción */
   interpretedInput: string;
   /** Sin descripción */
-  kbUnderstanding: string;
-  /** Sin descripción */
   answerMessage: string;
   /** Sin descripción */
   context: string;
-  /** setCupoBrillaProfile */
-  setCupoBrillaProfile: any;
+  /** Respuesta dada por la base de conocimientos */
+  kbAnswer: string;
+  /** farewell1 */
+  farewell1: any;
 }
 
 export const workflow = new AskToKnowledgeBaseState();

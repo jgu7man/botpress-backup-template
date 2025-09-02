@@ -1,3 +1,4 @@
+import { workflow } from "./workflow.state";
 // Node: save_data_client - nd-bb06b713d9
 // "Save and Update User Conversation Data in Database" - ins-648c840c43
 
@@ -5,9 +6,12 @@ export {};
 
 // ------------------ EXECUTE CODE -------------------------
 
-const phone = user.phone;
-const { conversationId = "" } = event;
-console.log(`💾 saving conversationId:`, conversationId);
+const phone = user.phone
+const conversationId = event.conversationId || ''
+
+const { status, ending, topics } = conversation.flow || {}
+const { reference, brillaPrice, cashPrice, price } = user.interestedProduct || {}
+console.log(`💾 saving conversation:`, conversationId || phone)
 
 conversation.sensitiveData = {
   TELEFONO: phone,
@@ -16,47 +20,71 @@ conversation.sensitiveData = {
   CEDULA: user.nationalID,
   NUMERO_DE_FACTURA: user.brillaBillNumber,
   TIPO_DE_CONTRATO: user.jobContractType,
-};
+  REPORTADO: user.negativeCreditReport
+}
+
+let precioInformado: number
+if (user.creditProfile === 'CUPO_BRILLA') {
+  precioInformado = brillaPrice
+} else if (user.purchasePreference === 'CASH') {
+  precioInformado = cashPrice
+} else {
+  precioInformado = price
+}
 
 conversation.nonSensitiveData = {
   RESUMEN: user.description,
-  PRODUCTO_DE_INTERES: user.interestedProduct?.reference,
+  PRODUCTO_DE_INTERES: reference,
   UBICACION_DE_SERVICIO: user.serviceLocation,
-  ESTATUS: user.conversationStatus,
+  ESTATUS: status,
   ASISTENCIA: user.assistanceMode,
   ROL_DE_CLIENTE: user.clientRole,
   PERFIL_CREDITICIO: user.creditProfile,
-  REPORTADO: user.negativeCreditReport ? "Si" : "No",
   PREFERENCIA_DE_COMPRA: user.purchasePreference,
-  CONCLUSION: user.conversationEnding,
-};
+  CONCLUSION: ending,
+  TEMAS: topics,
+  PRECIO_INFORMADO: precioInformado,
+  SENTIMIENTO: workflow.sentiment
+}
+
+const isAuthorizedPop = user.authorizedPop?.answer === 'ACCEPTED' 
+const isColdProspect = conversation.flow.status == 'COLD_PROSPECT'
+const saveSensitiveData = isAuthorizedPop || isColdProspect
 
 let rowData: {
-  CONVERSATION_ID: string;
-  [key: string]: string;
+  CONVERSATION_ID: string
+  [key: string]: string | string[] | number
 } = {
   CONVERSATION_ID: conversationId,
-  ...(user.popAuthorized
+  ...(saveSensitiveData
     ? { ...conversation.sensitiveData, ...conversation.nonSensitiveData }
-    : { ...conversation.nonSensitiveData }),
-};
+    : { ...conversation.nonSensitiveData })
+}
 
-console.log(`🤖 Saving rowData:`, rowData);
+console.log(`🤖 Saving rowData:`, rowData)
+const lastTenDigitsOfPhone = phone.slice(-10)
+console.log('🔎 lastTenDigitsOfPhone', lastTenDigitsOfPhone)
 
 try {
-  const existingRecord = await leadClientsTable.findRecords({
-    filter: { TELEFONO: phone } as Record<keyof leadClientsTableRecord, any>,
-  });
-  console.log(`🤖 existingRecord:`, existingRecord);
+    const recordResults = await leadClientsTable.findRecords({
+    filter: { 
+      $or: [
+        { TELEFONO: { $regex: `${lastTenDigitsOfPhone}$` } }, 
+        { CONVERSATION_ID: conversationId }
+      ]
+    }
+  })
 
-  if (existingRecord.length > 0) {
-    console.log(`✅ Updating record with id: ${existingRecord[0].id}`);
-    const recordId = existingRecord[0].id;
-    await leadClientsTable.updateRecord(recordId, rowData);
+  console.log('❕ Records result', recordResults)
+
+  if (recordResults.length > 0) {
+    console.log(`✅ Updating record with id: ${recordResults[0].id}`)
+    const recordId = recordResults[0].id
+    await leadClientsTable.updateRecord(recordId, rowData)
   } else {
-    console.log(`🔅 Creating new record`);
-    await leadClientsTable.createRecord(rowData);
+    console.log(`🔅 Creating new record`)
+    await leadClientsTable.createRecord(rowData)
   }
 } catch (error) {
-  console.error("❌ Error saving data:", error);
+  console.error('❌ Error saving data:', error)
 }

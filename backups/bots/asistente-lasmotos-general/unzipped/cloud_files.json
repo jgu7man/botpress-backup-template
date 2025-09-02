@@ -1,5 +1,239 @@
 [
   {
+    "id": "file_01K435WAN5F0KV83B83E0T2ZR9",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 111816,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "757292657157556"
+    },
+    "key": "whatsapp-media_757292657157556",
+    "index": false,
+    "updatedAt": "2025-09-01T17:40:58.652Z"
+  },
+  {
+    "id": "file_01K434J3D3YPT23PGED7QCQVBP",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1782161645721476"
+    },
+    "key": "whatsapp-media_1782161645721476",
+    "index": false,
+    "updatedAt": "2025-09-01T17:17:54.972Z"
+  },
+  {
+    "id": "file_01K434HQZRMCPNKCAX8E26C3WB",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "774456958646990"
+    },
+    "key": "whatsapp-media_774456958646990",
+    "index": false,
+    "updatedAt": "2025-09-01T17:17:43.277Z"
+  },
+  {
+    "id": "file_01K434HDNW303SWCJ0B2VX7X0M",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1079178910625904"
+    },
+    "key": "whatsapp-media_1079178910625904",
+    "index": false,
+    "updatedAt": "2025-09-01T17:17:32.724Z"
+  },
+  {
+    "id": "file_01K434H2WVH8ACW2WE78Z5JQ29",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "749861011206323"
+    },
+    "key": "whatsapp-media_749861011206323",
+    "index": false,
+    "updatedAt": "2025-09-01T17:17:21.684Z"
+  },
+  {
+    "id": "file_01K434GNAX32QQE6XMY431J4DZ",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1524972578872269"
+    },
+    "key": "whatsapp-media_1524972578872269",
+    "index": false,
+    "updatedAt": "2025-09-01T17:17:07.798Z"
+  },
+  {
+    "id": "file_01K434G61EP8G7ABAMCWRFHR93",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "653769504431539"
+    },
+    "key": "whatsapp-media_653769504431539",
+    "index": false,
+    "updatedAt": "2025-09-01T17:16:52.134Z"
+  },
+  {
+    "id": "file_01K434FMTJVCGTHGQSW6NF9Z78",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/webp",
+    "size": 49938,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1281863710331804"
+    },
+    "key": "whatsapp-media_1281863710331804",
+    "index": false,
+    "updatedAt": "2025-09-01T17:16:34.507Z"
+  },
+  {
+    "id": "file_01K433Z6WY9VB8EPJM6TDZ6Y20",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "image/jpeg",
+    "size": 130195,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1270614747621648"
+    },
+    "key": "whatsapp-media_1270614747621648",
+    "index": false,
+    "updatedAt": "2025-09-01T17:07:35.956Z"
+  },
+  {
+    "id": "file_01K433X65X1S8QMZ55GAJ3MJV0",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "application/pdf",
+    "size": 343022,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1100432468381884"
+    },
+    "key": "whatsapp-media_1100432468381884",
+    "index": false,
+    "updatedAt": "2025-09-01T17:06:29.685Z"
+  },
+  {
+    "id": "file_01K43058QW9XYD7QDS3H7ZQNWW",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "audio/ogg",
+    "size": 4623,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1518089312965726"
+    },
+    "key": "whatsapp-media_1518089312965726",
+    "index": false,
+    "updatedAt": "2025-09-01T16:01:00.147Z"
+  },
+  {
+    "id": "file_01K4303AMAQJMEH7Y0VH12VCWD",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "audio/ogg",
+    "size": 12016,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "1551486592881490"
+    },
+    "key": "whatsapp-media_1551486592881490",
+    "index": false,
+    "updatedAt": "2025-09-01T15:59:56.546Z"
+  },
+  {
+    "id": "file_01K42VMZRX3H5QYXDQ6GCH5B3S",
+    "accessPolicies": [
+      "public_content"
+    ],
+    "contentType": "audio/ogg",
+    "size": 4165,
+    "status": "upload_completed",
+    "tags": {
+      "source": "integration",
+      "channel": "channel",
+      "integration": "whatsapp",
+      "whatsappMediaId": "968860108707373"
+    },
+    "key": "whatsapp-media_968860108707373",
+    "index": false,
+    "updatedAt": "2025-09-01T14:42:12.368Z"
+  },
+  {
     "id": "file_01K3PAS736WES6CA11GZH3YM23",
     "accessPolicies": [
       "public_content"

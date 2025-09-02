@@ -1,10 +1,10 @@
 import { workflow } from "./workflow.state";
 
 // # IsReportedAndHasCupoBrilla
-// Instruction: untitled
+// Instruction: concernMessage
 export class IsReportedAndHasCupoBrillaPrompt {
   static readonly Model = "fast-model";
-  static readonly Temperature = 0;
+  static readonly Temperature = 0.25;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;

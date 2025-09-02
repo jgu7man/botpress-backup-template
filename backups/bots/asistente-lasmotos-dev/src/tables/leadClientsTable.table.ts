@@ -8,15 +8,19 @@
   Parent folder: root
   Selectors: []
   Is compute enabled: false
-  Updated: 2025-04-06T18:30:57.714Z
+  Updated: 2025-05-29T15:30:22.311Z
 */
 export interface leadClientsTable {
   /** Record ID */
   id: string;
+  /** Sin descripción */
+  COSTO: string | null;
+  /** Los temas de los que se hablaron en la conversación */
+  TEMAS: string[] | null;
   /** cedula del cliente */
   CEDULA: string | null;
   /** Sin descripción */
-  NOMBRE: string;
+  NOMBRE: string | null;
   /** Sin descripción */
   ESTATUS: string | null;
   /** Sin descripción */
@@ -29,10 +33,12 @@ export interface leadClientsTable {
   ASISTENCIA: string | null;
   /** Sin descripción */
   CONCLUSION: string | null;
-  /** Sin descripción */
-  ROL_DE_CLIENTE: string | null;
+  /** La evaluación del sentimiento de la conversación */
+  SENTIMIENTO: string | null;
   /** Sin descripción */
   CONVERSATION_ID: string;
+  /** El precio que se mencionó dependiendo de las condiciones de compra  */
+  PRECIO_INFORMADO: number | null;
   /** Sin descripción */
   TIPO_DE_CONTRATO: string | null;
   /** Sin descripción */

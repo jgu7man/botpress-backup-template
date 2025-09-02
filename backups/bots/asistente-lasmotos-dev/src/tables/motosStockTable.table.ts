@@ -8,7 +8,7 @@
   Parent folder: root
   Selectors: []
   Is compute enabled: false
-  Updated: 2025-04-15T13:27:08.537Z
+  Updated: 2025-08-02T14:55:27.898Z
 */
 export interface motosStockTable {
   /** Record ID */

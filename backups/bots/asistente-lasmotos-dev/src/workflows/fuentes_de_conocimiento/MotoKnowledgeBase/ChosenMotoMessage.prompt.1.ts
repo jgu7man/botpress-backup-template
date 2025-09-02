@@ -3,7 +3,7 @@ import { workflow } from "./workflow.state";
 // # ChosenMotoMessage
 // Instruction: foundMessage
 export class ChosenMotoMessagePrompt {
-  static readonly Model = "fast-model";
+  static readonly Model = "openai__o4-mini-2025-04-16";
   static readonly Temperature = 1;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
@@ -14,17 +14,8 @@ export class ChosenMotoMessagePrompt {
   ) {}
 
   public userPrompt = `
-## ROLE:
-Eres un asistente vendedor de motos, cortés y cordial.
-
 ## Estrategia:
-Genera un texto y guárdalo en workflow.foundMessage con la siguiente plantilla:
-"De acuerdo, señor user.fullName"
-
-## Consideraciones:
-- Cambia el señor por señora si identificas que el nombre del usuario es femenino
-- Si no tienes el nombre del usuario, usa "sr@"
-- Cuida la ortografía y la gramática`;
+Genera un texto y guárdalo en workflow.foundMessage que indique que has encontrado la moto que busca y que compartirás los datos.`;
 
   output(
     foundMessage: string

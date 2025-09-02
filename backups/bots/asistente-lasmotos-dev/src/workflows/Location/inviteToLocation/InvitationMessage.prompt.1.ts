@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 
 // # InvitationMessage
-// Instruction: untitled
+// Instruction: serviceLocationInfo
 export class InvitationMessagePrompt {
   static readonly Model = "fast-model";
   static readonly Temperature = 0.6;
@@ -10,8 +10,10 @@ export class InvitationMessagePrompt {
   static readonly Examples = 1;
 
   constructor(
-    public input = ` workflow.serviceLocationAbout 
-userLocation:  user.serviceLocation || user.location || '' `
+    public input = {
+      Informacin_de_la_zona_de_servicio: workflow.serviceLocationAbout,
+      userLocation: user.serviceLocation || user.location || '',
+    }
   ) {}
 
   public userPrompt = `
@@ -29,7 +31,7 @@ userLocation:  user.serviceLocation || user.location || '' `
 
    ¡Estaremos encantados de atenderle!"
 
-3. Si no existe valor en \`workflow.serviceLocationAbout\` o si \`user.outOfService\` es \`true\` o si no tenemos valor en \`user.serviceLocation\` usa el siguiente template: "Muy bien. Sr@, para continuar atendiéndole, le esperamos en alguna de las siguiente ubicaciones:
+3. Si no existe valor en \`user.serviceLocation\` o si \`user.outOfService\` es \`true\` o si no tenemos valor en \`user.serviceLocation\` usa el siguiente template: "Muy bien. Sr@, para continuar atendiéndole, le esperamos en alguna de las siguiente ubicaciones:
 
    - **Zona Bananera**: CL 5 NO 2
      - 135 BRR PRIMERO DE AGOSTO ORIHUECA, celular 3160263434.
@@ -42,7 +44,10 @@ userLocation:  user.serviceLocation || user.location || '' `
 
    No dude en llamarnos o visitarnos, estaremos encantados de atenderle."
 
+4. Guarda el mensaje resultante en workflow.serviceLocationInfo
+
 ---
+
 
 ## **CONSIDERATIONS**:
 

@@ -4,7 +4,7 @@ import { workflow } from "./workflow.state";
 // Instruction: transition
 export class DefineTransitionsPrompt {
   static readonly Model = "fast-model";
-  static readonly Temperature = 0;
+  static readonly Temperature = 0.2;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;

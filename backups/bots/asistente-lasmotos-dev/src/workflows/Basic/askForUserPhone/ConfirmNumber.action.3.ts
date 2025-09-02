@@ -1,13 +1,9 @@
 import { workflow } from "./workflow.state";
-// Node: ConfirmNumber - nd-0c6b6b4b4b
-// "Track Confirmation Attempts and Set Skip Reason" - ins-68cfe8f5ae
+// Node: confirmNumber - nd-98ac3e0a7b
+// "User Profile Management and Data Handling System" - ins-1de8d2e406
 
 export {};
 
 // ------------------ EXECUTE CODE -------------------------
 
-workflow.attemptsToConfirm++
-
-if (workflow.attemptsToConfirm > 1) {
-    workflow.skipFlowReason = 'Se intentó confirmar el número de teléfono más de 1 vez  '
-}
+user.phone = workflow.userPhoneInput

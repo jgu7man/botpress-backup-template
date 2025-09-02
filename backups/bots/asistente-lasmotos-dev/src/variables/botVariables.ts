@@ -1,18 +1,8 @@
-import { ConversationActionsHistory } from "../schemas/ConversationActionsHistory";
 
 export class botVariables {
-  /** [var-e76a72e7be] */
-  conversationContext: string;
   /**
-  * [var-ca1b9daae5]
-  * @description The list of conversations from the bot 
+  * [var-4a4c21b650]
+  * @description La hora en colombia 
   */
-  conversationActions: ConversationActionsHistory[];
-  /** [var-1fe026fdd8] */
-  clarificationAttempts: number;
-  /**
-  * [var-abde0d6af8]
-  * @description state of bot when get a answer from user 
-  */
-  irregularState: string;
+  colombiaTime: string;
 }

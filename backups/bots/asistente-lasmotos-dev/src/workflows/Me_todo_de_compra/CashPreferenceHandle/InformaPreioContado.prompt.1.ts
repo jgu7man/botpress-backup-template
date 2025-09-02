@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 
 // # InformaPreioContado
-// Instruction: untitled
+// Instruction: priceInfoMessage
 export class InformaPreioContadoPrompt {
   static readonly Model = "fast-model";
   static readonly Temperature = 0;

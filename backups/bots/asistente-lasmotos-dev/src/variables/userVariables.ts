@@ -1,3 +1,4 @@
+import { AuthorizedPop } from "../schemas/AuthorizedPop";
 import { CreditUserInfo } from "../schemas/CreditUserInfo";
 import { ProductInfoSchema } from "../schemas/ProductInfoSchema";
 
@@ -12,13 +13,6 @@ export class userVariables {
   * @description telefono del cliente que contacta 
   */
   phone: string;
-  /** [var-f4f0ed016f] */
-  popAuthorized: boolean;
-  /**
-  * [var-83dcd249ff]
-  * @description variable que te dice si ya se ha preguntado por autorizacion antes 
-  */
-  askedBefore: boolean;
   /**
   * [var-9369e3e179]
   * @description location of client 
@@ -37,11 +31,6 @@ export class userVariables {
   nationalID: string;
   /** [var-2ab8508338] */
   brillaBillNumber: string;
-  /**
-  * [var-354a3c444f]
-  * @description La categorización de la finalización de la conversación. Puede ser:  'COMPLEXED',  'WRONG', 'SERVED', 'TIMEDOUT' 
-  */
-  conversationEnding: string;
   /** [var-17ae7daec2] */
   serviceLocation: string;
   /** [var-25c7be938a] */
@@ -58,11 +47,19 @@ export class userVariables {
   jobContractType: string;
   /** [var-fa90fc97e1] */
   phoneInvalid: boolean;
-  /** [var-1b5209edbb] */
+  /**
+  * [var-2946efe2f3]
+  * @description Información de que el cliente autorizó o rechazó el guardado de sus datos. 
+  */
+  authorizedPop: AuthorizedPop;
+  /**
+  * [var-1b5209edbb]
+  * @description Estado del cliente ante data crédito. Se le pregunta si está reportado y los valores posibles son 'SÍ' o 'NO' 
+  */
   negativeCreditReport: string;
   /**
-  * [var-372b1dc48c]
-  * @description variable que controla cuando se debe contactar al usuario 
+  * [var-3261ad1899]
+  * @description La última pregunta que hizo a cliente 
   */
-  conversationStatus: string;
+  lastQuestionMade: string;
 }

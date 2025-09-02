@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 
 // # InviteToOffice
-// Instruction: serviceLocationInfo
+// Instruction: untitled
 export class InviteToOfficePrompt {
   static readonly Model = "fast-model";
   static readonly Temperature = 0.6;

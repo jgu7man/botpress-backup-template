@@ -1,7 +1,7 @@
 import { workflow } from "./workflow.state";
 
 // # CatchAssistancePreferenceAnswer
-// Instruction: userAnswerContext
+// Instruction: assistanceMode
 export class CatchAssistancePreferenceAnswerPrompt {
   static readonly Model = "fast-model";
   static readonly Temperature = 0;
@@ -22,18 +22,19 @@ Analiza la siguiente respuesta del usuario: \`workflow.assistanceModeAnswer\`.
 
 Clasifica la intención del usuario según estas categorías:
 
-1. \`"sede"\` → El usuario quiere ser atendido en persona (sede, tienda, sucursal, oficina).
-2. \`"linea"\` → El usuario quiere ser atendido en línea (virtual, por teléfono, chat, etc.).
-3. \`"rechazo"\` → El usuario rechaza o no está interesado en ser atendido.
-4. \`"consulta"\` → El usuario realiza una pregunta o consulta.
+1. \`"ON_STORE"\` → El usuario quiere ser atendido en persona (sede, tienda, sucursal, oficina).
+2. \`"ON_LINE"\` → El usuario quiere ser atendido en línea (virtual, por teléfono, chat, etc.).
+2. \`"RECHAZO"\` → El usuario no quiere ser atendido.
 
-Devuelve únicamente una palabra: \`sede\`, \`linea\`, \`rechazo\` o \`consulta\` según corresponda, y guárdala en \`workflow.userAnswerContext\`.
+Devuelve únicamente una palabra: \`ON_STORE\`, \`ON_LINE\`, \`RECHAZO\`,  según corresponda, y guárdala en \`workflow.userAnswerContext\`.
 
-No agregues explicaciones adicionales.`;
+No agregues explicaciones adicionales.
+**IMPORTANTE** Si alguna de esos valores no corresponde a alguna categorización deja la variable vacía
+`;
 
   output(
-    userAnswerContext: string
+    assistanceMode: string
   ) {
-    workflow.userAnswerContext = userAnswerContext;
+    user.assistanceMode = assistanceMode;
   }
 }

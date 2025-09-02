@@ -4,14 +4,14 @@ import { workflow } from "./workflow.state";
 // Instruction: jobContractType
 export class UnderstandAnswerPrompt {
   static readonly Model = "fast-model";
-  static readonly Temperature = 0;
+  static readonly Temperature = 0.25;
   static readonly Version = "1.0";
   static readonly HandleFailure = false;
   static readonly Examples = 1;
 
   constructor(
     public input = {
-      Respuesta_del_usuario: workflow.userAnswer,
+      Respuesta_del_usuario: event.preview,
       Interpretacin: workflow.answerUnderstanding,
     }
   ) {}

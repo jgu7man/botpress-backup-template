@@ -73,7 +73,7 @@ interface HooksTableOperations {
 // Estas son adicionales a las variables globales del bot
 declare global {
   // Variables específicas para operaciones de Notion
-  const workflow: NotionWorkflowState;
+  // const workflow: NotionWorkflowState;
   const axios: AxiosStatic;
 
   // Tabla específica para operaciones de hook (mock para drafts)

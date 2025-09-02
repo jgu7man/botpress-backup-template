@@ -1,5 +1,5 @@
 workflow.headers = {
-  Authorization: `Bearer ${env.NOTION_API_KEY}`,
+  Authorization: `Bearer ${workflow.NOTION_API_KEY}`,
   "Content-Type": "application/json",
   "Notion-Version": "2022-06-28",
 };

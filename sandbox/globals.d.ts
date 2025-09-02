@@ -3,40 +3,12 @@
  * Este archivo re-declara los globals del bot para que estén disponibles en el sandbox
  */
 
-// Interfaz genérica para operaciones de tabla (copiada del bot)
-interface TableOperations<T> {
-  findRecords(params?: {
-    filter?: any;
-    sort?: any;
-    maxRecords?: number;
-  }): Promise<T[]>;
-  createRecord(data: Partial<T>): Promise<T>;
-  updateRecord(id: string, data: Partial<T>): Promise<T>;
-  deleteRecord(id: string): Promise<void>;
-  findFirst(params?: { filter?: any; sort?: any }): Promise<T | null>;
-}
-
 // Re-declarar los globals para el sandbox
 declare global {
   // Variables principales del bot
   const bot: botVariables;
   const user: userVariables;
-  const conversation: conversationVariables & {
-    // Agentes de Botpress (incluidos automáticamente)
-    SummaryAgent: {
-      summary: string;
-      transcript: string;
-    };
-    TranslatorAgent: {
-      translation: string;
-      detectedLanguage: string;
-    };
-    KnowledgeAgent: {
-      answer: string;
-      sources: any[];
-    };
-    RouterAgent: Record<string, any>;
-  };
+  const conversation: conversationVariables & ConversationAgents;
   // event está definido en types/core/event-override.d.ts para evitar conflictos con DOM Event
   const env: ConfigVariables;
 

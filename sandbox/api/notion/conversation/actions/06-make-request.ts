@@ -6,11 +6,6 @@ async function makeRequest() {
   // Muestra el método y la URL de la solicitud en consola
   console.log(`📡 ${method} request to: ${url}`);
 
-  // Si existe un cuerpo en la solicitud, lo muestra en consola
-  if (body) {
-    console.log("📤 Request body:", JSON.stringify(body, null, 2));
-  }
-
   try {
     console.log("📡 Making request to Notion API...");
 

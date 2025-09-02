@@ -26,11 +26,15 @@ const createTimestamp = () => ({
 console.log("🚀 Creating base conversation document...");
 console.log(`📝 Conversation ID: ${workflow.conversationId}`);
 
+if (!workflow.NOTION_CONVERSATION_DB) {
+  throw new Error("❌ Missing Notion conversation database ID.");
+}
+
 // Define el cuerpo de la solicitud para crear la conversación en Notion
 workflow.body = {
   // Especifica el ID de la base de datos de Notion donde se guardará la conversación
   parent: {
-    database_id: env.NOTION_CONVERSATION_DB,
+    database_id: workflow.NOTION_CONVERSATION_DB,
   },
   // Define las propiedades del documento: ID de conversación y momento de envío
   properties: {

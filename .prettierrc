@@ -7,5 +7,6 @@
 			}
 		}
 	],
-	"quoteProps": "preserve"
+	"quoteProps": "preserve",
+	"trailingComma": "none"
 }

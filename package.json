@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "unfold-bot": "tsx ./tools/bot-unfolder/core/main.ts",
+    "unfold-bot:prompts": "npm run unfold-bot -- --prompts",
+    "unfold-bot:help": "npm run unfold-bot -- --help",
     "export-tables": "tsx ./tools/bot-table-exporter/run.ts",
     "extract": "tsx ./tools/smart-extractor/main.ts",
     "compress": "rm -rf ./exports/$ENV/assistant-$ENV.bpz && 7z a -tzip -mx=9 ./exports/$ENV/assistant-$ENV.bpz ./bots/$ENV/*",

@@ -3,12 +3,24 @@
  * Este archivo re-declara los globals del bot para que estén disponibles en el sandbox
  */
 
+import { ConfigVariables } from "../../types/bot/Settings";
+import { TableOperations } from "../../types/core/TableOperations";
+
+// Definir tipos faltantes para el sandbox
+interface botVariables {
+  irregularState: any;
+}
+
+interface userVariables {
+  phone: string;
+}
+
 // Re-declarar los globals para el sandbox
 declare global {
   // Variables principales del bot
   const bot: botVariables;
   const user: userVariables;
-  const conversation: conversationVariables & ConversationAgents;
+  // const conversation: ConversationAgents & {};
   // event está definido en types/core/event-override.d.ts para evitar conflictos con DOM Event
   const env: ConfigVariables;
 
@@ -24,17 +36,4 @@ declare global {
   const Int_Improvement_Iterations_Table: TableOperations<any>;
   const Int_Improvement_Feedback_Table: TableOperations<any>;
   const Int_KB_Analytics_Table: TableOperations<any>;
-
-  // Variables específicas del workflow (sandbox)
-  const workflow: {
-    headers?: {
-      Authorization: string;
-      "Content-Type": string;
-      "Notion-Version": string;
-    };
-    conversationId?: string;
-    pageId?: string;
-    phone?: string;
-    [key: string]: any;
-  };
 }
